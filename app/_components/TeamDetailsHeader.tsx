@@ -1,33 +1,31 @@
-import { ChevronLeft, StarOutline } from '@mui/icons-material'
-import React from 'react'
+import { FaAngleLeft } from 'react-icons/fa';
+import { MdStarOutline } from 'react-icons/md';
+import Image from "next/image";
+import barcelonaCrest from "../_assets/barcelona_crest.png";
+import { useParams } from 'next/navigation';
+import AltHeader from './AltHeader';
+import { getHeaderLinks } from '../_utils/link';
+import { TEAM_LINKS } from '../_assets/constants/team';
 
 const TeamDetailsHeader = () => {
+  const { id } = useParams<{ id: string }>();
+  const links = getHeaderLinks({ path: 'team', id, links: TEAM_LINKS });
+
   return (
-    <div className="bg-gradient-to-br from-secondary-700/50 via-secondary-800/20 to-transparent p-2 pb-0 border-b border-secondary-900/50">
-      <div className="py-4 pr-3 flex items-center gap-2">
+    <>
+      <div className="py-4 pr-3 flex items-center gap-2 bg-gradient-to-r from-red-900/50 to-blue-900/50 m-2 rounded-lg p-2">
         <button className="h-8 aspect-square rounded-full hover:bg-secondary-400/10">
-          <ChevronLeft />
+          <FaAngleLeft size={20} />
         </button>
-        <div className="h-14 rounded-full aspect-square border-2 border-secondary-500"></div>
+        <Image src={barcelonaCrest} alt="Clug Emblem" width={80} />
         <div className="flex-1 flex-col">
           <p className="font-bold">FC Barcelona</p>
           <p className="text-sm text-secondary-600">Spain</p>
         </div>
-        <StarOutline />
+        <MdStarOutline size={20} />
       </div>
-      <ul className="flex items-center gap-2 mt-4">
-        <li className="relative">
-          <button className="px-2 font-bold text-secondary-500">Details</button>
-          <div className="absolute bottom-[-3px] left-0 w-full h-[3px] bg-secondary-500" />
-        </li>
-        <li>
-          <button className="px-2 font-semibold text-secondary-700">Matches</button>
-        </li>
-        <li>
-          <button className="px-2 font-semibold text-secondary-700">Players</button>
-        </li>
-      </ul>
-    </div>
+      <AltHeader links={links} />
+    </>
   )
 }
 
