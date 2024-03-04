@@ -1,4 +1,4 @@
-import { Menu } from "@mui/icons-material"
+import { MdMenu } from "react-icons/md";
 
 const Leftbar = () => {
   return (
@@ -11,28 +11,28 @@ const Leftbar = () => {
         <ul className="flex flex-col gap-2">
           <li className="flex items-center justify-between py-1 px-2 gap-3 hover:bg-black-900/50">
             <div className="flex items-center gap-2 text-secondary-600">
-              <Menu />
+              <MdMenu />
               <span>Premier League</span>
             </div>
             <span className="text-secondary-700 text-xs font-bold">England</span>
           </li>
           <li className="flex items-center justify-between py-1 px-2 gap-3 hover:bg-black-900/50">
             <div className="flex items-center gap-2 text-secondary-600">
-              <Menu />
+              <MdMenu />
               <span>La Liga</span>
             </div>
             <span className="text-secondary-700 text-xs font-bold">Spain</span>
           </li>
           <li className="flex items-center justify-between py-1 px-2 gap-3 hover:bg-black-900/50">
             <div className="flex items-center gap-2 text-secondary-600">
-              <Menu />
+              <MdMenu />
               <span>Serie A</span>
             </div>
             <span className="text-secondary-700 text-xs font-bold">Italy</span>
           </li>
           <li className="flex items-center justify-between py-1 px-2 gap-3 hover:bg-black-900/50">
             <div className="flex items-center gap-2 text-secondary-600">
-              <Menu />
+              <MdMenu />
               <span>Ligue 1</span>
             </div>
             <span className="text-secondary-700 text-xs font-bold">France</span>
@@ -49,49 +49,49 @@ const Leftbar = () => {
         <ul className="flex flex-col gap-2">
           <li className="flex items-center justify-between py-1 px-2 gap-3 hover:bg-black-900/50">
             <div className="flex items-center gap-2 text-secondary-600">
-              <Menu />
+              <MdMenu />
               <span>FC Barcelona</span>
             </div>
           </li>
           <li className="flex items-center justify-between py-1 px-2 gap-3 hover:bg-black-900/50">
             <div className="flex items-center gap-2 text-secondary-600">
-              <Menu />
+              <MdMenu />
               <span>Manchester City</span>
             </div>
           </li>
           <li className="flex items-center justify-between py-1 px-2 gap-3 hover:bg-black-900/50">
             <div className="flex items-center gap-2 text-secondary-600">
-              <Menu />
+              <MdMenu />
               <span>Manchester United</span>
             </div>
           </li>
           <li className="flex items-center justify-between py-1 px-2 gap-3 hover:bg-black-900/50">
             <div className="flex items-center gap-2 text-secondary-600">
-              <Menu />
+              <MdMenu />
               <span>Real Madrid</span>
             </div>
           </li>
           <li className="flex items-center justify-between py-1 px-2 gap-3 hover:bg-black-900/50">
             <div className="flex items-center gap-2 text-secondary-600">
-              <Menu />
+              <MdMenu />
               <span>Real Madrid</span>
             </div>
           </li>
           <li className="flex items-center justify-between py-1 px-2 gap-3 hover:bg-black-900/50">
             <div className="flex items-center gap-2 text-secondary-600">
-              <Menu />
+              <MdMenu />
               <span>Real Madrid</span>
             </div>
           </li>
           <li className="flex items-center justify-between py-1 px-2 gap-3 hover:bg-black-900/50">
             <div className="flex items-center gap-2 text-secondary-600">
-              <Menu />
+              <MdMenu />
               <span>Real Madrid</span>
             </div>
           </li>
           <li className="flex items-center justify-between py-1 px-2 gap-3 hover:bg-black-900/50">
             <div className="flex items-center gap-2 text-secondary-600">
-              <Menu />
+              <MdMenu />
               <span>Real Madrid</span>
             </div>
           </li>
