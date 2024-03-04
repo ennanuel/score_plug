@@ -1,0 +1,63 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { FaAngleDown } from "react-icons/fa";
+import { GiSoccerField } from "react-icons/gi";
+import { MdOutlinePerson, MdOutlineSettings, MdSearch } from "react-icons/md";
+import { NAV_LINKS } from "../_assets/constants/links";
+import NavLink from "./NavLink";
+
+
+const Header = () => {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => { 
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <nav className={`sticky top-[-60px] border-b z-[99999] ${scrolled ? 'bg-primary-500 border-secondary-900/80' : 'bg-primary-900 border-transparent'}`}>
+      <div className="flex items-center justify-between gap-4 px-5 py-3 bg-primary-500 border-b border-secondary-400/10">
+        <div className={`flex-1 font-semibold text-white-100 text-3xl flex items-center justify-start gap-3 transition-transform origin-left ${scrolled && 'translate-y-[58px] scale-75'}`}>
+          <button className='p-1 h-9 flex items-center justify-center aspect-square rounded-full hover:bg-white-100/10'>
+            <GiSoccerField /> 
+          </button>
+          <span>Score Plug</span>
+        </div>
+        <div className='overflow-clip flex-1 flex items-stretch justify-start gap-2 bg-white-100/5 border border-secondary-100/10 hover:border-secondary-100/50 rounded-md'>
+          <label htmlFor="search" className="text-white-500 flex items-center justify-center pl-2">
+            <MdSearch />
+          </label>
+          <input 
+            className="text-sm flex-1 bg-transparent border-none outline-none text-white-600 focus:text-white-200 h-[35px] pr-2" 
+            type="text" 
+            id="search" 
+            placeholder="Barcelona v Chelsea" 
+          />
+        </div>
+        <ul className="flex-1 flex items-center justify-end gap-4">
+          <li className="aspect-square rounded-full border border-white-600 hover:bg-white-100/10 flex items-center justify-center p-1">
+            <MdOutlinePerson size={24} />
+          </li>
+          <li className="rounded-2xl hover:bg-white-100/10 flex items-center justify-center py-1 px-2">
+            <MdOutlineSettings size={24} />
+            <FaAngleDown />
+          </li>
+        </ul>
+      </div>
+      <ul className={`flex items-center justify-start gap-3 px-8 py-3 transition-transform w-fit ${scrolled && "lg:translate-x-[180px]"}`}>
+        {
+          NAV_LINKS.map((navLink, index) => (
+            <li><NavLink key={index} {...navLink} /></li>
+          ))
+        }
+      </ul>
+    </nav>
+  )
+}
+
+export default Header
