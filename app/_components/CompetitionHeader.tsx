@@ -1,33 +1,32 @@
-import { ChevronLeft, StarOutline } from '@mui/icons-material'
-import React from 'react'
+"use client";
+
+import { MdKeyboardArrowLeft, MdStar } from 'react-icons/md';
+import premierLeagueEmblem from '../_assets/premier_league_emblem.png';
+import { useParams } from 'next/navigation';
+import Image from 'next/image';
+import AltHeader from './AltHeader';
+import { getHeaderLinks } from '../_utils/link';
+import { COMPETITION_LINKS } from '../_assets/constants/competition';
 
 const CompetitionHeader = () => {
+  const { id } = useParams<{ id: string }>();
+  const links = getHeaderLinks({ path: 'competition', id, links: COMPETITION_LINKS });
+
   return (
-    <div className="bg-gradient-to-br from-red-600/50 via-red-800/20 to-transparent p-2 pb-0 border-b border-secondary-900/50">
-      <div className="py-4 pr-3 flex items-center gap-2">
+    <>
+      <div className="bg-gradient-to-r m-2 from-red-900/50 to-red-900/20 py-4 px-3 flex items-center gap-2 rounded-md">
         <button className="h-8 aspect-square rounded-full hover:bg-secondary-400/10">
-          <ChevronLeft />
+          <MdKeyboardArrowLeft size={20} />
         </button>
-        <div className="h-14 rounded-full aspect-square border-2 border-secondary-500"></div>
+        <Image src={premierLeagueEmblem} alt="Competition Emblem" width={60} className="aspect-square object-contain" />
         <div className="flex-1 flex-col">
-          <p className="font-bold">La Liga</p>
+          <p className="font-bold">Premier League</p>
           <p className="text-sm text-secondary-600">Spain</p>
         </div>
-        <StarOutline />
+        <MdStar />
       </div>
-      <ul className="flex items-center gap-2 mt-4">
-        <li className="relative">
-          <button className="px-2 font-bold text-secondary-500">Details</button>
-          <div className="absolute bottom-[-3px] left-0 w-full h-[3px] bg-secondary-500" />
-        </li>
-        <li>
-          <button className="px-2 font-semibold text-secondary-700">Matches</button>
-        </li>
-        <li>
-          <button className="px-2 font-semibold text-secondary-700">Teams</button>
-        </li>
-      </ul>
-    </div>
+      <AltHeader links={links} />
+    </>
   )
 }
 
