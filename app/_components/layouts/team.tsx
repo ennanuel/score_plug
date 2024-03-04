@@ -1,13 +1,12 @@
-import { Outlet } from 'react-router-dom'
-import { TeamDetailsHeader } from '../../components'
+import { TeamDetailsHeader } from '../'
 
-const Team = () => {
+const Team = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   return (
     <div className="border border-secondary-900/50">
       <TeamDetailsHeader />
-      <Outlet />
+      {children}
     </div>
   )
-}
+};
 
 export default Team
