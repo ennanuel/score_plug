@@ -1,8 +1,8 @@
 
 
-const NotFound = () => {
+function NotFound () {
   return (
-    <div>
+    <div className="flex items-center justify-center">
       Nothing found
     </div>
   )
