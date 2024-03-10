@@ -7,7 +7,7 @@ import CompetitionWithMatches from './_components/CompetitionWithMatches';
 import { Competition } from '@/types/competition.type';import { useQuery, gql } from '@apollo/client';
 
 const GET_COMPETITION_DATA = gql`
-  query GetCompetitionData {
+  query {
     competitions {
       limit
       totalCompetitions
@@ -33,9 +33,12 @@ const GET_COMPETITION_DATA = gql`
           status
           utcDate
           score {
-            fullTime
+            fullTime {
+              home
+              away
+            }
           }
-          minutes
+          minute
         }
       }
     }
