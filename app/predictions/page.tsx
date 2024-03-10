@@ -1,3 +1,5 @@
+"use client";
+
 import { MATCHES } from "../_assets/constants/match";
 import MatchPredictionCard from "../_components/MatchPredictionCard";
 import { Match } from "@/types/match.type";
