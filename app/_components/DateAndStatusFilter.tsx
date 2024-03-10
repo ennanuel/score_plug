@@ -1,11 +1,10 @@
 "use client"
 
 import { MdOutlineNotifications, MdKeyboardArrowRight, MdKeyboardArrowLeft } from 'react-icons/md';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, Suspense } from 'react';
 import { getMatchDates } from '../_utils/dateTime';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { Suspense } from 'react';
 
 const MATCH_STATUS = [
     { title: "All", value: "" },
