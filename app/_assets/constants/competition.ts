@@ -2,6 +2,8 @@ import premierLeagueEmblem from "../premier_league_emblem.png";
 import premierLeagueEmblem2 from "../premier_league_emblem2.png";
 import championsLeagueEmblem from "../ucl_emblem.png";
 import laLigaEmblem from "../la_liga_emblem.png";
+import { MATCHES } from "./match";
+import { Match } from "@/types/match.type";
 
 export const COMPETITION_LINKS = [
     { title: "Details", href: "" },
@@ -14,7 +16,9 @@ const CURRENT_SEASON = {
     endDate: "July 01, 2023",
     currentMatchday: 20,
     winner: 0
-}
+};
+
+const COMPETITION_MATCHES = MATCHES as Match[];
 
 export const COMPETITIONS = [
     {
@@ -28,7 +32,8 @@ export const COMPETITIONS = [
         emblem: premierLeagueEmblem,
         currentSeason: CURRENT_SEASON,
         hasLiveMatch: true,
-        matches: 10
+        matches: COMPETITION_MATCHES,
+        noOfMatches: 10
     },
     {
         _id: 300,
@@ -41,7 +46,8 @@ export const COMPETITIONS = [
         emblem: laLigaEmblem,
         currentSeason: CURRENT_SEASON,
         hasLiveMatch: true,
-        matches: 6
+        matches: COMPETITION_MATCHES,
+        noOfatches: 6
     },
     {
         _id: 300,
@@ -54,7 +60,8 @@ export const COMPETITIONS = [
         emblem: championsLeagueEmblem,
         currentSeason: CURRENT_SEASON,
         hasLiveMatch: false,
-        matches: 3
+        matches: COMPETITION_MATCHES,
+        noOfMatches: 3
     },
     {
         _id: 300,
@@ -67,6 +74,7 @@ export const COMPETITIONS = [
         emblem: premierLeagueEmblem2,
         currentSeason: CURRENT_SEASON,
         hasLiveMatch: false,
-        matches: 0
+        matches: COMPETITION_MATCHES,
+        noOfMatches: 0
     },
 ];
