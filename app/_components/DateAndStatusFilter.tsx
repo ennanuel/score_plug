@@ -5,6 +5,7 @@ import { useState, useMemo } from 'react';
 import { getMatchDates } from '../_utils/dateTime';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 
 const MATCH_STATUS = [
     { title: "All", value: "" },
@@ -25,6 +26,7 @@ function DateAndStatusFilter() {
     const dates = useMemo(() => getMatchDates(), []);
 
     return (
+        <Suspense>
         <div className='border border-secondary-900/50 mt-2 py-2 px-3 flex justify-between items-center gap-3'>
             <button onClick={() => setShowStatus( prev => !prev )} className='py-[2px] px-2 pr-0 flex items-center justify-center rounded-[5px] bg-secondary-500 text-sm text-black-900 font-bold'>
                 <span>{status.title}</span>
@@ -59,6 +61,7 @@ function DateAndStatusFilter() {
                     <MdOutlineNotifications />
             </button>
         </div>
+        </Suspense>
     )
 };
 

@@ -2,7 +2,7 @@
 
 import { describeArc } from "@/app/_utils/shape";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname, /* useSearchParams */ } from "next/navigation";
 
 
 const MatchPrediction = () => {
@@ -10,9 +10,9 @@ const MatchPrediction = () => {
   const awayArc = describeArc({ x: 45, y: 45, radius: 40, startAngle: 0, endAngle: 30 });
   const drawArc = describeArc({ x: 45, y: 45, radius: 40, startAngle: 0, endAngle: 60 });
   
-  const params = useSearchParams();
+  // const params = useSearchParams();
   const pathname = usePathname();
-  const showHalfTimeResults = params.get("time") === 'half-time';
+  // const showHalfTimeResults = params.get("time") === 'half-time';
 
   return (
     <div className="mt-2 p-2">
