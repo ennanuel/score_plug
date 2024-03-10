@@ -1,4 +1,4 @@
-import { ChevronRight, StarOutline } from '@mui/icons-material';
+import { MdKeyboardArrowRight } from "react-icons/md";
 
 const Search = () => {
     return (
@@ -76,7 +76,7 @@ const Search = () => {
                             <h3 className="text-secondary-400 font-semibold">Premier League</h3>
                             <span className="text-xs text-secondary-600">England</span>
                         </div>
-                        <ChevronRight />
+                        <MdKeyboardArrowRight size={20} />
                     </div>
 
                     <div className="flex items-center gap-4 justify-between bg-primary-500 p-3 px-4 rounded-lg">
@@ -85,7 +85,7 @@ const Search = () => {
                             <h3 className="text-secondary-400 font-semibold">Ligue 1</h3>
                             <span className="text-xs text-secondary-600">France</span>
                         </div>
-                        <ChevronRight />
+                        <MdKeyboardArrowRight size={20} />
                     </div>
 
                     <div className="flex items-center gap-4 justify-between bg-primary-500 p-3 px-4 rounded-lg shadow-lg">
@@ -94,7 +94,7 @@ const Search = () => {
                             <h3 className="text-secondary-400 font-semibold">La Liga</h3>
                             <span className="text-xs text-secondary-600">Spain</span>
                         </div>
-                        <ChevronRight />
+                        <MdKeyboardArrowRight size={20} />
                     </div>
 
                     <div className="flex items-center gap-4 justify-between bg-primary-500 p-3 px-4 rounded-lg shadow-lg">
@@ -103,7 +103,7 @@ const Search = () => {
                             <h3 className="text-secondary-400 font-semibold">Bundesliga</h3>
                             <span className="text-xs text-secondary-600">Germany</span>
                         </div>
-                        <ChevronRight />
+                        <MdKeyboardArrowRight size={20} />
                     </div>
                 </div>
             </div>
