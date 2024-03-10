@@ -1,6 +1,10 @@
 "use client";
 
+import { ApolloProvider } from "@apollo/client";
+import client from "@/apolloClient";
+
 import { Inter } from "next/font/google";
+
 import { Header, Leftbar, Rightbar, Footer } from './_components';
 import CompetitionLayout from "./_components/layouts/competition";
 import MatchLayout from "./_components/layouts/match";
@@ -26,19 +30,21 @@ export default function RootLayout({
   const pageBody = getBody({ children, pathname });
 
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Header />
-        <div className="grid grid-cols-4">
-          <Leftbar />
-          <div className="col-span-2 p-4">
-            {pageBody}
+    <ApolloProvider client={client}>
+      <html lang="en">
+        <body className={inter.className}>
+          <Header />
+          <div className="grid grid-cols-4">
+            <Leftbar />
+            <div className="col-span-2 p-4">
+              {pageBody}
+            </div>
+            <Rightbar />
           </div>
-          <Rightbar />
-        </div>
-        <Footer />
-      </body>
-    </html>
+          <Footer />
+        </body>
+      </html>
+    </ApolloProvider>
   );
 };
 

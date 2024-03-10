@@ -10,6 +10,8 @@ import MatchCard from './MatchCard';
 import CompetitionCard from './CompetitionCard';
 import FormBox from './FormBox';
 import Standings from './standings';
+import DateAndStatusFilter from './DateAndStatusFilter';
+import CompetitionWithMatches from './CompetitionWithMatches';
 
 export {
     Header,
@@ -23,5 +25,6 @@ export {
     MatchCard,
     CompetitionCard,
     FormBox,
-    Standings
+    Standings,
+    DateAndStatusFilter
 }
