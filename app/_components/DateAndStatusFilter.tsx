@@ -4,7 +4,7 @@ import { MdOutlineNotifications, MdKeyboardArrowRight, MdKeyboardArrowLeft } fro
 import { useState, useMemo } from 'react';
 import { getMatchDates } from '../_utils/dateTime';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 const MATCH_STATUS = [
     { title: "All", value: "" },
@@ -13,7 +13,8 @@ const MATCH_STATUS = [
     { title: "Finished", value: "finished" }
 ];
 
-function DateAndStatusFilter({ path }: { path: string; }) {
+function DateAndStatusFilter() {
+    const pathname = usePathname();
     const params = useSearchParams();
     const dateFilter = params.get("date") || (new Date()).toLocaleDateString();
     const statusFilter = params.get("status") || "";
@@ -34,7 +35,7 @@ function DateAndStatusFilter({ path }: { path: string; }) {
                     {
                         dates.map(({ date, value }, index) => (
                             <li key={index}>
-                                <Link href={`${path}?date=${value}`} className={`flex flex-col items-center justify-center ${dateFilter === value ? 'text-highlight-400' : 'text-secondary-600'}`}>
+                                <Link href={`${pathname}?date=${value}`} className={`flex flex-col items-center justify-center ${dateFilter === value ? 'text-highlight-400' : 'text-secondary-600'}`}>
                                     <span className="text-xs font-semibold uppercase">{date.dayOfWeek}</span>
                                     <span className='text-[.7em] uppercase'>{date.day} {date.month}</span>
                                 </Link>
@@ -46,7 +47,7 @@ function DateAndStatusFilter({ path }: { path: string; }) {
                     {
                         MATCH_STATUS.filter(status => status.value !== statusFilter).map(({ title, value }, index) => (
                             <li key={index}>
-                                <Link href={`${path}?status=${value}`} className="py-1 px-3 flex rounded-[5px] bg-secondary-900/50 text-sm text-white-600 font-semibold">
+                                <Link href={`${pathname}?status=${value}`} className="py-1 px-3 flex rounded-[5px] bg-secondary-900/50 text-sm text-white-600 font-semibold">
                                     <span>{title}</span>
                                 </Link>
                             </li>
