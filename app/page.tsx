@@ -1,12 +1,55 @@
 "use client";
 
 import { useState } from 'react';
-import { MdArrowRight, MdFavorite, MdOutlineNotifications } from "react-icons/md";
+import { MdStar } from "react-icons/md";
+import { COMPETITIONS } from './_assets/constants/competition';
+import CompetitionWithMatches from './_components/CompetitionWithMatches';
+import { Competition } from '@/types/competition.type';import { useQuery, gql } from '@apollo/client';
+
+const GET_COMPETITION_DATA = gql`
+  query GetCompetitionData {
+    competitions {
+      limit
+      totalCompetitions
+      page
+      competitions {
+        _id
+        name
+        emblem
+        area {
+          name
+          flag
+        }
+        matches {
+          _id
+          homeTeam {
+            name
+            crest
+          }
+          awayTeam {
+            name 
+            crest
+          }
+          status
+          utcDate
+          score {
+            fullTime
+          }
+          minutes
+        }
+      }
+    }
+  }
+`;
 
 function Home() {
   const [live, setLive] = useState(false);
   const onLive = () => setLive(true);
   const offLive = () => setLive(false);
+
+  const { loading, error, data } = useQuery(GET_COMPETITION_DATA);
+
+  console.log(data);
 
   return (
     <main className="border border-secondary-900/50 bg-primary-500 p-3">
@@ -21,153 +64,16 @@ function Home() {
             <span>Live</span>
           </button>
         </div>
-        <MdFavorite />
+        <MdStar />
       </div>
-      <div className="bg-primary-800 py-3 px-4 rounded-lg mt-6">
+     
+        <div className="bg-primary-800 py-3 px-4 rounded-lg mt-6">
         <h2 className="font-bold">Popular Leagues</h2>
-        <div className='mt-4 flex flex-col gap-3'>
-          <div className='flex items-center gap-3 p-2'>
-            <div className="w-5 aspect-square border-2 border-secondary-800" />
-            <div className="flex-1 flex flex-col">
-              <span className="font-semibold text-secondary-500 text-sm">Premier League</span>
-              <span className="text-[.7em] text-secondary-700">England</span>
-            </div>
-            <MdArrowRight />
-          </div>
-
-          <div className="flex items-center justify-between bg-secondary-900/60 hover:bg-secondary-900/80 rounded-md p-2">
-            <div className="h-[50px] w-[6px] rounded-md bg-highlight-500" />
-            <p className="px-4 py-3 text-highlight-400 font-semibold">18'</p>
-            <div className="flex flex-1 flex-col gap-2">
-              <div className="flex items-center gap-2">
-                <div className="w-4 aspect-square rounded-full border-2 border-secondary-800" />
-                <p className="flex-1 text-sm font-semibold">FC Barcelona</p>
-                <span className="font-bold text-sm">4</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-4 aspect-square rounded-full border-2 border-secondary-800" />
-                <p className="flex-1 text-sm font-semibold">FC Barcelona</p>
-                <span className="font-bold text-sm">4</span>
-              </div>
-            </div>
-            <div className="flex items-center justify-center pl-4 pr-2">
-              <MdOutlineNotifications />
-            </div>
-          </div>
-
-          <div className="flex items-center justify-between bg-secondary-900/60 hover:bg-secondary-900/80 rounded-md p-2">
-            <div className="h-[50px] w-[6px] rounded-md bg-highlight-500" />
-            <p className="px-4 py-3 text-highlight-400 font-semibold">18'</p>
-            <div className="flex flex-1 flex-col gap-2">
-              <div className="flex items-center gap-2">
-                <div className="w-4 aspect-square rounded-full border-2 border-secondary-800" />
-                <p className="flex-1 text-sm font-semibold">FC Barcelona</p>
-                <span className="font-bold text-sm">4</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-4 aspect-square rounded-full border-2 border-secondary-800" />
-                <p className="flex-1 text-sm font-semibold">FC Barcelona</p>
-                <span className="font-bold text-sm">4</span>
-              </div>
-            </div>
-            <div className="flex items-center justify-center pl-4 pr-2">
-              <MdOutlineNotifications />
-            </div>
-          </div>
-
-          <div className="flex items-center justify-between bg-secondary-900/60 hover:bg-secondary-900/80 rounded-md p-2">
-            <div className="h-[50px] w-[6px] rounded-md bg-highlight-500" />
-            <p className="px-4 py-3 text-highlight-400 font-semibold">18'</p>
-            <div className="flex flex-1 flex-col gap-2">
-              <div className="flex items-center gap-2">
-                <div className="w-4 aspect-square rounded-full border-2 border-secondary-800" />
-                <p className="flex-1 text-sm font-semibold">FC Barcelona</p>
-                <span className="font-bold text-sm">4</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-4 aspect-square rounded-full border-2 border-secondary-800" />
-                <p className="flex-1 text-sm font-semibold">FC Barcelona</p>
-                <span className="font-bold text-sm">4</span>
-              </div>
-            </div>
-            <div className="flex items-center justify-center pl-4 pr-2">
-              <MdOutlineNotifications />
-            </div>
-          </div>
-        </div>
-
-        
-        <div className='mt-4 flex flex-col gap-3'>
-          <div className='flex items-center gap-3 p-2'>
-            <div className="w-5 aspect-square border-2 border-secondary-800" />
-            <div className="flex-1 flex flex-col">
-              <span className="font-semibold text-secondary-500 text-sm">La Liga</span>
-              <span className="text-[.7em] text-secondary-700">Spain</span>
-            </div>
-            <MdArrowRight />
-          </div>
-
-          <div className="flex items-center justify-between bg-secondary-900/60 hover:bg-secondary-900/80 rounded-md p-2">
-            <div className="h-[50px] w-[6px] rounded-md bg-highlight-500" />
-            <p className="px-4 py-3 text-highlight-400 font-semibold">18'</p>
-            <div className="flex flex-1 flex-col gap-2">
-              <div className="flex items-center gap-2">
-                <div className="w-4 aspect-square rounded-full border-2 border-secondary-800" />
-                <p className="flex-1 text-sm font-semibold">FC Barcelona</p>
-                <span className="font-bold text-sm">4</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-4 aspect-square rounded-full border-2 border-secondary-800" />
-                <p className="flex-1 text-sm font-semibold">FC Barcelona</p>
-                <span className="font-bold text-sm">4</span>
-              </div>
-            </div>
-            <div className="flex items-center justify-center pl-4 pr-2">
-              <MdOutlineNotifications />
-            </div>
-          </div>
-
-          <div className="flex items-center justify-between bg-secondary-900/60 hover:bg-secondary-900/80 rounded-md p-2">
-            <div className="h-[50px] w-[6px] rounded-md bg-highlight-500" />
-            <p className="px-4 py-3 text-highlight-400 font-semibold">18'</p>
-            <div className="flex flex-1 flex-col gap-2">
-              <div className="flex items-center gap-2">
-                <div className="w-4 aspect-square rounded-full border-2 border-secondary-800" />
-                <p className="flex-1 text-sm font-semibold">FC Barcelona</p>
-                <span className="font-bold text-sm">4</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-4 aspect-square rounded-full border-2 border-secondary-800" />
-                <p className="flex-1 text-sm font-semibold">FC Barcelona</p>
-                <span className="font-bold text-sm">4</span>
-              </div>
-            </div>
-            <div className="flex items-center justify-center pl-4 pr-2">
-              <MdOutlineNotifications />
-            </div>
-          </div>
-
-          <div className="flex items-center justify-between bg-secondary-900/60 hover:bg-secondary-900/80 rounded-md p-2">
-            <div className="h-[50px] w-[6px] rounded-md bg-highlight-500" />
-            <p className="px-4 py-3 text-highlight-400 font-semibold">18'</p>
-            <div className="flex flex-1 flex-col gap-2">
-              <div className="flex items-center gap-2">
-                <div className="w-4 aspect-square rounded-full border-2 border-secondary-800" />
-                <p className="flex-1 text-sm font-semibold">FC Barcelona</p>
-                <span className="font-bold text-sm">4</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-4 aspect-square rounded-full border-2 border-secondary-800" />
-                <p className="flex-1 text-sm font-semibold">FC Barcelona</p>
-                <span className="font-bold text-sm">4</span>
-              </div>
-            </div>
-            <div className="flex items-center justify-center pl-4 pr-2">
-              <MdOutlineNotifications />
-            </div>
-          </div>
-        </div>
-
+        <ul className="flex flex-col gap-4">
+          {
+            COMPETITIONS.map((competition, index) => <li key={index}><CompetitionWithMatches {...(competition as Competition)} /></li>)
+          }
+        </ul>
       </div>
 
     </main>
