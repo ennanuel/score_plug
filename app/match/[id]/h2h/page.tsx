@@ -4,12 +4,12 @@ import { MATCHES } from "@/app/_assets/constants/match";
 import { TEAM_FORM } from "@/app/_assets/constants/team";
 import { FormBox, MatchCard, Standings } from "@/app/_components";
 import { Match } from "@/types/match.type";
-import { usePathname, useSearchParams } from "next/navigation"
+// import { usePathname, useSearchParams } from "next/navigation"
 
 const H2H = () => {
-    const params = useSearchParams();
-    const showHomeSide = params.get("side") === 'home';
-    const pathname = usePathname();
+    // const params = useSearchParams();
+    // const showHomeSide = params.get("side") === 'home';
+    // const pathname = usePathname();
 
     return (
         <div className='mt-2 p-4'>
