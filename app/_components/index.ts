@@ -12,6 +12,8 @@ import FormBox from './FormBox';
 import Standings from './standings';
 import DateAndStatusFilter from './DateAndStatusFilter';
 import CompetitionWithMatches from './CompetitionWithMatches';
+import LoadingMessage from './LoadingMessage';
+import ErrorMessage from './ErrorMessage';
 
 export {
     Header,
@@ -26,5 +28,8 @@ export {
     CompetitionCard,
     FormBox,
     Standings,
-    DateAndStatusFilter
+    DateAndStatusFilter,
+    CompetitionWithMatches,
+    LoadingMessage,
+    ErrorMessage
 }
