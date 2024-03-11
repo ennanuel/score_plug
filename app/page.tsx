@@ -7,8 +7,10 @@ import { Competition } from '@/types/competition.type';
 import { useQuery, gql } from '@apollo/client';
 import { ErrorMessage, LoadingMessage } from './_components';
 
-const getCompetitionData = ({ page, status }: { page: number; status: "IN_PLAY" | "" }) => gql`
-  query (page: ${page}, status: ${status}) {
+// const getCompetitionData = ({ page, status }: { page: number; status: "IN_PLAY" | "" }) => gql`
+//   query (page: ${page}, status: ${status}) {
+const QUERY = gql`
+  query {
     competitions {
       totalPages
       page
@@ -51,9 +53,9 @@ function Home() {
   const showLiveMatches = () => setStatus("IN_PLAY");
   const showAllMatches = () => setStatus("");
 
-  const query = getCompetitionData({ page, status });
+  // const query = getCompetitionData({ page, status });
 
-  const { loading, error, data } = useQuery<{ competitions: Competition[]; totalPages: number; page: number; }>(query);
+  const { loading, error, data } = useQuery<{ competitions: Competition[]; totalPages: number; page: number; }>(QUERY);
 
   if (loading) return <LoadingMessage />
   
