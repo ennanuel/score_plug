@@ -6,6 +6,7 @@ import { MdOutlineNotificationsActive } from 'react-icons/md';
 import { Match, MatchScore, MatchStatus } from "@/types/match.type";
 import { HIGHLIGHT_BACKGROUNDS, MATCH_CARD_BACKGROUNDS } from "../_assets/constants/match";
 import { getDateFormat, getTimeFormat } from "../_utils/dateTime";
+import { useMemo } from "react";
 
 function getHighlightBackground(matchStatus: MatchStatus): string { 
     const index = matchStatus.toLowerCase() as keyof typeof HIGHLIGHT_BACKGROUNDS;
@@ -26,16 +27,17 @@ function getTeamColors(status: MatchStatus, score: MatchScore) {
 }
 
 function MatchCard ({ _id, status, minutes, utcDate, homeTeam, awayTeam, score }: Match) {
-    const showMinutes = /(in_play|paused|finished)/i.test(status);
-    const showTime = status === 'TIMED';
-    const timeTextColor = status !== 'IN_PLAY' ?
+    const showMinutes = useMemo(() => /(in_play|paused|finished)/i.test(status), []);
+    const showTime = useMemo(() => status === 'TIMED', []);
+    const timeTextColor = useMemo(() => status !== 'IN_PLAY' ?
         (status === 'PAUSED' ? 'text-highlight-600' : 'FINISHED' ? 'text-secondary-800' : 'text-secondary-500') :
-        'text-highlight-400';
-    const highlightBackground = getHighlightBackground(status);
-    const cardBackground = getMatchCardBackground(status);
-    const time = getTimeFormat(utcDate);
-    const date = getDateFormat(utcDate);
-    const { homeTextColor, awayTextColor } = getTeamColors(status, score);
+        'text-highlight-400'
+        , []);
+    const highlightBackground = useMemo(() => getHighlightBackground(status), []);
+    const cardBackground = useMemo(() => getMatchCardBackground(status), []);
+    const time = useMemo(() => getTimeFormat(utcDate), []);
+    const date = useMemo(() => getDateFormat(utcDate), []);
+    const { homeTextColor, awayTextColor } = useMemo(() => getTeamColors(status, score), []);
 
     return (
         <Link href={`/match/${_id}`} className={`flex items-center justify-between ${cardBackground} hover:bg-secondary-900/80 rounded-md p-2`}>
@@ -58,7 +60,7 @@ function MatchCard ({ _id, status, minutes, utcDate, homeTeam, awayTeam, score }
             <div className="flex items-center justify-center w-[60px] ml-2">
                 {
                     status === 'FINISHED' ?
-                        <p className="text-center text-xs font-semibold text-secondary-800">21 Mar. 2023</p> :
+                        <p className="text-center text-xs font-semibold text-secondary-800">{date}</p> :
                         <MdOutlineNotificationsActive size={20} />
                 }
             </div>
