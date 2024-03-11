@@ -55,14 +55,11 @@ function Home() {
 
   // const query = getCompetitionData({ page, status });
 
-  const { loading, error, data } = useQuery<{ competitions: Competition[]; totalPages: number; page: number; }>(QUERY);
+  const { loading, error, data } = useQuery<{ competitions: { competitions: Competition[]; totalPages: number; page: number; } }>(QUERY);
 
   if (loading) return <LoadingMessage />
   
-  if (error) {
-    console.error(data);
-    return <ErrorMessage />;
-  }
+  if (error) return <ErrorMessage />;
 
   return (
     <main className="border border-secondary-900/50 bg-primary-500 p-3">
@@ -84,7 +81,7 @@ function Home() {
         <h2 className="font-bold">Popular Leagues</h2>
         <ul className="flex flex-col gap-4">
           {
-            // data?.competitions?.map((competition, index) => <li key={index}><CompetitionWithMatches {...competition} /></li>)
+            data?.competitions?.competitions?.map((competition, index) => <li key={index}><CompetitionWithMatches {...competition} /></li>)
           }
         </ul>
       </div>
