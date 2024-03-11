@@ -56,7 +56,6 @@ function Home() {
   // const query = getCompetitionData({ page, status });
 
   const { loading, error, data } = useQuery<{ competitions: { competitions: Competition[]; totalPages: number; page: number; } }>(QUERY);
-  console.log(data);
 
   if (loading) return <LoadingMessage />
   
@@ -82,6 +81,7 @@ function Home() {
         <h2 className="font-bold">Popular Leagues</h2>
         <ul className="flex flex-col gap-4">
           {
+            data?.competitions?.competitions.map(competition => competition.name)
             // data?.competitions?.competitions?.map((competition, index) => <li key={index}><CompetitionWithMatches {...competition} /></li>)
           }
         </ul>
