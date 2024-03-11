@@ -84,7 +84,7 @@ function Home() {
         <h2 className="font-bold">Popular Leagues</h2>
         <ul className="flex flex-col gap-4">
           {
-            data?.competitions?.map((competition, index) => <li key={index}><CompetitionWithMatches {...competition} /></li>)
+            // data?.competitions?.map((competition, index) => <li key={index}><CompetitionWithMatches {...competition} /></li>)
           }
         </ul>
       </div>
