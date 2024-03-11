@@ -59,7 +59,10 @@ function Home() {
 
   if (loading) return <LoadingMessage />
   
-  if(error) return <ErrorMessage />
+  if (error) {
+    console.error(data);
+    return <ErrorMessage />;
+  }
 
   return (
     <main className="border border-secondary-900/50 bg-primary-500 p-3">
