@@ -13,7 +13,7 @@ const QUERY = gql`
   query {
     competitions {
       totalPages
-      page
+      currentPage
       competitions {
         _id
         name
