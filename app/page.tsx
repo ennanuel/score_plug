@@ -53,8 +53,6 @@ function Home() {
   const showLiveMatches = () => setStatus("IN_PLAY");
   const showAllMatches = () => setStatus("");
 
-  // const query = getCompetitionData({ page, status });
-
   const { loading, error, data } = useQuery<{ competitions: { competitions: Competition[]; totalPages: number; page: number; } }>(QUERY);
 
   if (loading) return <LoadingMessage />
