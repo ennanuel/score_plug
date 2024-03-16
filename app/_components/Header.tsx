@@ -20,12 +20,10 @@ const Header = () => {
   }, []);
 
   return (
-    <nav className={`sticky top-[-60px] border-b z-[99999] ${scrolled ? 'bg-primary-500 border-secondary-900/80' : 'bg-primary-900 border-transparent'}`}>
-      <div className="flex items-center justify-between gap-4 px-5 py-3 bg-primary-500 border-b border-secondary-400/10">
-        <div className={`flex-1 font-semibold text-white-100 text-3xl flex items-center justify-start gap-3 transition-transform origin-left ${scrolled && 'translate-y-[58px] scale-75'}`}>
-          <button className='p-1 h-9 flex items-center justify-center aspect-square rounded-full hover:bg-white-100/10'>
-            <GiSoccerField /> 
-          </button>
+    <nav className={`sticky top-[-60px] z-[99999] border-b border-secondary-900/50 bg-primary-500`}>
+      <div className="flex items-center justify-between gap-4 px-5 py-2">
+        <div className={`flex-1 font-semibold text-white-100 text-2xl flex items-center justify-start gap-3 transition-transform origin-left ${scrolled && 'translate-y-[58px] scale-75'}`}>
+          <GiSoccerField /> 
           <span>Score Plug</span>
         </div>
         <div className='overflow-clip flex-1 flex items-stretch justify-start gap-2 bg-white-100/5 border border-secondary-100/10 hover:border-secondary-100/50 rounded-md'>
