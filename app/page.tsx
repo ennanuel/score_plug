@@ -21,6 +21,9 @@ const QUERY = gql`
         }
         matches {
           _id
+          status
+          utcDate
+          minute
           homeTeam {
             name
             crest
@@ -29,15 +32,12 @@ const QUERY = gql`
             name 
             crest
           }
-          status
-          utcDate
           score {
             fullTime {
               home
               away
             }
           }
-          minute
         }
       }
     }
@@ -55,6 +55,8 @@ function Home() {
   if (loading) return <LoadingMessage />
   
   if (error) return <ErrorMessage />;
+
+  console.log(data);
 
   return (
     <main className="border border-secondary-900/50 bg-primary-500 p-3">
