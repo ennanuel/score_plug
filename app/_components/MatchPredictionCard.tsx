@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { getTimeFormat } from "../_utils/dateTime";
 
-function MatchPredictionCard({ _id, homeTeam, competition, awayTeam, utcDate, status, outcome, score, minutes }: Match) {
+function MatchPredictionCard({ _id, homeTeam, competition, awayTeam, utcDate, status, outcome, score, minute }: Match) {
   const time = getTimeFormat(utcDate);
 
   return (
@@ -33,7 +33,7 @@ function MatchPredictionCard({ _id, homeTeam, competition, awayTeam, utcDate, st
             <span className={`${/in_play|paused/i.test(status) ? 'text-highlight-400' : 'text-secondary-500'} text-3xl font-bold`}>
               {score.fullTime.homeTeam} - {score.fullTime.awayTeam}
             </span>
-            <span className={`${/in_play|paused/i.test(status) ? 'text-highlight-500' : 'text-secondary-600'} font-semibold`}>{minutes}'</span>
+            <span className={`${/in_play|paused/i.test(status) ? 'text-highlight-500' : 'text-secondary-600'} font-semibold`}>{minute}'</span>
           </div>
       }
           <div className="flex flex-col justify-between items-center gap-2">
