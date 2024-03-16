@@ -7,8 +7,6 @@ import { Competition } from '@/types/competition.type';
 import { useQuery, gql } from '@apollo/client';
 import { ErrorMessage, LoadingMessage } from './_components';
 
-// const getCompetitionData = ({ page, status }: { page: number; status: "IN_PLAY" | "" }) => gql`
-//   query (page: ${page}, status: ${status}) {
 const QUERY = gql`
   query {
     competitions {
@@ -20,7 +18,6 @@ const QUERY = gql`
         emblem
         area {
           name
-          flag
         }
         matches {
           _id
