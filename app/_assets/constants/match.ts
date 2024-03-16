@@ -54,7 +54,7 @@ export const MATCHES = [
     {
         _id: 123,
         status: "IN_PLAY",
-        minutes: "20",
+        minute: "20",
         competition: MATCH_COMPETITION,
         outcome: MATCH_OUTCOME1,
         timeRemaining: {
@@ -82,7 +82,7 @@ export const MATCHES = [
     {
         _id: 123,
         status: "FINISHED",
-        minutes: "FT",
+        minute: "FT",
         competition: MATCH_COMPETITION,
         outcome: MATCH_OUTCOME2,
         timeRemaining: {
@@ -110,7 +110,7 @@ export const MATCHES = [
     {
         _id: 123,
         status: "PAUSED",
-        minutes: "HT",
+        minute: "HT",
         competition: MATCH_COMPETITION,
         outcome: MATCH_OUTCOME3,
         timeRemaining: {
@@ -138,7 +138,7 @@ export const MATCHES = [
     {
         _id: 123,
         status: "TIMED",
-        minutes: "20",
+        minute: "20",
         competition: MATCH_COMPETITION,
         outcome: MATCH_OUTCOME2,
         timeRemaining: {
@@ -166,7 +166,7 @@ export const MATCHES = [
     {
         _id: 123,
         status: "TIMED",
-        minutes: "20",
+        minute: "20",
         competition: MATCH_COMPETITION,
         outcome: MATCH_OUTCOME1,
         timeRemaining: {
