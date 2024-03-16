@@ -2,14 +2,17 @@ const MONTHS_ARRAY = ['January', 'February', 'March', 'April', 'May', 'June', 'J
 const DAYS_IN_A_WEEK = ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'];
 
 export function getDateFormat(dateString: string): string {
-    const date = new Date(dateString);
+    const dateStringToNumber = Number(dateString);
+    const date = new Date(dateStringToNumber);
     const month = MONTHS_ARRAY[date.getMonth()]?.substring(0, 3);
     const dateFormat = `${date.getDate()} ${month}, ${date.getFullYear()}`;
+    console.log(dateString);
     return dateFormat;
 };
 
 export function getTimeFormat(dateString: string): string {
-    const time = (new Date(dateString)).toTimeString();
+    const dateStringToNumber = Number(dateString);
+    const time = (new Date(dateStringToNumber)).toTimeString();
     const [hours, minutes, ...others] = time.split(":");
     const timeFormat = `${hours}:${minutes}`;
     return timeFormat;
