@@ -56,8 +56,6 @@ function Home() {
   
   if (error) return <ErrorMessage />;
 
-  console.log(data);
-
   return (
     <main className="border border-secondary-900/50 bg-primary-500 p-3">
       <div className="flex items-center justify-between px-3">
