@@ -22,7 +22,7 @@ export type MatchScore = {
 export type Match = {
     _id: number;
     status: MatchStatus;
-    minute?: string;
+    minute: string;
     competition: {
         _id: number;
         name: string;
