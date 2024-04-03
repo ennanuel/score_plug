@@ -9,34 +9,30 @@ import { ErrorMessage, LoadingMessage } from './_components';
 
 const QUERY = gql`
   query {
-    competitions {
-      totalPages
-      currentPage
-      competitions {
-        _id
+    activeCompetitions {
+      _id
+      name
+      emblem
+      area {
         name
-        emblem
-        area {
+      }
+      matches {
+        _id
+        status
+        utcDate
+        minute
+        homeTeam {
           name
+          crest
         }
-        matches {
-          _id
-          status
-          utcDate
-          minute
-          homeTeam {
-            name
-            crest
-          }
-          awayTeam {
-            name 
-            crest
-          }
-          score {
-            fullTime {
-              home
-              away
-            }
+        awayTeam {
+          name 
+          crest
+        }
+         score {
+          fullTime {
+            home
+            away
           }
         }
       }
