@@ -15,16 +15,9 @@ const MatchInfo = () => {
         </p>
       </div>
 
-      <p className='text-center font-semibold text-secondary-500 mt-6 pt-2'>Venue</p>
-      <div className="p-4 py-3 bg-primary-600 rounded-md flex flex-col gap-4 mt-2">
-        <p className="flex items-center justify-between">
-          <span className='text-sm text-secondary-600'>Name</span>
-          <span className="text-sm font-semibold">Jorginho Rodriguez</span>
-        </p>
-        <p className="flex items-center justify-between">
-          <span className='text-sm text-secondary-600'>Nationality</span>
-          <span className="text-sm font-semibold">Italy</span>
-        </p>
+      <div className="flex-col gap-2">
+        <h3>Venue</h3>
+        <p>Metro Politano, Italy</p>
       </div>
     </div>
   )
