@@ -42,11 +42,10 @@ const QUERY = gql`
 
 function Home() {
   const [status, setStatus] = useState<"IN_PLAY" | "">("");
-  const [page, setPage] = useState(0);
   const showLiveMatches = () => setStatus("IN_PLAY");
   const showAllMatches = () => setStatus("");
 
-  const { loading, error, data } = useQuery<{ competitions: { competitions: Competition[]; totalPages: number; page: number; } }>(QUERY);
+  const { loading, error, data } = useQuery<{ activeCompetitions: Competition[] }>(QUERY);
 
   if (loading) return <LoadingMessage />
   
@@ -72,7 +71,7 @@ function Home() {
         <h2 className="font-bold">Popular Leagues</h2>
         <ul className="flex flex-col gap-4">
           {
-            data?.competitions?.competitions?.map((competition, index) => <li key={index}><CompetitionWithMatches {...competition} /></li>)
+            data?.activeCompetitions.map((competition, index) => <li key={index}><CompetitionWithMatches {...competition} /></li>)
           }
         </ul>
       </div>
