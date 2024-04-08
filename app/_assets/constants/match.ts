@@ -65,8 +65,8 @@ export const MATCHES = [
         score: {
             winner: null,
             fullTime: {
-                homeTeam: 1,
-                awayTeam: 4
+                home: 1,
+                away: 4
             }
         },
         homeTeam: {
@@ -93,8 +93,8 @@ export const MATCHES = [
         score: {
             winner: "AWAY_TEAM",
             fullTime: {
-                homeTeam: 0,
-                awayTeam: 3
+                home: 0,
+                away: 3
             }
         },
         homeTeam: {
@@ -121,8 +121,8 @@ export const MATCHES = [
         score: {
             winner: null,
             fullTime: {
-                homeTeam: 2,
-                awayTeam: 0
+                home: 2,
+                away: 0
             }
         },
         homeTeam: {
@@ -149,8 +149,8 @@ export const MATCHES = [
         score: {
             winner: null,
             fullTime: {
-                homeTeam: null,
-                awayTeam: null
+                home: null,
+                away: null
             }
         },
         homeTeam: {
@@ -177,8 +177,8 @@ export const MATCHES = [
         score: {
             winner: null,
             fullTime: {
-                homeTeam: null,
-                awayTeam: null
+                home: null,
+                away: null
             }
         },
         homeTeam: {
