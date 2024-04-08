@@ -33,22 +33,57 @@ const MATCH_COMPETITION = {
 };
 
 const MATCH_OUTCOME1 = {
-    homeWin: 10,
-    draw: 30,
-    awayWin: 60
-}
-
-const MATCH_OUTCOME2 = {
-    homeWin: 68,
-    draw: 22,
-    awayWin: 10
-}
-
-const MATCH_OUTCOME3 = {
-    homeWin: 25.05,
-    draw: 24.95,
-    awayWin: 50
-}
+    halfTime: {
+        outcome: {
+            homeWin: 10,
+            draw: 30,
+            awayWin: 60
+        },
+        goals: {
+            _1: {
+                over: 50,
+                under: 50,
+            },
+            _2: {
+                over: 50,
+                under: 50,
+            },
+            _3: {
+                over: 50,
+                under: 50,
+            },
+            _4: {
+                over: 50,
+                under: 50,
+            },
+        },
+    },
+    fullTime: {
+        outcome: {
+            homeWin: 10,
+            draw: 30,
+            awayWin: 60
+        },
+        goals: {
+            _1: {
+                over: 50,
+                under: 50,
+            },
+            _2: {
+                over: 50,
+                under: 50,
+            },
+            _3: {
+                over: 50,
+                under: 50,
+            },
+            _4: {
+                over: 50,
+                under: 50,
+            },
+        },
+    },
+};
 
 export const MATCHES = [
     {
@@ -56,7 +91,7 @@ export const MATCHES = [
         status: "IN_PLAY",
         minute: "20",
         competition: MATCH_COMPETITION,
-        outcome: MATCH_OUTCOME1,
+        predictions: MATCH_OUTCOME1,
         timeRemaining: {
             days: 0,
             hours: -2,
@@ -84,7 +119,7 @@ export const MATCHES = [
         status: "FINISHED",
         minute: "FT",
         competition: MATCH_COMPETITION,
-        outcome: MATCH_OUTCOME2,
+        predictions: MATCH_OUTCOME1,
         timeRemaining: {
             days: 0,
             hours: -2,
@@ -112,7 +147,7 @@ export const MATCHES = [
         status: "PAUSED",
         minute: "HT",
         competition: MATCH_COMPETITION,
-        outcome: MATCH_OUTCOME3,
+        predictions: MATCH_OUTCOME1,
         timeRemaining: {
             days: 0,
             hours: -2,
@@ -140,7 +175,7 @@ export const MATCHES = [
         status: "TIMED",
         minute: "20",
         competition: MATCH_COMPETITION,
-        outcome: MATCH_OUTCOME2,
+        predictions: MATCH_OUTCOME1,
         timeRemaining: {
             days: 0,
             hours: 2,
@@ -168,7 +203,7 @@ export const MATCHES = [
         status: "TIMED",
         minute: "20",
         competition: MATCH_COMPETITION,
-        outcome: MATCH_OUTCOME1,
+        predictions: MATCH_OUTCOME1,
         timeRemaining: {
             days: 0,
             hours: 1,
