@@ -48,7 +48,7 @@ function Matches() {
                 <div className="flex justify-between items-center gap-4">
                     <h1 className='font-bold text-2xl'>Matches</h1>
                     <button className='d-flex align-items-center rounded-md text-white-100'>
-                        <MdStarOutline size={30} />
+                        <MdStarOutline size={20} />
                     </button>
                 </div>
                 <DateAndStatusFilter />
