@@ -13,8 +13,8 @@ export function getMatchCardBackground(matchStatus: MatchStatus): string {
 
 export function getTeamColors(status: MatchStatus, score: MatchScore) {
     const result = { homeTextColor: 'text-secondary-300', awayTextColor: 'text-secondary-400' };
-    if (score.fullTime.homeTeam < score.fullTime.awayTeam) result.homeTextColor = 'text-secondary-700';
-    else if (score.fullTime.awayTeam < score.fullTime.homeTeam) result.awayTextColor = 'text-secondary-700';
-    else if (status !== 'TIMED' && (score.fullTime.awayTeam === score.fullTime.homeTeam)) result.homeTextColor = result.awayTextColor = 'text-secondary-700';
+    if (score.fullTime.home < score.fullTime.away) result.homeTextColor = 'text-secondary-700';
+    else if (score.fullTime.away < score.fullTime.home) result.awayTextColor = 'text-secondary-700';
+    else if (status !== 'TIMED' && (score.fullTime.away === score.fullTime.home)) result.homeTextColor = result.awayTextColor = 'text-secondary-700';
     return result;
 }
