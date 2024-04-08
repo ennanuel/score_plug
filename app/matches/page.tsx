@@ -4,10 +4,41 @@ import { MdStarOutline } from 'react-icons/md';
 import { MATCHES } from '../_assets/constants/match';
 import MatchCard from '../_components/MatchCard';
 import { Match } from '@/types/match.type';
-import { DateAndStatusFilter } from '../_components';
+import { DateAndStatusFilter, ErrorMessage, LoadingMessage } from '../_components';
 import { Suspense } from 'react';
+import { useQuery, gql } from '@apollo/client';
+
+const QUERY = gql`
+  query {
+    matches {
+        totalPages
+        matches {
+            _id
+            status
+            utcDate
+            minute
+            homeTeam {
+                name
+                crest
+            }
+            awayTeam {
+                name 
+                crest
+            }
+            score {
+                fullTime {
+                    home
+                    away
+                }
+            }
+        }
+    }
+  }
+`;
+
 
 function Matches() {
+    const { loading, error, data } = useQuery<{ matches: { matches: Match[], totalPages: number } }>(QUERY);
 
     return (
         <Suspense>
@@ -26,7 +57,7 @@ function Matches() {
 
                         <ul className="flex flex-col gap-1">
                             {
-                                MATCHES.map((match, index) => (
+                                data?.matches?.matches.map((match, index) => (
                                     <li><MatchCard key={index} {...(match as Match)} /></li>
                                 ))
                             }
