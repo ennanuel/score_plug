@@ -34,6 +34,15 @@ const QUERY = gql`
                 away
               }
             }
+            predictions {
+              fullTime {
+                outcome {
+                  homeWin
+                  draw
+                  awayWin
+                }
+              }
+            }
         }
     }
   }
