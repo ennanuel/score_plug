@@ -11,13 +11,17 @@ export type Competition = {
     type: string;
     emblem: string | StaticImport;
     currentSeason: {
-        startDate: string,
-        endDate: string,
-        currentMatchday: number,
-        winner: number
+        startDate: string;
+        endDate: string;
+        currentMatchday: number;
+        winner: number;
     };
     hasLiveMatch: boolean;
     noOfMatches: number;
     matches: Match[];
+    recentMatches: {
+        matches: number;
+        hasLiveMatch: boolean;
+    };
     isFavorite: boolean;
 };
