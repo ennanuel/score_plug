@@ -6,16 +6,16 @@ export type MatchScore = {
     duration: string;
     winner: null | "HOME_TEAM" | "AWAY_TEAM" | "DRAW";
     firstHalf: {
-        homeTeam: number;
-        awayTeam: number;
+        home: number;
+        away: number;
     },
     secondHalf: {
-        homeTeam: number;
-        awayTeam: number;
+        home: number;
+        away: number;
     },
     fullTime: {
-        homeTeam: number;
-        awayTeam: number;
+        home: number;
+        away: number;
     }
 };
 
@@ -49,9 +49,56 @@ export type Match = {
         crest: string | StaticImport;
     },
     score: MatchScore;
-    outcome: {
-        homeWin: number;
-        draw: number;
-        awayWin: number;
+    predictions: {
+        halfTime: {
+            outcome: {
+                homeWin: number;
+                draw: number;
+                awayWin: number;
+            },
+            goals: {
+                _1: {
+                    over: number,
+                    under: number
+                },
+                _2: {
+                    over: number,
+                    under: number
+                },
+                _3: {
+                    over: number,
+                    under: number
+                },
+                _4: {
+                    over: number,
+                    under: number
+                }
+            }
+        },
+        fullTime: {
+            outcome: {
+                homeWin: number;
+                draw: number;
+                awayWin: number;
+            },
+            goals: {
+                _1: {
+                    over: number,
+                    under: number
+                },
+                _2: {
+                    over: number,
+                    under: number
+                },
+                _3: {
+                    over: number,
+                    under: number
+                },
+                _4: {
+                    over: number,
+                    under: number
+                }
+            }
+        }
     }
 }
