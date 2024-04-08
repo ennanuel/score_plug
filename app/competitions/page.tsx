@@ -1,3 +1,5 @@
+"use client";
+
 import { MdStarOutline } from 'react-icons/md';
 import CompetitionCard from '../_components/CompetitionCard';
 import { Competition } from '@/types/competition.type';
