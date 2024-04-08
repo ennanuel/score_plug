@@ -31,12 +31,12 @@ function MatchCard ({ _id, status, minute, utcDate, homeTeam, awayTeam, score }:
                 <div className={`flex items-center gap-2 ${homeTextColor}`}>
                     <Image src={homeTeam.crest} alt={homeTeam.name} width={20} height={20} className="aspect-square object-contain" />
                     <p className="flex-1 text-sm font-semibold">{homeTeam.name}</p>
-                    <span className="font-bold text-sm">{score.fullTime.homeTeam}</span>
+                    <span className="font-bold text-sm">{score.fullTime.home}</span>
                 </div>
                 <div className={`flex items-center gap-2 ${awayTextColor}`}>
                     <Image src={awayTeam.crest} alt={awayTeam.name} width={20} height={20} className="aspect-square object-contain" />
                     <p className="flex-1 text-sm font-semibold">{awayTeam.name}</p>
-                    <span className="font-bold text-sm">{score.fullTime.awayTeam}</span>
+                    <span className="font-bold text-sm">{score.fullTime.away}</span>
                 </div>
             </div>
             <div className="flex items-center justify-center w-[60px] ml-2">
