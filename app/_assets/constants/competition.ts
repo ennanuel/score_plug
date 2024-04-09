@@ -48,6 +48,10 @@ export const COMPETITIONS = [
         emblem: laLigaEmblem,
         currentSeason: CURRENT_SEASON,
         matches: COMPETITION_MATCHES,
+        recentMatches: {
+            matches: 10,
+            hasLiveMatch: true
+        }
     },
     {
         _id: 300,
