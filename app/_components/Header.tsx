@@ -47,7 +47,7 @@ const Header = () => {
           </li>
         </ul>
       </div>
-      <ul className={`flex items-center justify-start gap-3 px-6 transition-transform w-fit ${scrolled && "lg:translate-x-[110px]"}`}>
+      <ul className={`flex items-center justify-start gap-3 px-6 transition-transform w-fit ${scrolled && "lg:translate-x-[130px]"}`}>
         {
           NAV_LINKS.map((navLink, index) => (
             <li><NavLink key={index} {...navLink} /></li>
