@@ -13,6 +13,7 @@ const QUERY = gql`
         matches {
             _id
             minute
+            status
             homeTeam {
               name
               crest
