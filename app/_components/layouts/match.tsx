@@ -1,6 +1,11 @@
+"use client"
+
 import { MatchHeader } from '../';
+import { useParams } from 'next/navigation';
 
 const Match = ({ children }: Readonly<{ children: React.ReactNode }>) => {
+  const { id } = useParams();
+
   return (
     <div className='border border-secondary-900/50'>
       <MatchHeader />
