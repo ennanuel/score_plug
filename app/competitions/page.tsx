@@ -18,6 +18,10 @@ const QUERY = gql`
                 name
                 flag
             }
+            recentMatches {
+                matches
+                hasLiveMatch
+            }
         }
     }
   }
@@ -31,8 +35,8 @@ const Competitions = () => {
 
     return (
         <div className="border border-secondary-900/50 bg-primary-500 p-3">
-            <div className="flex items-center gap-4 justify-between bg-primary-800 p-3 px-4 rounded-lg">
-                <h2 className="font-bold">Leagues and Competitions</h2>
+            <div className="flex items-center gap-4 justify-between">
+                <h1 className="font-bold">Leagues and Competitions</h1>
                 <MdStarOutline size={20} />
             </div>
             
