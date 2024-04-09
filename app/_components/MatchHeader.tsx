@@ -30,6 +30,7 @@ const query = gql`
       competition {
         _id
         name
+        emblem
         area {
           name
           flag
@@ -72,7 +73,7 @@ const MatchHeader = () => {
     variables: { id }
   });
   const time = useMemo(() => getTimeFormat(data?.match.utcDate || ''), [data]);
-  const colors = useMemo(() => data && { homeTeam: data?.match.homeTeam.clubColors.split('/')[0].toLowerCase(), awayTeam: data.match.awayTeam.clubColors.split('/')[0].toLowerCase() }, [data]);
+  const colors = useMemo(() => data && { homeTeam: data?.match.homeTeam.clubColors.split('/')[0].replace(/\s+/ig, '').toLowerCase(), awayTeam: data.match.awayTeam.clubColors.split('/')[0].replace(/\s+/ig, '').toLowerCase() }, [data]);
 
   if (loading) return <LoadingMessage />;
   else if (error) return <ErrorMessage />;
