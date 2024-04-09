@@ -116,19 +116,17 @@ const MatchHeader = () => {
             {
             data.match.status === "TIMED" ?
               <p className="text-3xl font-bold">{time}</p> :
-              <p className="text-4xl font-bold">
+              <p className="text-[4rem] font-bold">
                 {
-                  /in_play|paused|finished/i.test(data.match.status) ?
+                  /(in_play|paused|finished)/i.test(data.match.status) ?
                     `${data.match.score.fullTime.home} - ${data.match.score.fullTime.away}` :
                     data.match.status.substring(0, 4)
                 }
               </p>
             }
           {
-            Number(data.match.timeRemaining.days) >= 1 || !["IN_PLAY, PAUSED"].includes(data.match.status) ?
-              <p className="text-sm text-secondary-600">
-                {date}
-              </p> :
+            Number(data.match.timeRemaining.days) >= 1 || !/(in_play|paused)/i.test(data.match.status) ?
+              <p className="text-sm text-secondary-600">{date}</p> :
               data.match.status !== "TIMED" ?
                 <p className="text-sm text-secondary-600">
                   {`${data.match.score.firstHalf.home} - ${data.match.score.firstHalf.away}`}
