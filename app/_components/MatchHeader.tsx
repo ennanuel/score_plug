@@ -74,12 +74,11 @@ const MatchHeader = () => {
     variables: { id }
   });
   const time = useMemo(() => getTimeFormat(data?.match.utcDate || ''), [data]);
+  const colors = useMemo(() => data && { homeTeamColor: data?.match.homeTeam.clubColors.split(' / ')[0].toLowerCase(), awayTeamColors: data.match.awayTeam.clubColors.split(' / ')[0].toLowerCase() }, [data]);
 
   if (loading) return <LoadingMessage />;
   else if (error) return <ErrorMessage />;
   else if (!data) return null;
-
-  console.log(data.match.homeTeam.clubColors, data.match.awayTeam.clubColors)
 
   return (
     <>
@@ -92,7 +91,10 @@ const MatchHeader = () => {
         </div>
         <MdNotifications size={20} />
       </div>
-      <div className="bg-gradient-to-r from-blue-900/50 to-red-900/50 p-4 grid grid-cols-5 m-3 mt-4 gap-2 rounded-md">
+      <div
+        style={{ background: `linear-background(45deg, ${colors?.homeTeamColor}, ${colors?.awayTeamColors})` }}
+        className="bg-gradient-to-r from-blue-900/50 to-red-900/50 p-4 grid grid-cols-5 m-3 mt-4 gap-2 rounded-md"
+      >
         <div className="col-span-2 flex flex-col gap-2 items-center justify-center">
           <Image width={90} src={data.match.homeTeam.crest} className="aspect-square object-contain" alt="Clug Crest" />
           <h3 className="font-bold text-sm text-secondary-600">{data.match.homeTeam.name}</h3>
@@ -104,7 +106,7 @@ const MatchHeader = () => {
           </p>
         </div>
         <div className="col-span-2 flex flex-col gap-2 items-center justify-center">
-          <Image width={90} src={data.match.homeTeam.crest} className="aspect-square object-contain" alt="Clug Crest" />
+          <Image width={90} src={data.match.awayTeam.crest} className="aspect-square object-contain" alt="Clug Crest" />
           <h3 className="font-bold text-sm text-secondary-600">{data.match.awayTeam.name}</h3>
         </div>
       </div>
