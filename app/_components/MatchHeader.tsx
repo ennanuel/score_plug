@@ -57,12 +57,6 @@ const query = gql`
         }
       }
 
-      referees {
-        name
-        type
-        nationality
-      }
-
     }
   }
 `
