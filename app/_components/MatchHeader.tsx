@@ -4,8 +4,6 @@ import { MdNotifications } from 'react-icons/md';
 import { FaAngleLeft } from 'react-icons/fa';
 import Image from "next/image";
 import AltHeader from './AltHeader';
-import barcelonaCrest from "../_assets/barcelona_crest.png";
-import liverpoolCrest from "../_assets/liverpool_crest.png";
 import { useParams } from 'next/navigation';
 import { getHeaderLinks } from '../_utils/link';
 import { MATCH_LINKS } from '../_assets/constants/match';
@@ -74,17 +72,17 @@ const MatchHeader = () => {
     variables: { id }
   });
   const time = useMemo(() => getTimeFormat(data?.match.utcDate || ''), [data]);
-  const colors = useMemo(() => data && { homeTeamColor: data?.match.homeTeam.clubColors.split(' / ')[0].toLowerCase(), awayTeamColors: data.match.awayTeam.clubColors.split(' / ')[0].toLowerCase() }, [data]);
+  const colors = useMemo(() => data && { homeTeam: data?.match.homeTeam.clubColors.split('/')[0].toLowerCase(), awayTeam: data.match.awayTeam.clubColors.split('/')[0].toLowerCase() }, [data]);
 
   if (loading) return <LoadingMessage />;
   else if (error) return <ErrorMessage />;
   else if (!data) return null;
-
+  console.log(colors);
   return (
     <>
       <div className="flex items-center justify-between gap-2 m-3 pr-3">
         <FaAngleLeft />
-        <div className="h-6 aspect-square border-2 border-secondary-800"></div>
+        <Image src={data.match.competition.emblem} alt={data.match.competition.name} width={50} height={50} className="object-contain" />
         <div className="flex-1 flex flex-col">
           <h3 className="text-sm font-semibold">{data.match.competition.name}</h3>
           <p className='text-[.7em] text-secondary-700'>{data.match.competition.area.name}</p>
@@ -92,7 +90,7 @@ const MatchHeader = () => {
         <MdNotifications size={20} />
       </div>
       <div
-        style={{ background: `linear-background(45deg, ${colors?.homeTeamColor}, ${colors?.awayTeamColors})` }}
+        style={{ background: `linear-background(90deg, ${colors?.homeTeam}, ${colors?.awayTeam})` }}
         className="bg-gradient-to-r from-blue-900/50 to-red-900/50 p-4 grid grid-cols-5 m-3 mt-4 gap-2 rounded-md"
       >
         <div className="col-span-2 flex flex-col gap-2 items-center justify-center">
