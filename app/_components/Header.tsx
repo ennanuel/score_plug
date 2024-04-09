@@ -22,7 +22,7 @@ const Header = () => {
   return (
     <nav className={`sticky top-[-50px] z-[99999] border-b py-2 d-flex flex-col gap-2 border-secondary-900/50 bg-primary-500`}>
       <div className="flex items-center justify-between gap-4 px-5">
-        <div className={`flex-1 font-semibold text-white-100 text-2xl flex items-center justify-start gap-3 transition-transform ${scrolled && 'translate-y-[58px]'}`}>
+        <div className={`flex-1 font-semibold text-white-100 text-2xl flex items-center justify-start gap-3 transition-transform ${scrolled && 'translate-y-[50px]'}`}>
           <GiSoccerField /> 
           <span>Score Plug</span>
         </div>
@@ -47,7 +47,7 @@ const Header = () => {
           </li>
         </ul>
       </div>
-      <ul className={`flex items-center justify-start gap-3 px-8 transition-transform w-fit ${scrolled && "lg:translate-x-[180px]"}`}>
+      <ul className={`flex items-center justify-start gap-3 px-8 transition-transform w-fit ${scrolled && "lg:translate-x-[110px]"}`}>
         {
           NAV_LINKS.map((navLink, index) => (
             <li><NavLink key={index} {...navLink} /></li>
