@@ -119,7 +119,7 @@ const MatchHeader = () => {
               </p> :
               <p className="text-sm text-secondary-600">
                 <span>Starts in </span>
-                <span className="capitalize">{Number(remainingTime) > 1 ? timeMeasurement : timeMeasurement?.replace(/s$/, '')} {remainingTime}</span>
+                <span className="capitalize">{remainingTime} {Number(remainingTime) > 1 ? timeMeasurement : timeMeasurement?.replace(/s$/, '')}</span>
               </p>
           }
         </div>
