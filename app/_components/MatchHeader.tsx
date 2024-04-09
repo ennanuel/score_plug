@@ -22,7 +22,12 @@ const query = gql`
     match(id: $id) {
       _id
       minute
-      timeRemaining
+
+      timeRemaining {
+        days
+        hours
+        minutes
+      }
 
       competition {
         _id
