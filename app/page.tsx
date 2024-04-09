@@ -52,15 +52,15 @@ function Home() {
   if (error) return <ErrorMessage />;
 
   return (
-    <main className="border border-secondary-900/50 bg-primary-500 p-3">
-      <h2 className="font-bold">Featured Matches</h2>
+    <main className="border border-secondary-900/500 flex flex-col gap-4 p-3">
+      <h2 className="font-bold">Today's Matches</h2>
       <div className="flex items-center justify-between px-3">
         <div className="relative flex items-center justify-stretch h-[30px] gap-2">
-          <button onClick={showAllMatches} className={`relative flex justify-center items-center gap-2 h-full px-3 rounded-md font-semibold ${status === "" ? 'text-orange-300 bg-orange-400/20': 'bg-black-900/50 text-orange-700'}`}>
+          <button onClick={showAllMatches} className={`relative flex justify-center items-center gap-2 h-full px-3 rounded-sm font-semibold ${status === "" ? 'text-orange-300 bg-orange-400/20': 'bg-black-900/50 text-orange-700'}`}>
             {status === "" && <span className="block w-2 aspect-square rounded-md bg-orange-300"></span>}
             <span>All</span>
           </button>
-          <button onClick={showLiveMatches} className={`relative flex justify-center items-center gap-2 h-full px-3 rounded-md font-semibold ${status === "IN_PLAY" ? ' text-green-300 bg-green-400/20': 'bg-black-900/50 text-green-700'}`}>            
+          <button onClick={showLiveMatches} className={`relative flex justify-center items-center gap-2 h-full px-3 rounded-sm font-semibold ${status === "IN_PLAY" ? ' text-green-300 bg-green-400/20': 'bg-black-900/50 text-green-700'}`}>            
             {status === "IN_PLAY" && <span className="block w-2 aspect-square rounded-md bg-green-600"></span>}
             <span>Live</span>
           </button>
