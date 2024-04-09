@@ -21,6 +21,7 @@ const query = gql`
     match(id: $id) {
       _id
       minute
+      status
 
       timeRemaining {
         days
@@ -66,7 +67,7 @@ const query = gql`
   }
 `;
 
-const getTeamColors = (clubColors: string) => clubColors.split('/').map(color => color.replace(/\s+/ig, '').toLowerCase());
+const getTeamColors = (clubColors: string) => clubColors?.split('/')?.map(color => color.replace(/\s+/ig, '').toLowerCase() || []);
 
 const MatchHeader = () => {
   const { id } = useParams<{ id: string }>();
@@ -111,16 +112,25 @@ const MatchHeader = () => {
           <h3 className="font-bold text-sm text-secondary-600">{data.match.homeTeam.name}</h3>
         </div>
         <div className="relative col-span-1 flex flex-col items-center justify-center text-center">
-          <p className="text-3xl font-bold">{time}</p>
+          <p className="text-3xl font-bold">
+            {
+              data.match.status !== "TIMED" ?
+                /in_play|paused|finished/i.test(data.match.status) ? `${data.match.score.fullTime.home} - ${data.match.score.fullTime.away}` : data.match.status.substring(0, 4) :
+                time
+            }</p>
           {
-            Number(data.match.timeRemaining.days) >= 1 ?
+            Number(data.match.timeRemaining.days) >= 1 || /(^in_play|^paused)/i.test(data.match.status) ?
               <p className="text-sm text-secondary-600">
                 {date}
               </p> :
-              <p className="text-sm text-secondary-600">
-                <span>Starts in </span>
-                <span className="capitalize">{remainingTime} {Number(remainingTime) > 1 ? timeMeasurement : timeMeasurement?.replace(/s$/, '')}</span>
-              </p>
+              /(in_play|paused)/i.test(data.match.status) ?
+                <p className="text-sm text-secondary-600">
+                  {`${data.match.score.firstHalf.home} - ${data.match.score.firstHalf.away}`}
+                </p> :
+                <p className="text-sm text-secondary-600">
+                  <span>Starts in </span>
+                  <span className="capitalize">{remainingTime} {Number(remainingTime) > 1 ? timeMeasurement : timeMeasurement?.replace(/s$/, '')}</span>
+                </p>
           }
         </div>
         <div className="relative col-span-2 flex flex-col gap-2 items-center justify-center">
