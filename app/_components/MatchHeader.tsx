@@ -63,7 +63,9 @@ const query = gql`
 
     }
   }
-`
+`;
+
+const getTeamColors = (clubColors: string) => clubColors.split('/').map(color => color.replace(/\s+/ig, '').toLowerCase());
 
 const MatchHeader = () => {
   const { id } = useParams<{ id: string }>();
@@ -73,12 +75,17 @@ const MatchHeader = () => {
     variables: { id }
   });
   const time = useMemo(() => getTimeFormat(data?.match.utcDate || ''), [data]);
-  const colors = useMemo(() => data && { homeTeam: data?.match.homeTeam.clubColors.split('/')[0].replace(/\s+/ig, '').toLowerCase(), awayTeam: data.match.awayTeam.clubColors.split('/')[1].replace(/\s+/ig, '').toLowerCase() }, [data]);
+  const [timeMeasurement, remainingTime] = useMemo(() => data ? Object.entries(data.match.timeRemaining).find(([key, value]) => Number(value) >= 1) || [] : [], [data]);
+
+  const colors = useMemo(() => ({
+    homeTeam: data ? getTeamColors(data.match.homeTeam.clubColors) : [],
+    awayTeam: data ? getTeamColors(data.match.awayTeam.clubColors) : []
+  }), [data]);
 
   if (loading) return <LoadingMessage />;
   else if (error) return <ErrorMessage />;
   else if (!data) return null;
-  console.log(colors);
+  
   return (
     <>
       <div className="flex items-center justify-between gap-2 m-3 pr-3">
@@ -90,10 +97,11 @@ const MatchHeader = () => {
         </div>
         <MdNotifications size={20} />
       </div>
-      <div
-        style={{ background: `linear-gradient(90deg, ${colors?.homeTeam}, ${colors?.awayTeam})` }}
-        className="bg-gradient-to-r from-blue-900/50 to-red-900/50 p-4 grid grid-cols-5 m-3 mt-4 gap-2 rounded-md"
-      >
+      <div className="relative p-4 grid grid-cols-5 m-3 mt-4 gap-2 rounded-md">
+        <div
+          style={{ background: `linear-gradient(90deg, ${colors.homeTeam[0] === colors.awayTeam[0] ? colors.homeTeam[1] : colors.homeTeam[0]}, ${colors.awayTeam[0]})` }}
+          className="absolute top-0 left-0 w-full h-full opacity-30"
+        ></div>
         <div className="col-span-2 flex flex-col gap-2 items-center justify-center">
           <Image width={90} src={data.match.homeTeam.crest} className="aspect-square object-contain" alt="Clug Crest" />
           <h3 className="font-bold text-sm text-secondary-600">{data.match.homeTeam.name}</h3>
@@ -101,7 +109,8 @@ const MatchHeader = () => {
         <div className="col-span-1 flex flex-col items-center justify-center text-center">
           <p className="text-3xl font-bold">{time}</p>
           <p className="text-sm text-secondary-600">
-            Starts in {Object.values(data.match.timeRemaining).find((value) => (value as number) >= 1)} {Object.entries(data.match.timeRemaining).find(([key, value]) => (value as number) >= 1)?.slice(0, 1)}
+            <span>Starts in</span>
+            <span className="capitalize">{Number(remainingTime) > 1 ? timeMeasurement : timeMeasurement?.replace(/s$/, '')} {remainingTime}</span>
           </p>
         </div>
         <div className="col-span-2 flex flex-col gap-2 items-center justify-center">
