@@ -73,7 +73,7 @@ const MatchHeader = () => {
     variables: { id }
   });
   const time = useMemo(() => getTimeFormat(data?.match.utcDate || ''), [data]);
-  const colors = useMemo(() => data && { homeTeam: data?.match.homeTeam.clubColors.split('/')[0].replace(/\s+/ig, '').toLowerCase(), awayTeam: data.match.awayTeam.clubColors.split('/')[0].replace(/\s+/ig, '').toLowerCase() }, [data]);
+  const colors = useMemo(() => data && { homeTeam: data?.match.homeTeam.clubColors.split('/')[0].replace(/\s+/ig, '').toLowerCase(), awayTeam: data.match.awayTeam.clubColors.split('/')[1].replace(/\s+/ig, '').toLowerCase() }, [data]);
 
   if (loading) return <LoadingMessage />;
   else if (error) return <ErrorMessage />;
@@ -91,7 +91,7 @@ const MatchHeader = () => {
         <MdNotifications size={20} />
       </div>
       <div
-        style={{ background: `linear-background(90deg, ${colors?.homeTeam}, ${colors?.awayTeam})` }}
+        style={{ background: `linear-gradient(90deg, ${colors?.homeTeam}, ${colors?.awayTeam})` }}
         className="bg-gradient-to-r from-blue-900/50 to-red-900/50 p-4 grid grid-cols-5 m-3 mt-4 gap-2 rounded-md"
       >
         <div className="col-span-2 flex flex-col gap-2 items-center justify-center">
