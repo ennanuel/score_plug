@@ -21,6 +21,7 @@ const query = gql`
     match(id: $id) {
       _id
       minute
+      utcDate
       status
 
       timeRemaining {
@@ -112,18 +113,23 @@ const MatchHeader = () => {
           <h3 className="font-bold text-sm text-secondary-600">{data.match.homeTeam.name}</h3>
         </div>
         <div className="relative col-span-1 flex flex-col items-center justify-center text-center">
-          <p className="text-3xl font-bold">
             {
-              data.match.status !== "TIMED" ?
-                /in_play|paused|finished/i.test(data.match.status) ? `${data.match.score.fullTime.home} - ${data.match.score.fullTime.away}` : data.match.status.substring(0, 4) :
-                time
-            }</p>
+            data.match.status !== "TIMED" ?
+              <p className="text-3xl font-bold">{time}</p> :
+              <p className="text-4xl font-bold">
+                {
+                  /in_play|paused|finished/i.test(data.match.status) ?
+                    `${data.match.score.fullTime.home} - ${data.match.score.fullTime.away}` :
+                    data.match.status.substring(0, 4)
+                }
+              </p>
+            }
           {
-            Number(data.match.timeRemaining.days) >= 1 || /(^in_play|^paused)/i.test(data.match.status) ?
+            Number(data.match.timeRemaining.days) >= 1 || !["IN_PLAY, PAUSED"].includes(data.match.status) ?
               <p className="text-sm text-secondary-600">
                 {date}
               </p> :
-              /(in_play|paused)/i.test(data.match.status) ?
+              data.match.status !== "TIMED" ?
                 <p className="text-sm text-secondary-600">
                   {`${data.match.score.firstHalf.home} - ${data.match.score.firstHalf.away}`}
                 </p> :
