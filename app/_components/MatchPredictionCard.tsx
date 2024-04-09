@@ -2,9 +2,10 @@ import { Match } from "@/types/match.type";
 import Link from "next/link";
 import Image from "next/image";
 import { getTimeFormat } from "../_utils/dateTime";
+import { useMemo } from "react";
 
 function MatchPredictionCard({ _id, homeTeam, competition, awayTeam, utcDate, status, predictions, score, minute }: Match) {
-  const time = getTimeFormat(utcDate);
+  const time = useMemo(() => getTimeFormat(utcDate), []);
 
   return (
     <Link href={`/match/${_id}/prediction`} className="grid grid-cols-3 bg-primary-800 py-2 px-4 rounded-md gap-2 shadow-lg">
