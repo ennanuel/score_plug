@@ -13,7 +13,8 @@ import { Match } from "@/types/match.type";
 import LoadingMessage from './LoadingMessage';
 import ErrorMessage from './ErrorMessage';
 import { useMemo } from 'react';
-import { getTimeFormat } from '../_utils/dateTime';
+import { getDateFormat, getTimeFormat } from '../_utils/dateTime';
+import Link from 'next/link';
 
 const query = gql`
   query GetMatchByID($id: ID!) {
@@ -74,7 +75,8 @@ const MatchHeader = () => {
   const { loading, error, data } = useQuery<{ match: Match }>(query, {
     variables: { id }
   });
-  const time = useMemo(() => getTimeFormat(data?.match.utcDate || ''), [data]);
+  const time = useMemo(() => getTimeFormat(data?.match?.utcDate || ''), [data]);
+  const date = useMemo(() => getDateFormat(data?.match?.utcDate || ''), [data]);
   const [timeMeasurement, remainingTime] = useMemo(() => data ? Object.entries(data.match.timeRemaining).find(([key, value]) => Number(value) >= 1) || [] : [], [data]);
 
   const colors = useMemo(() => ({
@@ -89,7 +91,9 @@ const MatchHeader = () => {
   return (
     <>
       <div className="flex items-center justify-between gap-2 m-3 pr-3">
-        <FaAngleLeft />
+        <button className="flex items-center justify-center">
+          <FaAngleLeft />
+        </button>
         <Image src={data.match.competition.emblem} alt={data.match.competition.name} width={50} height={50} className="object-contain" />
         <div className="flex-1 flex flex-col">
           <h3 className="text-sm font-semibold">{data.match.competition.name}</h3>
@@ -108,10 +112,16 @@ const MatchHeader = () => {
         </div>
         <div className="relative col-span-1 flex flex-col items-center justify-center text-center">
           <p className="text-3xl font-bold">{time}</p>
-          <p className="text-sm text-secondary-600">
-            <span>Starts in</span>
-            <span className="capitalize">{Number(remainingTime) > 1 ? timeMeasurement : timeMeasurement?.replace(/s$/, '')} {remainingTime}</span>
-          </p>
+          {
+            Number(data.match.timeRemaining.days) >= 1 ?
+              <p className="text-sm text-secondary-600">
+                {date}
+              </p> :
+              <p className="text-sm text-secondary-600">
+                <span>Starts in </span>
+                <span className="capitalize">{Number(remainingTime) > 1 ? timeMeasurement : timeMeasurement?.replace(/s$/, '')} {remainingTime}</span>
+              </p>
+          }
         </div>
         <div className="relative col-span-2 flex flex-col gap-2 items-center justify-center">
           <Image width={90} src={data.match.awayTeam.crest} className="aspect-square object-contain" alt="Clug Crest" />
