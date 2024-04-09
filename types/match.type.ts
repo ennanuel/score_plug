@@ -50,6 +50,7 @@ export type Match = {
         crest: string | StaticImport;
         clubColors: string;
     },
+    venue: string;
     score: MatchScore;
     predictions: {
         halfTime: {
@@ -103,4 +104,9 @@ export type Match = {
             }
         }
     }
+    referees: {
+        name: string;
+        type: string;
+        natitionaliity: string;
+    }[]
 }
