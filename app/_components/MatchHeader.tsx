@@ -114,7 +114,7 @@ const MatchHeader = () => {
         </div>
         <div className="relative col-span-1 flex flex-col items-center justify-center text-center">
             {
-            data.match.status !== "TIMED" ?
+            data.match.status === "TIMED" ?
               <p className="text-3xl font-bold">{time}</p> :
               <p className="text-4xl font-bold">
                 {
