@@ -52,7 +52,7 @@ function Home() {
   if (error) return <ErrorMessage />;
 
   return (
-    <main className="border border-secondary-900/500 flex flex-col gap-4 p-3">
+    <main className="border border-secondary-900/50 bg-primary-600 flex flex-col gap-4 p-3">
       <h2 className="font-bold">Today's Matches</h2>
       <div className="flex items-center justify-between px-3">
         <div className="relative flex items-center justify-stretch h-[30px] gap-2">
