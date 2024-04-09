@@ -20,9 +20,9 @@ const Header = () => {
   }, []);
 
   return (
-    <nav className={`sticky top-[-40px] z-[99999] border-b py-2 px-4 flex flex-col gap-2 border-secondary-900/50 bg-primary-500`}>
+    <nav className={`sticky top-[-50px] z-[99999] border-b py-2 px-4 flex flex-col gap-2 border-secondary-900/50 bg-primary-500`}>
       <div className="flex items-center justify-between gap-4 px-4">
-        <div className={`flex-1 font-semibold text-white-100 text-2xl flex items-center justify-start gap-3 transition-transform ${scrolled && 'translate-y-[30px]'}`}>
+        <div className={`flex-1 font-semibold text-white-100 text-2xl flex items-center justify-start gap-3 transition-transform ${scrolled && 'translate-y-[50px]'}`}>
           <GiSoccerField /> 
           <span>Score Plug</span>
         </div>
