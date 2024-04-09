@@ -99,7 +99,7 @@ const MatchHeader = () => {
       </div>
       <div className="relative p-4 grid grid-cols-5 m-3 mt-4 gap-2">
         <div
-          style={{ background: `linear-gradient(90deg, ${colors.homeTeam[0] === colors.awayTeam[0] ? colors.homeTeam[1] : colors.homeTeam[0]}, ${colors.awayTeam[0]})` }}
+          style={{ background: `linear-gradient(90deg, ${colors.homeTeam[0] === colors.awayTeam[0] ? colors.awayTeam[1] : colors.awayTeam[0]}, ${colors.homeTeam[0]})` }}
           className="absolute top-0 left-0 w-full h-full opacity-30 rounded-md"
         ></div>
         <div className="relative col-span-2 flex flex-col gap-2 items-center justify-center">
