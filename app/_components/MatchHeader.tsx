@@ -109,7 +109,7 @@ const MatchHeader = () => {
           className="absolute top-0 left-0 w-full h-full opacity-30 rounded-md"
         ></div>
         {
-          <p className={`absolute top-2 left-2 text-base font-bold ${/in_play|paused/i.test(data.match.status) ? "text-highlight-400" : "text-secondary-500"} flex items-center gap-2`}>
+          <p className={`absolute top-2 left-2 p-1 border-sm bg-black-900/50 text-base font-semibold ${/in_play|paused/i.test(data.match.status) ? "text-highlight-400" : "text-secondary-500"} flex items-center gap-2`}>
             <span className={`w-1 h-[10px] ${/in_play|paused/i.test(data.match.status) ? "bg-highlight-400" : "bg-secondary-500"}`} />
             <span>{data.match.minute}</span>
           </p>
@@ -135,7 +135,7 @@ const MatchHeader = () => {
               <p className="text-sm text-secondary-600">{date}</p> :
               data.match.status !== "TIMED" ?
                 <p className="text-sm text-secondary-600">
-                  {`${data.match.score.firstHalf.home} - ${data.match.score.firstHalf.away}`}
+                  {`(${data.match.score.firstHalf.home} - ${data.match.score.firstHalf.away})`}
                 </p> :
                 <p className="text-sm text-secondary-600">
                   <span>Starts in </span>
