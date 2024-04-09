@@ -108,6 +108,12 @@ const MatchHeader = () => {
           style={{ background: `linear-gradient(90deg, ${colors.homeTeam[0] === colors.awayTeam[0] ? colors.homeTeam[1] : colors.homeTeam[0]}, ${colors.awayTeam[0]})` }}
           className="absolute top-0 left-0 w-full h-full opacity-30 rounded-md"
         ></div>
+        {
+          <p className={`absolute top-2 left-2 text-base font-bold ${/in_play|paused/i.test(data.match.status) ? "text-highlight-400" : "text-secondary-500"} flex items-center gap-2`}>
+            <span className={`w-1 h-[10px] ${/in_play|paused/i.test(data.match.status) ? "bg-highlight-400" : "bg-secondary-500"}`} />
+            <span>{data.match.minute}</span>
+          </p>
+        }
         <div className="relative col-span-2 flex flex-col gap-2 items-center justify-center">
           <Image width={90} src={data.match.homeTeam.crest} className="aspect-square object-contain" alt="Clug Crest" />
           <h3 className="font-bold text-sm text-secondary-600">{data.match.homeTeam.name}</h3>
@@ -116,7 +122,7 @@ const MatchHeader = () => {
             {
             data.match.status === "TIMED" ?
               <p className="text-3xl font-bold">{time}</p> :
-              <p className="text-[4rem] font-bold">
+              <p className="text-[2rem] font-bold">
                 {
                   /(in_play|paused|finished)/i.test(data.match.status) ?
                     `${data.match.score.fullTime.home} - ${data.match.score.fullTime.away}` :
