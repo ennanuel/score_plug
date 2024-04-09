@@ -53,6 +53,7 @@ function Home() {
 
   return (
     <main className="border border-secondary-900/50 bg-primary-500 p-3">
+      <h2 className="font-bold">Featured Matches</h2>
       <div className="flex items-center justify-between px-3">
         <div className="relative flex items-center justify-stretch h-[30px] gap-2">
           <button onClick={showAllMatches} className={`relative flex justify-center items-center gap-2 h-full px-3 rounded-md font-semibold ${status === "" ? 'text-orange-300 bg-orange-400/20': 'bg-black-900/50 text-orange-700'}`}>
@@ -66,16 +67,11 @@ function Home() {
         </div>
         <MdStar />
       </div>
-     
-        <div className="bg-primary-800 py-3 px-4 rounded-lg mt-6">
-        <h2 className="font-bold">Popular Leagues</h2>
-        <ul className="flex flex-col gap-4">
+      <ul className="flex flex-col gap-4">
           {
             data?.activeCompetitions.map((competition, index) => <li key={index}><CompetitionWithMatches {...competition} /></li>)
           }
-        </ul>
-      </div>
-
+      </ul>
     </main>
   )
 }
