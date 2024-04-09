@@ -42,11 +42,13 @@ export type Match = {
         _id: number;
         name: string;
         crest: string | StaticImport;
+        clubColors: string;
     },
     awayTeam: {
         _id: number;
         name: string;
         crest: string | StaticImport;
+        clubColors: string;
     },
     score: MatchScore;
     predictions: {
