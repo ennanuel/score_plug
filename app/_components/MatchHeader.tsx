@@ -97,23 +97,23 @@ const MatchHeader = () => {
         </div>
         <MdNotifications size={20} />
       </div>
-      <div className="relative p-4 grid grid-cols-5 m-3 mt-4 gap-2 rounded-md">
+      <div className="relative p-4 grid grid-cols-5 m-3 mt-4 gap-2">
         <div
           style={{ background: `linear-gradient(90deg, ${colors.homeTeam[0] === colors.awayTeam[0] ? colors.homeTeam[1] : colors.homeTeam[0]}, ${colors.awayTeam[0]})` }}
-          className="absolute top-0 left-0 w-full h-full opacity-30"
+          className="absolute top-0 left-0 w-full h-full opacity-30 rounded-md"
         ></div>
-        <div className="col-span-2 flex flex-col gap-2 items-center justify-center">
+        <div className="relative col-span-2 flex flex-col gap-2 items-center justify-center">
           <Image width={90} src={data.match.homeTeam.crest} className="aspect-square object-contain" alt="Clug Crest" />
           <h3 className="font-bold text-sm text-secondary-600">{data.match.homeTeam.name}</h3>
         </div>
-        <div className="col-span-1 flex flex-col items-center justify-center text-center">
+        <div className="relative col-span-1 flex flex-col items-center justify-center text-center">
           <p className="text-3xl font-bold">{time}</p>
           <p className="text-sm text-secondary-600">
             <span>Starts in</span>
             <span className="capitalize">{Number(remainingTime) > 1 ? timeMeasurement : timeMeasurement?.replace(/s$/, '')} {remainingTime}</span>
           </p>
         </div>
-        <div className="col-span-2 flex flex-col gap-2 items-center justify-center">
+        <div className="relative col-span-2 flex flex-col gap-2 items-center justify-center">
           <Image width={90} src={data.match.awayTeam.crest} className="aspect-square object-contain" alt="Clug Crest" />
           <h3 className="font-bold text-sm text-secondary-600">{data.match.awayTeam.name}</h3>
         </div>
