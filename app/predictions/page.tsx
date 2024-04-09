@@ -12,6 +12,7 @@ const QUERY = gql`
         totalPages
         matches {
             _id
+            minute
             homeTeam {
               name
               crest
