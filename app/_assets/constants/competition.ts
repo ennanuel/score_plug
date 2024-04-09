@@ -31,9 +31,11 @@ export const COMPETITIONS = [
         type: "REGULAR",
         emblem: premierLeagueEmblem,
         currentSeason: CURRENT_SEASON,
-        hasLiveMatch: true,
         matches: COMPETITION_MATCHES,
-        noOfMatches: 10
+        recentMatches: {
+            matches: 10,
+            hasLiveMatch: true
+        }
     },
     {
         _id: 300,
@@ -45,9 +47,7 @@ export const COMPETITIONS = [
         type: "REGULAR",
         emblem: laLigaEmblem,
         currentSeason: CURRENT_SEASON,
-        hasLiveMatch: true,
         matches: COMPETITION_MATCHES,
-        noOfatches: 6
     },
     {
         _id: 300,
@@ -59,9 +59,11 @@ export const COMPETITIONS = [
         type: "CUP",
         emblem: championsLeagueEmblem,
         currentSeason: CURRENT_SEASON,
-        hasLiveMatch: false,
         matches: COMPETITION_MATCHES,
-        noOfMatches: 3
+        recentMatches: {
+            matches: 3,
+            hasLiveMatch: false
+        }
     },
     {
         _id: 300,
@@ -73,8 +75,10 @@ export const COMPETITIONS = [
         type: "CUP",
         emblem: premierLeagueEmblem2,
         currentSeason: CURRENT_SEASON,
-        hasLiveMatch: false,
         matches: COMPETITION_MATCHES,
-        noOfMatches: 0
+        recentMatches: {
+            matches: 0,
+            hasLiveMatch: false
+        }
     },
 ];
