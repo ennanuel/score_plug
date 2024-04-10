@@ -1,5 +1,6 @@
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { Match } from "./match.type";
+import { Team } from "./team.type";
 
 export type Competition = {
     _id: number;
@@ -24,4 +25,5 @@ export type Competition = {
         hasLiveMatch: boolean;
     };
     isFavorite: boolean;
+    teams: Team[]
 };
