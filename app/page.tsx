@@ -47,9 +47,9 @@ function Home() {
 
   const { loading, error, data } = useQuery<{ activeCompetitions: Competition[] }>(QUERY);
 
-  if (loading) return <LoadingMessage />
-  
-  if (error) return <ErrorMessage />;
+  if (loading) return <LoadingMessage />;
+  else if (error) return <ErrorMessage />;
+  else if (!data) return <div>Nothing was found</div>;
 
   return (
     <main className="border border-secondary-900/50 bg-primary-600 flex flex-col gap-4 p-3">
