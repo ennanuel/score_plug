@@ -21,12 +21,13 @@ const Header = () => {
 
   return (
     <>
-      <div className="flex items-center gap-4 px-4 h-[50px] bg-primary-500">
-        <div className="sticky top-0 z-[2] flex-1 font-semibold text-white-100 text-2xl flex items-center justify-start gap-3 transition-transform">
-          <GiSoccerField /> 
-          <span>Score Plug</span>
-        </div>
-        <div className='overflow-clip h-[40px] flex-1 flex items-stretch justify-start gap-2 bg-white-100/5 border border-secondary-100/10 hover:border-secondary-100/50 rounded-md'>
+      <div className="fixed top-0 h-[50px] z-[2] flex-1 font-semibold text-white-100 text-2xl flex items-center justify-start gap-3 transition-transform">
+        <GiSoccerField /> 
+        <span>Score Plug</span>
+      </div>
+      <div className="flex gap-4 px-4 h-[50px] bg-primary-500">
+        <div className="flex-1 opacity-0"></div>
+        <div className='overflow-clip flex-1 my-[5px] flex items-stretch justify-start gap-2 bg-white-100/5 border border-secondary-100/10 hover:border-secondary-100/50 rounded-md'>
           <label htmlFor="search" className="text-white-500 flex items-center justify-center pl-2">
             <MdSearch />
           </label>
