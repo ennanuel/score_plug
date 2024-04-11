@@ -5,19 +5,39 @@ export type MatchStatus = "TIMED" | "PAUSED" | "IN_PLAY" | "FINISHED" | "CANCELL
 export type MatchScore = {
     duration: string;
     winner: null | "HOME_TEAM" | "AWAY_TEAM" | "DRAW";
-    firstHalf: {
-        home: number;
-        away: number;
-    },
-    secondHalf: {
-        home: number;
-        away: number;
-    },
-    fullTime: {
-        home: number;
-        away: number;
-    }
+    firstHalf: Score;
+    secondHalf: Score;
+    fullTime: Score;
 };
+
+export type Score = {
+    home: number;
+    away: number;
+}
+
+export type MatchGoals = {
+    _1: GoalsOutcome;
+    _2: GoalsOutcome;
+    _3: GoalsOutcome;
+    _4: GoalsOutcome
+};
+
+export type GoalsOutcome = {
+    over: number;
+    under: number;
+};
+
+export type MatchOutcome = {
+    homeWin: number;
+    draw: number;
+    awayWin: number;
+};
+
+export type Referee = {
+    name: string;
+    type: string;
+    nationality: string;
+}
 
 export type Match = {
     _id: number;
@@ -54,59 +74,13 @@ export type Match = {
     score: MatchScore;
     predictions: {
         halfTime: {
-            outcome: {
-                homeWin: number;
-                draw: number;
-                awayWin: number;
-            },
-            goals: {
-                _1: {
-                    over: number,
-                    under: number
-                },
-                _2: {
-                    over: number,
-                    under: number
-                },
-                _3: {
-                    over: number,
-                    under: number
-                },
-                _4: {
-                    over: number,
-                    under: number
-                }
-            }
+            outcome: MatchOutcome;
+            goals: MatchGoals;
         },
         fullTime: {
-            outcome: {
-                homeWin: number;
-                draw: number;
-                awayWin: number;
-            },
-            goals: {
-                _1: {
-                    over: number,
-                    under: number
-                },
-                _2: {
-                    over: number,
-                    under: number
-                },
-                _3: {
-                    over: number,
-                    under: number
-                },
-                _4: {
-                    over: number,
-                    under: number
-                }
-            }
+            outcome: MatchOutcome;
+            goals: MatchGoals;
         }
     }
-    referees: {
-        name: string;
-        type: string;
-        natitionaliity: string;
-    }[]
+    referees: Referee[]
 }
