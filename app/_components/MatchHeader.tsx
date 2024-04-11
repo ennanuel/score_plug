@@ -118,8 +118,8 @@ const MatchHeader = () => {
           <Image width={90} src={data.match.homeTeam.crest} className="aspect-square object-contain" alt="Clug Crest" />
           <h3 className="font-bold text-sm text-secondary-600">{data.match.homeTeam.name}</h3>
         </div>
-        <div className="relative col-span-1 flex flex-col items-center justify-center text-center">
-          <div className="flex flex-col justify-center gap-1">
+        <div className="relative col-span-1 flex flex-col gap-2 items-center justify-center text-center">
+          <div className="flex flex-col justify-center">
             {
               data.match.status === "TIMED" ?
                 <p className="text-3xl font-bold">{time}</p> :
