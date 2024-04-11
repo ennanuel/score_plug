@@ -47,7 +47,7 @@ const MatchInfo = () => {
                 <p className="flex items-center justify-between">
                   <span className='text-sm text-secondary-600'>Nationality</span>
                   <span>County Flag</span>
-                  <span className="text-sm font-semibold">{referee.natitionaliity}</span>
+                  <span className="text-sm font-semibold">{referee.nationality}</span>
                 </p>
               </div>
             </li>
