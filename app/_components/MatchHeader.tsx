@@ -133,7 +133,7 @@ const MatchHeader = () => {
                   }
                 </p>
             }
-            <p className="text-sm text-secondary-600">
+            <p className="text-sm mt-[-5px] text-secondary-600">
               {`(${data.match.score.firstHalf.home} - ${data.match.score.firstHalf.away})`}
             </p>
           </div>
