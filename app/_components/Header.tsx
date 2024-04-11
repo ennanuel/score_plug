@@ -21,12 +21,12 @@ const Header = () => {
 
   return (
     <>
-      <div className="flex gap-4 px-4 h-[50px] py-2 bg-primary-500">
-        <div className="sticky top-0 flex-1 font-semibold text-white-100 text-2xl flex items-center justify-start gap-3 transition-transform">
+      <div className="flex items-center gap-4 px-4 h-[50px] bg-primary-500">
+        <div className="sticky top-0 z-[2] flex-1 font-semibold text-white-100 text-2xl flex items-center justify-start gap-3 transition-transform">
           <GiSoccerField /> 
           <span>Score Plug</span>
         </div>
-        <div className='overflow-clip flex-1 flex my-2 items-stretch justify-start gap-2 bg-white-100/5 border border-secondary-100/10 hover:border-secondary-100/50 rounded-md'>
+        <div className='overflow-clip h-[40px] flex-1 flex items-stretch justify-start gap-2 bg-white-100/5 border border-secondary-100/10 hover:border-secondary-100/50 rounded-md'>
           <label htmlFor="search" className="text-white-500 flex items-center justify-center pl-2">
             <MdSearch />
           </label>
@@ -47,7 +47,7 @@ const Header = () => {
           </li>
         </ul>
       </div>
-      <nav className="sticky h-[50px] top-0 border-b px-6 flex items-center justify-center border-secondary-900/50 bg-primary-500">
+      <nav className="sticky z-[1] h-[50px] top-0 border-b px-6 flex border-secondary-900/50 bg-primary-500">
         <ul className={`flex items-center justify-start gap-3 transition-transform w-fit ${scrolled && "lg:translate-x-[130px]"}`}>
           {
             NAV_LINKS.map((navLink, index) => (
