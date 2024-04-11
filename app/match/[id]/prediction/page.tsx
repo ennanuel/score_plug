@@ -1,29 +1,134 @@
 "use client";
 
+import { useState, useMemo } from "react";
 import { describeArc } from "@/app/_utils/shape";
+import { useParams } from "next/navigation";
 import Link from "next/link";
-import { usePathname, /* useSearchParams */ } from "next/navigation";
+import { gql, useQuery } from "@apollo/client";
+import { ErrorMessage, LoadingMessage } from "@/app/_components";
 
+import { Match, MatchGoals } from "@/types/match.type";
+
+const QUERY = gql`
+  query GetMatchPrediction($id: ID!) {
+    match(id: $id) {
+      _id
+      utcDate
+      status
+      minute
+      score {
+        firstHalf {
+          home
+          away
+        }
+        fullTime {
+          home
+          away
+        }
+      }
+      competition {
+        _id
+        name
+        area {
+          name
+          flag
+        }
+      }
+      homeTeam {
+        _id 
+        name
+        crest
+      }
+      awayTeam {
+        _id
+        name
+        crest
+      }
+      predictions {
+        halfTime {
+          outcome {
+            homeWin
+            draw
+            awayWin
+          }
+          goals {
+            _1 {
+              over
+              under
+            }
+            _2 {
+              over
+              under
+            }
+            _3 {
+              over
+              under
+            }
+            _4 {
+              over
+              under
+            }
+          }
+        }
+        fullTime {
+          outcome {
+            homeWin
+            draw
+            awayWin
+          }
+          goals {
+            _1 {
+              over
+              under
+            }
+            _2 {
+              over
+              under
+            }
+            _3 {
+              over
+              under
+            }
+            _4 {
+              over
+              under
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+const goalsOutcome = {
+  "_1": 0.5,
+  "_2": 1.5,
+  "_3": 2.5,
+  "_4": 3.5
+}
+
+const convertToPercentageOf360 = (value: number) => Number(((value / 100) * 360).toFixed(2));
 
 const MatchPrediction = () => {
-  const homeArc = describeArc({ x: 45, y: 45, radius: 40, startAngle: 0, endAngle: 300});
-  const awayArc = describeArc({ x: 45, y: 45, radius: 40, startAngle: 0, endAngle: 30 });
-  const drawArc = describeArc({ x: 45, y: 45, radius: 40, startAngle: 0, endAngle: 60 });
+  const { id } = useParams();
+
+  const { loading, error, data } = useQuery<{ match: Match }>(QUERY, { variables: { id } });
   
-  // const params = useSearchParams();
-  const pathname = usePathname();
-  // const showHalfTimeResults = params.get("time") === 'half-time';
+  const [timePeriod, setTimePeriod] = useState<"halfTime" | "fullTime">("halfTime");
+
+  const homeArc = useMemo(() => data ? describeArc({ x: 45, y: 45, radius: 40, startAngle: 0, endAngle: convertToPercentageOf360(data?.match.predictions[timePeriod].outcome.homeWin)}) : '360', [data, timePeriod]);
+  const awayArc = useMemo(() => data ? describeArc({ x: 45, y: 45, radius: 40, startAngle: 0, endAngle: convertToPercentageOf360(data?.match.predictions[timePeriod].outcome.awayWin)}) : '360', [data, timePeriod]);
+  const drawArc = useMemo(() => data ? describeArc({ x: 45, y: 45, radius: 40, startAngle: 0, endAngle: convertToPercentageOf360(data?.match.predictions[timePeriod].outcome.draw)}) : '360', [data, timePeriod]);
+
+  if (loading) return <LoadingMessage />;
+  else if (error) return <ErrorMessage />;
+  else if (!data) return <div>Nothing was found</div>;
 
   return (
     <div className="mt-2 p-2">
       <ul className="mx-3 flex items-center gap-3">
-        <Link href={`${pathname}?time=full-time`}>
-          <button className="h-[30px] rounded-md px-4 bg-secondary-400 text-sm text-primary-600 font-semibold">Full-time</button>
-        </Link>
-        <Link href={`${pathname}?time=half-time`}>
-          <button className="h-[30px] rounded-md px-4 bg-secondary-900/50 text-sm text-secondary-700 hover:text-secondary-500">Half-time</button>
-        </Link>
-      </ul>
+        <button onClick={() => setTimePeriod("halfTime")} className="h-[30px] rounded-md px-4 bg-secondary-400 text-sm text-primary-600 font-semibold">Full-time</button>
+        <button onClick={() => setTimePeriod("fullTime")} className="h-[30px] rounded-md px-4 bg-secondary-900/50 text-sm text-secondary-700 hover:text-secondary-500">Half-time</button>      </ul>
       <div className="border border-secondary-900/50 p-4 mt-3">
         <h3 className='font-semibold text-sm text-center'>Outcome</h3>
         <div className="mt-4 flex items-center justify-around gap-1">
@@ -53,63 +158,25 @@ const MatchPrediction = () => {
             </div>
           </div>
 
-          <h3 className='font-semibold text-sm mt-6 text-center'>Goals</h3>
-          <div className="flex flex-col mt-2 gap-1">
-            <div className="flex items-center gap-2">
-              <p className="w-14 text-xs text-secondary-600">Ov. 0.5</p>
-              <div className="w-[calc(50%-80px)] min-w-[60px] h-[25px] flex items-center justify-end border border-highlight-400 bg-highlight-400/10 px-2">
-                <p className="text-highlight-400 font-semibold text-xs">40.39%</p>
+        <h3 className='font-semibold text-sm mt-6 text-center'>Goals</h3>
+        {
+          Object.entries(data.match.predictions[timePeriod].goals).map(([key, value]) => (
+            <div className="flex flex-col mt-2 gap-1">
+              <div className="flex items-center gap-2">
+                <p className="w-14 text-xs text-secondary-600">Ov. {goalsOutcome[key as keyof typeof goalsOutcome]}</p>
+                <div className="w-[calc(50%-80px)] min-w-[60px] h-[25px] flex items-center justify-end border border-highlight-400 bg-highlight-400/10 px-2">
+                  <p className="text-highlight-400 font-semibold text-xs">{value.over}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <p className="w-14 text-xs text-secondary-600">Un. {goalsOutcome[key as keyof typeof goalsOutcome]}</p>
+                <div className="w-[calc(60%-80px)] min-w-[60px]  h-[25px] flex items-center justify-end border border-highlight-600 bg-highlight-600/10 px-2">
+                  <p className="text-highlight-600 font-semibold text-xs">{value.under}</p>
+                </div>
               </div>
             </div>
-            <div className="flex items-center gap-2">
-              <p className="w-14 text-xs text-secondary-600">Un. 0.5</p>
-              <div className="w-[calc(60%-80px)] min-w-[60px]  h-[25px] flex items-center justify-end border border-highlight-600 bg-highlight-600/10 px-2">
-                <p className="text-highlight-600 font-semibold text-xs">59.61%</p>
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-col mt-2 gap-1">
-            <div className="flex items-center gap-2">
-              <p className="w-14 text-xs text-secondary-600">Ov. 1.5</p>
-              <div className="w-[calc(70%-80px)] min-w-[60px] h-[25px] flex items-center justify-end border border-highlight-400 bg-highlight-400/10 px-2">
-                <p className="text-highlight-400 font-semibold text-xs">70.00%</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <p className="w-14 text-xs text-secondary-600">Un. 1.5</p>
-              <div className="w-[calc(30%-80px)] min-w-[60px]  h-[25px] flex items-center justify-end border border-highlight-600 bg-highlight-600/10 px-2">
-                <p className="text-highlight-600 font-semibold text-xs">30.00%</p>
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-col mt-2 gap-1">
-            <div className="flex items-center gap-2">
-              <p className="w-14 text-xs text-secondary-600">Ov. 2.5</p>
-              <div className="w-[calc(25%-80px)] min-w-[60px] h-[25px] flex items-center justify-end border border-highlight-400 bg-highlight-400/10 px-2">
-                <p className="text-highlight-400 font-semibold text-xs">23.25%</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <p className="w-14 text-xs text-secondary-600">Un. 2.5</p>
-              <div className="w-[calc(75%-80px)] min-w-[60px]  h-[25px] flex items-center justify-end border border-highlight-600 bg-highlight-600/10 px-2">
-                <p className="text-highlight-600 font-semibold text-xs">76.75%</p>
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-col mt-2 gap-1">
-            <div className="flex items-center gap-2">
-              <p className="w-14 text-xs text-secondary-600">Ov. 3.5</p>
-              <div className="w-[calc(10%-80px)]  min-w-[60px] h-[25px] flex items-center justify-end border border-highlight-400 bg-highlight-400/10 px-2">
-                <p className="text-highlight-400 font-semibold text-xs">10.22%</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <p className="w-14 text-xs text-secondary-600">Un. 3.5</p>
-              <div className="w-[calc(90%-80px)] min-w-[60px]  h-[25px] flex items-center justify-end border border-highlight-600 bg-highlight-600/10 px-2">
-                <p className="text-highlight-600 font-semibold text-xs">89.78%</p>
-              </div>
-            </div>
-          </div>
+          ))
+        }
       </div>
     </div>
   )
