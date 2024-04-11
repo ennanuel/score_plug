@@ -6,7 +6,7 @@ import { MdKeyboardArrowRight, MdStar } from "react-icons/md";
 const CompetitionCard = ({ _id, name, emblem, area, recentMatches }: Competition) => {
     return (
         <Link href={`/competition/${_id}`} className={`flex items-center gap-4 justify-between bg-primary-800 hover:bg-primary-400/50 hover:border-transparent p-3 px-4 rounded-lg border ${recentMatches.hasLiveMatch ? 'border-highlight-400' : 'border-transparent'}`}>
-            <Image src={emblem} width={40} className="aspect-square object-contain" alt={name} />
+            <Image src={emblem || String(process.env.NEXT_IMAGE_URI)} width={40} className="aspect-square object-contain" alt={name} />
             <div className="flex-1 flex flex-col">
                 <div className="flex items-center gap-2">
                     <h3 className="text-secondary-400 font-semibold">{name}</h3>
