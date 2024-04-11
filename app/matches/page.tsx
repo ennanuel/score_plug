@@ -2,7 +2,7 @@
 
 import MatchCard from '../_components/MatchCard';
 import { Match } from '@/types/match.type';
-import { DateAndStatusFilter, ErrorMessage, LoadingMessage } from '../_components';
+import { DateAndStatusFilter, ErrorMessage, LoadingMessage, MatchesContainer } from '../_components';
 import { Suspense } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { MdStarOutline } from 'react-icons/md';
@@ -39,8 +39,9 @@ const QUERY = gql`
 function Matches() {
     const { loading, error, data } = useQuery<{ matches: { matches: Match[], totalPages: number } }>(QUERY);
 
-    if (loading) return <LoadingMessage />
-    else if (error) return <ErrorMessage />
+    if (loading) return <LoadingMessage />;
+    else if (error) return <ErrorMessage />;
+    else if (!data) return <div>Nothing was found!</div>;
 
     return (
         <Suspense>
@@ -52,14 +53,7 @@ function Matches() {
                     </button>
                 </div>
                 <DateAndStatusFilter />
-
-                <ul className="flex flex-col gap-1">
-                    {
-                        data?.matches?.matches.map((match, index) => (
-                            <li><MatchCard key={index} {...match} /></li>
-                        ))
-                    }
-                </ul>
+                <MatchesContainer matches={data.matches.matches} />
             </div>
         </Suspense>
     )
