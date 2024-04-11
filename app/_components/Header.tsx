@@ -22,8 +22,8 @@ const Header = () => {
   return (
     <>
       <div className="fixed top-0 left-[15px] h-[50px] z-[2] flex-1 font-semibold text-white-100 text-2xl flex items-center justify-start gap-3 transition-transform">
-        <PiPlug size={40} /> 
-        <span>Score Plug</span>
+        <PiPlug size={30} /> 
+        <span>ScorePlug</span>
       </div>
       <div className="flex items-center gap-4 px-4 h-[50px] bg-primary-500">
         <div className="flex-1 opacity-0"></div>
