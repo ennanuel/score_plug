@@ -116,9 +116,9 @@ const MatchPrediction = () => {
   
   const [timePeriod, setTimePeriod] = useState<"halfTime" | "fullTime">("halfTime");
 
-  const homeArc = useMemo(() => data ? describeArc({ x: 45, y: 45, radius: 40, startAngle: 0, endAngle: convertToPercentageOf360(data?.match.predictions[timePeriod].outcome.homeWin)}) : '360', [data, timePeriod]);
-  const awayArc = useMemo(() => data ? describeArc({ x: 45, y: 45, radius: 40, startAngle: 0, endAngle: convertToPercentageOf360(data?.match.predictions[timePeriod].outcome.awayWin)}) : '360', [data, timePeriod]);
-  const drawArc = useMemo(() => data ? describeArc({ x: 45, y: 45, radius: 40, startAngle: 0, endAngle: convertToPercentageOf360(data?.match.predictions[timePeriod].outcome.draw)}) : '360', [data, timePeriod]);
+  const homeArc = useMemo(() => data ? describeArc({ x: 45, y: 45, radius: 40, startAngle: 0, endAngle: convertToPercentageOf360(data?.match.predictions[timePeriod].outcome?.homeWin)}) : '360', [data, timePeriod]);
+  const awayArc = useMemo(() => data ? describeArc({ x: 45, y: 45, radius: 40, startAngle: 0, endAngle: convertToPercentageOf360(data?.match.predictions[timePeriod].outcome?.awayWin)}) : '360', [data, timePeriod]);
+  const drawArc = useMemo(() => data ? describeArc({ x: 45, y: 45, radius: 40, startAngle: 0, endAngle: convertToPercentageOf360(data?.match.predictions[timePeriod].outcome?.draw)}) : '360', [data, timePeriod]);
 
   if (loading) return <LoadingMessage />;
   else if (error) return <ErrorMessage />;
@@ -160,22 +160,24 @@ const MatchPrediction = () => {
 
         <h3 className='font-semibold text-sm mt-6 text-center'>Goals</h3>
         {
-          Object.entries(data.match.predictions[timePeriod].goals).map(([key, value]) => (
-            <div className="flex flex-col mt-2 gap-1">
-              <div className="flex items-center gap-2">
-                <p className="w-14 text-xs text-secondary-600">Ov. {goalsOutcome[key as keyof typeof goalsOutcome]}</p>
-                <div className="w-[calc(50%-80px)] min-w-[60px] h-[25px] flex items-center justify-end border border-highlight-400 bg-highlight-400/10 px-2">
-                  <p className="text-highlight-400 font-semibold text-xs">{value.over}</p>
+          data.match.predictions[timePeriod].goals ?
+            Object.entries(data.match.predictions[timePeriod].goals).map(([key, value]) => (
+              <div className="flex flex-col mt-2 gap-1">
+                <div className="flex items-center gap-2">
+                  <p className="w-14 text-xs text-secondary-600">Ov. {goalsOutcome[key as keyof typeof goalsOutcome]}</p>
+                  <div className="w-[calc(50%-80px)] min-w-[60px] h-[25px] flex items-center justify-end border border-highlight-400 bg-highlight-400/10 px-2">
+                    <p className="text-highlight-400 font-semibold text-xs">{value.over}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <p className="w-14 text-xs text-secondary-600">Un. {goalsOutcome[key as keyof typeof goalsOutcome]}</p>
+                  <div className="w-[calc(60%-80px)] min-w-[60px]  h-[25px] flex items-center justify-end border border-highlight-600 bg-highlight-600/10 px-2">
+                    <p className="text-highlight-600 font-semibold text-xs">{value.under}</p>
+                  </div>
                 </div>
               </div>
-              <div className="flex items-center gap-2">
-                <p className="w-14 text-xs text-secondary-600">Un. {goalsOutcome[key as keyof typeof goalsOutcome]}</p>
-                <div className="w-[calc(60%-80px)] min-w-[60px]  h-[25px] flex items-center justify-end border border-highlight-600 bg-highlight-600/10 px-2">
-                  <p className="text-highlight-600 font-semibold text-xs">{value.under}</p>
-                </div>
-              </div>
-            </div>
-          ))
+            )) :
+            null
         }
       </div>
     </div>
