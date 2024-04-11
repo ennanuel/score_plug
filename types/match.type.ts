@@ -1,5 +1,3 @@
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
-
 export type MatchStatus = "TIMED" | "PAUSED" | "IN_PLAY" | "FINISHED" | "CANCELLED" | "POSTPONED";
 
 export type MatchScore = {
@@ -26,10 +24,10 @@ export type Match = {
     competition: {
         _id: number;
         name: string;
-        emblem: string | StaticImport;
+        emblem: string | undefined;
         area: {
             name: string;
-            flag: string | StaticImport;
+            flag: string | undefined;
         }
     }
     timeRemaining: {
@@ -41,13 +39,13 @@ export type Match = {
     homeTeam: {
         _id: number;
         name: string;
-        crest: string | StaticImport;
+        crest: string | undefined;
         clubColors: string;
     },
     awayTeam: {
         _id: number;
         name: string;
-        crest: string | StaticImport;
+        crest: string | undefined;
         clubColors: string;
     },
     venue: string;
