@@ -3,7 +3,7 @@
 import { MdStar, MdStarOutline } from 'react-icons/md';
 import Link from "next/link";
 import Image from "next/image";
-import { MatchCard } from '.';
+import { MatchCard, MatchesContainer } from '.';
 import { Competition } from '@/types/competition.type';
 
 const CompetitionWithMatches = ({ _id, name, emblem, area, matches, isFavorite }: Competition) => {
@@ -21,13 +21,7 @@ const CompetitionWithMatches = ({ _id, name, emblem, area, matches, isFavorite }
                         <MdStarOutline size={20} />
                 }
             </div>
-            <ul className="flex flex-col gap-1">
-                {
-                    matches.map((match, index) => (
-                        <li key={index}><MatchCard {...match} /></li>
-                    ))
-                }
-            </ul>
+            <MatchesContainer matches={matches} />
         </div>
 
     )
