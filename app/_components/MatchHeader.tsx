@@ -144,6 +144,8 @@ const MatchHeader = () => {
           {
             Number(data.match.timeRemaining.days) >= 1 || !/(in_play|paused)/i.test(data.match.status) ?
               <p className="text-sm text-secondary-600">{date}</p> :
+              /(in_play|paused)/i.test(data.match.status) ?
+                null :
                 <p className="text-sm text-secondary-600">
                   <span>Starts in </span>
                   <span className="capitalize">{remainingTime} {Number(remainingTime) > 1 ? timeMeasurement : timeMeasurement?.replace(/s$/, '')}</span>
