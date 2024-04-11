@@ -135,7 +135,7 @@ const MatchHeader = () => {
             }
             {
               data.match.status !== "TIMED" && /(in_play|paused|finished)/i.test(data.match.status) ?
-                <p className="text-sm mt-[-5px] text-secondary-600">
+                <p className="text-sm mt-[-5px] text-secondary-600 font-semibold">
                   {`(${data.match.score.firstHalf.home} - ${data.match.score.firstHalf.away})`}
                 </p> :
                 null
