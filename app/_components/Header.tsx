@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { FaAngleDown } from "react-icons/fa";
-import { GiSoccerField } from "react-icons/gi";
 import { MdOutlinePerson, MdOutlineSettings, MdSearch } from "react-icons/md";
 import { NAV_LINKS } from "../_assets/constants/links";
 import NavLink from "./NavLink";
+import { PiPlug } from "react-icons/pi";
 
 
 const Header = () => {
@@ -22,7 +22,7 @@ const Header = () => {
   return (
     <>
       <div className="fixed top-0 left-[15px] h-[50px] z-[2] flex-1 font-semibold text-white-100 text-2xl flex items-center justify-start gap-3 transition-transform">
-        <GiSoccerField /> 
+        <PiPlug size={40} /> 
         <span>Score Plug</span>
       </div>
       <div className="flex items-center gap-4 px-4 h-[50px] bg-primary-500">
