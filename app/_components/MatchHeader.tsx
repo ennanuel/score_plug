@@ -119,26 +119,27 @@ const MatchHeader = () => {
           <h3 className="font-bold text-sm text-secondary-600">{data.match.homeTeam.name}</h3>
         </div>
         <div className="relative col-span-1 flex flex-col items-center justify-center text-center">
+          <div className="flex flex-col justify-center gap-1">
             {
-            data.match.status === "TIMED" ?
-              <p className="text-3xl font-bold">{time}</p> :
-              <p className="text-[2rem] font-bold">
-                {
-                  /(in_play|paused|finished)/i.test(data.match.status) ?
-                    <span>
-                      <span className="font-bold">{data.match.score.fullTime.home}</span> - <span className="font-bold">{data.match.score.fullTime.away}</span>
-                    </span> :
-                    data.match.status.substring(0, 4)
-                }
-              </p>
+              data.match.status === "TIMED" ?
+                <p className="text-3xl font-bold">{time}</p> :
+                <p className="text-[2rem] font-bold">
+                  {
+                    /(in_play|paused|finished)/i.test(data.match.status) ?
+                      <span>
+                        <span className="font-bold">{data.match.score.fullTime.home}</span> - <span className="font-bold">{data.match.score.fullTime.away}</span>
+                      </span> :
+                      data.match.status.substring(0, 4)
+                  }
+                </p>
             }
+            <p className="text-sm text-secondary-600">
+              {`(${data.match.score.firstHalf.home} - ${data.match.score.firstHalf.away})`}
+            </p>
+          </div>
           {
             Number(data.match.timeRemaining.days) >= 1 || !/(in_play|paused)/i.test(data.match.status) ?
               <p className="text-sm text-secondary-600">{date}</p> :
-              data.match.status !== "TIMED" ?
-                <p className="text-sm text-secondary-600">
-                  {`(${data.match.score.firstHalf.home} - ${data.match.score.firstHalf.away})`}
-                </p> :
                 <p className="text-sm text-secondary-600">
                   <span>Starts in </span>
                   <span className="capitalize">{remainingTime} {Number(remainingTime) > 1 ? timeMeasurement : timeMeasurement?.replace(/s$/, '')}</span>
