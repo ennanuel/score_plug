@@ -133,9 +133,13 @@ const MatchHeader = () => {
                   }
                 </p>
             }
-            <p className="text-sm mt-[-5px] text-secondary-600">
-              {`(${data.match.score.firstHalf.home} - ${data.match.score.firstHalf.away})`}
-            </p>
+            {
+              data.match.status !== "TIMED" && /(in_play|paused|finished)/i.test(data.match.status) ?
+                <p className="text-sm mt-[-5px] text-secondary-600">
+                  {`(${data.match.score.firstHalf.home} - ${data.match.score.firstHalf.away})`}
+                </p> :
+                null
+            }
           </div>
           {
             Number(data.match.timeRemaining.days) >= 1 || !/(in_play|paused)/i.test(data.match.status) ?
