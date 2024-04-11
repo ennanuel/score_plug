@@ -12,7 +12,7 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => { 
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+    const handleScroll = () => setScrolled(window.scrollY > 10);
 
     window.addEventListener('scroll', handleScroll);
 
@@ -20,13 +20,13 @@ const Header = () => {
   }, []);
 
   return (
-    <nav className={`sticky top-[-45px] z-[99999] border-b py-2 px-4 flex flex-col gap-2 border-secondary-900/50 bg-primary-500`}>
-      <div className="flex items-center justify-between gap-4 px-4">
-        <div className={`flex-1 font-semibold text-white-100 text-2xl flex items-center justify-start gap-3 transition-transform ${scrolled && 'translate-y-[40px]'}`}>
+    <nav className="h-[100px] grid grid-cols-2 z-[99999] border-b py-2 px-4 border-secondary-900/50 bg-primary-500">
+      <div className="flex gap-4 px-4">
+        <div className="sticky top-[0] flex-1 font-semibold text-white-100 text-2xl flex items-center justify-start gap-3 transition-transform">
           <GiSoccerField /> 
           <span>Score Plug</span>
         </div>
-        <div className='overflow-clip flex-1 flex items-stretch justify-start gap-2 bg-white-100/5 border border-secondary-100/10 hover:border-secondary-100/50 rounded-md'>
+        <div className='overflow-clip flex-1 flex my-2 items-stretch justify-start gap-2 bg-white-100/5 border border-secondary-100/10 hover:border-secondary-100/50 rounded-md'>
           <label htmlFor="search" className="text-white-500 flex items-center justify-center pl-2">
             <MdSearch />
           </label>
