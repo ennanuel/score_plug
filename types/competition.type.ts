@@ -1,3 +1,4 @@
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { Match } from "./match.type";
 import { Team } from "./team.type";
 
@@ -26,11 +27,11 @@ export type Competition = {
     _id: number;
     area: {
         name: string;
-        flag: string | undefined;
+        flag: string | StaticImport;
     };
     name: string;
     type: string;
-    emblem: string | undefined;
+    emblem: string | StaticImport;
     currentSeason: {
         startDate: string;
         endDate: string;
