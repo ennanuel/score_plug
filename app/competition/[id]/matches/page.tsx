@@ -1,4 +1,5 @@
 import { DateAndStatusFilter, LoadingMessage, ErrorMessage, MatchesContainer } from '@/app/_components';
+import { Match } from '@/types/match.type';
 import { gql, useQuery } from '@apollo/client';
 import { useParams } from 'next/navigation';
 import { Suspense } from 'react';
@@ -34,7 +35,7 @@ const QUERY = gql`
 
 const CompetitionMatches = () => {
     const { id } = useParams();
-    const { loading, error, data } = useQuery(QUERY, { variables: { id } });
+    const { loading, error, data } = useQuery<{ competition: { matches: Match[] } }>(QUERY, { variables: { id } });
 
     if (loading) return <LoadingMessage />;
     else if (error) return <ErrorMessage />;
