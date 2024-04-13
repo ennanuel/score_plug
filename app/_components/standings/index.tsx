@@ -1,10 +1,18 @@
-import { TEAM_STANDINGS } from "@/app/_assets/constants/team";
+"use client";
+
+import { useMemo } from "react";
 import { MdTag } from "react-icons/md";
 import Standing from "./Standing";
-import { Competition, CompetitionStandings } from "@/types/competition.type";
-import { Match } from "@/types/match.type";
+import { Competition } from "@/types/competition.type";
+import { COMPETITIONS_STANDINGS_STRUCTURE } from "@/app/_assets/constants/competition";
 
-function Standings({ competition, match }: { competition?: Competition, match?: Match }) {
+function Standings({ competition, teams = [] }: { competition?: Competition, teams?: number[] }) {
+    const { relegationPositions, topPositions, midPositions } = useMemo(() => {
+        const structureKeys = Object.keys(COMPETITIONS_STANDINGS_STRUCTURE);
+        const key = structureKeys.find(key => (new RegExp(key)).test(String(competition?.code)));
+        return COMPETITIONS_STANDINGS_STRUCTURE[(key as keyof typeof COMPETITIONS_STANDINGS_STRUCTURE) || "CL"];
+    }, [])
+    
     if (!competition) return null;
 
     return (
@@ -28,10 +36,10 @@ function Standings({ competition, match }: { competition?: Competition, match?: 
                                     standing.table.map((teamStanding, index) => (
                                         <Standing
                                             key={index}
-                                            highlightedTeams={[1208]}
-                                            relegationPositions={15}
-                                            topPositions={3}
-                                            midPositions={5}
+                                            highlightedTeams={teams}
+                                            relegationPositions={relegationPositions}
+                                            topPositions={topPositions}
+                                            midPositions={midPositions}
                                             teamStanding={teamStanding}
                                         />
                                     ))
