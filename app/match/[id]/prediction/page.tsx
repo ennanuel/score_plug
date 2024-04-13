@@ -172,13 +172,13 @@ const MatchPrediction = () => {
                 <div className="flex items-center gap-2">
                   <p className="w-14 text-xs text-secondary-600">Ov. {goalsOutcome[key as keyof typeof goalsOutcome]}</p>
                   <div className="w-[calc(50%-80px)] min-w-[60px] h-[25px] flex items-center justify-end border border-highlight-400 bg-highlight-400/10 px-2">
-                    <p className="text-highlight-400 font-semibold text-xs">{value.over}</p>
+                    <p className="text-highlight-400 font-semibold text-xs">{value.over.toFixed(2)}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
                   <p className="w-14 text-xs text-secondary-600">Un. {goalsOutcome[key as keyof typeof goalsOutcome]}</p>
                   <div className="w-[calc(60%-80px)] min-w-[60px]  h-[25px] flex items-center justify-end border border-highlight-600 bg-highlight-600/10 px-2">
-                    <p className="text-highlight-600 font-semibold text-xs">{value.under}</p>
+                    <p className="text-highlight-600 font-semibold text-xs">{value.under.toFixed(2)}</p>
                   </div>
                 </div>
               </div>
