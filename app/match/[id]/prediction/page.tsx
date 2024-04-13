@@ -137,8 +137,7 @@ const MatchPrediction = () => {
                 <circle className="stroke-[6px] stroke-secondary-900" fill="transparent" cx={45} cy={45} r={38} />
                 <path className='stroke-[8px] stroke-highlight-400' fill="transparent" d={homeArc} />
               <text className='fill-highlight-300 font-bold text-lg translate-y-[2px]' x="50%" y="50%" textAnchor='middle' dominantBaseline="middle">
-                {data.match.predictions[timePeriod].outcome.homeWin}
-                <text className="text-base">%</text>
+                {data.match.predictions[timePeriod].outcome.homeWin}%
               </text>
               </svg>
               <p className="text-sm text-secondary-600">Home</p>
@@ -148,8 +147,7 @@ const MatchPrediction = () => {
                 <circle className="stroke-[6px] stroke-secondary-900" fill="transparent" cx={45} cy={45} r={38} />
                 <path className='stroke-[8px] stroke-highlight-600' fill="transparent" d={drawArc} />
               <text className='fill-highlight-300 font-bold text-lg translate-y-[2px]' x="50%" y="50%" textAnchor='middle' dominantBaseline="middle">
-                {data.match.predictions[timePeriod].outcome.draw}
-                <text className="text-base">%</text>
+                {data.match.predictions[timePeriod].outcome.draw}%
               </text>
               </svg>
               <p className="text-sm text-secondary-600">Draw</p>
@@ -159,8 +157,7 @@ const MatchPrediction = () => {
                 <circle className="stroke-[6px] stroke-secondary-900" fill="transparent" cx={45} cy={45} r={38} />
                 <path className='stroke-[8px] stroke-highlight-700' fill="transparent" d={awayArc} />
               <text className='fill-highlight-300 font-bold text-lg translate-y-[2px]' x="50%" y="50%" textAnchor='middle' dominantBaseline="middle">
-                {data.match.predictions[timePeriod].outcome.awayWin}
-                <text className="text-base">%</text>
+                {data.match.predictions[timePeriod].outcome.awayWin}%
               </text>
               </svg>
               <p className="text-sm text-secondary-600">Away</p>
