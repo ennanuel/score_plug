@@ -137,7 +137,8 @@ const MatchPrediction = () => {
                 <circle className="stroke-[6px] stroke-secondary-900" fill="transparent" cx={45} cy={45} r={38} />
                 <path className='stroke-[8px] stroke-highlight-400' fill="transparent" d={homeArc} />
               <text className='fill-highlight-300 font-bold text-lg translate-y-[2px]' x="50%" y="50%" textAnchor='middle' dominantBaseline="middle">
-                {data.match.predictions[timePeriod].outcome.homeWin}%
+                {data.match.predictions[timePeriod].outcome.homeWin}
+                <span className="text-base">%</span>
               </text>
               </svg>
               <p className="text-sm text-secondary-600">Home</p>
@@ -147,7 +148,8 @@ const MatchPrediction = () => {
                 <circle className="stroke-[6px] stroke-secondary-900" fill="transparent" cx={45} cy={45} r={38} />
                 <path className='stroke-[8px] stroke-highlight-600' fill="transparent" d={drawArc} />
               <text className='fill-highlight-300 font-bold text-lg translate-y-[2px]' x="50%" y="50%" textAnchor='middle' dominantBaseline="middle">
-                {data.match.predictions[timePeriod].outcome.draw}%
+                {data.match.predictions[timePeriod].outcome.draw}
+                <span className="text-base">%</span>
               </text>
               </svg>
               <p className="text-sm text-secondary-600">Draw</p>
@@ -157,7 +159,8 @@ const MatchPrediction = () => {
                 <circle className="stroke-[6px] stroke-secondary-900" fill="transparent" cx={45} cy={45} r={38} />
                 <path className='stroke-[8px] stroke-highlight-700' fill="transparent" d={awayArc} />
               <text className='fill-highlight-300 font-bold text-lg translate-y-[2px]' x="50%" y="50%" textAnchor='middle' dominantBaseline="middle">
-                {data.match.predictions[timePeriod].outcome.awayWin}%
+                {data.match.predictions[timePeriod].outcome.awayWin}
+                <span className="text-base">%</span>
               </text>
               </svg>
               <p className="text-sm text-secondary-600">Away</p>
