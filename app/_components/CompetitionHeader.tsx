@@ -2,7 +2,6 @@
 
 import { useMemo } from "react";
 import { MdKeyboardArrowLeft, MdStar } from 'react-icons/md';
-import premierLeagueEmblem from '../_assets/premier_league_emblem.png';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import AltHeader from './AltHeader';
