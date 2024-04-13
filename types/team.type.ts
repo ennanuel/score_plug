@@ -1,4 +1,5 @@
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import { CompetitionTable } from "./competition.type";
 
 export type Team = {
     _id: number;
@@ -27,13 +28,7 @@ export type Team = {
 };
 
 export type TeamStanding = {
-    _id: number;
-    index: number;
-    crest: string | StaticImport;
-    name: string;
-    matchesPlayed: number;
-    goalDifference: number;
-    points: number;
+    teamStanding: CompetitionTable;
     highlightedTeams: number[];
     relegationPositions: number;
     topPositions: number;
