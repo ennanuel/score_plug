@@ -13,6 +13,8 @@ const QUERY = gql`
             _id
             name
             emblem
+            code
+            
             teams {
                 _id
             }
