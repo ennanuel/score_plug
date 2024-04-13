@@ -1,19 +1,23 @@
+"use client";
+
+import { useMemo } from "react";
 import { TeamStanding } from "@/types/team.type";
 import Image from "next/image";
 
 
 function Standing({ highlightedTeams, teamStanding, relegationPositions, topPositions, midPositions }: TeamStanding) {
-    const highlightTeam = highlightedTeams.includes(123 /*This should be the id of the team to be highlighted*/);
+    const highlightTeam = useMemo(() => highlightedTeams.includes(teamStanding.team._id), []);
 
-    const teamPosition = teamStanding.position <= topPositions ?
+    const teamPosition = useMemo(() => teamStanding.position <= topPositions ?
         'TOP_TEAM' :
         (teamStanding.position > topPositions && teamStanding.position <= midPositions) ?
             'MID_TEAM' :
             (teamStanding.position >= relegationPositions) ?
                 'LOW_TEAM' :
-                '';
+                '',
+        []);
 
-    const highlightColors = highlightTeam ?
+    const highlightColors = useMemo(() => highlightTeam ?
         (
             teamPosition === 'TOP_TEAM' ?
                 'bg-green-400/10 border-green-500' :
@@ -22,20 +26,22 @@ function Standing({ highlightedTeams, teamStanding, relegationPositions, topPosi
                     teamPosition === 'LOW_TEAM' ? 'bg-red-400/10 border-red-500' :
                         'bg-white-100/10 border-white-500'
         ) :
-        'border-transparent';
+        'border-transparent',
+        []);
 
-    const positionColors = teamPosition === 'TOP_TEAM' ?
-        'bg-green-500' :
+    const positionColors = useMemo(() => teamPosition === 'TOP_TEAM' ?
+        'bg-green-500 text-primary-800' :
         teamPosition === 'MID_TEAM' ?
-            'bg-yellow-500' :
+            'bg-yellow-500 text-primary-800' :
             teamPosition === 'LOW_TEAM' ?
-                'bg-red-500' :
-                'text-gray-500';
+                'bg-red-500 text-primary-800' :
+                'text-gray-500',
+        []);
 
     return (
         <tr className={`text-xs text-center h-10 border-l-4 hover:bg-primary-500 ${highlightColors}`}>
             <td className="text-center text-xs">
-                <p className={`h-6 m-auto aspect-square rounded-full text-primary-800 ${positionColors}  font-bold flex items-center justify-center`}>
+                <p className={`h-6 m-auto aspect-square rounded-full ${positionColors} font-bold flex items-center justify-center`}>
                     {teamStanding.position}
                 </p>
             </td>
