@@ -14,6 +14,7 @@ const QUERY = gql`
             _id
             minute
             status
+            utcDate
             homeTeam {
               name
               crest
