@@ -2,14 +2,14 @@ import { TeamStanding } from "@/types/team.type";
 import Image from "next/image";
 
 
-function Standing({ _id, index, name, crest, matchesPlayed, goalDifference, points, highlightedTeams, relegationPositions, topPositions, midPositions }: TeamStanding) {
-    const highlightTeam = highlightedTeams.includes(_id);
+function Standing({ highlightedTeams, teamStanding, relegationPositions, topPositions, midPositions }: TeamStanding) {
+    const highlightTeam = highlightedTeams.includes(123 /*This should be the id of the team to be highlighted*/);
 
-    const teamPosition = index <= topPositions ?
+    const teamPosition = teamStanding.position <= topPositions ?
         'TOP_TEAM' :
-        (index > topPositions && index <= midPositions) ?
+        (teamStanding.position > topPositions && teamStanding.position <= midPositions) ?
             'MID_TEAM' :
-            (index >= relegationPositions) ?
+            (teamStanding.position >= relegationPositions) ?
                 'LOW_TEAM' :
                 '';
 
@@ -36,18 +36,18 @@ function Standing({ _id, index, name, crest, matchesPlayed, goalDifference, poin
         <tr className={`text-xs text-center h-10 border-l-4 hover:bg-primary-500 ${highlightColors}`}>
             <td className="text-center text-xs">
                 <p className={`h-6 m-auto aspect-square rounded-full text-primary-800 ${positionColors}  font-bold flex items-center justify-center`}>
-                    {index + 1}
+                    {teamStanding.position}
                 </p>
             </td>
             <td className="text-left">
-                <Image src={crest} width={18} alt={name} className="aspect-square object-contain float-left mr-2" />
-                <p>{name}</p>
+                <Image src={teamStanding.team.crest || String(process.env.VITE_IMAGE_URL)} width={18} alt={teamStanding.team.name} className="aspect-square object-contain float-left mr-2" />
+                <p>{teamStanding.team.name}</p>
             </td>
-            <td className="text-secondary-500">{matchesPlayed}</td>
+            <td className="text-secondary-500">{teamStanding.playedGames}</td>
             <td className="text-secondary-500">
-                {`${goalDifference > 0 ? '+' : ''}${goalDifference}`}
+                {`${teamStanding.goalDifference > 0 ? '+' : ''}${teamStanding.goalDifference}`}
             </td>
-            <td className="text-secondary-500">{points}</td>
+            <td className="text-secondary-500">{teamStanding.points}</td>
         </tr>
     )
 };
