@@ -25,6 +25,7 @@ export type CompetitionStandings = {
 
 export type Competition = {
     _id: number;
+    code: string;
     area: {
         name: string;
         flag: string | StaticImport;
