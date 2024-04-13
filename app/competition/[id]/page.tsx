@@ -30,7 +30,11 @@ const QUERY = gql`
                 group
                 table {
                     position
-                    team
+                    team {
+                        _id
+                        name
+                        crest
+                    }
                     playedGames
                     form
                     won
