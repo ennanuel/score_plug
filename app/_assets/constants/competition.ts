@@ -86,3 +86,41 @@ export const COMPETITIONS = [
         }
     },
 ];
+
+export const COMPETITIONS_STANDINGS_STRUCTURE = {
+    "PPL": {
+        topPositions: 2,
+        midPositions: 3,
+        relegationPositions: 16
+    },
+    "BSA": {
+        topPositions: 4,
+        midPositions: 6,
+        relegationPositions: 17
+    },
+    "DED": {
+        topPositions: 3,
+        midPositions: 4,
+        relegationPositions: 16
+    },
+    "CL": {
+        topPositions: 2,
+        midPositions: 3,
+        relegationPositions: 4
+    },
+    "BL1": {
+        topPositions: 4,
+        midPositions: 5,
+        relegationPositions: 16
+    },
+    "SA|PD|PL|FL1": {
+        topPositions: 4,
+        midPositions: 5,
+        relegationPositions: 18
+    },
+    "WC|EC|CLI": {
+        topPositions: 2,
+        midPositions: 0,
+        relegationPositions: 3
+    }
+}
