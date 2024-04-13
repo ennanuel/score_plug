@@ -126,9 +126,9 @@ const MatchPrediction = () => {
 
   return (
     <div className="mt-2 p-2">
-      <ul className="mx-3 flex items-center gap-3">
-        <button onClick={() => setTimePeriod("halfTime")} className="h-[30px] rounded-md px-4 bg-secondary-400 text-sm text-primary-600 font-semibold">Full-time</button>
-        <button onClick={() => setTimePeriod("fullTime")} className="h-[30px] rounded-md px-4 bg-secondary-900/50 text-sm text-secondary-700 hover:text-secondary-500">Half-time</button>      </ul>
+      <ul className="mx-3 mt-4 flex items-center gap-3">
+        <button onClick={() => setTimePeriod("halfTime")} className={`h-[30px] rounded-md px-4 ${timePeriod === 'halfTime' ? 'bg-secondary-400 text-primary-600 font-semibold' : 'bg-secondary-900/50 text-secondary-700'} text-sm hover:text-secondary-500`}>Half-time</button>
+        <button onClick={() => setTimePeriod("fullTime")} className={`h-[30px] rounded-md px-4 ${timePeriod === 'fullTime' ? 'bg-secondary-400 text-primary-600 font-semibold' : 'bg-secondary-900/50 text-secondary-700'} text-sm hover:text-secondary-500`}>Full-time</button>      </ul>
       <div className="border border-secondary-900/50 p-4 mt-3">
         <h3 className='font-semibold text-sm text-center'>Outcome</h3>
         <div className="mt-4 flex items-center justify-around gap-1">
