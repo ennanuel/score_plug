@@ -165,7 +165,7 @@ const MatchPrediction = () => {
           </div>
 
         <h3 className='font-semibold text-sm mt-6 text-center'>Goals</h3>
-        <ul className="flex flex-col gap-4">
+        <ul className="flex flex-col gap-4 mt-4">
           {
             data.match.predictions[timePeriod].goals ?
               Object.entries(data.match.predictions[timePeriod].goals)
@@ -174,14 +174,14 @@ const MatchPrediction = () => {
                   <li className="flex flex-col gap-1">
                     <div className="flex items-center gap-2">
                       <p className="w-14 text-xs text-secondary-600">Ov. {goalsOutcome[key as keyof typeof goalsOutcome]}</p>
-                      <div style={{ width: `${value.over}%` }} className="w-full min-w-[60px] h-[25px] flex items-center justify-end border border-highlight-400 bg-highlight-400/10 px-2">
-                        <p className="text-highlight-400 font-semibold text-xs">{value.over?.toFixed(2)}</p>
+                      <div style={{ width: `calc(${value.over}% - 20px)` }} className="w-full min-w-[60px] h-[25px] flex items-center justify-end border border-highlight-400 bg-highlight-400/10 px-2">
+                        <p className="text-highlight-400 font-semibold text-xs">{value.over?.toFixed(2)}%</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
                       <p className="w-14 text-xs text-secondary-600">Un. {goalsOutcome[key as keyof typeof goalsOutcome]}</p>
-                      <div style={{ width: `${value.under}%` }} className="w-full min-w-[60px]  h-[25px] flex items-center justify-end border border-highlight-600 bg-highlight-600/10 px-2">
-                        <p className="text-highlight-600 font-semibold text-xs">{value.under?.toFixed(2)}</p>
+                      <div style={{ width: `calc(${value.under}% - 20px)` }} className="w-full min-w-[60px]  h-[25px] flex items-center justify-end border border-highlight-600 bg-highlight-600/10 px-2">
+                        <p className="text-highlight-600 font-semibold text-xs">{value.under?.toFixed(2)}%</p>
                       </div>
                     </div>
                   </li>
