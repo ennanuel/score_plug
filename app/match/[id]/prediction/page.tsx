@@ -129,8 +129,8 @@ const MatchPrediction = () => {
       <ul className="mx-3 mt-4 flex items-center gap-3">
         <button onClick={() => setTimePeriod("halfTime")} className={`h-[30px] rounded-md px-4 ${timePeriod === 'halfTime' ? 'bg-secondary-400 text-primary-600 font-semibold' : 'bg-secondary-900/50 text-secondary-700'} text-sm hover:text-secondary-500`}>Half-time</button>
         <button onClick={() => setTimePeriod("fullTime")} className={`h-[30px] rounded-md px-4 ${timePeriod === 'fullTime' ? 'bg-secondary-400 text-primary-600 font-semibold' : 'bg-secondary-900/50 text-secondary-700'} text-sm hover:text-secondary-500`}>Full-time</button>      </ul>
-      <div className="border border-secondary-900/50 p-4 mt-3">
-        <h3 className='font-semibold text-sm text-center'>Outcome</h3>
+      <div className="p-4 mt-3">
+        <h3 className='font-semibold text-base text-center'>Outcome</h3>
         <div className="mt-4 flex items-center justify-around gap-1">
             <div className="flex flex-col gap-1 items-center justify-center">
               <svg width="90px" height="90px">
@@ -167,7 +167,7 @@ const MatchPrediction = () => {
             </div>
           </div>
 
-        <h3 className='font-semibold text-sm mt-6 text-center'>Goals</h3>
+        <h3 className='font-semibold text-base mt-6 text-center'>Goals</h3>
         <ul className="flex flex-col gap-4 mt-4">
           {
             data.match.predictions[timePeriod].goals ?
