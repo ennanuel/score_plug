@@ -6,7 +6,7 @@ import Image from "next/image";
 
 
 function Standing({ highlightedTeams, teamStanding, relegationPositions, topPositions, midPositions }: TeamStanding) {
-    const highlightTeam = useMemo(() => highlightedTeams.includes(teamStanding.team._id), []);
+    const highlightTeam = useMemo(() => highlightedTeams.includes(teamStanding?.team?._id), []);
 
     const teamPosition = useMemo(() => teamStanding.position <= topPositions ?
         'TOP_TEAM' :
