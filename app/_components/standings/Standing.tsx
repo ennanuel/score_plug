@@ -40,7 +40,7 @@ function Standing({ highlightedTeams, teamStanding, relegationPositions, topPosi
                 </p>
             </td>
             <td className="text-left">
-                <Image src={teamStanding.team.crest || String(process.env.VITE_IMAGE_URL)} width={18} alt={teamStanding.team.name} className="aspect-square object-contain float-left mr-2" />
+                <Image src={teamStanding.team.crest || String(process.env.NEXT_IMAGE_URL)} width={18} alt={teamStanding.team.name} className="aspect-square object-contain float-left mr-2" />
                 <p>{teamStanding.team.name}</p>
             </td>
             <td className="text-secondary-500">{teamStanding.playedGames}</td>
