@@ -24,6 +24,24 @@ const QUERY = gql`
                 startDate
                 endDate
             }
+            standings {
+                stage
+                type
+                group
+                table {
+                    position
+                    team
+                    playedGames
+                    form
+                    won
+                    draw
+                    lost
+                    points
+                    goalsFor
+                    goalsAgainst
+                    goalDifference
+                }
+            }
         }
     }
 `;
@@ -42,7 +60,7 @@ const CompetitionInfo = () => {
 
     return (
         <div className="mt-2">
-            <Standings />
+            <Standings competition={data.competition} />
 
             <div className="text-xs mt-2">
                 <div className="flex justify-between items-end bg-primary-500 p-2">
