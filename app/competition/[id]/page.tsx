@@ -14,7 +14,7 @@ const QUERY = gql`
             name
             emblem
             code
-            
+
             teams {
                 _id
             }
@@ -66,8 +66,10 @@ const CompetitionInfo = () => {
 
     return (
         <div className="mt-2">
+            <h2 className="text-lg my-4">Standings</h2>
             <Standings competition={data.competition} />
 
+            <h2 className="text-lg my-4">Details</h2>
             <div className="text-xs mt-2">
                 <div className="flex justify-between items-end bg-primary-500 p-2">
                     <span className="text-gray-400">Region</span>
