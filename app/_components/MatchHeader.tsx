@@ -142,7 +142,7 @@ const MatchHeader = () => {
             }
           </div>
           {
-            Number(data.match.timeRemaining.days) >= 1 || !/(in_play|paused)/i.test(data.match.status) ?
+            Number(data.match.timeRemaining.days) >= 1 && !/(in_play|paused)/i.test(data.match.status) ?
               <p className="text-sm text-secondary-600">{date}</p> :
               /(in_play|paused)/i.test(data.match.status) ?
                 null :
