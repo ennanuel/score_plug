@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { Match } from '@/types/match.type';
+import { Match } from '@/types/global.type';
 import { gql, useQuery } from '@apollo/client';
 import { useParams } from 'next/navigation';
 import { ErrorMessage, LoadingMessage } from '@/app/_components';
