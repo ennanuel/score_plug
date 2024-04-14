@@ -69,7 +69,7 @@ const MatchInfo = () => {
             </div>
           </div>
         </div>
-        <hr className="border-none m-auto bg-white-100/10 outline-none h-[1px] w-[80%]" />
+        <hr className="border-none m-auto mt-2 bg-white-100/10 outline-none h-[1px] w-full" />
         <div className="flex items-center justify-between">
           <h3 className='font-semibold text-sm text-secondary-500 mt-2'>Match Venue</h3>
           <p className="text-sm">{data.match.venue || 'Not available'}</p>
