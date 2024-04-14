@@ -11,6 +11,8 @@ import { gql, useQuery } from '@apollo/client';
 import LoadingMessage from "./LoadingMessage";
 import ErrorMessage from "./ErrorMessage";
 
+import { Competition } from "@/types/global.type";
+
 const QUERY = gql`
   query GetCompetition($id: ID!) {
     competition(id: $id) {
@@ -29,7 +31,7 @@ const CompetitionHeader = () => {
   const { id } = useParams<{ id: string }>();
   const links = useMemo(() => getHeaderLinks({ path: 'competition', id, links: COMPETITION_LINKS }), [])
 
-  const { loading, error, data } = useQuery(QUERY, { variables: { id } });
+  const { loading, error, data } = useQuery<{ competition: Competition }>(QUERY, { variables: { id } });
 
   if (loading) return <LoadingMessage />;
   else if (error) return <ErrorMessage />;
