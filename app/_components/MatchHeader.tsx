@@ -9,12 +9,11 @@ import { getHeaderLinks } from '../_utils/link';
 import { MATCH_LINKS } from '../_assets/constants/match';
 
 import { gql, useQuery } from '@apollo/client';
-import { Match } from "@/types/match.type";
+import { Match } from "@/types/global.type";
 import LoadingMessage from './LoadingMessage';
 import ErrorMessage from './ErrorMessage';
 import { useMemo } from 'react';
 import { getDateFormat, getTimeFormat } from '../_utils/dateTime';
-import Link from 'next/link';
 
 const query = gql`
   query GetMatchByID($id: ID!) {
