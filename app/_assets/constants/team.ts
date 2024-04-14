@@ -23,10 +23,6 @@ export const TEAMS = [
         founded: "1972",
         clubColors: "Blue Red",
         venue: "Camp Nou, Barcelona, Spain",
-        matchesPlayed: 10,
-        wins: 5,
-        draws: 3,
-        losses: 2,
         coach: {
             name: "Xavi Hernandes",
             nationality: "Spain",
@@ -48,10 +44,6 @@ export const TEAMS = [
         founded: "1999",
         clubColors: "White Red",
         venue: "San Siro, Milan",
-        matchesPlayed: 14,
-        wins: 10,
-        draws: 0,
-        losses: 4,
         coach: {
             name: "Jurgen Klopp",
             nationality: "Germany",
