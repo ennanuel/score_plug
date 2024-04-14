@@ -44,7 +44,7 @@ function Matches() {
 
     return (
         <Suspense>
-            <div className="border border-secondary-900/50 bg-primary-500 p-3">
+            <div className="border border-secondary-900/50 bg-primary-500 p-3 flex flex-col gap-4">
                 <div className="flex justify-between items-center gap-4">
                     <h1 className='font-bold text-2xl'>Matches</h1>
                     <button className='d-flex align-items-center rounded-md text-white-100'>
