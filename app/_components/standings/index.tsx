@@ -3,7 +3,7 @@
 import { useMemo } from "react";
 import { MdTag } from "react-icons/md";
 import Standing from "./Standing";
-import { Competition } from "@/types/competition.type";
+import { Competition } from "@/types/global.type";
 import { COMPETITIONS_STANDINGS_STRUCTURE } from "@/app/_assets/constants/competition";
 
 function Standings({ competition, teams = [] }: { competition?: Competition, teams?: number[] }) {
@@ -20,7 +20,7 @@ function Standings({ competition, teams = [] }: { competition?: Competition, tea
             {
                 competition.standings.map((standing) => (
                     <>
-                        {competition.type === 'CUP' && <h3 className="mt-4 mb-4 font-semibold text-sm">{standing.group}</h3>}
+                        {competition.type === 'CUP' && <h3 className="m-4 font-semibold text-sm">{standing.group}</h3>}
                     <table className="w-full">
                         <thead className="text-xs text-secondary-700 h-8 border-y border-secondary-900/50">
                         <th className="w-[50px] font-semibold text-center">
