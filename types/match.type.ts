@@ -1,5 +1,3 @@
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
-
 export type MatchStatus = "TIMED" | "PAUSED" | "IN_PLAY" | "FINISHED" | "CANCELLED" | "POSTPONED";
 
 export type MatchScore = {
@@ -19,7 +17,7 @@ export type MatchGoals = {
     _1: GoalsOutcome;
     _2: GoalsOutcome;
     _3: GoalsOutcome;
-    _4: GoalsOutcome
+    _4: GoalsOutcome;
 };
 
 export type GoalsOutcome = {
@@ -37,50 +35,21 @@ export type Referee = {
     name: string;
     type: string;
     nationality: string;
-}
+};
 
-export type Match = {
-    _id: number;
-    status: MatchStatus;
-    minute: string;
-    competition: {
-        _id: number;
-        name: string;
-        emblem: string | StaticImport;
-        area: {
-            name: string;
-            flag: string | StaticImport;
-        }
-    }
-    timeRemaining: {
-        days: null | number;
-        hours: null | number;
-        minutes: null | number;
-    },
-    utcDate: string,
-    homeTeam: {
-        _id: number;
-        name: string;
-        crest: string | StaticImport;
-        clubColors: string;
+export type H2HAggregate = {
+    homeTeam: { 
+        id: number,
+        wins: number,
+        draws: number,
+        losses: number,
+        totalGoals: number
     },
     awayTeam: {
-        _id: number;
-        name: string;
-        crest: string | StaticImport;
-        clubColors: string;
-    },
-    venue: string;
-    score: MatchScore;
-    predictions: {
-        halfTime: {
-            outcome: MatchOutcome;
-            goals: MatchGoals;
-        },
-        fullTime: {
-            outcome: MatchOutcome;
-            goals: MatchGoals;
-        }
+        id: number,
+        wins: number,
+        draws: number,
+        losses: number,
+        totalGoals: number
     }
-    referees: Referee[]
 }
