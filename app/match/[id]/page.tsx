@@ -47,7 +47,7 @@ const MatchInfo = () => {
   return (
     <div className='p-4'>
 
-      <div className="flex flex-col p-4 gap-2 rounded-md boder border-white-100/5 bg-gradient-to-br from-white-100/10 to-white-100/5">
+      <div className="flex flex-col p-4 gap-2 rounded-md boder border-white-100/10">
         <div className="flex items-center gap-4">
           <Image
             src={data.match.competition.emblem || String(process.env.NEXT_IMAGE_URL)}
