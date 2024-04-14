@@ -45,15 +45,17 @@ const MatchLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
       {children}
       <section>
         <h3 className='font-semibold text-secondary-500 mt-6 p-4'>Similar Matches</h3>
-        {
-          loading ? 
-            <LoadingMessage /> :
-            error ?
-              <ErrorMessage /> :
-              !data ?
-                <div>Nothing was found</div> :
-                <MatchesContainer matches={data?.similarMatches || []} />
-        }
+        <div className="p-2">
+          {
+            loading ? 
+              <LoadingMessage /> :
+              error ?
+                <ErrorMessage /> :
+                !data ?
+                  <div>Nothing was found</div> :
+                  <MatchesContainer matches={data?.similarMatches || []} />
+          }
+        </div>
       </section>
     </div>
   )
