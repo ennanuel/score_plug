@@ -1,12 +1,12 @@
 import { DateAndStatusFilter, LoadingMessage, ErrorMessage, MatchesContainer } from '@/app/_components';
-import { Match } from '@/types/match.type';
+import { Match } from '@/types/global.type';
 import { gql, useQuery } from '@apollo/client';
 import { useParams } from 'next/navigation';
 import { Suspense } from 'react';
 
 const QUERY = gql`
-    query CompetitionMatches($id: ID!) {
-        competition(id: $id) {
+    query CompetitionMatches($id: ID!, $from: String, $to: String) {
+        competition(id: $id, from: $from, to: $to) {
             matches {
                 _id
                 utcDate
