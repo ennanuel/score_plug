@@ -229,19 +229,19 @@ const H2H = () => {
             <div className='flex flex-col items-center gap-2 p-2 px-5 pt-[40px] m-auto mt-2 border border-secondary-900/50'>
                 <div className="flex w-[80%]">
                     <div style={{ width: `${data.match.predictions.fullTime.outcome.homeWin}%`}} className="relative top-0 left-0 w-[33.33%] h-2 rounded-l-[5px] bg-highlight-300">
-                        <p className="absolute bottom-[100%] left-[50%] flex items-center justify-center gap-1 translate-x-[-50%] text-[.7em] text-secondary-600">
+                        <p className="absolute bottom-[calc(100%_+_5px)] left-[50%] flex items-center justify-center gap-1 translate-x-[-50%] text-[.7em] text-secondary-600">
                             <span>Home</span>
                             <span>({data.match.predictions.fullTime.outcome.homeWin}%)</span>
                         </p>
                     </div>
                     <div style={{ width: `${data.match.predictions.fullTime.outcome.draw}%`}} className="relative top-0 left-0 w-[33.34%] h-2 border-x border-primary-800 bg-highlight-500">
-                        <p className="absolute bottom-[100%] left-[50%] flex items-center justify-center gap-1 translate-x-[-50%] text-[.7em] text-secondary-600">
+                        <p className="absolute bottom-[calc(100%_+_5px)] left-[50%] flex items-center justify-center gap-1 translate-x-[-50%] text-[.7em] text-secondary-600">
                             <span>Draw</span>
                             <span>({data.match.predictions.fullTime.outcome.draw}%)</span>
                         </p>
                     </div>
                     <div style={{ width: `${data.match.predictions.fullTime.outcome.awayWin}%` }} className="relative top-0 left-0 w-[33.33%] h-2 rounded-r-[5px] bg-highlight-700">
-                        <p className="absolute bottom-[100%] left-[50%] flex items-center justify-center gap-1 translate-x-[-50%] text-[.7em] text-secondary-600">
+                        <p className="absolute bottom-[calc(100%_+_5px)] left-[50%] flex items-center justify-center gap-1 translate-x-[-50%] text-[.7em] text-secondary-600">
                             <span>Away</span>
                             <span>({data.match.predictions.fullTime.outcome.awayWin}%)</span>
                         </p>
