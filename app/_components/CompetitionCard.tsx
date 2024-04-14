@@ -5,7 +5,7 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 
 const CompetitionCard = ({ _id, name, emblem, area, recentMatches }: Competition) => {
     return (
-        <Link href={`/competition/${_id}`} className={`flex items-center gap-4 justify-between bg-transparent hover:bg-primary-400/10 p-2 rounded-sm border ${recentMatches.hasLiveMatch ? 'border-highlight-400/20' : 'border-primary-400/10'}`}>
+        <Link href={`/competition/${_id}`} className={`flex items-center gap-4 justify-between hover:bg-primary-400/10 p-2 rounded-sm border ${recentMatches.hasLiveMatch ? 'border-highlight-400/20' : 'border-primary-400/20'}`}>
             <Image src={emblem || String(process.env.NEXT_IMAGE_URI)} width={30} height={30} className="aspect-square object-contain" alt={name} />
             <div className="flex-1 flex flex-col">
                 <div className="flex items-center gap-2">
@@ -19,7 +19,7 @@ const CompetitionCard = ({ _id, name, emblem, area, recentMatches }: Competition
             {
                 Boolean(recentMatches.matches) ?
                     <div className="flex items-center gap-2">
-                        <span className="block w-2 h-2 rounded-full bg-highlight-400"></span>
+                        {recentMatches.hasLiveMatch && <span className="block w-2 h-2 rounded-full bg-highlight-400"></span>}
                         <p className={`text-xs font-bold ${recentMatches.hasLiveMatch ? 'text-highlight-400' : 'text-gray-400'}`}>
                         {recentMatches.matches} {recentMatches.matches > 1 ? 'matches' : 'match'}
                         </p>
