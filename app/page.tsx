@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { MdStar } from "react-icons/md";
 import CompetitionWithMatches from './_components/CompetitionWithMatches';
-import { Competition } from '@/types/competition.type';
+import { Competition } from '@/types/global.type';
 import { useQuery, gql } from '@apollo/client';
 import { ErrorMessage, LoadingMessage } from './_components';
 
