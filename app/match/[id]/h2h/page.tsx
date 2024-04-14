@@ -26,7 +26,7 @@ const QUERY = gql`
                     goalsConceded
                     goalsScored
                 }
-                fulltime {
+                fullTime {
                     wins
                     draws
                     goalsConceded
@@ -64,7 +64,7 @@ const QUERY = gql`
                     goalsConceded
                     goalsScored
                 }
-                fulltime {
+                fullTime {
                     wins
                     draws
                     goalsConceded
@@ -98,6 +98,20 @@ const QUERY = gql`
                 aggregates {
                     numberOfMatches
                     halfTime {
+                        homeTeam {
+                            totalGoals
+                            wins
+                            draws
+                            losses
+                        }
+                        awayTeam {
+                            totalGoals
+                            wins
+                            draws
+                            losses
+                        }
+                    }
+                    fullTime {
                         homeTeam {
                             totalGoals
                             wins
