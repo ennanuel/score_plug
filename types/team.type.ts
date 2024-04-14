@@ -1,31 +1,13 @@
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { CompetitionTable } from "./competition.type";
 
-export type Team = {
-    _id: number;
-    area: {
-        name: string;
-        flag: string | StaticImport
-    }
-    name: string;
-    shortName: string;
-    tla: string;
-    crest: string | StaticImport;
-    address: string;
-    website: string;
-    founded: string;
-    clubColors: string;
-    venue: string;
-    matchesPlayed: number;
-    wins: number;
-    draws: number;
-    losses: number;
-    coach: {
-        name: string;
-        nationality: string;
-    }
-    hasOngoingMatch: boolean;
-};
+
+export type TeamMatchOutcome = {
+    wins: number,
+    draws: number,
+    losses: number,
+    goalsScored: number,
+    goalsConceded: number
+}
 
 export type TeamStanding = {
     teamStanding: CompetitionTable;
@@ -33,4 +15,4 @@ export type TeamStanding = {
     relegationPositions: number;
     topPositions: number;
     midPositions: number;
-}
+};
