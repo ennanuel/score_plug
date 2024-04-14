@@ -283,8 +283,8 @@ const H2H = () => {
                     <span className='font-semibold text-sm'>{data.match.head2head?.aggregates?.fullTime?.awayTeam?.totalGoals}</span>
                 </div>
             
-                <div className="flex flex-col gap-3 w-full mb-3">
-                    <p className='font-semibold text-sm my-6'>Previous Encounters</p>
+                <div className="flex flex-col gap-4 w-full mb-3">
+                    <p className='font-semibold text-sm mt-6'>Previous Encounters</p>
                     <MatchesContainer matches={data.match.head2head.matches || []} />
                 </div>
             </div>
@@ -309,21 +309,25 @@ const H2H = () => {
                     </div>
                 </div>
                 
-                <div className="flex justify-between items-center gap-3 py-2 px-2">
+                <div className="flex justify-between items-center gap-3 py-2 px-4">
                     <p className="text-xs text-secondary-600">Average Goals Scored</p>
                     <p className="text-sm font-semibold">{data.match[showHomeSide ? 'homeTeam' : 'awayTeam'].fullTime.goalsScored}</p>
                 </div>
                 
-                <div className="flex justify-between items-center gap-3 py-2 px-2">
+                <div className="flex justify-between items-center gap-3 py-2 px-4">
                     <p className="text-xs text-secondary-600">Average Goals Conceded</p>
                     <p className="text-sm font-semibold">{data.match[showHomeSide ? 'homeTeam' : 'awayTeam'].fullTime.goalsConceded}</p>
                 </div>
 
-                <p className='font-semibold text-sm my-6 px-4'>Previous Matches</p>
-                <MatchesContainer matches={data.match.head2head.matches || []} />
+                <div className="flex flex-col gap-4 mt-6">
+                    <p className='font-semibold text-sm px-4'>Previous Matches</p>
+                    <MatchesContainer matches={data.match.head2head.matches || []} />
+                </div>
 
-                <p className='font-semibold text-sm mt-6 px-4'>Team Standing</p>
-                <Standings competition={data?.match.competition} teams={[data.match.homeTeam._id, data.match.awayTeam._id]} />
+                <div className="flex flex-col mt-6 gap-6">
+                    <p className='font-semibold text-smpx-4'>Team Standing</p>
+                    <Standings competition={data?.match.competition} teams={[data.match.homeTeam._id, data.match.awayTeam._id]} />
+                </div>
             </div>
         </div>
     )
