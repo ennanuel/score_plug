@@ -1,5 +1,5 @@
 import { DateAndStatusFilter, MatchCard } from "@/app/_components/";
-import { Match } from "@/types/match.type";
+import { Match } from "@/types/global.type";
 import { MATCHES } from "@/app/_assets/constants/match";
 import { Suspense } from "react";
 

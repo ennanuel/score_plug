@@ -1,7 +1,6 @@
 "use client";
 
-import MatchCard from '../_components/MatchCard';
-import { Match } from '@/types/match.type';
+import { Match } from '@/types/global.type';
 import { DateAndStatusFilter, ErrorMessage, LoadingMessage, MatchesContainer } from '../_components';
 import { Suspense } from 'react';
 import { useQuery, gql } from '@apollo/client';

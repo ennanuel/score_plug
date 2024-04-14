@@ -1,10 +1,10 @@
 "use client";
 
 import MatchPredictionCard from "../_components/MatchPredictionCard";
-import { Match } from "@/types/match.type";
 import { DateAndStatusFilter, ErrorMessage, LoadingMessage } from "../_components";
 import { Suspense } from "react";
 import { gql, useQuery } from "@apollo/client";
+import { Match } from "@/types/global.type";
 
 const QUERY = gql`
   query {
