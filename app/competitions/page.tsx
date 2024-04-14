@@ -2,7 +2,7 @@
 
 import { MdStarOutline } from 'react-icons/md';
 import CompetitionCard from '../_components/CompetitionCard';
-import { Competition } from '@/types/competition.type';
+import { Competition } from '@/types/global.type';
 import { useQuery, gql } from '@apollo/client';
 import { LoadingMessage, ErrorMessage } from '../_components';
 
@@ -34,7 +34,7 @@ const Competitions = () => {
     else if (error) return <ErrorMessage />;
 
     return (
-        <div className="border border-secondary-900/50 bg-primary-500 p-3">
+        <div className="border border-secondary-900/50 p-3">
             <div className="flex items-center gap-4 justify-between">
                 <h1 className="font-bold">Leagues and Competitions</h1>
                 <MdStarOutline size={20} />
@@ -47,6 +47,8 @@ const Competitions = () => {
                     ))
                 }
             </ul>
+            
+            <button className="border h-[40px] min-w-[100px] rounded-md bg-secondary-400 text-black-900">More</button>
         </div>
     )
 }
