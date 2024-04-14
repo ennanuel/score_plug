@@ -129,8 +129,8 @@ const MatchPrediction = () => {
         <button onClick={() => setTimePeriod("halfTime")} className={`h-[30px] rounded-md px-4 ${timePeriod === 'halfTime' ? 'bg-secondary-400 text-primary-600 font-semibold' : 'bg-secondary-900/50 text-secondary-700'} text-sm hover:text-secondary-500`}>Half-time</button>
         <button onClick={() => setTimePeriod("fullTime")} className={`h-[30px] rounded-md px-4 ${timePeriod === 'fullTime' ? 'bg-secondary-400 text-primary-600 font-semibold' : 'bg-secondary-900/50 text-secondary-700'} text-sm hover:text-secondary-500`}>Full-time</button>      </ul>
       <div className="p-2 mt-3">
-        <h3 className='font-bold text-base'>Outcome</h3>
-        <div className="p-4 jmt-4 border border-white-100/10 rounded-md flex items-center justify-around gap-1">
+        <h3 className='font-bold text-base mx-3'>Outcome</h3>
+        <div className="p-4 mt-3 border border-white-100/10 rounded-md flex items-center justify-around gap-1">
             <div className="flex flex-col gap-1 items-center justify-center">
               <svg width="90px" height="90px">
                 <circle className="stroke-[6px] stroke-secondary-900" fill="transparent" cx={45} cy={45} r={38} />
@@ -163,14 +163,14 @@ const MatchPrediction = () => {
             </div>
           </div>
 
-        <h3 className='font-bold text-base mt-6'>Goals</h3>
-        <ul className="flex flex-col gap-4 p-4 mt-4 border border-white-100/10 rounded-md">
+        <h3 className='font-bold text-base mt-6 mx-3'>Goals</h3>
+        <ul className="flex flex-col mt-3 border border-white-100/10 rounded-md">
           {
             data.match.predictions[timePeriod].goals ?
               Object.entries(data.match.predictions[timePeriod].goals)
                 .filter(([key, { over, under }]) => over || under)
                 .map(([key, value]) => (
-                  <li className="flex flex-col gap-1">
+                  <li className="flex flex-col gap-1 px-4 p-2 border-b last:border-b-0 border-white-100/10">
                     <div className="flex items-center gap-2">
                       <p className="w-14 text-xs text-secondary-600">Ov. {goalsOutcome[key as keyof typeof goalsOutcome]}</p>
                       <div style={{ width: `calc(${value.over}% - 40px)` }} className="w-full min-w-[60px] h-[25px] flex items-center justify-end border border-highlight-400 bg-highlight-400/10 px-2">
