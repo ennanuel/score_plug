@@ -95,7 +95,7 @@ const MatchHeader = () => {
         <button className="flex items-center justify-center">
           <FaAngleLeft />
         </button>
-        <Image src={data.match.competition.emblem} alt={data.match.competition.name} width={50} height={50} className="object-contain" />
+        <Image src={data.match.competition.emblem} alt={data.match.competition.name} width={30} height={30} className="object-contain" />
         <div className="flex-1 flex flex-col">
           <h3 className="text-sm font-semibold">{data.match.competition.name}</h3>
           <p className='text-[.7em] text-secondary-700'>{data.match.competition.area.name}</p>
@@ -143,7 +143,7 @@ const MatchHeader = () => {
             }
           </div>
           {
-            Number(data.match.timeRemaining.days) >= 1 && !/(in_play|paused)/i.test(data.match.status) ?
+            Number(data.match.timeRemaining.days) >= 1 || !/(timed|in_play|paused)/i.test(data.match.status) ?
               <p className="text-sm text-secondary-600">{date}</p> :
               /(in_play|paused)/i.test(data.match.status) ?
                 null :
