@@ -47,8 +47,8 @@ const MatchInfo = () => {
   return (
     <div className='p-4'>
 
-      <div className="flex flex-col p-2 rounded-md boder border-white-100/5 bg-gradient-to-br from-white-100/5 to-white-100/15">
-        <div className="flex items-center gap-2">
+      <div className="flex flex-col p-4 gap-2 rounded-md boder border-white-100/5 bg-gradient-to-br from-white-100/10 to-white-100/5">
+        <div className="flex items-center gap-4">
           <Image
             src={data.match.competition.emblem || String(process.env.NEXT_IMAGE_URL)}
             alt={data.match.competition.name}
@@ -70,8 +70,9 @@ const MatchInfo = () => {
             </div>
           </div>
         </div>
+        <hr className="border-none border-t border-white-100/5 outline-none bg-transparent h-0 w-[80%]" />
         <div className="flex items-center justify-between">
-          <h3 className='font-semibold text-secondary-500 mt-2'>Match Venue</h3>
+          <h3 className='font-semibold text-sm text-secondary-500 mt-2'>Match Venue</h3>
           <p className="text-sm">{data.match.venue || 'Not available'}</p>
         </div>
       </div>
