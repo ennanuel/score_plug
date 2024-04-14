@@ -36,6 +36,8 @@ const QUERY = gql`
                     _id
                     utcDate
                     status
+                    minute
+
                     score {
                         fullTime {
                             home
@@ -74,6 +76,8 @@ const QUERY = gql`
                     _id
                     utcDate
                     status
+                    minute
+
                     score {
                         fullTime {
                             home
@@ -132,6 +136,8 @@ const QUERY = gql`
                     _id
                     utcDate
                     status
+                    minute
+
                     score {
                         fullTime {
                             home
@@ -223,13 +229,13 @@ const H2H = () => {
             <div className='flex flex-col items-center gap-2 p-2 px-5 pt-6 m-auto mt-2 border border-secondary-900/50'>
                 <div className="flex w-[80%]">
                     <div style={{ width: `${data.match.predictions.fullTime.outcome.homeWin}%`}} className="relative top-0 left-0 w-[33.33%] h-2 rounded-l-[5px] bg-highlight-300">
-                        <p className="absolute bottom-[100%] left-[50%] translate-x-[-50%] text-[.7em] text-secondary-600">Home</p>
+                        <p className="absolute bottom-[100%] left-[50%] translate-x-[-50%] text-[.7em] text-secondary-600">Home ({data.match.predictions.fullTime.outcome.homeWin})</p>
                     </div>
                     <div style={{ width: `${data.match.predictions.fullTime.outcome.draw}%`}} className="relative top-0 left-0 w-[33.34%] h-2 border-x border-primary-800 bg-highlight-500">
-                        <p className="absolute bottom-[100%] left-[50%] translate-x-[-50%] text-[.7em] text-secondary-600">Draw</p>
+                        <p className="absolute bottom-[100%] left-[50%] translate-x-[-50%] text-[.7em] text-secondary-600">Draw ({data.match.predictions.fullTime.outcome.draw})</p>
                     </div>
                     <div style={{ width: `${data.match.predictions.fullTime.outcome.awayWin}%` }} className="relative top-0 left-0 w-[33.33%] h-2 rounded-r-[5px] bg-highlight-700">
-                        <p className="absolute bottom-[100%] left-[50%] translate-x-[-50%] text-[.7em] text-secondary-600">Away</p>
+                        <p className="absolute bottom-[100%] left-[50%] translate-x-[-50%] text-[.7em] text-secondary-600">Away ({data.match.predictions.fullTime.outcome.awayWin})</p>
                     </div>
                 </div>
 
@@ -282,11 +288,11 @@ const H2H = () => {
 
             <p className='text-center font-semibold mt-6'>Individual Stats</p>
             <div className="flex items-center p-2 gap-3 mt-2">
-                <button className="px-4 h-[30px] rounded-[15px] text-sm font-bold bg-secondary-400 text-primary-600 border border-secondary-400">
+                <button onClick={() => setShowHomeSide(true)} className={`px-4 h-[35px] rounded-md text-sm font-bold ${showHomeSide ? 'bg-secondary-100/10 border-secondary-100/10' : 'border-transparent bg-secondary-100/5'} border`}>
                     <Image src={data.match.homeTeam.crest || String(process.env.NEXT_IMAGE_URL)} alt={data.match.homeTeam.name} width={20} height={20} />
                 </button>
-                <button className="px-4 h-[30px] rounded-[15px] text-sm font-bold text-secondary-700 border border-secondary-700">
-                    <Image src={data.match.homeTeam.crest || String(process.env.NEXT_IMAGE_URL)} alt={data.match.homeTeam.name} width={20} height={20} />
+                <button onClick={() => setShowHomeSide(false)} className={`px-4 h-[35px] rounded-md text-sm font-bold ${showHomeSide ? 'bg-secondary-100/10 border-secondary-100/10' : 'border-transparent bg-secondary-100/5'} border`}>
+                    <Image src={data.match.awayTeam.crest || String(process.env.NEXT_IMAGE_URL)} alt={data.match.homeTeam.name} width={20} height={20} />
                 </button>
             </div>
 
