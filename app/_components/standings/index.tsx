@@ -19,7 +19,7 @@ function Standings({ competition, teams = [] }: { competition?: Competition, tea
         <div className="flex flex-col gap-4">
             {
                 competition.standings.map((standing) => (
-                    <>
+                    <div>
                         {competition.type === 'CUP' && <h3 className="mt-4 p-2 border-t border-white-100/10 bg-white-100/5 font-semibold text-sm">{standing.group}</h3>}
                     <table className="w-full">
                         <thead className="text-xs text-secondary-700 h-8 border-y border-secondary-900/50">
@@ -48,7 +48,7 @@ function Standings({ competition, teams = [] }: { competition?: Competition, tea
                                 }
                         </tbody>
                     </table>
-                    </>
+                    </div>
                 ))
             }
         </div>
