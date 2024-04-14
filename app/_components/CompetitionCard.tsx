@@ -1,7 +1,7 @@
 import { Competition } from '@/types/global.type';
 import Link from 'next/link';
 import Image from "next/image";
-import { MdKeyboardArrowRight, MdStar } from "react-icons/md";
+import { MdKeyboardArrowRight } from "react-icons/md";
 
 const CompetitionCard = ({ _id, name, emblem, area, recentMatches }: Competition) => {
     return (
@@ -17,8 +17,7 @@ const CompetitionCard = ({ _id, name, emblem, area, recentMatches }: Competition
                 </div>
             </div>
             {
-                Boolean(recentMatches.matches)
-                    ?
+                Boolean(recentMatches.matches) ?
                     <div className="flex items-center gap-2">
                         <span className="block w-2 h-2 rounded-full bg-highlight-400"></span>
                         <p className={`text-xs font-bold ${recentMatches.hasLiveMatch ? 'text-highlight-400' : 'text-gray-400'}`}>
