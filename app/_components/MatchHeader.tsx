@@ -7,6 +7,8 @@ import { useParams } from 'next/navigation';
 import { getHeaderLinks } from '../_utils/link';
 import { MATCH_LINKS } from '../_assets/constants/match';
 
+import { BsChevronLeft } from "react-icons/bs";
+
 import { gql, useQuery } from '@apollo/client';
 import { Match } from "@/types/global.type";
 import LoadingMessage from './LoadingMessage';
@@ -83,8 +85,11 @@ const MatchHeader = () => {
       <div className="relative p-4 grid grid-cols-5 m-3 mt-4 gap-2">
         <div
           style={{ background: `linear-gradient(90deg, ${colors.homeTeam[0] === colors.awayTeam[0] ? colors.homeTeam[1] : colors.homeTeam[0]}, ${colors.awayTeam[0]})` }}
-          className="absolute top-0 left-0 w-full h-full opacity-30 rounded-md"
+          className="absolute top-0 right-0 w-full h-full opacity-30 rounded-md"
         ></div>
+        <button className="absolute top-0 left-0 flex items-center justify-center w-4 h-4 rounded-full bg-black-900/5 hover:bg-secondary-900 text-secondary-400">
+          <BsChevronLeft size={20} />
+        </button>
         {
           /in_play|paused|finished/i.test(data.match.status) ?
             <p className={`absolute top-2 left-2 p-1 px-2 border-md bg-black-900/50 text-base font-semibold ${/in_play|paused/i.test(data.match.status) ? "text-highlight-400" : "text-secondary-500"} flex items-center gap-2`}>
