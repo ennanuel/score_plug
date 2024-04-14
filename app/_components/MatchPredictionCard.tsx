@@ -1,4 +1,4 @@
-import { Match } from "@/types/match.type";
+import { Match } from "@/types/global.type";
 import Link from "next/link";
 import Image from "next/image";
 import { getTimeFormat } from "../_utils/dateTime";
