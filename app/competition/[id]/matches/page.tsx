@@ -8,8 +8,8 @@ import { Suspense } from 'react';
 
 const QUERY = gql`
     query CompetitionMatches($id: ID!, $from: String, $to: String) {
-        competition(id: $id, from: $from, to: $to) {
-            matches {
+        competition(id: $id) {
+            matches(from: $from, to: $to) {
                 _id
                 utcDate
                 minute
