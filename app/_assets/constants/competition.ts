@@ -3,7 +3,7 @@ import premierLeagueEmblem2 from "../premier_league_emblem2.png";
 import championsLeagueEmblem from "../ucl_emblem.png";
 import laLigaEmblem from "../la_liga_emblem.png";
 import { MATCHES } from "./match";
-import { Match } from "@/types/match.type";
+import { Match } from "@/types/global.type";
 
 export const COMPETITION_LINKS = [
     { title: "Details", href: "" },
