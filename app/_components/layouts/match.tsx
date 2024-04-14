@@ -44,7 +44,7 @@ const MatchLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
       <MatchHeader />
       {children}
       <section>
-        <h3 className='font-semibold text-gray-400 mt-6 pt-2'>Similar Matches</h3>
+        <h3 className='font-semibold text-secondary-500 mt-6 p-4'>Similar Matches</h3>
         {
           loading ? 
             <LoadingMessage /> :
