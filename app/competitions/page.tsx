@@ -47,8 +47,6 @@ const Competitions = () => {
                     ))
                 }
             </ul>
-            
-            <button className="border h-[40px] min-w-[100px] rounded-md bg-secondary-400 text-black-900">More</button>
         </div>
     )
 }
