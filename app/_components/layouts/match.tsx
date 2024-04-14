@@ -51,10 +51,8 @@ const MatchLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
             error ?
               <ErrorMessage /> :
               !data ?
-                null :
-                data.match.similarMatches.length ?
-                  <div>Nothing was found</div> :
-                  <MatchesContainer matches={data?.match?.similarMatches || []} />
+                <div>Nothing was found</div> :
+                <MatchesContainer matches={data?.match?.similarMatches || []} />
         }
       </section>
     </div>
