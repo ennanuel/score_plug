@@ -126,6 +126,29 @@ const QUERY = gql`
                         }
                     }
                 }
+
+                
+                matches {
+                    _id
+                    utcDate
+                    status
+                    score {
+                        fullTime {
+                            home
+                            away
+                        }
+                    }
+                    homeTeam {
+                        _id
+                        name
+                        crest
+                    }
+                    awayTeam {
+                        _id
+                        name
+                        crest
+                    }
+                }
             }
 
             predictions {
@@ -249,7 +272,7 @@ const H2H = () => {
                     <p className='font-semibold text-sm mt-6 text-center'>Previous Encounters</p>
                     <ul className="flex flex-col gap-1">
                         {
-                            data.match.head2head.matches.filter(match => match.status === 'FINISHED').map((match, index) => (
+                            data.match.head2head.matches?.map((match, index) => (
                                 <li key={index}><MatchCard {...match} /></li>
                             ))
                         }
