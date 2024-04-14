@@ -63,14 +63,13 @@ const MatchInfo = () => {
                 src={data.match.competition.area.flag || String(process.env.NEXT_IMAGE_URL)}
                 alt={data.match.competition.area.name}
                 width={15}
-                height={15}
-                className="object-cover rounded-full"
+                className="aspect-square object-cover rounded-full"
               />
               <p className="text-xs text-secondary-700">{data.match.competition.area.name}</p>
             </div>
           </div>
         </div>
-        <hr className="border-none border-t border-white-100/5 outline-none bg-transparent h-0 w-[80%]" />
+        <hr className="border-none bg-white-100/10 outline-none h-[1px] w-[80%]" />
         <div className="flex items-center justify-between">
           <h3 className='font-semibold text-sm text-secondary-500 mt-2'>Match Venue</h3>
           <p className="text-sm">{data.match.venue || 'Not available'}</p>
