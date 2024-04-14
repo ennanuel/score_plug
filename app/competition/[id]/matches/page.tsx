@@ -1,3 +1,5 @@
+"use client";
+
 import { DateAndStatusFilter, LoadingMessage, ErrorMessage, MatchesContainer } from '@/app/_components';
 import { Match } from '@/types/global.type';
 import { gql, useQuery } from '@apollo/client';
