@@ -1,4 +1,4 @@
-import { Competition } from '@/types/competition.type';
+import { Competition } from '@/types/global.type';
 import Link from 'next/link';
 import Image from "next/image";
 import { MdKeyboardArrowRight, MdStar } from "react-icons/md";
@@ -18,9 +18,13 @@ const CompetitionCard = ({ _id, name, emblem, area, recentMatches }: Competition
             </div>
             {
                 Boolean(recentMatches.matches)
-                    ? <p className={`text-xs font-bold ${recentMatches.hasLiveMatch ? 'text-highlight-400' : 'text-gray-400'}`}>
+                    ?
+                    <div className="flex items-center gap-2">
+                        <span className="block w-2 h-2 rounded-full bg-highlight-400"></span>
+                        <p className={`text-xs font-bold ${recentMatches.hasLiveMatch ? 'text-highlight-400' : 'text-gray-400'}`}>
                         {recentMatches.matches} {recentMatches.matches > 1 ? 'matches' : 'match'}
-                    </p>
+                        </p>
+                    </div>
                     : null
             }
             <MdKeyboardArrowRight size={20} />
