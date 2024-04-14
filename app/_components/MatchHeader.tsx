@@ -1,7 +1,6 @@
 "use client";
 
-import { MdNotifications } from 'react-icons/md';
-import { FaAngleLeft } from 'react-icons/fa';
+
 import Image from "next/image";
 import AltHeader from './AltHeader';
 import { useParams } from 'next/navigation';
@@ -27,16 +26,6 @@ const query = gql`
         days
         hours
         minutes
-      }
-
-      competition {
-        _id
-        name
-        emblem
-        area {
-          name
-          flag
-        }
       }
 
       homeTeam {
@@ -91,17 +80,6 @@ const MatchHeader = () => {
   
   return (
     <>
-      <div className="flex items-center justify-between gap-2 m-3 pr-3">
-        <button className="flex items-center justify-center">
-          <FaAngleLeft />
-        </button>
-        <Image src={data.match.competition.emblem} alt={data.match.competition.name} width={30} height={30} className="object-contain" />
-        <div className="flex-1 flex flex-col">
-          <h3 className="text-sm font-semibold">{data.match.competition.name}</h3>
-          <p className='text-[.7em] text-secondary-700'>{data.match.competition.area.name}</p>
-        </div>
-        <MdNotifications size={20} />
-      </div>
       <div className="relative p-4 grid grid-cols-5 m-3 mt-4 gap-2">
         <div
           style={{ background: `linear-gradient(90deg, ${colors.homeTeam[0] === colors.awayTeam[0] ? colors.homeTeam[1] : colors.homeTeam[0]}, ${colors.awayTeam[0]})` }}
