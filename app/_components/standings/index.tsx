@@ -16,12 +16,12 @@ function Standings({ competition, teams = [] }: { competition?: Competition, tea
     if (!competition) return null;
 
     return (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col">
             {
                 competition.standings.map((standing) => (
                     <div>
-                        {competition.type === 'CUP' && <h3 className="mt-4 p-2 px-4 border-t border-white-100/5 bg-white-100/5 font-semibold text-sm">{standing.group}</h3>}
-                    <table className="w-full border-b border-secondary-900/50">
+                        {competition.type === 'CUP' && <h3 className="p-2 px-4 border-t border-white-100/5 bg-white-100/5 font-semibold text-sm">{standing.group}</h3>}
+                    <table className="w-full">
                         <thead className="text-xs text-secondary-700 h-8 border-y border-secondary-900/50">
                         <th className="w-[50px] font-semibold text-center">
                             <span className="flex items-center justify-center w-full">
