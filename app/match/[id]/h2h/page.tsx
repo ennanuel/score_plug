@@ -300,7 +300,7 @@ const H2H = () => {
                 <button onClick={() => setShowHomeSide(true)} className={`px-4 h-[35px] rounded-md text-sm font-bold ${showHomeSide ? 'bg-secondary-100/10 border-secondary-100/10' : 'border-transparent bg-secondary-100/5'} border`}>
                     <Image src={data.match.homeTeam.crest || String(process.env.NEXT_IMAGE_URL)} alt={data.match.homeTeam.name} width={20} height={20} />
                 </button>
-                <button onClick={() => setShowHomeSide(false)} className={`px-4 h-[35px] rounded-md text-sm font-bold ${showHomeSide ? 'bg-secondary-100/10 border-secondary-100/10' : 'border-transparent bg-secondary-100/5'} border`}>
+                <button onClick={() => setShowHomeSide(false)} className={`px-4 h-[35px] rounded-md text-sm font-bold ${!showHomeSide ? 'bg-secondary-100/10 border-secondary-100/10' : 'border-transparent bg-secondary-100/5'} border`}>
                     <Image src={data.match.awayTeam.crest || String(process.env.NEXT_IMAGE_URL)} alt={data.match.homeTeam.name} width={20} height={20} />
                 </button>
             </div>
