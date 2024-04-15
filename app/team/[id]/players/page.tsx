@@ -1,6 +1,25 @@
-import { PLAYERS } from '@/app/_assets/constants/player'
-import PlayerCard from '@/app/_components/PlayerCard'
-import React from 'react'
+import { PLAYERS } from '@/app/_assets/constants/player';
+import PlayerCard from '@/app/_components/PlayerCard';
+import { gql } from '@apollo/client';
+import React from 'react';
+
+const QUERY = gql`
+  query GetTeamPlayers($id: ID!) {
+    team(id: $id) {
+      squad {
+        _id
+        name
+        number
+        position
+        
+        country {
+          name
+          flag
+        }
+      }
+    }
+  }
+`;
 
 const TeamPlayers = () => {
   return (
