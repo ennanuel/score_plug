@@ -1,4 +1,5 @@
-import { PLAYERS } from '@/app/_assets/constants/player';
+"use client";
+
 import { ErrorMessage, LoadingMessage } from '@/app/_components';
 import PlayerCard from '@/app/_components/PlayerCard';
 import { gql, useQuery } from '@apollo/client';
@@ -35,7 +36,7 @@ const TeamPlayers = () => {
   return (
     <ul className="grid grid-cols-5 gap-4 p-4">
       {
-        PLAYERS.map((player, index) => (<li key={index}><PlayerCard {...player} /></li>))
+        data.team.squad.map((player, index) => (<li key={index}><PlayerCard {...player} /></li>))
       }
     </ul>
   )
