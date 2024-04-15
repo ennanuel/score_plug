@@ -2,23 +2,25 @@
 
 import { Match } from '@/types/global.type';
 import { DateAndStatusFilter, ErrorMessage, LoadingMessage, MatchesContainer } from '../_components';
-import { Suspense } from 'react';
+import { Suspense, useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { MdStarOutline } from 'react-icons/md';
 
 const QUERY = gql`
-  query {
-    matches {
+  query GetMatches($status: String, $from: String) {
+    matches(status: $status, from: $from) {
         totalPages
         matches {
             _id
             status
             utcDate
             minute
+
             homeTeam {
                 name
                 crest
             }
+
             awayTeam {
                 name 
                 crest
@@ -36,25 +38,28 @@ const QUERY = gql`
 
 
 function Matches() {
-    const { loading, error, data } = useQuery<{ matches: { matches: Match[], totalPages: number } }>(QUERY);
+    const [status, setStatus] = useState("");
+    const [date, setDate] = useState((new Date()).toDateString());
+
+    const { loading, error, data } = useQuery<{ matches: { matches: Match[], totalPages: number } }>(QUERY, {
+        variables: { status, from: date }
+    });
 
     if (loading) return <LoadingMessage />;
     else if (error) return <ErrorMessage />;
     else if (!data) return <div>Nothing was found!</div>;
 
     return (
-        <Suspense>
-            <div className="border border-secondary-900/50 p-3 flex flex-col gap-4">
-                <div className="flex justify-between items-center gap-4">
-                    <h1 className='font-bold text-3xl px-4'>Matches</h1>
-                    <button className='d-flex align-items-center rounded-md text-white-100'>
-                        <MdStarOutline size={20} />
-                    </button>
-                </div>
-                <DateAndStatusFilter />
-                <MatchesContainer matches={data.matches.matches} />
+        <div className="border border-secondary-900/50 p-3 flex flex-col gap-4">
+            <div className="flex justify-between items-center gap-4">
+                <h1 className='font-bold text-3xl px-4'>Matches</h1>
+                <button className='d-flex align-items-center rounded-md text-white-100'>
+                    <MdStarOutline size={20} />
+                </button>
             </div>
-        </Suspense>
+            <DateAndStatusFilter setDate={setDate} setMatchStatus={setStatus} />
+            <MatchesContainer matches={data.matches.matches} />
+        </div>
     )
 };
 
