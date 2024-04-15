@@ -7,16 +7,14 @@ import { useParams } from 'next/navigation';
 import { getHeaderLinks } from '../_utils/link';
 import { MATCH_LINKS } from '../_assets/constants/match';
 
-import { BsChevronLeft } from "react-icons/bs";
-
 import { gql, useQuery } from '@apollo/client';
 import { Match } from "@/types/global.type";
 import LoadingMessage from './LoadingMessage';
 import ErrorMessage from './ErrorMessage';
 import { useMemo } from 'react';
 import { getDateFormat, getTimeFormat, getTimeRemaining } from '../_utils/dateTime';
-import { MatchTimeRemaining } from "@/types/match.type";
 import { getMatchTeamColors } from "../_utils/colors";
+import { FaAngleLeft } from "react-icons/fa";
 
 const query = gql`
   query GetMatchByID($id: ID!) {
@@ -87,8 +85,8 @@ const MatchHeader = () => {
           style={{ background: `linear-gradient(90deg, ${colors.homeTeam[0] === colors.awayTeam[0] ? colors.homeTeam[1] : colors.homeTeam[0]}, ${colors.awayTeam[0]})` }}
           className="absolute top-0 left-0 w-full h-full opacity-30 rounded-md"
         ></div>
-        <button className="absolute top-2 left-2 flex items-center justify-center w-4 h-4 rounded-full bg-black-900/50 hover:bg-secondary-900 text-secondary-400">
-          <BsChevronLeft size={20} />
+        <button className="absolute top-2 left-2 flex items-center justify-center w-6 h-6 rounded-full bg-black-900/50 hover:bg-secondary-900 text-secondary-400">
+          <FaAngleLeft size={20} />
         </button>
         {
           /in_play|paused|finished/i.test(data.match.status) ?
