@@ -16,7 +16,7 @@ const QUERY = gql`
       area {
         name
       }
-      matches {
+      matches (status: $status) {
         _id
         status
         utcDate
