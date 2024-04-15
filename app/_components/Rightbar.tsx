@@ -146,7 +146,7 @@ const Rightbar = () => {
                   <span className="truncate text-sm w-full font-semibold text-secondary-500">{match.awayTeam.name}</span>
                 </div>
               </div>
-              <div className="flex items-center justify-between rounded-lg bg-gradient-to-r from-secondary-800/10 to-secondary-800/30 shadow-lg p-3 mt-4">
+              <div className="flex items-center justify-between rounded-lg bg-gradient-to-r from-secondary-800/10 to-secondary-800/30 shadow-lg p-2 mt-4">
                 <div className="flex-[2] flex flex-col">
                   <span className="text-sm font-semibold text-secondary-400">{match.competition.name}</span>
                   <span className="text-xs text-secondary-600 border-l-2 border-highlight-500 pl-2">{match.venue || 'Venue unavailable'}</span>
@@ -156,7 +156,7 @@ const Rightbar = () => {
                   <span className="text-md font-bold text-secondary-400">{getTimeFormat(match.utcDate)}</span>
                   {
                     match.status === "TIMED" ?
-                      <span className="text-xs text-secondary-600 font-semibold">
+                      <span className="text-xs text-secondary-600 font-semibold text-center">
                         <span>Starts in </span>
                         <span>{getTimeRemaining(match.timeRemaining).timeRemainder} {getTimeRemaining(match.timeRemaining).timeUnit}</span>
                       </span> :

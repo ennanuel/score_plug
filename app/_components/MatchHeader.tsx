@@ -69,7 +69,7 @@ const MatchHeader = () => {
   });
   const time = useMemo(() => getTimeFormat(data?.match?.utcDate || ''), [data]);
   const date = useMemo(() => getDateFormat(data?.match?.utcDate || ''), [data]);
-  const { timeUnit, timeRemainder } = useMemo(() => getTimeRemaining(data?.match.timeRemaining), [data]);
+  const { timeUnit, timeRemainder } = useMemo(() => getTimeRemaining(data?.match?.timeRemaining), [data]);
 
   const colors = useMemo(() => ({
     homeTeam: data ? getMatchTeamColors(data.match.homeTeam.clubColors) : [],
