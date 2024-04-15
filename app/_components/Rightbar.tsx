@@ -121,7 +121,7 @@ const Rightbar = () => {
               <div className="grid grid-cols-3 bg-primary-800 py-2 px-4 rounded-md gap-2 shadow-lg">
                 <span className="col-span-3 text-highlight-300 text-xs flex items-center gap-1">
                   <div className="w-[4px] aspect-square rounded-full bg-highlight-300" />
-                  <span>Live</span>
+                  {/in_play|paused/i.test(match.status) ? <span>Live</span> : <span>{match.competition.area.name}</span>}
                 </span>
                 <div className="flex flex-col justify-between ai-center gap-2">
                   <Image src={match.homeTeam.crest || String(process.env.NEXT_IMAGE_URL)} width={60} alt={match.homeTeam.name} className="aspect-square object-contain" />
