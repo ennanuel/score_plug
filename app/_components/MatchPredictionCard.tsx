@@ -27,8 +27,8 @@ function MatchPredictionCard({ _id, homeTeam, competition, awayTeam, utcDate, st
       {
         status === 'TIMED' ? 
           <div className="flex flex-col items-center justify-center gap-1">
-            <span className="text-3xl font-bold text-secondary-400">v</span>
-            <span className="text-secondary-700 font-semibold text-center">{time}</span>
+            <span className="text-3xl font-bold text-secondary-400">V</span>
+            <span className="text-secondary-700 text-sm font-semibold text-center">{time}</span>
           </div> :
           <div className="flex flex-col items-center justify-center">
             <span className={`${/in_play|paused/i.test(status) ? 'text-highlight-400' : 'text-secondary-500'} text-3xl font-bold`}>
