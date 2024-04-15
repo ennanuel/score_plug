@@ -18,6 +18,16 @@ const QUERY = gql`
         utcDate
         minute
 
+        competition {
+          _id
+          name
+          emblem
+          area {
+            name
+            flag
+          }
+        }
+
         homeTeam {
           _id
           name
@@ -55,6 +65,16 @@ const QUERY = gql`
         utcDate
         minute
         venue
+
+        competition {
+          _id
+          name
+          emblem
+          area {
+            name
+            flag
+          }
+        }
 
         homeTeam {
           _id
@@ -146,7 +166,7 @@ const Rightbar = () => {
       <div className="border border-secondary-900/50 bg-primary-500 p-3">
         <h2 className="font-bold text-white-300 mb-2">Featured Prediction</h2>
         {
-          data?.matches?.matches?.map((match) => (
+          data?.matchPredictions?.matches?.map((match) => (
             <div key={match._id} className="grid grid-cols-3 bg-primary-800 py-2 px-4 rounded-md gap-2 shadow-lg">
               <div className="col-span-3 text-highlight-300 text-xs flex items-center gap-1 font-semibold">
                 <div className="w-[4px] h-full rounded-lg bg-highlight-300" />
