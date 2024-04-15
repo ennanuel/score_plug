@@ -173,7 +173,7 @@ const Rightbar = () => {
                 <span>{match.competition.name}</span>
               </div>
               <div className="flex flex-col justify-between ai-center gap-2">
-                <div className="aspect-square rounded-2xl bg-white-100/5 flex items-center justify-center"></div>
+                <Image src={match.homeTeam.crest || String(process.env.NEXT_IMAGE_URL)} width={60} alt={match.homeTeam.name} className="aspect-square object-contain" />
                 <span className="truncate text-sm w-full font-semibold text-secondary-500">{match.homeTeam.name}</span>
               </div>
                 {
@@ -187,7 +187,7 @@ const Rightbar = () => {
                     </p>
                 }
               <div className="flex flex-col justify-between ai-center gap-2">
-                <div className="aspect-square rounded-2xl bg-white-100/5 flex items-center justify-center"></div>
+                <Image src={match.awayTeam.crest || String(process.env.NEXT_IMAGE_URL)} width={60} alt={match.awayTeam.name} className="aspect-square object-contain" />
                 <span className="truncate text-sm w-full font-semibold text-secondary-500">{match.awayTeam.name}</span>
               </div>
               <div className="col-span-3">
