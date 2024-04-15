@@ -47,3 +47,5 @@ export function getTablePositionColor(teamPosition: "TOP_TEAM" | "MID_TEAM" | "L
                 'bg-red-500 text-primary-800' :
                 'text-gray-500';
 };
+
+export const getMatchTeamColors = (clubColors: string) => clubColors?.split('/')?.map(color => color.replace(/\s+/ig, '').toLowerCase() || []);
