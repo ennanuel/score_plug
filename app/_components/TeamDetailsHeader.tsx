@@ -22,7 +22,7 @@ const QUERY = gql`
       name
       crest
       clubColors
-      
+
       area {
         name
         flag
@@ -44,20 +44,22 @@ const TeamDetailsHeader = () => {
 
   return (
     <>
-      <div className="relative py-4 pr-3 flex items-center gap-2 m-2 rounded-lg p-2">
-        <div style={{ background: `linear-gradient(45deg, ${teamColors[0]}, ${teamColors[1]})`}} className="absolute top-0 left-0 w-full h-full" />
-        <button className="h-8 aspect-square rounded-full hover:bg-secondary-400/10">
-          <FaAngleLeft size={20} />
-        </button>
-        <Image src={data.team.crest || String(process.env.NEXT_IMAGE_URL)} alt="Clug Emblem" width={80} className="aspect-square object-contain" />
-        <div className="flex-1 flex-col">
-          <h2 className="font-bold text-lg">{data.team.name}</h2>
-          <div className="flex items-center gap-2">
-            <Image src={data.team.area.flag || String(process.env.NEXT_IMAGE_URL)} alt={data.team.name + ' crest'} width={20} className='aspect-square object-contain' />
-            <p className="text-sm text-secondary-600">{data.team.area.name}</p>
+      <div className="relative">
+        <div style={{ background: `linear-gradient(45deg, ${teamColors[0]}, ${teamColors[1]})`}} className="opacity-30 rounded-lg absolute top-0 left-0 w-full h-full" />
+        <div className="relative py-4 pr-3 flex items-center gap-2 m-2 p-2">
+          <button className="h-8 aspect-square rounded-full hover:bg-secondary-400/10">
+            <FaAngleLeft size={20} />
+          </button>
+          <Image src={data.team.crest || String(process.env.NEXT_IMAGE_URL)} alt="Clug Emblem" width={80} className="aspect-square object-contain" />
+          <div className="flex-1 flex-col">
+            <h2 className="font-bold text-lg">{data.team.name}</h2>
+            <div className="flex items-center gap-2">
+              <Image src={data.team.area.flag || String(process.env.NEXT_IMAGE_URL)} alt={data.team.name + ' crest'} width={20} className='aspect-square object-contain' />
+              <p className="text-sm text-secondary-600">{data.team.area.name}</p>
+            </div>
           </div>
+          <MdStarOutline size={20} />
         </div>
-        <MdStarOutline size={20} />
       </div>
       <AltHeader links={links} />
     </>
