@@ -18,6 +18,12 @@ const QUERY = gql`
         utcDate
         minute
 
+        timeRemaining {
+          days
+          hours
+          minutes
+        }
+
         competition {
           _id
           name
@@ -106,7 +112,7 @@ const Rightbar = () => {
   else if (!data) return <div className="col-span-1">Nothing to show!</div>;
 
   return (
-    <div className="col-span-1 p-4 flex flex-col gap-6">
+    <div className="sticky top-[50px] col-span-1 p-4 flex flex-col gap-6">
     <div className="border border-secondary-900/50 bg-primary-500 p-3">
         <h2 className="font-bold text-white-300 mb-2">Featured Match</h2>
         {
