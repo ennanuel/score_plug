@@ -2,6 +2,7 @@ import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { H2HAggregate, MatchGoals, MatchOutcome, MatchScore, MatchStatus, MatchTimeRemaining, Referee } from "./match.type";
 import { CompetitionStandings } from "./competition.type";
 import { TeamMatchOutcome } from "./team.type";
+import { Player } from "./player.type";
 
 
 export type HeadToHead = {
@@ -90,6 +91,7 @@ export type Team = {
     halfTime: TeamMatchOutcome;
     fullTime: TeamMatchOutcome;
     coach: Referee;
+    squad: Player[];
     hasOngoingMatch: boolean;
     matches: Match[]
 };
