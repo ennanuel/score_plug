@@ -12,6 +12,8 @@ import { gql, useQuery } from '@apollo/client';
 import { Team } from '@/types/global.type';
 import LoadingMessage from './LoadingMessage';
 import ErrorMessage from './ErrorMessage';
+import { useMemo } from 'react';
+import { getMatchTeamColors } from '../_utils/colors';
 
 const QUERY = gql`
   query GetTeam($id: ID!) {
@@ -28,10 +30,11 @@ const QUERY = gql`
 `
 
 const TeamDetailsHeader = () => {
-  const { id } = useParams<{ id: string }>();
-  const links = getHeaderLinks({ path: 'team', id, links: TEAM_LINKS });
+  const { id } = useParams();
+  const links = getHeaderLinks({ path: 'team', id: String(id), links: TEAM_LINKS });
 
   const { loading, error, data } = useQuery<{ team: Team }>(QUERY, { variables: { id } });
+  const teamColors = useMemo(() => getMatchTeamColors(data?.team?.clubColors || ''), [data]);
   
   if (loading) return <LoadingMessage />;
   else if (error) return <ErrorMessage />;
@@ -39,7 +42,8 @@ const TeamDetailsHeader = () => {
 
   return (
     <>
-      <div className="py-4 pr-3 flex items-center gap-2 bg-gradient-to-r from-red-900/50 to-blue-900/50 m-2 rounded-lg p-2">
+      <div className="relative py-4 pr-3 flex items-center gap-2 m-2 rounded-lg p-2">
+        <div style={{ background: `linear-gradient(45deg, ${teamColors[0]}, ${teamColors[1]})`}} className="absolute top-0 left-0 w-full h-full" />
         <button className="h-8 aspect-square rounded-full hover:bg-secondary-400/10">
           <FaAngleLeft size={20} />
         </button>

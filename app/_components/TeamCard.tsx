@@ -11,7 +11,7 @@ function TeamCard ({ _id, name, crest, hasOngoingMatch }: Team) {
                     null
             }
             <Image src={crest} alt={name} width={80} className="object-contain aspect-square" />
-            <p className="text-secondary-600 text-sm truncate w-full">{name}</p>
+            <p className="text-secondary-600 text-sm text-center truncate w-full">{name}</p>
         </Link>
     )
 }
