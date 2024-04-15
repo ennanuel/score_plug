@@ -18,12 +18,6 @@ const QUERY = gql`
         utcDate
         minute
 
-        timeRemaining {
-          days
-          hours
-          minutes
-        }
-
         competition {
           _id
           name
@@ -98,6 +92,12 @@ const QUERY = gql`
             home
             away
           }
+        }
+
+        timeRemaining {
+          days
+          hours
+          minutes
         }
       }
     }
@@ -199,8 +199,8 @@ const Rightbar = () => {
               <div className="col-span-3">
                 <div className="relative mt-1 mb-2 h-2 rounded-lg bg-secondary-900 overflow-clip">
                   <div className="absolute top-0 left-0 w-[100%] h-full rounded-r-lg bg-highlight-700 shadow-lg" />
-                  <div style={{ width: `${match.predictions.fullTime.outcome.draw + match.predictions.fullTime.outcome.awayWin}%` }} className="absolute top-0 left-0 w-[80%] h-full rounded-r-lg bg-highlight-500 shadow-lg" />
-                  <div style={{ width: `${match.predictions.fullTime.outcome.awayWin}%` }} className="absolute top-0 left-0 w-[50%] h-full rounded-r-lg bg-highlight-300" />
+                  <div style={{ width: `${match.predictions.fullTime.outcome.draw + match.predictions.fullTime.outcome.homeWin}%` }} className="absolute top-0 left-0 w-[80%] h-full rounded-r-lg bg-highlight-500 shadow-lg" />
+                  <div style={{ width: `${match.predictions.fullTime.outcome.homeWin}%` }} className="absolute top-0 left-0 w-[50%] h-full rounded-r-lg bg-highlight-300" />
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="flex-1 flex flex-col gap-[2px] text-center">
