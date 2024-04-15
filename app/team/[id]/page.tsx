@@ -2,7 +2,7 @@ import { TEAM_FORM } from '@/app/_assets/constants/team';
 import { FormBox, MatchCard, Standings } from '@/app/_components';
 import { MATCHES } from '@/app/_assets/constants/match';
 
-import { Match } from '@/types/match.type';
+import { Match } from '@/types/global.type';
 
 const TeamInfo = () => {
     return (

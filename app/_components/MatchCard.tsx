@@ -3,18 +3,16 @@
 import Link from "next/link";
 import Image from "next/image";
 import { MdOutlineNotificationsActive } from 'react-icons/md';
-import { Match } from "@/types/match.type";
+import { Match } from "@/types/global.type";
 import { getDateFormat, getTimeFormat } from "../_utils/dateTime";
 import { useMemo } from "react";
-import { getHighlightBackground, getMatchCardBackground, getTeamColors } from "../_utils/colors";
+import { getHighlightBackground, getMatchCardBackground, getMatchTimeColor, getTeamColors } from "../_utils/colors";
 
 function MatchCard ({ _id, status, minute, utcDate, homeTeam, awayTeam, score }: Match) {
     const showMinutes = useMemo(() => /(in_play|paused|finished)/i.test(status), []);
     const showTime = useMemo(() => status === 'TIMED', []);
-    const timeTextColor = useMemo(() => status !== 'IN_PLAY' ?
-        (status === 'PAUSED' ? 'text-highlight-600' : 'FINISHED' ? 'text-secondary-800' : 'text-secondary-500') :
-        'text-highlight-400'
-        , []);
+
+    const timeTextColor = useMemo(() => getMatchTimeColor(status), []);
     const highlightBackground = useMemo(() => getHighlightBackground(status), []);
     const cardBackground = useMemo(() => getMatchCardBackground(status), []);
     const time = useMemo(() => getTimeFormat(utcDate), []);
@@ -22,21 +20,21 @@ function MatchCard ({ _id, status, minute, utcDate, homeTeam, awayTeam, score }:
     const { homeTextColor, awayTextColor } = useMemo(() => getTeamColors(status, score), []);
 
     return (
-        <Link href={`/match/${_id}`} className={`flex items-center justify-between ${cardBackground} hover:bg-secondary-900/80 rounded-md p-2`}>
-            <div className={`h-[50px] w-[6px] rounded-md ${highlightBackground}`} />
-            <p className={`px-4 py-3 ${timeTextColor} ${showMinutes ? 'text-base' : 'text-sm'} font-semibold w-[80px] text-center`}>
-                {showMinutes ? `${minute}${/paused|finished/i.test(status) ? "'" : ""}` : showTime ? time : status.slice(0, 4)}
+        <Link href={`/match/${_id}`} className={`flex items-center border-b border-white-100/5 last:border-transparent justify-between ${cardBackground} hover:border-transparent hover:bg-white-100/5 p-2`}>
+            <div className={`h-[40px] w-[3px] rounded-md ${highlightBackground}`} />
+            <p className={`px-4 py-3 ${timeTextColor} text-sm font-semibold w-[80px] text-center`}>
+                {showMinutes ? `${minute}${/(paused|finished)/i.test(status) ? "" : "'"}` : showTime ? time : status.slice(0, 4)}
             </p>
             <div className="flex flex-1 flex-col gap-2">
                 <div className={`flex items-center gap-2 ${homeTextColor}`}>
-                    <Image src={homeTeam.crest} alt={homeTeam.name} width={20} height={20} className="aspect-square object-contain" />
-                    <p className="flex-1 text-sm font-semibold">{homeTeam.name}</p>
-                    <span className="font-bold text-sm">{score.fullTime.homeTeam}</span>
+                    <Image src={homeTeam.crest || String(process.env.NEXT_IMAGE_URI)} alt={homeTeam.name} height={15} width={15} className="aspect-square object-contain" />
+                    <p className="flex-1 text-xs font-semibold">{homeTeam.name}</p>
+                    <span className="font-bold text-sm">{score.fullTime.home}</span>
                 </div>
                 <div className={`flex items-center gap-2 ${awayTextColor}`}>
-                    <Image src={awayTeam.crest} alt={awayTeam.name} width={20} height={20} className="aspect-square object-contain" />
-                    <p className="flex-1 text-sm font-semibold">{awayTeam.name}</p>
-                    <span className="font-bold text-sm">{score.fullTime.awayTeam}</span>
+                    <Image src={awayTeam.crest || String(process.env.NEXT_IMAGE_URI)} alt={awayTeam.name} height={15} width={15} className="aspect-square object-contain" />
+                    <p className="flex-1 text-xs font-semibold">{awayTeam.name}</p>
+                    <span className="font-bold text-sm">{score.fullTime.away}</span>
                 </div>
             </div>
             <div className="flex items-center justify-center w-[60px] ml-2">

@@ -3,7 +3,7 @@ import premierLeagueEmblem2 from "../premier_league_emblem2.png";
 import championsLeagueEmblem from "../ucl_emblem.png";
 import laLigaEmblem from "../la_liga_emblem.png";
 import { MATCHES } from "./match";
-import { Match } from "@/types/match.type";
+import { Match } from "@/types/global.type";
 
 export const COMPETITION_LINKS = [
     { title: "Details", href: "" },
@@ -31,9 +31,11 @@ export const COMPETITIONS = [
         type: "REGULAR",
         emblem: premierLeagueEmblem,
         currentSeason: CURRENT_SEASON,
-        hasLiveMatch: true,
         matches: COMPETITION_MATCHES,
-        noOfMatches: 10
+        recentMatches: {
+            matches: 10,
+            hasLiveMatch: true
+        }
     },
     {
         _id: 300,
@@ -45,9 +47,11 @@ export const COMPETITIONS = [
         type: "REGULAR",
         emblem: laLigaEmblem,
         currentSeason: CURRENT_SEASON,
-        hasLiveMatch: true,
         matches: COMPETITION_MATCHES,
-        noOfatches: 6
+        recentMatches: {
+            matches: 10,
+            hasLiveMatch: true
+        }
     },
     {
         _id: 300,
@@ -59,9 +63,11 @@ export const COMPETITIONS = [
         type: "CUP",
         emblem: championsLeagueEmblem,
         currentSeason: CURRENT_SEASON,
-        hasLiveMatch: false,
         matches: COMPETITION_MATCHES,
-        noOfMatches: 3
+        recentMatches: {
+            matches: 3,
+            hasLiveMatch: false
+        }
     },
     {
         _id: 300,
@@ -73,8 +79,48 @@ export const COMPETITIONS = [
         type: "CUP",
         emblem: premierLeagueEmblem2,
         currentSeason: CURRENT_SEASON,
-        hasLiveMatch: false,
         matches: COMPETITION_MATCHES,
-        noOfMatches: 0
+        recentMatches: {
+            matches: 0,
+            hasLiveMatch: false
+        }
     },
 ];
+
+export const COMPETITIONS_STANDINGS_STRUCTURE = {
+    "PPL": {
+        topPositions: 2,
+        midPositions: 3,
+        relegationPositions: 16
+    },
+    "BSA": {
+        topPositions: 4,
+        midPositions: 6,
+        relegationPositions: 17
+    },
+    "DED": {
+        topPositions: 3,
+        midPositions: 4,
+        relegationPositions: 16
+    },
+    "CL": {
+        topPositions: 2,
+        midPositions: 3,
+        relegationPositions: 4
+    },
+    "BL1": {
+        topPositions: 4,
+        midPositions: 5,
+        relegationPositions: 16
+    },
+    "SA|PD|PL|FL1": {
+        topPositions: 4,
+        midPositions: 5,
+        relegationPositions: 18
+    },
+    "WC|EC|CLI": {
+        topPositions: 2,
+        midPositions: 0,
+        relegationPositions: 3
+    }
+}

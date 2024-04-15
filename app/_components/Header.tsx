@@ -2,17 +2,17 @@
 
 import { useEffect, useState } from "react";
 import { FaAngleDown } from "react-icons/fa";
-import { GiSoccerField } from "react-icons/gi";
 import { MdOutlinePerson, MdOutlineSettings, MdSearch } from "react-icons/md";
 import { NAV_LINKS } from "../_assets/constants/links";
 import NavLink from "./NavLink";
+import { PiPlug } from "react-icons/pi";
 
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => { 
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+    const handleScroll = () => setScrolled(window.scrollY > 10);
 
     window.addEventListener('scroll', handleScroll);
 
@@ -20,13 +20,14 @@ const Header = () => {
   }, []);
 
   return (
-    <nav className={`sticky top-[-60px] z-[99999] border-b border-secondary-900/50 bg-primary-500`}>
-      <div className="flex items-center justify-between gap-4 px-5 py-2">
-        <div className={`flex-1 font-semibold text-white-100 text-2xl flex items-center justify-start gap-3 transition-transform origin-left ${scrolled && 'translate-y-[58px] scale-75'}`}>
-          <GiSoccerField /> 
-          <span>Score Plug</span>
-        </div>
-        <div className='overflow-clip flex-1 flex items-stretch justify-start gap-2 bg-white-100/5 border border-secondary-100/10 hover:border-secondary-100/50 rounded-md'>
+    <>
+      <div className="fixed top-0 left-[15px] h-[50px] z-[2] flex-1 font-semibold text-white-100 text-2xl flex items-center justify-start gap-3 transition-transform">
+        <PiPlug size={30} /> 
+        <span>ScorePlug</span>
+      </div>
+      <div className="flex items-center gap-4 px-4 h-[50px] bg-primary-500">
+        <div className="flex-1 opacity-0"></div>
+        <div className='overflow-clip flex-1 h-[35px] flex items-stretch justify-start gap-2 bg-white-100/5 border border-secondary-100/10 hover:border-secondary-100/50 rounded-md'>
           <label htmlFor="search" className="text-white-500 flex items-center justify-center pl-2">
             <MdSearch />
           </label>
@@ -47,14 +48,16 @@ const Header = () => {
           </li>
         </ul>
       </div>
-      <ul className={`flex items-center justify-start gap-3 px-8 py-3 transition-transform w-fit ${scrolled && "lg:translate-x-[180px]"}`}>
-        {
-          NAV_LINKS.map((navLink, index) => (
-            <li><NavLink key={index} {...navLink} /></li>
-          ))
-        }
-      </ul>
-    </nav>
+      <nav className="sticky z-[1] h-[50px] top-0 border-b px-6 flex border-secondary-900/50 bg-primary-500">
+        <ul className={`flex items-center justify-start gap-3 transition-transform w-fit ${scrolled && "lg:translate-x-[130px]"}`}>
+          {
+            NAV_LINKS.map((navLink, index) => (
+              <li><NavLink key={index} {...navLink} /></li>
+            ))
+          }
+        </ul>
+      </nav>
+    </>
   )
 }
 

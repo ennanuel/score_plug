@@ -1,3 +1,5 @@
+import { MatchTimeRemaining } from "@/types/match.type";
+
 const MONTHS_ARRAY = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const DAYS_IN_A_WEEK = ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'];
 
@@ -32,4 +34,11 @@ export function getMatchDates(): { date: { day: number, month: string, dayOfWeek
         dates.push({ date: { day, month, dayOfWeek }, value: fullDate });
     }
     return dates;
- };
+};
+ 
+export function getTimeRemaining (timeRemaining?: MatchTimeRemaining) {
+    if (!timeRemaining) return { timeUnit: '', timeRemainder: 0 };
+    const [unit, timeRemainder] = Object.entries(timeRemaining).find(([key, value]) => Number(value) >= 1) || [];
+    const timeUnit = timeRemainder === 1 ? unit?.replace(/s$/, '') : unit;
+    return { timeUnit, timeRemainder }
+}

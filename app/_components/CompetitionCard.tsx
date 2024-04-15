@@ -1,24 +1,29 @@
-import { Competition } from '@/types/competition.type';
+import { Competition } from '@/types/global.type';
 import Link from 'next/link';
 import Image from "next/image";
-import { MdKeyboardArrowRight, MdStar } from "react-icons/md";
+import { MdKeyboardArrowRight } from "react-icons/md";
 
-const CompetitionCard = ({ _id, name, emblem, area, noOfMatches, hasLiveMatch }: Competition) => {
+const CompetitionCard = ({ _id, name, emblem, area, recentMatches }: Competition) => {
     return (
-        <Link href={`/competition/${_id}`} className={`flex items-center gap-4 justify-between bg-primary-800 hover:bg-primary-400/50 hover:border-transparent p-3 px-4 rounded-lg border ${hasLiveMatch ? 'border-highlight-400' : 'border-transparent'}`}>
-            <Image src={emblem} width={40} className="aspect-square object-contain" alt={name} />
+        <Link href={`/competition/${_id}`} className={`flex items-center gap-4 justify-between hover:bg-white-400/5 p-2 rounded-sm border ${recentMatches.hasLiveMatch ? 'border-highlight-400/20' : 'border-primary-400/20'}`}>
+            <Image src={emblem || String(process.env.NEXT_IMAGE_URI)} width={30} height={30} className="aspect-square object-contain" alt={name} />
             <div className="flex-1 flex flex-col">
                 <div className="flex items-center gap-2">
-                    <h3 className="text-secondary-400 font-semibold">{name}</h3>
-                    <MdStar />
+                    <h3 className="text-secondary-400 font-semibold text-sm">{name}</h3>
                 </div>
-                <span className="text-xs text-gray-500">{area.name}</span>
+                <div className="flex items-center gap-2">
+                    <Image src={area.flag || String(process.env.NEXT_IMAGE_URI)} width={15} height={15} className="object-contain" alt="Competition area flag" />
+                    <span className="text-xs text-gray-500">{area.name}</span>
+                </div>
             </div>
             {
-                noOfMatches
-                    ? <p className={`text-xs font-bold ${hasLiveMatch ? 'text-highlight-400' : 'text-gray-400'}`}>
-                        {noOfMatches} {noOfMatches > 1 ? 'matches' : 'match'}
-                    </p>
+                Boolean(recentMatches.matches) ?
+                    <div className="flex items-center gap-2">
+                        {recentMatches.hasLiveMatch && <span className="block w-2 h-2 rounded-full bg-highlight-400"></span>}
+                        <p className={`text-xs font-bold ${recentMatches.hasLiveMatch ? 'text-highlight-400' : 'text-gray-400'}`}>
+                        {recentMatches.matches} {recentMatches.matches > 1 ? 'matches' : 'match'}
+                        </p>
+                    </div>
                     : null
             }
             <MdKeyboardArrowRight size={20} />

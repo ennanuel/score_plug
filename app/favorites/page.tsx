@@ -1,4 +1,4 @@
-import { Competition } from '@/types/competition.type';
+import { Competition, Team } from '@/types/global.type';
 import { COMPETITIONS } from '../_assets/constants/competition';
 import { TEAMS } from '../_assets/constants/team';
 import CompetitionCard from '../_components/CompetitionCard';
@@ -26,7 +26,7 @@ const index = () => {
         <ul className="grid grid-cols-4 gap-4 mt-4">
           {
             TEAMS.map((team, index) => (
-              <li key={index}><TeamCard {...team} /></li>
+              <li key={index}><TeamCard {...(team as Team)} /></li>
             ))
           }
         </ul>

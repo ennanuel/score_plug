@@ -1,12 +1,10 @@
 "use client";
 
-import { MdStarOutline } from 'react-icons/md';
-import { MATCHES } from '../_assets/constants/match';
-import MatchCard from '../_components/MatchCard';
-import { Match } from '@/types/match.type';
-import { DateAndStatusFilter, ErrorMessage, LoadingMessage } from '../_components';
+import { Match } from '@/types/global.type';
+import { DateAndStatusFilter, ErrorMessage, LoadingMessage, MatchesContainer } from '../_components';
 import { Suspense } from 'react';
 import { useQuery, gql } from '@apollo/client';
+import { MdStarOutline } from 'react-icons/md';
 
 const QUERY = gql`
   query {
@@ -40,30 +38,21 @@ const QUERY = gql`
 function Matches() {
     const { loading, error, data } = useQuery<{ matches: { matches: Match[], totalPages: number } }>(QUERY);
 
+    if (loading) return <LoadingMessage />;
+    else if (error) return <ErrorMessage />;
+    else if (!data) return <div>Nothing was found!</div>;
+
     return (
         <Suspense>
-            <div className="border border-secondary-900/50 bg-primary-500 p-3">
+            <div className="border border-secondary-900/50 p-3 flex flex-col gap-4">
+                <div className="flex justify-between items-center gap-4">
+                    <h1 className='font-bold text-3xl px-4'>Matches</h1>
+                    <button className='d-flex align-items-center rounded-md text-white-100'>
+                        <MdStarOutline size={20} />
+                    </button>
+                </div>
                 <DateAndStatusFilter />
-                <ul className="bg-primary-800 py-3 px-4 rounded-lg mt-6">
-                    <li className='flex flex-col gap-3'>
-                        <div className='flex items-center gap-3 p-2'>
-                            <div className="w-5 aspect-square border-2 border-secondary-800" />
-                            <div className="flex-1 flex flex-col">
-                                <span className="font-semibold text-secondary-500 text-sm">Premier League</span>
-                                <span className="text-[.7em] text-secondary-700">England</span>
-                            </div>
-                            <MdStarOutline size={20} />
-                        </div>
-
-                        <ul className="flex flex-col gap-1">
-                            {
-                                data?.matches?.matches.map((match, index) => (
-                                    <li><MatchCard key={index} {...(match as Match)} /></li>
-                                ))
-                            }
-                        </ul>
-                    </li>
-                </ul>
+                <MatchesContainer matches={data.matches.matches} />
             </div>
         </Suspense>
     )

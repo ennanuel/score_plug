@@ -10,6 +10,7 @@ import CompetitionLayout from "./_components/layouts/competition";
 import MatchLayout from "./_components/layouts/match";
 import TeamLayout from "./_components/layouts/team";
 import { usePathname } from "next/navigation";
+
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -19,13 +20,9 @@ function getBody({ pathname, children }: { pathname: string; children: React.Rea
   else if (pathname.startsWith("/match/")) return (<MatchLayout>{children}</MatchLayout>);
   else if (pathname.startsWith("/team/")) return (<TeamLayout>{children}</TeamLayout>);
   return children;
-}
+};
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
   const pathname = usePathname();
   const pageBody = getBody({ children, pathname });
 
