@@ -21,6 +21,8 @@ const QUERY = gql`
       _id
       name
       crest
+      clubColors
+      
       area {
         name
         flag
