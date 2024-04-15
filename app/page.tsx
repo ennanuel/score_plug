@@ -8,15 +8,15 @@ import { useQuery, gql } from '@apollo/client';
 import { ErrorMessage, LoadingMessage } from './_components';
 
 const QUERY = gql`
-  query GetActiveCompetitions($status: String!) {
-    activeCompetitions {
+  query GetActiveCompetitions($isLive: Boolean!) {
+    activeCompetitions(isLive: $isLive) {
       _id
       name
       emblem
       area {
         name
       }
-      matches (status: $status) {
+      matches {
         _id
         status
         utcDate
@@ -45,7 +45,7 @@ function Home() {
   const showLiveMatches = () => setStatus("IN_PLAY");
   const showAllMatches = () => setStatus("");
 
-  const { loading, error, data } = useQuery<{ activeCompetitions: Competition[] }>(QUERY, { variables: { status } });
+  const { loading, error, data } = useQuery<{ activeCompetitions: Competition[] }>(QUERY, { variables: { isLive: status === 'IN_PLAY' } });
 
   if (loading) return <LoadingMessage />;
   else if (error) return <ErrorMessage />;
