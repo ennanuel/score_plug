@@ -184,12 +184,17 @@ const Rightbar = () => {
               </div>
                 {
                   /in_play|paused|finished/i.test(match.status) ? 
-                    <div className="flex flex-col items-center justify-center gap-1">
-                      <span className="text-3xl font-bold text-secondary-400">v</span>
-                      <span className="text-secondary-700 font-semibold">12:00</span>
+                    <div className="flex flex-col items-center justify-center">
+                      <span className="text-3xl font-bold text-highlight-400">
+                        <span className="font-bold">{match.score.fullTime.home}</span>
+                        <span>-</span>
+                        <span className="font-bold">{match.score.fullTime.away}</span>
+                      </span>
+                      <span className="text-highlight-500 font-semibold">{/\w/i.test(match.minute) ? match.minute : `${match.minute}'`}</span>
                     </div>:
-                    <p className="text-2xl font-bold flex items-center justify-center">
-                      <span>V</span>
+                    <p className="text-2xl font-bold flex flex-col items-center justify-center">
+                      <span className="text-2xl font-bold">V</span>
+                      <span className="text-sm text-secondary-700">{getTimeFormat(match.utcDate)}</span>
                     </p>
                 }
               <div className="flex flex-col justify-between ai-center gap-2">
