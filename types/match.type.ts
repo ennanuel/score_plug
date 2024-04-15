@@ -8,6 +8,12 @@ export type MatchScore = {
     fullTime: Score;
 };
 
+export type MatchTimeRemaining = {
+    days: number | null;
+    hours: number | null;
+    minutes: number | null;
+}
+
 export type Score = {
     home: number;
     away: number;

@@ -1,5 +1,5 @@
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
-import { H2HAggregate, MatchGoals, MatchOutcome, MatchScore, MatchStatus, Referee } from "./match.type";
+import { H2HAggregate, MatchGoals, MatchOutcome, MatchScore, MatchStatus, MatchTimeRemaining, Referee } from "./match.type";
 import { CompetitionStandings } from "./competition.type";
 import { TeamMatchOutcome } from "./team.type";
 
@@ -21,11 +21,7 @@ export type Match = {
     status: MatchStatus;
     minute: string;
     competition: Competition;
-    timeRemaining: {
-        days: null | number;
-        hours: null | number;
-        minutes: null | number;
-    }
+    timeRemaining: MatchTimeRemaining;
     utcDate: string,
     homeTeam: Team;
     awayTeam: Team;
