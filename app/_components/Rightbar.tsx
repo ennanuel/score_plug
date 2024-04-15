@@ -147,12 +147,12 @@ const Rightbar = () => {
                 </div>
               </div>
               <div className="flex items-center justify-between rounded-lg bg-gradient-to-r from-secondary-800/10 to-secondary-800/30 shadow-lg p-2 mt-4">
-                <div className="flex-[2] flex flex-col">
+                <div className="flex-[2] flex flex-col ml-2">
                   <span className="text-sm font-semibold text-secondary-400">{match.competition.name}</span>
                   <span className="text-xs text-secondary-600 border-l-2 border-highlight-500 pl-2">{match.venue || 'Venue unavailable'}</span>
                 </div>
                 <div className="w-[2px] h-[40px] mx-2 bg-secondary-200/20 rounded-md" />
-                <div className="flex-[1] flex flex-col items-center jc-center">
+                <div className="flex-[1] flex flex-col items-center justify-center">
                   <span className="text-md font-bold text-secondary-400">{getTimeFormat(match.utcDate)}</span>
                   {
                     match.status === "TIMED" ?
