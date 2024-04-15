@@ -16,7 +16,7 @@ const DATES = getMatchDates();
 
 function DateAndStatusFilter({ setDate, setMatchStatus }: { setDate?: Dispatch<SetStateAction<string>>; setMatchStatus?: Dispatch<SetStateAction<string>>; }) {
     const [status, setStatus] = useState<keyof typeof MATCH_STATUS>("all");
-    const [dateFilter, setDateFilter] = useState("");
+    const [dateFilter, setDateFilter] = useState((new Date()).toDateString());
 
     const statusValue = useMemo(() => MATCH_STATUS[status], [status]);
 
@@ -30,7 +30,7 @@ function DateAndStatusFilter({ setDate, setMatchStatus }: { setDate?: Dispatch<S
 
     return (
         <div className='border border-secondary-900/50 mt-2 py-2 px-3 flex justify-between items-center gap-3'>
-            <button onClick={() => setShowStatus( prev => !prev )} className='py-[2px] px-2 pr-0 flex items-center justify-center rounded-[5px] bg-secondary-500 text-sm text-black-900 font-bold'>
+            <button onClick={() => setShowStatus( prev => !prev )} className='py-[2px] px-2 pr-0 uppercase flex items-center justify-center rounded-[5px] bg-secondary-500 text-sm text-black-900 font-bold'>
                 <span>{status}</span>
                 { showStatus ? <MdKeyboardArrowLeft /> : <MdKeyboardArrowRight /> }
             </button>
