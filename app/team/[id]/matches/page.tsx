@@ -57,12 +57,10 @@ const TeamMatches = () => {
     else if (!data) return <div>Nothing was found!</div>;
     
     return (
-        <Suspense>
-            <div className="p-2 flex flex-col gap-4">
-                <DateAndStatusFilter />
-                <MatchesContainer matches={data.team.matches} />
-            </div>
-        </Suspense>
+        <div className="p-2 flex flex-col gap-4">
+            <DateAndStatusFilter />
+            <MatchesContainer matches={data.team.matches} />
+        </div>
     )
 }
 
