@@ -1,19 +1,67 @@
-import { DateAndStatusFilter, MatchCard } from "@/app/_components/";
+"use client";
+
+import { DateAndStatusFilter, LoadingMessage, ErrorMessage, MatchCard, MatchesContainer } from "@/app/_components/";
 import { Match } from "@/types/global.type";
-import { MATCHES } from "@/app/_assets/constants/match";
 import { Suspense } from "react";
+import { gql, useQuery } from "@apollo/client"
+import { useParams } from "next/navigation";
+import { Team } from "@/types/global.type";
+
+const QUERY = gql`
+    query GetTeamMatches($id: ID!) {
+        team(id: $id) {
+            matches {
+                _id
+                minute
+                utcDate
+                status
+
+                competition {
+                    _id
+                    name
+                    emblem
+                    area {
+                        name
+                        flag
+                    }
+                }
+
+                homeTeam {
+                    _id
+                    name
+                    crest
+                }
+
+                awayTeam {
+                    _id
+                    name
+                    crest
+                }
+
+                score {
+                    fullTime {
+                        home
+                        away
+                    }
+                }
+            }
+        }
+    }
+`
 
 const TeamMatches = () => {
+    const { id } = useParams();
+    const { loading, error, data } = useQuery<{ team: Team }>(QUERY, { variables: { id } });
+
+    if (loading) return <LoadingMessage />;
+    else if (error) return <ErrorMessage />;
+    else if (!data) return <div>Nothing was found!</div>;
+    
     return (
         <Suspense>
-            <div className="p-2">
+            <div className="p-2 flex flex-col gap-4">
                 <DateAndStatusFilter />
-
-                <ul className="flex flex-col gap-3 mt-4 p-2 border border-secondary-900/50">
-                    {
-                        MATCHES.map((match, index) => <li key={index}><MatchCard {...(match as Match)} /></li>)
-                    }
-                </ul>
+                <MatchesContainer matches={data.team.matches} />
             </div>
         </Suspense>
     )
