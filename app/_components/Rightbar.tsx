@@ -1,8 +1,90 @@
-import { Match } from "@/types/global.type";
+"use client";
+
 import Image from "next/image";
 import { getDateFormat, getTimeFormat, getTimeRemaining } from "../_utils/dateTime";
 
-const Rightbar = ({ data }: { data?: { matchPredictions: { matches: Match[] }, matches: { matches: Match[] } } }) => {
+import { gql, useQuery } from "@apollo/client";
+import { Match } from "@/types/global.type";
+import LoadingMessage from "./LoadingMessage";
+import ErrorMessage from "./ErrorMessage";
+
+
+const QUERY = gql`
+  query GetMatchAndPrediction {
+    matchPredictions(limit: 1) {
+      matches {
+        _id
+        status
+        utcDate
+        minute
+
+        homeTeam {
+          _id
+          name
+          crest
+        }
+        awayTeam {
+          _id
+          name
+          crest
+        }
+        
+        score {
+          fullTime {
+            home
+            away
+          }
+        }
+
+        predictions {
+          fullTime {
+            outcome {
+              homeWin
+              draw
+              awayWin
+            }
+          }
+        }
+      }
+    }
+
+    matches {
+      matches(limit: 1) {
+        _id
+        status
+        utcDate
+        minute
+        venue
+
+        homeTeam {
+          _id
+          name
+          crest
+        }
+        awayTeam {
+          _id
+          name
+          crest
+        }
+        
+        score {
+          fullTime {
+            home
+            away
+          }
+        }
+      }
+    }
+  }
+`
+
+const Rightbar = () => {
+  const { loading, error, data } = useQuery<{ matchPredictions: { matches: Match[] }, matches: { matches: Match[] } }>(QUERY);
+
+  if (loading) return <div className="col-span-1"><LoadingMessage /></div>;
+  else if (error) return <div className="col-span-1"><ErrorMessage /></div>;
+  else if (!data) return <div className="col-span-1">Nothing to show!</div>;
+  
   return (
     <div className="col-span-1 p-4 flex flex-col gap-6">
     <div className="border border-secondary-900/50 bg-primary-500 p-3">
