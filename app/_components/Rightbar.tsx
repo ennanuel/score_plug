@@ -48,8 +48,8 @@ const QUERY = gql`
       }
     }
 
-    matches {
-      matches(limit: 1) {
+    matches(limit: 1) {
+      matches {
         _id
         status
         utcDate
@@ -84,7 +84,7 @@ const Rightbar = () => {
   if (loading) return <div className="col-span-1"><LoadingMessage /></div>;
   else if (error) return <div className="col-span-1"><ErrorMessage /></div>;
   else if (!data) return <div className="col-span-1">Nothing to show!</div>;
-  
+
   return (
     <div className="col-span-1 p-4 flex flex-col gap-6">
     <div className="border border-secondary-900/50 bg-primary-500 p-3">
