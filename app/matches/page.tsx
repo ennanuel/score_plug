@@ -39,7 +39,7 @@ const QUERY = gql`
 
 function Matches() {
     const [status, setStatus] = useState("");
-    const [date, setDate] = useState((new Date()).toDateString());
+    const [date, setDate] = useState("");
 
     const { loading, error, data } = useQuery<{ matches: { matches: Match[], totalPages: number } }>(QUERY, {
         variables: { status, from: date }
