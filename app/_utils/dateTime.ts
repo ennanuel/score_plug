@@ -38,7 +38,7 @@ export function getMatchDates(): { date: { day: number, month: string, dayOfWeek
  
 export function getTimeRemaining (timeRemaining?: MatchTimeRemaining) {
     if (!timeRemaining) return { timeUnit: '', timeRemainder: 0 };
-    const [key, value] = Object.entries(timeRemaining).find(([key, value]) => Number(value) >= 1) || [];
-    const unit = value === 1 ? key : key?.replace(/s$/, '');
-    return { timeUnit: unit, timeRemaining: value }
+    const [unit, timeRemainder] = Object.entries(timeRemaining).find(([key, value]) => Number(value) >= 1) || [];
+    const timeUnit = timeRemainder === 1 ? unit : unit?.replace(/s$/, '');
+    return { timeUnit, timeRemainder }
 }
