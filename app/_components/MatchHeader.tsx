@@ -14,7 +14,9 @@ import { Match } from "@/types/global.type";
 import LoadingMessage from './LoadingMessage';
 import ErrorMessage from './ErrorMessage';
 import { useMemo } from 'react';
-import { getDateFormat, getTimeFormat } from '../_utils/dateTime';
+import { getDateFormat, getTimeFormat, getTimeRemaining } from '../_utils/dateTime';
+import { MatchTimeRemaining } from "@/types/match.type";
+import { getMatchTeamColors } from "../_utils/colors";
 
 const query = gql`
   query GetMatchByID($id: ID!) {
@@ -58,8 +60,6 @@ const query = gql`
   }
 `;
 
-const getTeamColors = (clubColors: string) => clubColors?.split('/')?.map(color => color.replace(/\s+/ig, '').toLowerCase() || []);
-
 const MatchHeader = () => {
   const { id } = useParams<{ id: string }>();
   const links = getHeaderLinks({ path: 'match', id, links: MATCH_LINKS });
@@ -69,11 +69,11 @@ const MatchHeader = () => {
   });
   const time = useMemo(() => getTimeFormat(data?.match?.utcDate || ''), [data]);
   const date = useMemo(() => getDateFormat(data?.match?.utcDate || ''), [data]);
-  const [timeMeasurement, remainingTime] = useMemo(() => data ? Object.entries(data.match.timeRemaining).find(([key, value]) => Number(value) >= 1) || [] : [], [data]);
+  const { timeUnit, timeRemainder } = useMemo(() => getTimeRemaining(data?.match.timeRemaining), [data]);
 
   const colors = useMemo(() => ({
-    homeTeam: data ? getTeamColors(data.match.homeTeam.clubColors) : [],
-    awayTeam: data ? getTeamColors(data.match.awayTeam.clubColors) : []
+    homeTeam: data ? getMatchTeamColors(data.match.homeTeam.clubColors) : [],
+    awayTeam: data ? getMatchTeamColors(data.match.awayTeam.clubColors) : []
   }), [data]);
 
   if (loading) return <LoadingMessage />;
@@ -132,7 +132,7 @@ const MatchHeader = () => {
                 null :
                 <p className="text-sm text-secondary-600">
                   <span>Starts in </span>
-                  <span className="capitalize">{remainingTime} {Number(remainingTime) > 1 ? timeMeasurement : timeMeasurement?.replace(/s$/, '')}</span>
+                  <span className="capitalize">{`${timeRemainder} ${timeUnit}`}</span>
                 </p>
           }
         </div>
