@@ -33,7 +33,7 @@ function DateAndStatusFilter({ setDate, setMatchStatus }: { setDate?: Dispatch<S
                 <span className="close-icon"><MdKeyboardArrowLeft size={15} /></span>
                 <span className="open-icon"><MdKeyboardArrowRight size={15} /></span>
             </button>
-            <div className="flex-1 relative overflow-clip">
+            <div className="status-dates flex-1 relative overflow-clip">
                 <ul className="dates flex items-center justify-evenly gap-3 transition-[transform,opacity]">
                     {
                         DATES.map(({ date, value }, index) => (

@@ -28,11 +28,11 @@ body {
   @apply hidden
 }
 
-.status-date-filter .status-btn:focus+.status-date-filter .dates {
+.status-date-filter .status-btn:focus+.status-dates .dates {
   @apply translate-x-[100%] opacity-0;
 }
 
-.status-date-filter .status-btn:focus+.status-date-filter .status {
+.status-date-filter .status-btn:focus+.status-dates .status {
   @apply translate-x-[0] opacity-100;
 }
 
