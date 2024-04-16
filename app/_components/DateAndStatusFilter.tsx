@@ -20,8 +20,6 @@ function DateAndStatusFilter({ setDate, setMatchStatus }: { setDate?: Dispatch<S
 
     const statusValue = useMemo(() => MATCH_STATUS[status], [status]);
 
-    const [showStatus, setShowStatus] = useState(false);
-
     useEffect(() => { 
         if (!setDate || !setMatchStatus) return;
         setDate(dateFilter);
@@ -29,13 +27,14 @@ function DateAndStatusFilter({ setDate, setMatchStatus }: { setDate?: Dispatch<S
     }, [statusValue, dateFilter]);
 
     return (
-        <div className='border border-secondary-900/50 mt-2 py-2 px-3 flex justify-between items-center gap-3'>
-            <button onClick={() => setShowStatus( prev => !prev )} className='py-[2px] px-2 pr-0 uppercase flex items-center justify-center rounded-[5px] bg-secondary-500 text-sm text-black-900 font-bold'>
+        <div className='status-date-filter border border-secondary-900/50 mt-2 py-2 px-3 flex justify-between items-center gap-3'>
+            <button className='status-btn py-[2px] px-2 pr-0 uppercase flex items-center justify-center rounded-[5px] bg-secondary-500 text-sm text-black-900 font-bold'>
                 <span>{status}</span>
-                { showStatus ? <MdKeyboardArrowLeft /> : <MdKeyboardArrowRight /> }
+                <span className="close-icon"><MdKeyboardArrowLeft size={15} /></span>
+                <span className="open-icon"><MdKeyboardArrowRight size={15} /></span>
             </button>
             <div className="flex-1 relative overflow-clip">
-                <ul className={`w-full flex items-center justify-evenly gap-3 transition-[transform,opacity] ${showStatus && 'translate-x-[100%] opacity-0'}`}>
+                <ul className="dates flex items-center justify-evenly gap-3 transition-[transform,opacity]">
                     {
                         DATES.map(({ date, value }, index) => (
                             <li key={index}>
@@ -47,7 +46,7 @@ function DateAndStatusFilter({ setDate, setMatchStatus }: { setDate?: Dispatch<S
                         ))
                     }
                 </ul>
-                <ul className={`absolute top-0 left-0 w-full h-full flex items-center justify-start gap-3 transition-[transform,opacity] ${!showStatus && 'translate-x-[-100%] opacity-0'}`}>
+                <ul className="status absolute top-0 left-0 w-full h-full flex items-center justify-start gap-3 transition-[transform,opacity] translate-x-[-100%] opacity-0">
                     {
                         Object.keys(MATCH_STATUS)
                             .filter((title) => title !== status)
