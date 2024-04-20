@@ -48,11 +48,11 @@ const Leftbar = () => {
           <h2 className="font-bold text-white-300">Top Leagues</h2>
           <Link href="/competitions" className="text-xs text-secondary-700 hover:text-secondary-500">More</Link>
         </div>
-        <ul className="flex flex-col gap-2">
+        <ul className="flex flex-col rounded-md border border-secondary-900/50">
           {
             data.topCompetitions.slice(0, 6).map((competition) => (
               <li key={competition._id}>
-                <Link href={`/competition/${competition._id}`} className="flex items-center justify-between py-1 px-2 gap-3 hover:bg-black-900/50">
+                <Link href={`/competition/${competition._id}`} className="flex items-center justify-between py-2 px-3 gap-3 border-b border-secondary-900/50 last:boder-none hover:bg-secondary-900/50">
                   <Image src={competition.emblem || String(process.env.NEXT_IMAGE_URL)} width={25} height={25} alt={competition.name} className="aspect-square object-contain" />
                   {competition.recentMatches.hasLiveMatch ? <span className="mr-[-5px] bg-highlight-500 text-xs w-[3px] h-[10px] rounded-md"></span> : null}
                   <span className={`text-sm font-semibold flex-1 ${competition.recentMatches.hasLiveMatch ? 'text-highlight-500' : 'text-secondary-600'}`}>{competition.name}</span>
@@ -70,11 +70,11 @@ const Leftbar = () => {
           <h2 className="font-bold text-white-300">Top Teams</h2>
           <span className="text-xs text-secondary-700 hover:text-secondary-500">More</span>
         </div>
-        <ul className="flex flex-col gap-2">
+        <ul className="flex flex-col border border-secondary-900/50">
           {
             data.teams.teams.map((team) => (
               <li key={team._id}>
-                <Link href={`/team/${team._id}`} className="flex items-center justify-between py-1 px-2 gap-3 hover:bg-black-900/50">
+                <Link href={`/team/${team._id}`} className="flex items-center justify-between py-2 px-3 gap-3 hover:bg-secondary-900/50 border-b border-secondary-900/50 last:border-none">
                   <Image src={team.crest || String(process.env.NEXT_IMAGE_URL)} width={25} height={25} alt={team.name} className="aspect-square object-contain" />
                   <span className="text-sm font-semibold text-secondary-600 flex-1">{team.name}</span>
                   {team.hasOngoingMatch ? <span className="w-2 h-2 aspect-square rounded-full bg-secondary-500" /> : null}
