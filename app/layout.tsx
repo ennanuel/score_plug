@@ -32,11 +32,15 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <body className={inter.className}>
           <Header />
           <div className="grid grid-cols-4">
-            <Leftbar />
-            <div className="col-span-2 p-4">
+            <section>
+              <Leftbar />
+            </section>
+            <section className="col-span-2 p-4">
               {pageBody}
-            </div>
-            <Rightbar />
+            </section>
+            <section>
+              <Rightbar />
+            </section>
           </div>
           <Footer />
         </body>

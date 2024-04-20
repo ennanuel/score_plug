@@ -52,24 +52,22 @@ function Home() {
   else if (!data) return <div>Nothing was found</div>;
 
   return (
-    <main className="border border-secondary-900/50 bg-primary-600 flex flex-col gap-4">
-      <div className="p-3">
-        <div className="flex items-center justify-between px-3">
-          <h2 className="font-bold">Today's Matches</h2>
-          <MdStar />
-        </div>
-          <div className="mt-2 flex items-center justify-stretch h-[30px] gap-2 text-sm">
-            <button onClick={showAllMatches} className={`relative flex justify-center items-center gap-2 h-full px-3 rounded-sm font-semibold ${status === "" ? 'text-orange-300 bg-orange-400/20': 'bg-black-900/50 text-orange-700'}`}>
-              {status === "" && <span className="block w-1 h-4 rounded-md bg-orange-300"></span>}
-              <span>All</span>
-            </button>
-            <button onClick={showLiveMatches} className={`relative flex justify-center items-center gap-2 h-full px-3 rounded-sm font-semibold ${status === "IN_PLAY" ? ' text-green-300 bg-green-400/20': 'bg-black-900/50 text-green-700'}`}>            
-              {status === "IN_PLAY" && <span className="block w-2 h-4 rounded-md bg-green-600"></span>}
-              <span>Live</span>
-            </button>
-          </div>
+    <main className="border border-secondary-900/50 bg-primary-600">
+      <div className="flex items-center justify-between px-3">
+        <h2 className="font-bold">Today's Matches</h2>
+        <MdStar />
       </div>
-      <ul className="flex flex-col">
+      <div className="mt-6 flex items-center justify-stretch h-[30px] gap-2 text-sm">
+        <button onClick={showAllMatches} className={`relative flex justify-center items-center gap-2 h-full px-3 rounded-sm font-semibold ${status === "" ? 'text-orange-300 bg-orange-400/20': 'border border-orange-700/50 text-orange-700'}`}>
+          {status === "" && <span className="block w-1 h-4 rounded-md bg-orange-300"></span>}
+          <span>All</span>
+        </button>
+        <button onClick={showLiveMatches} className={`relative flex justify-center items-center gap-2 h-full px-3 rounded-sm font-semibold ${status === "IN_PLAY" ? ' text-green-300 bg-green-400/20': 'border border-green-700/50 text-green-700'}`}>            
+          {status === "IN_PLAY" && <span className="block w-1 h-4 rounded-md bg-green-600"></span>}
+          <span>Live</span>
+        </button>
+      </div>
+      <ul className="flex flex-col mt-2">
           {
             data?.activeCompetitions.map((competition, index) => <li key={index}><CompetitionWithMatches {...competition} /></li>)
           }
