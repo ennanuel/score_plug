@@ -27,11 +27,11 @@ function DateAndStatusFilter({ setDate, setMatchStatus }: { setDate?: Dispatch<S
     }, [statusValue, dateFilter]);
 
     return (
-        <div className='status-date-filter border border-secondary-900/50 mt-2 py-2 px-3 flex justify-between items-center gap-3'>
-            <button className='status-btn py-[2px] px-2 pr-0 uppercase flex items-center justify-center rounded-[5px] bg-secondary-500 text-sm text-black-900 font-bold'>
+        <div className='status-date-filter border border-secondary-900/50 mt-2 py-2 px-3 flex justify-between items-stretch gap-3'>
+            <button className='status-btn border-r border-secondary-900/50 py-[2px] px-2 pr-1 uppercase flex items-center justify-center rounded-[5px] gap-2 text-sm text-secondary-500 font-bold'>
                 <span>{status}</span>
-                <span className="close-icon"><MdKeyboardArrowLeft size={15} /></span>
-                <span className="open-icon"><MdKeyboardArrowRight size={15} /></span>
+                <span className="close-icon"><MdKeyboardArrowLeft size={20} /></span>
+                <span className="open-icon"><MdKeyboardArrowRight size={20} /></span>
             </button>
             <div className="status-dates flex-1 relative overflow-clip">
                 <ul className="dates flex items-center justify-evenly gap-3 transition-[transform,opacity]">
@@ -52,7 +52,7 @@ function DateAndStatusFilter({ setDate, setMatchStatus }: { setDate?: Dispatch<S
                             .filter((title) => title !== status)
                             .map((title) => (
                                 <li key={title}>
-                                    <button onClick={() => setStatus((title as keyof typeof MATCH_STATUS))} className="py-1 px-3 flex rounded-[5px] bg-secondary-900/50 text-sm text-white-600 font-semibold">
+                                    <button onClick={() => setStatus((title as keyof typeof MATCH_STATUS))} className="capitalize py-3 px-4 flex rounded-sm bg-secondary-900/50 text-sm text-white-600 font-semibold">
                                         <span>{title}</span>
                                     </button>
                                 </li>
