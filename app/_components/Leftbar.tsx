@@ -53,14 +53,10 @@ const Leftbar = () => {
             data.topCompetitions.slice(0, 6).map((competition) => (
               <li key={competition._id}>
                 <Link href={`/competition/${competition._id}`} className="flex items-center justify-between py-1 px-2 gap-3 hover:bg-black-900/50">
-                  <div className="flex items-center gap-2">
-                    <Image src={competition.emblem || String(process.env.NEXT_IMAGE_URL)} width={25} height={25} alt={competition.name} className="aspect-square object-contain" />
-                    <span className={`text-sm ${competition.recentMatches.hasLiveMatch ? 'text-highlight-600' : 'text-secondary-600'}`}>{competition.name}</span>
-                  </div>
-                  <div className="flex flex-col justify-center">
-                    <span className="text-secondary-700 text-sm font-bold">{competition.area.name}</span>
-                    {competition.recentMatches.hasLiveMatch ? <span className="bg-highlight-500 text-xs w-2 h-2 rounded-full"></span> : null}
-                  </div>
+                  <Image src={competition.emblem || String(process.env.NEXT_IMAGE_URL)} width={25} height={25} alt={competition.name} className="aspect-square object-contain" />
+                  {competition.recentMatches.hasLiveMatch ? <span className="mr-[-5px] bg-highlight-500 text-xs w-[3px] h-[10px] rounded-md"></span> : null}
+                  <span className={`text-sm font-semibold flex-1 ${competition.recentMatches.hasLiveMatch ? 'text-highlight-500' : 'text-secondary-600'}`}>{competition.name}</span>
+                  <span className="text-secondary-700 text-xs">{competition.area.name}</span>
                 </Link>
               </li>
             ))
@@ -81,7 +77,7 @@ const Leftbar = () => {
                 <Link href={`/team/${team._id}`} className="flex items-center justify-between py-1 px-2 gap-3 hover:bg-black-900/50">
                   <Image src={team.crest || String(process.env.NEXT_IMAGE_URL)} width={25} height={25} alt={team.name} className="aspect-square object-contain" />
                   <span className="text-sm font-semibold text-secondary-600 flex-1">{team.name}</span>
-                  {team.hasOngoingMatch ? <span className="w-2 h-2 aspect-square rounded-full bg-highlight-500" /> : null}
+                  {team.hasOngoingMatch ? <span className="w-2 h-2 aspect-square rounded-full bg-secondary-500" /> : null}
                 </Link>
               </li>
             ))
