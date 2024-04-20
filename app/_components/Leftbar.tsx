@@ -9,7 +9,7 @@ import ErrorMessage from "./ErrorMessage";
 import { Competition, Team } from "@/types/global.type";
 
 const QUERY = gql`
-  query GetTopCompetitionsAndTeams($limit: Number) {
+  query GetTopCompetitionsAndTeams {
     topCompetitions {
       _id
       name
@@ -23,7 +23,7 @@ const QUERY = gql`
       }
     }
 
-    teams(limit: $limit) {
+    teams(limit: 10) {
       teams {
         _id
         name
@@ -35,7 +35,7 @@ const QUERY = gql`
 `
 
 const Leftbar = () => {
-  const { loading, error, data } = useQuery<{ topCompetitions: Competition[], teams: { teams: Team[] } }>(QUERY, { variables: { limit: 10 } });
+  const { loading, error, data } = useQuery<{ topCompetitions: Competition[], teams: { teams: Team[] } }>(QUERY);
 
   if (loading) return <LoadingMessage />;
   else if (error) return <ErrorMessage />;
