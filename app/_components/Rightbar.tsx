@@ -114,10 +114,10 @@ const Rightbar = () => {
   return (
     <div className="sticky top-[50px] col-span-1 p-4 flex flex-col gap-6">
     <div className="border border-secondary-900/50 p-3">
-        <h2 className="font-bold text-white-300 mb-2">Featured Match</h2>
+        <h2 className="font-bold text-white-300 mb-4">Featured Match</h2>
         {
           data?.matches?.matches?.map((match) => (
-            <div key={match._id} className="flex flex-col gap-4">
+            <div key={match._id} className="flex flex-col gap-2">
               <div className="grid grid-cols-3 border border-secondary-900/50 py-2 px-4 rounded-md gap-2 shadow-lg">
                 <span className="col-span-3 text-highlight-300 text-xs flex items-center gap-1">
                   <div className="w-[4px] aspect-square rounded-full bg-highlight-300" />
@@ -170,11 +170,11 @@ const Rightbar = () => {
     </div>
 
       <div className="border border-secondary-900/50 p-3">
-        <h2 className="font-bold text-white-300 mb-2">Featured Prediction</h2>
+        <h2 className="font-bold text-white-300 mb-4">Featured Prediction</h2>
         {
           data?.matchPredictions?.matches?.map((match) => (
-            <div className="flex flex-col gap-4">
-              <div key={match._id} className="grid grid-cols-3 border border-secondary-900/50 py-2 rounded-md gap-2 shadow-lg">
+            <div className="flex flex-col gap-2">
+              <div key={match._id} className="grid grid-cols-3 border border-secondary-900/50 p-2 rounded-md gap-2 shadow-lg">
                 <div className="col-span-3 text-highlight-300 text-xs flex items-center gap-1 font-semibold">
                   <div className="w-[4px] h-full rounded-lg bg-highlight-300" />
                   <span>{match.competition.name}</span>
