@@ -40,7 +40,7 @@ const Leftbar = () => {
   if (loading) return <LoadingMessage />;
   else if (error) return <ErrorMessage />;
   else if (!data) return <div>Nothing was found!</div>;
-;
+
   return (
     <div className="col-span-1 p-4 flex flex-col gap-6">
       <div className="border border-secondary-900/50 p-3">
