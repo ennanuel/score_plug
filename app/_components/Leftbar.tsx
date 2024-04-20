@@ -1,4 +1,5 @@
-import { MdMenu } from "react-icons/md";
+"use client";
+
 import { gql, useQuery } from "@apollo/client";
 import { Competition, Team } from "@/types/global.type";
 import { LoadingMessage, ErrorMessage } from "./";
