@@ -11,3 +11,5 @@ export function getTeamStandingStatus({ teamStanding, topPositions, midPositions
                 'LOW_TEAM' :
                 '';
 }
+
+export const loadImage = ({ src }: { src: string }) => src;
