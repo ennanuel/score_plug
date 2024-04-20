@@ -51,7 +51,7 @@ function DateAndStatusFilter({ setDate, setMatchStatus }: { setDate?: Dispatch<S
                             .filter((title) => title !== status)
                             .map((title) => (
                                 <li key={title}>
-                                    <button onClick={() => setStatus((title as keyof typeof MATCH_STATUS))} className="capitalize py-3 px-4 flex rounded-sm bg-secondary-900/50 text-sm text-white-600 font-semibold">
+                                    <button onClick={() => setStatus((title as keyof typeof MATCH_STATUS))} className="capitalize border border-secondary-900/50 py-3 px-4 flex rounded-sm hover:bg-secondary-900/50 hover:text-secondary-500 text-sm text-white-600 font-semibold">
                                         <span>{title}</span>
                                     </button>
                                 </li>
