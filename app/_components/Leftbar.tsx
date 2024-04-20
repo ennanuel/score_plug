@@ -7,6 +7,7 @@ import LoadingMessage from "./LoadingMessage";
 import ErrorMessage from "./ErrorMessage";
 
 import { Competition, Team } from "@/types/global.type";
+import { loadImage } from "../_utils/competition";
 
 const QUERY = gql`
   query GetTopCompetitionsAndTeams {
@@ -37,8 +38,6 @@ const QUERY = gql`
 const Leftbar = () => {
   const { loading, error, data } = useQuery<{ topCompetitions: Competition[], teams: { teams: Team[] } }>(QUERY);
 
-  const loaderFunc = ({ src }: { src: string }) => src;
-
   if (loading) return <LoadingMessage />;
   else if (error) return <ErrorMessage />;
   else if (!data) return <div>Nothing was found!</div>;
@@ -55,7 +54,7 @@ const Leftbar = () => {
             data.topCompetitions.slice(0, 6).map((competition) => (
               <li key={competition._id} className="border-b border-secondary-900/50 last:border-none">
                 <Link href={`/competition/${competition._id}`} className="flex items-center justify-between py-2 px-3 gap-3">
-                  <Image loader={loaderFunc} src={competition.emblem || String(process.env.NEXT_IMAGE_URL)} width={25} height={25} alt={competition.name} className="aspect-square object-contain" />
+                  <Image loader={loadImage} src={competition.emblem || String(process.env.NEXT_IMAGE_URL)} width={25} height={25} alt={competition.name} className="aspect-square object-contain" />
                   {competition.recentMatches.hasLiveMatch ? <span className="mr-[-5px] bg-highlight-500 text-xs w-[3px] h-[10px] rounded-md"></span> : null}
                   <span className={`text-sm font-semibold flex-1 ${competition.recentMatches.hasLiveMatch ? 'text-highlight-500' : 'text-secondary-600'}`}>{competition.name}</span>
                   <span className="text-secondary-700 text-xs">{competition.area.name}</span>

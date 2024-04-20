@@ -12,6 +12,7 @@ import LoadingMessage from "./LoadingMessage";
 import ErrorMessage from "./ErrorMessage";
 
 import { Competition } from "@/types/global.type";
+import { loadImage } from "../_utils/competition";
 
 const QUERY = gql`
   query GetCompetition($id: ID!) {
@@ -43,7 +44,7 @@ const CompetitionHeader = () => {
         <button className="h-8 aspect-square rounded-full hover:bg-secondary-400/10">
           <MdKeyboardArrowLeft size={20} />
         </button>
-        <Image src={data.competition.emblem || String(process.env.NEXT_IMAGE_URL)} alt="Competition Emblem" width={60} className="aspect-square object-contain" />
+        <Image src={data.competition.emblem || String(process.env.NEXT_IMAGE_URL)} loader={loadImage} alt="Competition Emblem" width={60} className="aspect-square object-contain" />
         <div className="flex-1 flex-col">
           <p className="font-bold">{data.competition.name}</p>
           <p className="text-sm text-secondary-600">{data.competition.area.name}</p>
