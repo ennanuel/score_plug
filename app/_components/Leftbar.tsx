@@ -37,6 +37,8 @@ const QUERY = gql`
 const Leftbar = () => {
   const { loading, error, data } = useQuery<{ topCompetitions: Competition[], teams: { teams: Team[] } }>(QUERY);
 
+  const loaderFunc = ({ src }: { src: string }) => src;
+
   if (loading) return <LoadingMessage />;
   else if (error) return <ErrorMessage />;
   else if (!data) return <div>Nothing was found!</div>;
@@ -48,12 +50,12 @@ const Leftbar = () => {
           <h2 className="font-bold text-white-300">Top Leagues</h2>
           <Link href="/competitions" className="text-xs text-secondary-700 hover:text-secondary-500">More</Link>
         </div>
-        <ul className="flex mt-4 flex-col rounded-md border border-secondary-900/50">
+        <ul className="flex mt-4 flex-col rounded-md overflow-hidden border border-secondary-900/50">
           {
             data.topCompetitions.slice(0, 6).map((competition) => (
               <li key={competition._id} className="border-b border-secondary-900/50 last:border-none">
                 <Link href={`/competition/${competition._id}`} className="flex items-center justify-between py-2 px-3 gap-3">
-                  <Image src={competition.emblem || String(process.env.NEXT_IMAGE_URL)} width={25} height={25} alt={competition.name} className="aspect-square object-contain" />
+                  <Image loader={loaderFunc} src={competition.emblem || String(process.env.NEXT_IMAGE_URL)} width={25} height={25} alt={competition.name} className="aspect-square object-contain" />
                   {competition.recentMatches.hasLiveMatch ? <span className="mr-[-5px] bg-highlight-500 text-xs w-[3px] h-[10px] rounded-md"></span> : null}
                   <span className={`text-sm font-semibold flex-1 ${competition.recentMatches.hasLiveMatch ? 'text-highlight-500' : 'text-secondary-600'}`}>{competition.name}</span>
                   <span className="text-secondary-700 text-xs">{competition.area.name}</span>
@@ -70,7 +72,7 @@ const Leftbar = () => {
           <h2 className="font-bold text-white-300">Top Teams</h2>
           <span className="text-xs text-secondary-700 hover:text-secondary-500">More</span>
         </div>
-        <ul className="flex mt-4 flex-col border border-secondary-900/50">
+        <ul className="flex mt-4 flex-col rounded-md overflow-hidden border border-secondary-900/50">
           {
             data.teams.teams.map((team) => (
               <li key={team._id} className="border-b border-secondary-900/50 last:border-nond">
