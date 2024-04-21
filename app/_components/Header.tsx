@@ -29,10 +29,10 @@ const Header = () => {
         <div className="flex-1 opacity-0"></div>
         <div className='overflow-clip flex-[2] flex items-stretch justify-start gap-2 border-x border-secondary-900/50 hover:bg-secondary-900/50'>
           <label htmlFor="search" className="text-white-500 flex items-center justify-center w-[50px] border-r border-secondary-900/50">
-            <MdSearch />
+            <MdSearch size={26} />
           </label>
           <input 
-            className="text-sm flex-1 bg-transparent border-none outline-none text-white-600 focus:text-white-200 pr-2" 
+            className="flex-1 bg-transparent border-none outline-none text-white-600 focus:text-white-200 pr-2" 
             type="text" 
             id="search" 
             placeholder="Barcelona v Chelsea" 
