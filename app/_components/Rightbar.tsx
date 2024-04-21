@@ -174,31 +174,31 @@ const Rightbar = () => {
         {
           data?.matchPredictions?.matches?.map((match) => (
             <div className="flex flex-col gap-2">
-              <div key={match._id} className="grid grid-cols-3 border border-secondary-900/50 p-2 rounded-md gap-2 shadow-lg">
-                <div className="col-span-3 text-highlight-300 text-xs flex items-center gap-1 font-semibold">
+              <div key={match._id} className="grid grid-cols-3 border border-secondary-900/50 rounded-md shadow-lg">
+                <div className="col-span-3 border-b border-secondary-900/50 p-2 px-3 text-highlight-300 text-xs flex items-center gap-1 font-semibold">
                   <div className="w-[4px] h-full rounded-lg bg-highlight-300" />
                   <span>{match.competition.name}</span>
                 </div>
-                <div className="flex flex-col justify-between ai-center gap-2">
+                <div className="flex flex-col justify-between ai-center gap-2 pl-2">
                   <Image src={match.homeTeam.crest || String(process.env.NEXT_IMAGE_URL)} width={60} alt={match.homeTeam.name} className="aspect-square object-contain" />
                   <span className="truncate text-sm w-full font-semibold text-secondary-500">{match.homeTeam.name}</span>
                 </div>
                 {
                   /in_play|paused|finished/i.test(match.status) ? 
-                    <div className="flex flex-col items-center justify-center">
-                      <div className="flex items-center justify-center gap-1 text-4xl font-bold text-highlight-400">
+                    <div className="flex flex-col items-stretch justify-stretch p-2 border-x border-secondary-900/50">
+                      <div className="flex items-center justify-center gap-1 text-4xl font-bold text-highlight-400 border-b border-secondary-900/50">
                         <span className="font-bold">{match.score.fullTime.home}</span>
                         <span>-</span>
                         <span className="font-bold">{match.score.fullTime.away}</span>
                       </div>
-                      <span className="text-highlight-500 font-semibold">{/\w/i.test(match.minute) ? match.minute : `${match.minute}'`}</span>
+                      <span className={`${match.minute != 'FT' ? 'text-highlight-500' : 'text-secondary-800'} font-semibold flex items-center justify-center`}>{/\w/i.test(match.minute) ? match.minute : `${match.minute}'`}</span>
                     </div>:
-                    <p className="text-2xl font-bold flex flex-col items-center justify-center">
-                      <span className="text-2xl font-bold">V</span>
-                      <span className="text-sm text-secondary-700">{getTimeFormat(match.utcDate)}</span>
+                    <p className="text-2xl font-bold flex flex-col items-stretch justify-stretch p-2 border-x border-secondary-900/50">
+                      <span className="text-2xl font-bold flex items-center justify-center border-b border-secondary-900/50">V</span>
+                      <span className="text-sm text-secondary-700 flex items-center justify-center">{getTimeFormat(match.utcDate)}</span>
                     </p>
                 }
-                <div className="flex flex-col justify-between ai-center gap-2">
+                <div className="flex flex-col justify-between ai-center gap-2 pr-2">
                   <Image src={match.awayTeam.crest || String(process.env.NEXT_IMAGE_URL)} width={60} alt={match.awayTeam.name} className="aspect-square object-contain" />
                   <span className="truncate text-sm w-full font-semibold text-secondary-500">{match.awayTeam.name}</span>
                 </div>
