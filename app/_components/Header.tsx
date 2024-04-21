@@ -21,14 +21,14 @@ const Header = () => {
 
   return (
     <>
-      <div className="fixed top-0 left-[15px] h-[50px] z-[2] flex-1 font-semibold text-white-100 text-2xl flex items-center justify-start gap-3 transition-transform">
-        <PiPlug size={30} /> 
+      <div className="fixed top-0 left-0 px-3 h-[50px] z-[2] flex-1 font-semibold border-r border-secondary-900/50 bg-primary-900 text-white-100 flex items-center justify-start gap-3">
+        <PiPlug size={25} /> 
         <span>ScorePlug</span>
       </div>
-      <div className="flex items-center gap-4 px-4 h-[50px] bg-primary-500">
+      <div className="flex items-stretch gap-4 px-4 h-[50px] bg-primary-900 border-b border-secondary-900/50">
         <div className="flex-1 opacity-0"></div>
-        <div className='overflow-clip flex-1 h-[35px] flex items-stretch justify-start gap-2 bg-white-100/5 border border-secondary-100/10 hover:border-secondary-100/50 rounded-md'>
-          <label htmlFor="search" className="text-white-500 flex items-center justify-center pl-2">
+        <div className='overflow-clip flex-2 flex items-stretch justify-start gap-2 border-r border-secondary-900/50 hover:bg-secondary-900/50'>
+          <label htmlFor="search" className="text-white-500 flex items-center justify-center w-[50px] border-r border-secondary-900/50">
             <MdSearch />
           </label>
           <input 
@@ -38,21 +38,21 @@ const Header = () => {
             placeholder="Barcelona v Chelsea" 
           />
         </div>
-        <ul className="flex-1 flex items-center justify-end gap-4">
-          <li className="aspect-square rounded-full border border-white-600 hover:bg-white-100/10 flex items-center justify-center p-1">
-            <MdOutlinePerson size={24} />
+        <ul className="flex-1 flex items-stretch justify-end">
+          <li className="w-[50px] border-r border-secondary-900/50 hover:bg-secondary-900/50 flex items-center justify-center">
+            <MdOutlinePerson size={25} />
           </li>
-          <li className="rounded-2xl hover:bg-white-100/10 flex items-center justify-center py-1 px-2">
+          <li className="hover:bg-white-100/10 flex items-center justify-center gap-2 px-2">
             <MdOutlineSettings size={24} />
             <FaAngleDown />
           </li>
         </ul>
       </div>
-      <nav className="sticky z-[1] h-[50px] top-0 border-b px-6 flex border-secondary-900/50 bg-primary-500">
-        <ul className={`flex items-center justify-start gap-3 transition-transform w-fit ${scrolled && "lg:translate-x-[130px]"}`}>
+      <nav className="sticky z-[1] h-[50px] top-0 bg-primary-900">
+        <ul className={`flex items-center justify-start transition-transform w-fit ${scrolled && "lg:translate-x-[130px]"}`}>
           {
             NAV_LINKS.map((navLink, index) => (
-              <li><NavLink key={index} {...navLink} /></li>
+              <li className="border-r first:border-x border-secondary-900/50"><NavLink key={index} {...navLink} /></li>
             ))
           }
         </ul>

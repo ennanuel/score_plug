@@ -27,7 +27,7 @@ function DateAndStatusFilter({ setDate, setMatchStatus }: { setDate?: Dispatch<S
 
     return (
         <div className='status-date-filter border border-secondary-900/50 mt-2 py-2 px-3 flex justify-between items-stretch gap-3'>
-            <button className='status-btn border-r border-secondary-900/50 py-[2px] px-2 pr-1 uppercase flex items-center justify-center rounded-[5px] gap-2 text-sm text-secondary-500 font-bold'>
+            <button className='status-btn border-r border-secondary-900/50 py-[2px] px-2 pr-1 uppercase flex items-center justify-center gap-2 text-sm text-secondary-500 font-bold'>
                 <span>{status}</span>
                 <span className="close-icon"><MdKeyboardArrowLeft size={20} /></span>
                 <span className="open-icon"><MdKeyboardArrowRight size={20} /></span>
@@ -45,13 +45,13 @@ function DateAndStatusFilter({ setDate, setMatchStatus }: { setDate?: Dispatch<S
                         ))
                     }
                 </ul>
-                <ul className="status absolute top-0 left-0 w-full h-full flex items-center justify-start gap-3 transition-[transform,opacity] translate-x-[-100%] opacity-0">
+                <ul className="status absolute top-0 left-0 w-full h-full flex items-center justify-starttransition-[transform,opacity] translate-x-[-100%] opacity-0">
                     {
                         Object.keys(MATCH_STATUS)
                             .filter((title) => title !== status)
                             .map((title) => (
                                 <li key={title}>
-                                    <button onClick={() => setStatus((title as keyof typeof MATCH_STATUS))} className="capitalize border border-secondary-900/50 py-3 px-4 flex rounded-sm hover:bg-secondary-900/50 hover:text-secondary-500 text-sm text-white-600 font-semibold">
+                                    <button onClick={() => setStatus((title as keyof typeof MATCH_STATUS))} className="capitalize border-r border-secondary-900/50 py-3 px-4 flex rounded-sm hover:bg-secondary-900/50 hover:text-secondary-500 text-sm text-white-600 font-semibold">
                                         <span>{title}</span>
                                     </button>
                                 </li>

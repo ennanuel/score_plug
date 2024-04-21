@@ -43,8 +43,8 @@ const Leftbar = () => {
   else if (!data) return <div>Nothing was found!</div>;
 
   return (
-    <div className="col-span-1 sticky top-[50px] p-4 flex flex-col gap-6">
-      <div className="border border-secondary-900/50 p-3">
+    <div className="col-span-1 sticky top-[50px] flex flex-col gap-2">
+      <div className="border-b border-secondary-900/50 p-3">
         <div className="flex justify-between items-center mb-2">
           <h2 className="font-bold text-white-300">Top Leagues</h2>
           <Link href="/competitions" className="text-xs text-secondary-700 hover:text-secondary-500">More</Link>
@@ -66,7 +66,7 @@ const Leftbar = () => {
       </div>
 
       
-      <div className="border border-secondary-900/50 p-3">
+      <div className="border-b border-secondary-900/50 p-3">
         <div className="flex justify-between items-center mb-2">
           <h2 className="font-bold text-white-300">Top Teams</h2>
           <span className="text-xs text-secondary-700 hover:text-secondary-500">More</span>

@@ -112,8 +112,8 @@ const Rightbar = () => {
   else if (!data) return <div className="col-span-1">Nothing to show!</div>;
 
   return (
-    <div className="sticky top-[50px] col-span-1 p-4 flex flex-col gap-6">
-    <div className="border border-secondary-900/50 p-3">
+    <div className="sticky top-[50px] flex flex-col gap-2">
+    <div className="border-b border-secondary-900/50 p-3">
         <h2 className="font-bold text-white-300 mb-4">Featured Match</h2>
         {
           data?.matches?.matches?.map((match) => (
@@ -169,7 +169,7 @@ const Rightbar = () => {
         }
     </div>
 
-      <div className="border border-secondary-900/50 p-3">
+      <div className="border-b border-secondary-900/50 p-3">
         <h2 className="font-bold text-white-300 mb-4">Featured Prediction</h2>
         {
           data?.matchPredictions?.matches?.map((match) => (

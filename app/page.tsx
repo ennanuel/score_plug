@@ -52,12 +52,12 @@ function Home() {
   else if (!data) return <div>Nothing was found</div>;
 
   return (
-    <main className="py-4 border border-secondary-900/50 bg-primary-600">
-      <div className="flex items-center justify-between px-3">
+    <main className="py-4 border-x border-secondary-900/50 bg-primary-600">
+      <div className="flex items-center justify-between px-6 mt-4">
         <h2 className="font-bold">Today's Matches</h2>
         <MdStar />
       </div>
-      <div className="mt-6 px-4 py-2 border-t border-secondary-900/50 flex items-center justify-stretch gap-2 text-sm">
+      <div className="mt-4 px-4 py-2 border-t border-secondary-900/50 flex items-center justify-stretch gap-2 text-sm">
         <button onClick={showAllMatches} className={`relative h-[30px] flex justify-center items-center gap-2 px-3 rounded-sm font-semibold ${status === "" ? 'text-orange-300 bg-orange-400/20': 'border border-orange-700/50 text-orange-700'}`}>
           {status === "" && <span className="block w-1 h-4 rounded-md bg-orange-300"></span>}
           <span>All</span>
