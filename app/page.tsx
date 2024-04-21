@@ -62,7 +62,7 @@ function Home() {
           {status === "" && <span className="block w-1 h-4 rounded-md bg-orange-300"></span>}
           <span>All</span>
         </button>
-        <button onClick={showLiveMatches} className={`flex justify-center items-center gap-2 px-4 min-w-[120px] font-semibold ${status === "IN_PLAY" ? 'border-r border-secondary-900/50 text-green-300 bg-green-400/20': ' text-green-700'}`}>            
+        <button onClick={showLiveMatches} className={`flex justify-center items-center gap-2 px-4 min-w-[120px] font-semibold ${status === "IN_PLAY" ? 'border-r border-secondary-900/50 text-green-300 bg-green-400/20': 'border-r border-secondary-900/50 text-green-700'}`}>            
           {status === "IN_PLAY" && <span className="block w-1 h-4 rounded-md bg-green-600"></span>}
           <span>Live</span>
         </button>
