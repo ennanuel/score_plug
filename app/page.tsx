@@ -58,11 +58,11 @@ function Home() {
         <MdStar />
       </div>
       <div className="mt-4 h-[50px] border-t border-secondary-900/50 flex items-stretch justify-stretch text-sm">
-        <button onClick={showAllMatches} className={`flex justify-center items-center gap-2 px-4 min-w-[120px] font-semibold border-r border-secondary-900/50 ${status === "" ? 'text-orange-300 bg-orange-400/20': ' text-orange-700'}`}>
+        <button onClick={showAllMatches} className={`flex justify-center items-center gap-2 px-4 min-w-[120px] font-semibold ${status === "" ? 'text-orange-300 bg-orange-400/20': 'border-r border-secondary-900/50 text-orange-700'}`}>
           {status === "" && <span className="block w-1 h-4 rounded-md bg-orange-300"></span>}
           <span>All</span>
         </button>
-        <button onClick={showLiveMatches} className={`flex justify-center items-center gap-2 px-4 min-w-[120px] font-semibold border-r border-secondary-900/50 ${status === "IN_PLAY" ? ' text-green-300 bg-green-400/20': 'text-green-700'}`}>            
+        <button onClick={showLiveMatches} className={`flex justify-center items-center gap-2 px-4 min-w-[120px] font-semibold ${status === "IN_PLAY" ? 'border-r border-secondary-900/50 text-green-300 bg-green-400/20': ' text-green-700'}`}>            
           {status === "IN_PLAY" && <span className="block w-1 h-4 rounded-md bg-green-600"></span>}
           <span>Live</span>
         </button>
