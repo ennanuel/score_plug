@@ -52,7 +52,7 @@ function Home() {
   else if (!data) return <div>Nothing was found</div>;
 
   return (
-    <main className="py-4 border-x border-secondary-900/50 bg-primary-600">
+    <main className="py-4 bg-primary-600">
       <div className="flex items-center justify-between px-6 mt-4">
         <h2 className="font-bold">Today's Matches</h2>
         <MdStar />
