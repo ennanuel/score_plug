@@ -49,7 +49,7 @@ const Header = () => {
         </ul>
       </div>
       <nav className="sticky z-[1] h-[50px] top-0 border-b border-secondary-900/50 bg-primary-900">
-        <ul className={`flex items-center justify-start transition-transform w-fit ${scrolled && "lg:translate-x-[170px]"}`}>
+        <ul className={`flex items-center justify-start transition-transform w-fit ${scrolled && "lg:translate-x-[160px]"}`}>
           {
             NAV_LINKS.map((navLink, index) => (
               <li className="border-r first:border-x border-secondary-900/50"><NavLink key={index} {...navLink} /></li>
