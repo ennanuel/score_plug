@@ -1,3 +1,5 @@
+"use client";
+
 import { Competition } from '@/types/global.type';
 import Link from 'next/link';
 import Image from "next/image";
