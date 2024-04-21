@@ -179,7 +179,7 @@ const Rightbar = () => {
                   <div className="w-[4px] h-full rounded-lg bg-highlight-300" />
                   <span>{match.competition.name}</span>
                 </div>
-                <div className="flex flex-col justify-between ai-center gap-2 p-2">
+                <div className="flex flex-col justify-between items-center gap-2 p-2">
                   <Image src={match.homeTeam.crest || String(process.env.NEXT_IMAGE_URL)} width={60} alt={match.homeTeam.name} className="aspect-square object-contain" />
                   <span className="truncate text-sm w-full font-semibold text-secondary-500">{match.homeTeam.name}</span>
                 </div>
@@ -191,14 +191,14 @@ const Rightbar = () => {
                         <span>-</span>
                         <span className="font-bold">{match.score.fullTime.away}</span>
                       </div>
-                      <span className={`${match.minute != 'FT' ? 'text-highlight-500' : 'text-secondary-800'} font-semibold flex items-center justify-center`}>{/\w/i.test(match.minute) ? match.minute : `${match.minute}'`}</span>
+                      <span className={`${match.minute != 'FT' ? 'text-highlight-500' : 'text-secondary-800'} font-semibold flex-1 flex items-center justify-center`}>{/\w/i.test(match.minute) ? match.minute : `${match.minute}'`}</span>
                     </div>:
-                    <p className="text-2xl font-bold flex-1 flex flex-col items-stretch justify-stretch p-2 border-x border-secondary-900/50">
-                      <span className="text-2xl font-bold flex items-center justify-center border-b border-secondary-900/50">V</span>
-                      <span className="text-sm text-secondary-700 flex items-center justify-center">{getTimeFormat(match.utcDate)}</span>
+                    <p className="text-2xl font-bold flex flex-col p-2 border-x border-secondary-900/50">
+                      <span className="text-2xl font-bold flex-1 flex items-center justify-center border-b border-secondary-900/50">V</span>
+                      <span className="text-sm text-secondary-700 flex-1 flex items-center justify-center">{getTimeFormat(match.utcDate)}</span>
                     </p>
                 }
-                <div className="flex flex-col justify-between ai-center gap-2 p-2">
+                <div className="flex flex-col justify-between items-center gap-2 p-2">
                   <Image src={match.awayTeam.crest || String(process.env.NEXT_IMAGE_URL)} width={60} alt={match.awayTeam.name} className="aspect-square object-contain" />
                   <span className="truncate text-sm w-full font-semibold text-secondary-500">{match.awayTeam.name}</span>
                 </div>
