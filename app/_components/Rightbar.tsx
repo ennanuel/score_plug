@@ -186,7 +186,7 @@ const Rightbar = () => {
                 {
                   /in_play|paused|finished/i.test(match.status) ? 
                     <div className="flex flex-col border-x border-secondary-900/50">
-                      <div className="flex flex-1 items-center justify-center gap-1 text-[2.2rem] font-bold text-highlight-400 border-b border-secondary-900/50">
+                      <div className="flex flex-1 items-center justify-center gap-1 text-[1.5rem] font-bold text-highlight-400 border-b border-secondary-900/50">
                         <span className="font-bold">{match.score.fullTime.home}</span>
                         <span>-</span>
                         <span className="font-bold">{match.score.fullTime.away}</span>
