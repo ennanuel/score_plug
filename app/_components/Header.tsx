@@ -27,7 +27,7 @@ const Header = () => {
       </div>
       <div className="flex items-stretch gap-4 px-4 h-[50px] bg-primary-900 border-b border-secondary-900/50">
         <div className="flex-1 opacity-0"></div>
-        <div className='overflow-clip flex-2 flex items-stretch justify-start gap-2 border-x border-secondary-900/50 hover:bg-secondary-900/50'>
+        <div className='overflow-clip flex-[2] flex items-stretch justify-start gap-2 border-x border-secondary-900/50 hover:bg-secondary-900/50'>
           <label htmlFor="search" className="text-white-500 flex items-center justify-center w-[50px] border-r border-secondary-900/50">
             <MdSearch />
           </label>
