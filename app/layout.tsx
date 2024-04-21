@@ -35,7 +35,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <section>
               <Leftbar />
             </section>
-            <section className="col-span-2">
+            <section className="col-span-2 border-x border-secondary-900/50">
               {pageBody}
             </section>
             <section>
