@@ -26,13 +26,13 @@ function DateAndStatusFilter({ setDate, setMatchStatus }: { setDate?: Dispatch<S
     }, [statusValue, dateFilter]);
 
     return (
-        <div className='status-date-filter border border-secondary-900/50 mt-2 py-2 px-3 flex justify-between items-stretch gap-3'>
+        <div className='status-date-filter border border-secondary-900/50 mt-2 py-2 px-3 flex justify-between items-stretch'>
             <button className='status-btn border-r border-secondary-900/50 py-[2px] px-2 pr-1 uppercase flex items-center justify-center gap-2 text-sm text-secondary-500 font-bold'>
                 <span>{status}</span>
                 <span className="close-icon"><MdKeyboardArrowLeft size={20} /></span>
                 <span className="open-icon"><MdKeyboardArrowRight size={20} /></span>
             </button>
-            <div className="status-dates flex-1 relative overflow-clip">
+            <div className="status-dates flex-1 relative overflow-clip pl-3">
                 <ul className="dates flex items-center justify-evenly gap-3 transition-[transform,opacity]">
                     {
                         DATES.map(({ date, value }, index) => (
