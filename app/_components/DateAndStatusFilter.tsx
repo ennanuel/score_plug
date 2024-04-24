@@ -15,7 +15,7 @@ const DATES = getMatchDates();
 
 function DateAndStatusFilter({ setDate, setMatchStatus }: { setDate?: Dispatch<SetStateAction<string>>; setMatchStatus?: Dispatch<SetStateAction<string>>; }) {
     const [status, setStatus] = useState<keyof typeof MATCH_STATUS>("all");
-    const [dateFilter, setDateFilter] = useState((new Date()).toDateString());
+    const [dateFilter, setDateFilter] = useState((new Date()).toLocaleDateString());
 
     const statusValue = useMemo(() => MATCH_STATUS[status], [status]);
 
