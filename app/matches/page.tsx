@@ -2,38 +2,38 @@
 
 import { Match } from '@/types/global.type';
 import { DateAndStatusFilter, ErrorMessage, LoadingMessage, MatchesContainer } from '../_components';
-import { Suspense, useState } from 'react';
+import { useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { MdStarOutline } from 'react-icons/md';
 
 const QUERY = gql`
-  query GetMatches($status: String, $from: String) {
-    matches(status: $status, from: $from) {
-        totalPages
-        matches {
-            _id
-            status
-            utcDate
-            minute
+    query GetMatches($status: String, $from: String) {
+        matches(status: $status, from: $from) {
+            totalPages
+            matches {
+                _id
+                status
+                utcDate
+                minute
 
-            homeTeam {
-                name
-                crest
-            }
+                homeTeam {
+                    name
+                    crest
+                }
 
-            awayTeam {
-                name 
-                crest
-            }
-            score {
-                fullTime {
-                    home
-                    away
+                awayTeam {
+                    name 
+                    crest
+                }
+                score {
+                    fullTime {
+                        home
+                        away
+                    }
                 }
             }
         }
     }
-  }
 `;
 
 
@@ -42,7 +42,8 @@ function Matches() {
     const [date, setDate] = useState("");
 
     const { loading, error, data } = useQuery<{ matches: { matches: Match[], totalPages: number } }>(QUERY, {
-        variables: { status, from: date }
+        variables: { status, from: date },
+        fetchPolicy: 'no-cache'
     });
 
     if (loading) return <LoadingMessage />;
