@@ -8,7 +8,7 @@ import { MdStarOutline } from 'react-icons/md';
 
 const QUERY = gql`
     query GetMatches($status: String, $from: String) {
-        matches(status: $status, from: $from) {
+        matches(status: $status, from: $from, limit: 100) {
             totalPages
             matches {
                 _id
