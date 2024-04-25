@@ -21,6 +21,7 @@ function DateAndStatusFilter({ setDate, setMatchStatus }: { setDate?: Dispatch<S
 
     useEffect(() => { 
         if (!setDate || !setMatchStatus) return;
+        console.log(dateFilter, statusValue);
         setDate(dateFilter);
         setMatchStatus(statusValue);
     }, [statusValue, dateFilter]);
