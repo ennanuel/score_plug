@@ -46,10 +46,6 @@ function Matches() {
         fetchPolicy: 'no-cache'
     });
 
-    if (loading) return <LoadingMessage />;
-    else if (error) return <ErrorMessage />;
-    else if (!data) return <div>Nothing was found!</div>;
-
     return (
         <div className="border border-secondary-900/50 p-3 flex flex-col gap-4">
             <div className="flex justify-between items-center gap-4">
@@ -59,7 +55,15 @@ function Matches() {
                 </button>
             </div>
             <DateAndStatusFilter setDate={setDate} setMatchStatus={setStatus} />
-            <MatchesContainer matches={data.matches.matches} />
+            {
+                loading ? 
+                    <LoadingMessage /> :
+                    error ?
+                        <ErrorMessage /> :
+                        !data ?
+                            <div>Nothing was found</div> :
+                            <MatchesContainer matches={data.matches.matches} />
+            }
         </div>
     )
 };
