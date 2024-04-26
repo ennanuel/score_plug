@@ -2,7 +2,7 @@
 
 import { Match } from '@/types/global.type';
 import { DateAndStatusFilter, ErrorMessage, LoadingMessage, MatchesContainer } from '../_components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { MdStarOutline } from 'react-icons/md';
 
@@ -41,10 +41,17 @@ function Matches() {
     const [status, setStatus] = useState("");
     const [date, setDate] = useState("");
 
+    const eventSource = new EventSource(`${String(process.env.NEXT_PUBLIC_API_URI)}/live-update`);
+
     const { loading, error, data } = useQuery<{ matches: { matches: Match[], totalPages: number } }>(QUERY, {
         variables: { status, from: date },
         fetchPolicy: 'no-cache'
     });
+
+    useEffect(() => { 
+        eventSource.onmessage = event => console.log(event.data);
+        return (eventSource.close());
+    }, []);
 
     return (
         <div className="border border-secondary-900/50 p-3 flex flex-col gap-4">
