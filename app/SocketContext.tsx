@@ -32,6 +32,7 @@ const SocketContextProvider = ({ children }: Readonly<{ children: React.ReactNod
 
     useEffect(() => { 
         socket.on('match-update', (data: SocketData) => {
+            console.log(data);
             setSocketData(data);
         })
     }, [socket]);
