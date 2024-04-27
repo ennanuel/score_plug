@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@apollo/client": "^3.9.5",
+    "@types/eventsource": "^1.1.15",
+    "eventsource": "^2.0.2",
     "graphql": "^16.8.1",
     "next": "14.1.0",
     "react": "^18",
