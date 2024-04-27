@@ -11,10 +11,10 @@ function MatchesContainer({ matches }: { matches: Match[] }) {
         const socketMatch = socketData.matches[match._id];
         const updatedMatch = {
             ...match,
-            status: socketMatch.status || match.status,
-            minute: socketMatch.minute || match.minute,
-            score: socketMatch.score || match.score,
-            timeRemaining: socketMatch.timeRemaining || match.timeRemaining
+            status: socketMatch?.status || match.status,
+            minute: socketMatch?.minute || match.minute,
+            score: socketMatch?.score || match.score,
+            timeRemaining: socketMatch?.timeRemaining || match.timeRemaining
         }
         return updatedMatch;
     }), [socketData]);
