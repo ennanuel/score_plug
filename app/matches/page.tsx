@@ -42,7 +42,7 @@ function Matches() {
     const [status, setStatus] = useState("");
     const [date, setDate] = useState("");
 
-    const eventSource = new EventSource(`${String(process.env.NEXT_PUBLIC_API_URI)}/live-update`);
+    const eventSource = new EventSource(`${String(process.env.NEXT_PUBLIC_API_URI)}/maintenance/update/match`);
 
     const { loading, error, data } = useQuery<{ matches: { matches: Match[], totalPages: number } }>(QUERY, {
         variables: { status, from: date },
