@@ -5,7 +5,9 @@ import { DateAndStatusFilter, ErrorMessage, LoadingMessage, MatchesContainer } f
 import { useEffect, useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { MdStarOutline } from 'react-icons/md';
-import EventSource from 'eventsource';
+import { io } from 'socket.io-client';
+
+const socket = io(String(process.env.NEXT_PUBLIC_API_URI));
 
 const QUERY = gql`
     query GetMatches($status: String, $from: String) {
@@ -42,7 +44,6 @@ function Matches() {
     const [status, setStatus] = useState("");
     const [date, setDate] = useState("");
 
-    const eventSource = new EventSource(`${String(process.env.NEXT_PUBLIC_API_URI)}/maintenance/update/match`);
 
     const { loading, error, data } = useQuery<{ matches: { matches: Match[], totalPages: number } }>(QUERY, {
         variables: { status, from: date },
@@ -50,8 +51,7 @@ function Matches() {
     });
 
     useEffect(() => { 
-        eventSource.onmessage = event => console.log(event.data);
-        return (eventSource.close());
+        socket.on('match-update', (data) => console.log(data));
     }, []);
 
     return (
