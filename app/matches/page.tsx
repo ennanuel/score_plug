@@ -5,6 +5,7 @@ import { DateAndStatusFilter, ErrorMessage, LoadingMessage, MatchesContainer } f
 import { useEffect, useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { MdStarOutline } from 'react-icons/md';
+import EventSource from 'eventsource';
 
 const QUERY = gql`
     query GetMatches($status: String, $from: String) {
