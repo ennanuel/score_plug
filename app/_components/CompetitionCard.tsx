@@ -8,7 +8,7 @@ import { loadImage } from '../_utils/competition';
 
 const CompetitionCard = ({ _id, name, emblem, area, recentMatches }: Competition) => {
     return (
-        <li className={`border-b last:border-none ${recentMatches.hasLiveMatch ? 'bg-secondary-900/20 border-transparent' : 'border-secondary-900/50'}`}>
+        <li className={`border-b last:border-none ${recentMatches.hasLiveMatch ? 'bg-secondary-900/20 border-transparent' : 'border-secondary-900/20'}`}>
             <Link href={`/competition/${_id}`} className="flex items-center gap-4 justify-between hover:bg-secondary-900/50 p-3 px-4">
                 <Image src={emblem || String(process.env.NEXT_IMAGE_URI)} loader={loadImage} width={30} height={30} className="aspect-square object-contain" alt={name} />
                 <div className="flex-1 flex flex-col">
