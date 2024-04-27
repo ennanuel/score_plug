@@ -1,3 +1,5 @@
+"use client";
+
 import { Match } from '@/types/global.type';
 import React, { useContext, useMemo } from 'react';
 import MatchCard from './MatchCard';
