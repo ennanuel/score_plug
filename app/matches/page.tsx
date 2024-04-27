@@ -5,9 +5,6 @@ import { DateAndStatusFilter, ErrorMessage, LoadingMessage, MatchesContainer } f
 import { useEffect, useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { MdStarOutline } from 'react-icons/md';
-import { io } from 'socket.io-client';
-
-const socket = io(String(process.env.NEXT_PUBLIC_API_URI));
 
 const QUERY = gql`
     query GetMatches($status: String, $from: String) {
@@ -46,17 +43,12 @@ function Matches() {
 
 
     const { loading, error, data } = useQuery<{ matches: { matches: Match[], totalPages: number } }>(QUERY, {
-        variables: { status, from: date },
-        fetchPolicy: 'no-cache'
+        variables: { status, from: date }
     });
 
-    useEffect(() => { 
-        socket.on('match-update', (data) => console.log(data));
-    }, []);
-
     return (
-        <div className="border border-secondary-900/50 p-3 flex flex-col gap-4">
-            <div className="flex justify-between items-center gap-4">
+        <div className="p-4 flex flex-col gap-4">
+            <div className="flex justify-between items-center gap-4 mt-4">
                 <h1 className='font-bold text-3xl px-4'>Matches</h1>
                 <button className='d-flex align-items-center rounded-md text-white-100'>
                     <MdStarOutline size={20} />
