@@ -110,7 +110,7 @@ const Rightbar = () => {
 
   const { loading, error, data } = useQuery<{ matchPredictions: { matches: Match[] }, matches: { matches: Match[] } }>(QUERY);
 
-  const { match, prediction } = useMemo(() => data && ({
+  const featuredData = useMemo(() => data && ({
     match: { ...(data.matches.matches[0]), ...(socketData.matches[data.matches.matches[0]?._id] || {}) },
     prediction: { ...(data.matchPredictions.matches[0]), ...(socketData.matches[data.matchPredictions.matches[0]?._id] || {}) },
   }), [data, socketData]);
@@ -124,14 +124,14 @@ const Rightbar = () => {
       <div className="border-b border-secondary-900/50 p-3">
         <h2 className="font-bold text-white-300 mb-4">Featured Match</h2>
         {
-          data?.matches?.matches?.map((match) => <FeaturedMatchCard key={match._id} {...match} />)
+          featuredData ? <FeaturedMatchCard {...featuredData.match} /> : <div>Nothing to show</div>
         }
       </div>
 
       <div className="p-3">
         <h2 className="font-bold text-white-300 mb-4">Featured Prediction</h2>
         {
-          data?.matchPredictions?.matches?.map((match) => <MatchPredictionCard key={match._id} {...match} />)
+          featuredData ? <MatchPredictionCard {...featuredData.prediction} /> : <div>Nothing to show</div>
         }
       </div>
 
