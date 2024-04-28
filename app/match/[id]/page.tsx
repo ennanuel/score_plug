@@ -54,7 +54,7 @@ const MatchInfo = () => {
           alt={data.match.competition.name}
           height={150}
           width={150}
-          className="object-contain opacity-50 blur-[50px] top-0 left-[-40px] absolute"
+          className="object-contain opacity-50 blur-[50px] top-[50px] left-[-50px] absolute"
         />
         <div className="flex items-center gap-4">
           <Image
