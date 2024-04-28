@@ -10,7 +10,7 @@ function MatchPredictionCard({ _id, homeTeam, competition, awayTeam, utcDate, st
   return (
     <Link href={`/match/${_id}/prediction`} className="flex flex-col gap-2">
       <div className="grid grid-cols-3 border border-secondary-900/50 rounded-md shadow-lg">
-        <div className="col-span-3 border-b border-secondary-900/50 p-2 px-3 text-highlight-300 text-xs flex items-center gap-1 font-semibold">
+        <div className="col-span-3 border-b border-secondary-900/50 p-2 text-highlight-300 text-xs flex items-center gap-1 font-semibold">
           <div className="w-[4px] h-full rounded-lg bg-highlight-300" />
           <span>{competition.name}</span>
         </div>
@@ -21,15 +21,15 @@ function MatchPredictionCard({ _id, homeTeam, competition, awayTeam, utcDate, st
         {
           /in_play|paused|finished/i.test(status) ?
             <div className="flex flex-col border-x border-secondary-900/50">
-              <div className="flex flex-[2] items-center justify-center gap-1 text-[1.5rem] text-highlight-400 border-b border-secondary-900/50">
+              <div className={`flex flex-[2] items-center justify-center gap-1 text-[1.7rem] ${minute == 'FT' ? 'text-secondary-600' : 'text-highlight-400'} border-b border-secondary-900/50`}>
                 <span className="font-bold">{score.fullTime.home}</span>
                 <span>-</span>
                 <span className="font-bold">{score.fullTime.away}</span>
               </div>
-              <span className={`${minute != 'FT' ? 'text-highlight-700/20 text-highlight-500' : 'text-secondary-900/10 text-secondary-800'} font-semibold flex-1 flex items-center justify-center`}>{/\w/i.test(minute) ? minute : `${minute}'`}</span>
+              <span className={`${minute != 'FT' ? 'bg-highlight-700/20 text-highlight-500' : 'bg-secondary-900/30 text-secondary-800'} font-semibold flex-1 flex items-center justify-center`}>{/\w/i.test(minute) ? minute : `${minute}'`}</span>
             </div> :
             <p className="text-2xl font-bold flex flex-col p-2 border-x border-secondary-900/50">
-              <span className="text-2xl font-bold flex-1 flex items-center justify-center border-b border-secondary-900/50">V</span>
+              <span className="text-2xl font-bold flex-[2] flex items-center justify-center border-b border-secondary-900/50">V</span>
               <span className="text-sm text-secondary-700 flex-1 flex items-center justify-center">{time}</span>
             </p>
         }
