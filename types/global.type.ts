@@ -38,7 +38,9 @@ export type Match = {
             outcome: MatchOutcome;
             goals: MatchGoals;
         }
-    }
+    };
+    wasUpdated?: boolean;
+    scoreWasUpdated?: boolean;
     referees: Referee[];
 };
 
