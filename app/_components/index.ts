@@ -8,6 +8,7 @@ import TeamDetailsHeader from './TeamDetailsHeader';
 import TeamCard from "./TeamCard";
 import MatchCard from './MatchCard';
 import CompetitionCard from './CompetitionCard';
+import FeaturedMatchCard from './FeaturedMatchCard';
 import FormBox from './FormBox';
 import Standings from './standings';
 import DateAndStatusFilter from './DateAndStatusFilter';
@@ -27,6 +28,7 @@ export {
     TeamCard,
     MatchCard,
     CompetitionCard,
+    FeaturedMatchCard,
     FormBox,
     Standings,
     DateAndStatusFilter,
