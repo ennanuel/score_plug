@@ -9,7 +9,7 @@ import { SocketContext } from "../SocketContext";
 
 const QUERY = gql`
   query GetMatchPredictions($date: String, $status: String) {
-    matchPredictions(date: $date, status: $status) {
+    matchPredictions(from: $date, status: $status) {
         totalPages
         matches {
             _id
@@ -66,7 +66,7 @@ const Matches = () => {
     ...match,
     ...(socketData.matches[match._id] || {})
   })), [socketData, data]);
-  
+
   return (
     <div className="p-4">
       <h2 className="col-span-2 font-bold text-2xl mb-2 mx-3 mt-4">Match Predictions</h2>

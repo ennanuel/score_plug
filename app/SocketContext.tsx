@@ -5,9 +5,9 @@ import { Match } from "@/types/global.type";
 import { io } from "socket.io-client";
 
 type SocketData = {
-    matches: { [key: string]: Match };
-    competitions: string[];
-    teams: string[];
+    matches: { [key: number]: Match };
+    competitions: number[];
+    teams: number[];
 }
 
 const socket = io(`${process.env.NEXT_PUBLIC_API_URI}`)

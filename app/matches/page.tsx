@@ -2,13 +2,12 @@
 
 import { Match } from '@/types/global.type';
 import { DateAndStatusFilter, ErrorMessage, LoadingMessage, MatchesContainer } from '../_components';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
-import { MdStarOutline } from 'react-icons/md';
 
 const QUERY = gql`
-    query GetMatches($status: String, $from: String) {
-        matches(status: $status, from: $from, limit: 100) {
+    query GetMatches($status: String, $date: String) {
+        matches(status: $status, from: $date, limit: 100) {
             totalPages
             matches {
                 _id
@@ -43,7 +42,7 @@ function Matches() {
 
 
     const { loading, error, data } = useQuery<{ matches: { matches: Match[], totalPages: number } }>(QUERY, {
-        variables: { status, from: date }
+        variables: { status, date }
     });
 
     return (
