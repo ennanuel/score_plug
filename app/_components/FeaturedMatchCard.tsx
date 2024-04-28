@@ -11,7 +11,7 @@ function FeaturedMatchCard({ _id, competition, homeTeam, awayTeam, utcDate, stat
 
     return (
         <Link href={`match/${_id}`} className="flex flex-col gap-2">
-            <div className="grid grid-cols-3 border border-secondary-900/50 rounded-md gap-2 shadow-lg">
+            <div className="grid grid-cols-3 border border-secondary-900/50 rounded-md shadow-lg">
                 <span className="col-span-3 text-highlight-300 text-xs flex items-center gap-1 px-4 py-1 border-b border-secondary-900/50">
                     <div className="w-[4px] aspect-square rounded-full bg-highlight-300" />
                     {/in_play|paused/i.test(status) ? <span>Live</span> : <span>{competition.area.name}</span>}

@@ -6,6 +6,7 @@ import { Match } from '@/types/global.type';
 import { gql, useQuery } from '@apollo/client';
 import { useParams } from 'next/navigation';
 import { ErrorMessage, LoadingMessage } from '@/app/_components';
+import { loadImage } from '@/app/_utils/competition';
 
 
 const QUERY = gql`
@@ -49,6 +50,7 @@ const MatchInfo = () => {
       <div className="relative overflow-clip flex flex-col p-4 gap-2 rounded-md border border-white-100/10">
         <Image
           src={data.match.competition.emblem || String(process.env.NEXT_IMAGE_URL)}
+          loader={loadImage}
           alt={data.match.competition.name}
           height={150}
           width={150}
@@ -57,6 +59,7 @@ const MatchInfo = () => {
         <div className="flex items-center gap-4">
           <Image
             src={data.match.competition.emblem || String(process.env.NEXT_IMAGE_URL)}
+            loader={loadImage}
             alt={data.match.competition.name}
             height={40}
             width={40}
