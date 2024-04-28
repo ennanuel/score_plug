@@ -46,8 +46,14 @@ const MatchInfo = () => {
 
   return (
     <div className='p-4'>
-
-      <div className="flex flex-col p-4 gap-2 rounded-md border border-white-100/10">
+      <div className="relative overflow-clip flex flex-col p-4 gap-2 rounded-md border border-white-100/10">
+        <Image
+          src={data.match.competition.emblem || String(process.env.NEXT_IMAGE_URL)}
+          alt={data.match.competition.name}
+          height={150}
+          width={150}
+          className="object-contain opacity-50 blur-[50px] top-0 left-[-40px] absolute"
+        />
         <div className="flex items-center gap-4">
           <Image
             src={data.match.competition.emblem || String(process.env.NEXT_IMAGE_URL)}
@@ -72,7 +78,7 @@ const MatchInfo = () => {
         <hr className="border-none m-auto mt-2 bg-white-100/10 outline-none h-[1px] w-full" />
         <div className="flex items-center justify-between">
           <h3 className='font-semibold text-sm text-secondary-500 mt-2'>Match Venue</h3>
-          <p className="text-sm">{data.match.venue || 'Not available'}</p>
+          <p className="text-sm text-secondary-800">{data.match.venue || 'Not available'}</p>
         </div>
       </div>
 
@@ -92,8 +98,8 @@ const MatchInfo = () => {
                   </p>
               </li>
             )) :
-            <div className="flex items-center justify-center p-4 border border-white-100/5 rounded-md">
-              <span>Not available</span>
+            <div className="flex items-center justify-center p-4 border text-sm font-semibold text-secondary-800 border-white-100/5 rounded-md">
+              <span>Referees not available</span>
             </div>
         }
       </ul>
