@@ -48,12 +48,7 @@ function Matches() {
 
     return (
         <div className="p-4 flex flex-col gap-4">
-            <div className="flex justify-between items-center gap-4 mt-4">
-                <h1 className='font-bold text-3xl px-4'>Matches</h1>
-                <button className='d-flex align-items-center rounded-md text-white-100'>
-                    <MdStarOutline size={20} />
-                </button>
-            </div>
+            <h1 className='font-bold text-3xl px-4'>Matches</h1>
             <DateAndStatusFilter setDate={setDate} setMatchStatus={setStatus} />
             {
                 loading ? 

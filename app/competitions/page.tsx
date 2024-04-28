@@ -5,6 +5,8 @@ import CompetitionCard from '../_components/CompetitionCard';
 import { Competition } from '@/types/global.type';
 import { useQuery, gql } from '@apollo/client';
 import { LoadingMessage, ErrorMessage } from '../_components';
+import { useContext, useMemo } from 'react';
+import { SocketContext } from '../SocketContext';
 
 const QUERY = gql`
   query {
@@ -30,6 +32,12 @@ const QUERY = gql`
 const Competitions = () => {
     const { loading, error, data } = useQuery<{ competitions: { competitions: Competition[] } }>(QUERY);
 
+    const { socketData } = useContext(SocketContext);
+    const competitions = useMemo(() => data?.competitions?.competitions?.map((competition) => ({
+        ...competition,
+        recentMatches: { ...competition.recentMatches, hasLiveMatch: socketData.competitions.includes(competition._id) }
+    })), [socketData, data])
+
     if (loading) return <LoadingMessage />;
     else if (error) return <ErrorMessage />;
 
@@ -42,7 +50,7 @@ const Competitions = () => {
             
             <ul className="flex flex-col mt-6 border border-secondary-900/50 rounded-md overflow-hidden">
                 {
-                    data?.competitions?.competitions.map((competition, index) => <CompetitionCard {...competition} key={index} />)
+                    competitions?.map((competition, index) => <CompetitionCard {...competition} key={index} />)
                 }
             </ul>
         </div>
