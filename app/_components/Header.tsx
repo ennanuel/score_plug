@@ -1,15 +1,23 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext, useMemo } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import { MdOutlinePerson, MdOutlineSettings, MdSearch } from "react-icons/md";
 import { NAV_LINKS } from "../_assets/constants/links";
 import NavLink from "./NavLink";
 import { PiPlug } from "react-icons/pi";
+import { SocketContext } from "../SocketContext";
 
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
+  const { socketData } = useContext(SocketContext);
+
+  const navLinks = useMemo(() => NAV_LINKS.map((link) => (
+    link.title == 'Matches' && Object.values(socketData.matches).some(match => match.scoreWasUpdated) ?
+      { ...link, alert: true } :
+      link
+  )), [socketData]);
 
   useEffect(() => { 
     const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -51,7 +59,7 @@ const Header = () => {
       <nav className="sticky z-[1] h-[50px] top-0 border-b border-secondary-900/50 bg-primary-900">
         <ul className={`flex items-center justify-start transition-transform w-fit ${scrolled && "lg:translate-x-[160px]"}`}>
           {
-            NAV_LINKS.map((navLink, index) => (
+            navLinks.map((navLink, index) => (
               <li className="border-r first:border-x border-secondary-900/50"><NavLink key={index} {...navLink} /></li>
             ))
           }
