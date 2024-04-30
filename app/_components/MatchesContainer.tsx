@@ -19,7 +19,7 @@ function MatchesContainer({ matches, loading, error }: { matches: Match[] | unde
             timeRemaining: socketMatch?.timeRemaining || match.timeRemaining
         }
         return updatedMatch;
-    }) || [], [socketData]);
+    }) || [], [socketData, matches]);
 
     if (loading) return <MatchLoading size={6} />;
     else if (error) return <ErrorMessage />;

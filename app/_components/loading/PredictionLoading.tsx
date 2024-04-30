@@ -11,11 +11,11 @@ const PredictionLoading = ({ size }: { size: number }) => {
         <ul className="grid grid-cols-2 gap-4">
             {
                 matches.map((key) => (
-                    <li key={key} style={{ '--delay': `${key * 100}ms` } as React.CSSProperties} className="flex flex-col gap-4 animate-loadgradient loading">
+                    <li key={key} style={{ '--delay': `${key * 100}ms` } as React.CSSProperties} className="flex flex-col gap-6 animate-loadgradient loading">
                         <div className="grid grid-cols-3 border border-secondary-900/50 rounded-md shadow-lg">
                             <div className="flex flex-col justify-between items-center gap-2 p-2">
                                 <span className="w-[60px] aspect-square rounded-full bg-secondary-900/50"></span>
-                                <span className="w-[80%] h-4 rounded-md bg-secondary-900/50"></span>
+                                <span className="w-[80%] h-4 rounded-sm bg-secondary-900/50"></span>
                             </div>
                             <div className="flex flex-col border-x border-secondary-900/50">
                                 <div className="flex-[2] border-b border-secondary-900/50">
@@ -24,7 +24,7 @@ const PredictionLoading = ({ size }: { size: number }) => {
                             </div>
                             <div className="flex flex-col justify-between items-center gap-2 p-2">
                                 <span className="w-[60px] aspect-square rounded-full bg-secondary-900/50"></span>
-                                <span className="w-[80%] h-4 rounded-md bg-secondary-900/50"></span>
+                                <span className="w-[80%] h-4 rounded-sm bg-secondary-900/50"></span>
                             </div>
                         </div>
                         <div className="flex border border-secondary-900/50 h-[40px]">
