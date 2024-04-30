@@ -81,16 +81,14 @@ const MatchHeader = () => {
     awayTeam: data ? getMatchTeamColors(data.match.awayTeam.clubColors) : []
   }), [data]);
 
-  if (loading) return <LoadingMessage />;
-  else if (error) return <ErrorMessage />;
-  else if (!matchData) return null;
+  if (error) return <ErrorMessage />
   
   return (
     <>
       {
         loading ?
           <DetailsHeaderLoading /> :
-          data ?
+          matchData ?
             <div className="relative p-4 grid grid-cols-5 m-3 mt-4 gap-2">
               <div
                 style={{ background: `linear-gradient(90deg, ${colors.homeTeam[0] === colors.awayTeam[0] ? colors.homeTeam[1] : colors.homeTeam[0]}, ${colors.awayTeam[0]})` }}
