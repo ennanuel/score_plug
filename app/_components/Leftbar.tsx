@@ -3,7 +3,6 @@
 import { gql, useQuery } from "@apollo/client";
 import Image from "next/image";
 import Link from "next/link";
-import LoadingMessage from "./LoadingMessage";
 import ErrorMessage from "./ErrorMessage";
 
 import { Competition, Team } from "@/types/global.type";
@@ -75,7 +74,7 @@ const Leftbar = () => {
           <span className="text-xs text-secondary-700 hover:text-secondary-500">More</span>
         </div>
         {
-          loading ?
+          true ?
             <CompetitionLoading size={8} small={true} /> :
             <ul className="flex mt-4 flex-col rounded-md overflow-hidden border border-secondary-900/50">
               {
