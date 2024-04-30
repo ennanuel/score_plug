@@ -77,13 +77,13 @@ const config: Config = {
       },
     },
     animation: {
-      loadgradient: 'loadinggradient 1s linear var(--delay) infinite',
-      loadopacity: 'loadingopacity 1s linear var(--delay) infinite alternate'
+      loadgradient: 'loadinggradient 1s linear infinite',
+      loadopacity: 'loadingopacity 1s linear infinite alternate'
     },
     keyframes: {
       loadinggradient: {
         from: { backgroundPosition: '200% 0' },
-        to: { backgroundPosition: '-40% 0' }
+        to: { backgroundPosition: '-50% 0' }
       },
       loadingopacity: {
         from: { opacity: '0' },
