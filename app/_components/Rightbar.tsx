@@ -124,27 +124,27 @@ const Rightbar = () => {
 
   return (
     <div className="sticky top-[50px] flex flex-col gap-2">
-      {
-        true ?
-          <div className="p-3">
-            <PredictionLoading size={2} full={true} />
-          </div> :
-          <>
-            <div className="border-b border-secondary-900/50 p-3">
-              <h2 className="font-bold text-white-300 mb-4">Featured Match</h2>
-              {
-                featuredMatch ? <FeaturedMatchCard {...(featuredMatch as Match)} /> : <p className="border border-secondary-900/50 p-6 h-[160px]">Nothing to show</p>
-              }
-            </div>
+      <div className="border-b border-secondary-900/50 p-3">
+        <h2 className="font-bold text-white-300 mb-4">Featured Match</h2>
+        {
+          true ?
+            <PredictionLoading size={1} full={true} /> :
+            featuredMatch ?
+              <FeaturedMatchCard {...(featuredMatch as Match)} /> :
+              <p className="border border-secondary-900/50 p-6 h-[160px]">Nothing to show</p>
+        }
+      </div>
 
-            <div className="p-3">
-              <h2 className="font-bold text-white-300 mb-4">Featured Prediction</h2>
-              {
-                featuredPrediction ? <MatchPredictionCard {...featuredPrediction as Match} /> : <p className="border border-secondary-900/50 p-6 h-[160px]">Nothing to show</p>
-              }
-            </div>
-          </>
-      }
+      <div className="p-3">
+        <h2 className="font-bold text-white-300 mb-4">Featured Prediction</h2>
+        {
+          true ?
+            <PredictionLoading size={1} full={true} /> :
+            featuredPrediction ?
+              <MatchPredictionCard {...featuredPrediction as Match} /> :
+              <p className="border border-secondary-900/50 p-6 h-[160px]">Nothing to show</p>
+        }
+      </div>
     </div>
   )
 }

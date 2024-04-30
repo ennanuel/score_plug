@@ -50,7 +50,6 @@ function Home() {
   const { loading, error, data } = useQuery<{ activeCompetitions: Competition[] }>(QUERY, { variables: { isLive: status === 'IN_PLAY' } });
 
   if (error) return <ErrorMessage />;
-  else if (!data) return <div>Nothing was found</div>;
 
   return (
     <main className="pb-4 bg-primary-600">
