@@ -53,17 +53,17 @@ function Home() {
   else if (!data) return <div>Nothing was found</div>;
 
   return (
-    <main className="bg-primary-600">
+    <main className="pb-4 bg-primary-600">
       <div className="flex items-center justify-between">
         <h2 className="font-bold px-4">Today's Matches</h2>
         <div className="h-[50px] flex items-stretch justify-stretch text-sm">
-          <button onClick={showAllMatches} className={`flex justify-center items-center gap-2 px-4 min-w-[120px] font-semibold ${status === "" ? 'text-orange-300 bg-orange-400/20' : 'border-l border-secondary-900/50 text-orange-700'}`}>
-            <span>All</span>
+          <button onClick={showAllMatches} className={`flex justify-center items-center gap-4 px-4 min-w-[100px] font-semibold ${status === "" ? 'text-orange-300 bg-orange-400/20' : 'border-l border-secondary-900/50 text-orange-700'}`}>
             {status === "" && <span className="block w-1 h-4 rounded-md bg-orange-300"></span>}
+            <span>All</span>
           </button>
-          <button onClick={showLiveMatches} className={`flex justify-center items-center gap-2 px-4 min-w-[120px] font-semibold ${status === "IN_PLAY" ? 'border-l text-green-300 bg-green-400/20' : 'border-r border-secondary-900/50 text-green-700'}`}>
-            <span>Live</span>
+          <button onClick={showLiveMatches} className={`flex justify-center items-center gap-4 px-4 min-w-[100px] font-semibold ${status === "IN_PLAY" ? 'border-l text-green-300 bg-green-400/20' : 'border-r border-secondary-900/50 text-green-700'}`}>
             {status === "IN_PLAY" && <span className="block w-1 h-4 rounded-md bg-green-600"></span>}
+            <span>Live</span>
           </button>
         </div>
       </div>
