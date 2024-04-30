@@ -83,8 +83,7 @@ const config: Config = {
     keyframes: {
       loadinggradient: {
         '0': { backgroundPosition: '200% 0' },
-        '50%': { backgroundPosition: '75% 0' },
-        '100%': { backgroundPosition: '-50% 0' }
+        '100%': { backgroundPosition: '0% 0' }
       },
       loadingopacity: {
         from: { opacity: '0' },
