@@ -4,10 +4,12 @@ import { Match } from '@/types/global.type';
 import React, { useContext, useMemo } from 'react';
 import MatchCard from './MatchCard';
 import { SocketContext } from '../SocketContext';
+import { MatchLoading } from './loading';
+import ErrorMessage from './ErrorMessage';
 
-function MatchesContainer({ matches }: { matches: Match[] }) {
+function MatchesContainer({ matches, loading, error }: { matches: Match[] | undefined, loading?: boolean; error?: boolean; }) {
     const { socketData } = useContext(SocketContext);
-    const matchesToView = useMemo(() => matches.map(match => {
+    const matchesToView = useMemo(() => matches?.map(match => {
         const socketMatch = socketData.matches[match._id];
         const updatedMatch = {
             ...match,
@@ -17,7 +19,10 @@ function MatchesContainer({ matches }: { matches: Match[] }) {
             timeRemaining: socketMatch?.timeRemaining || match.timeRemaining
         }
         return updatedMatch;
-    }), [socketData]);
+    }) || [], [socketData]);
+
+    if (loading) return <MatchLoading size={6} />;
+    else if (error) return <ErrorMessage />;
 
     return (
         <ul className='flex flex-col rounded-md border border-white-100/5 overflow-hidden'>
