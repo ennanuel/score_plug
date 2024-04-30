@@ -13,6 +13,7 @@ import ErrorMessage from "./ErrorMessage";
 
 import { Competition } from "@/types/global.type";
 import { loadImage } from "../_utils/competition";
+import { DetailsHeaderLoading } from "./loading";
 
 const QUERY = gql`
   query GetCompetition($id: ID!) {
@@ -34,23 +35,27 @@ const CompetitionHeader = () => {
 
   const { loading, error, data } = useQuery<{ competition: Competition }>(QUERY, { variables: { id } });
 
-  if (loading) return <LoadingMessage />;
-  else if (error) return <ErrorMessage />;
-  else if (!data) return null;
+  if (error) return <ErrorMessage />;
 
   return (
     <>
-      <div className="bg-gradient-to-r m-2 from-red-900/50 to-red-900/20 py-4 px-3 flex items-center gap-2 rounded-md">
-        <button className="h-8 aspect-square rounded-full hover:bg-secondary-400/10">
-          <MdKeyboardArrowLeft size={20} />
-        </button>
-        <Image src={data.competition.emblem || String(process.env.NEXT_IMAGE_URL)} loader={loadImage} alt="Competition Emblem" width={60} className="aspect-square object-contain" />
-        <div className="flex-1 flex-col">
-          <p className="font-bold">{data.competition.name}</p>
-          <p className="text-sm text-secondary-600">{data.competition.area.name}</p>
-        </div>
-        <MdStar />
-      </div>
+      {
+        loading ?
+          <DetailsHeaderLoading /> :
+          data ?
+            <div className="bg-gradient-to-r m-2 from-red-900/50 to-red-900/20 py-4 px-3 flex items-center gap-2 rounded-md">
+              <button className="h-8 aspect-square rounded-full hover:bg-secondary-400/10">
+                <MdKeyboardArrowLeft size={20} />
+              </button>
+              <Image src={data.competition.emblem || String(process.env.NEXT_IMAGE_URL)} loader={loadImage} alt="Competition Emblem" width={60} className="aspect-square object-contain" />
+              <div className="flex-1 flex-col">
+                <p className="font-bold">{data.competition.name}</p>
+                <p className="text-sm text-secondary-600">{data.competition.area.name}</p>
+              </div>
+              <MdStar />
+            </div> :
+            null
+      }
       <AltHeader links={links} />
     </>
   )
