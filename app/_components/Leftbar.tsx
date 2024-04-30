@@ -68,7 +68,7 @@ const Leftbar = () => {
       </div>
 
       
-      <div className="border-b border-secondary-900/50 p-3">
+      <div className="p-3">
         <div className="flex justify-between items-center mb-2">
           <h2 className="font-bold text-white-300">Top Teams</h2>
           <span className="text-xs text-secondary-700 hover:text-secondary-500">More</span>
