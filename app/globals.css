@@ -39,7 +39,7 @@ body {
 }
 
 .loading {
-  background: linear-gradient(10deg,
+  background: linear-gradient(80deg,
       rgba(255, 255, 255, 0.05) 0,
       rgba(255, 255, 255, 0.1) 10%,
       rgba(255, 255, 255, 0.2) 15%,

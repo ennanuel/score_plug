@@ -80,9 +80,9 @@ const config: Config = {
       loadgradient: 'loadinggradient 500ms linear var(--delay) infinite',
       loadopacity: 'loadingopacity 500ms linear var(--delay) infinite alternate'
     },
-    keyFrames: {
+    keyframes: {
       loadinggradient: {
-        from: { backgroundPosition: '-50% 0' },
+        from: { backgroundPosition: '-40% 0' },
         to: { backgroundPosition: '100% 0' }
       },
       loadingopacity: {
