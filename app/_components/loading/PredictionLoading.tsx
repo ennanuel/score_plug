@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 
-const PredictionLoading = ({ size }: { size: number }) => {
+const PredictionLoading = ({ size, full }: { size: number, full?: boolean }) => {
     const matches = useMemo(() => {
         const matches = [];
         for (let i = 0; i < size; i++) matches.push(i);
@@ -8,7 +8,7 @@ const PredictionLoading = ({ size }: { size: number }) => {
     }, []);
 
     return (
-        <ul className="grid grid-cols-2 gap-4">
+        <ul className={`grid ${full ? 'grid-cols-1': 'grid-cols-2'} gap-4`}>
             {
                 matches.map((key) => (
                     <li key={key} style={{ '--delay': `${key * 100}ms` } as React.CSSProperties} className="flex flex-col gap-6 animate-loadgradient loading">

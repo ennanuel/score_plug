@@ -8,6 +8,7 @@ import MatchPredictionCard from "./MatchPredictionCard";
 import FeaturedMatchCard from "./FeaturedMatchCard";
 import { useContext, useMemo } from "react";
 import { SocketContext } from "../SocketContext";
+import { PredictionLoading } from "./loading";
 
 
 const QUERY = gql`
@@ -115,26 +116,29 @@ const Rightbar = () => {
     prediction: { ...(data.matchPredictions.matches[0]), ...(socketData.matches[data.matchPredictions.matches[0]?._id] || {}) },
   }), [data, socketData]);
 
-  if (loading) return <div className="col-span-1"><LoadingMessage /></div>;
-  else if (error) return <div className="col-span-1"><ErrorMessage /></div>;
-  else if (!data) return <div className="col-span-1">Nothing to show!</div>;
+  if (error) return <div className="col-span-1"><ErrorMessage /></div>;
 
   return (
     <div className="sticky top-[50px] flex flex-col gap-2">
-      <div className="border-b border-secondary-900/50 p-3">
-        <h2 className="font-bold text-white-300 mb-4">Featured Match</h2>
-        {
-          featuredData ? <FeaturedMatchCard {...featuredData.match} /> : <div>Nothing to show</div>
-        }
-      </div>
+      {
+        loading ?
+          <PredictionLoading size={2} /> :
+          <>
+            <div className="border-b border-secondary-900/50 p-3">
+              <h2 className="font-bold text-white-300 mb-4">Featured Match</h2>
+              {
+                featuredData ? <FeaturedMatchCard {...featuredData.match} /> : <div>Nothing to show</div>
+              }
+            </div>
 
-      <div className="p-3">
-        <h2 className="font-bold text-white-300 mb-4">Featured Prediction</h2>
-        {
-          featuredData ? <MatchPredictionCard {...featuredData.prediction} /> : <div>Nothing to show</div>
-        }
-      </div>
-
+            <div className="p-3">
+              <h2 className="font-bold text-white-300 mb-4">Featured Prediction</h2>
+              {
+                featuredData ? <MatchPredictionCard {...featuredData.prediction} /> : <div>Nothing to show</div>
+              }
+            </div>
+          </>
+      }
     </div>
   )
 }
