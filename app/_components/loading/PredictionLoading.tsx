@@ -8,10 +8,10 @@ const PredictionLoading = ({ size, full }: { size: number, full?: boolean }) => 
     }, []);
 
     return (
-        <ul className={`grid ${full ? 'grid-cols-1': 'grid-cols-2'} gap-4`}>
+        <ul className={`grid ${full ? 'grid-cols-1': 'grid-cols-2'} gap-6`}>
             {
                 matches.map((key) => (
-                    <li key={key} style={{ '--delay': `${key * 100}ms` } as React.CSSProperties} className="flex flex-col gap-6 animate-loadgradient loading">
+                    <li key={key} style={{ '--delay': `${key * 100}ms` } as React.CSSProperties} className="flex flex-col gap-3 animate-loadgradient loading">
                         <div className="grid grid-cols-3 border border-secondary-900/50 rounded-md shadow-lg">
                             <div className="flex flex-col justify-between items-center gap-2 p-2">
                                 <span className="w-[60px] aspect-square rounded-full bg-secondary-900/50"></span>
