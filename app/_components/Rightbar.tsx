@@ -126,7 +126,9 @@ const Rightbar = () => {
     <div className="sticky top-[50px] flex flex-col gap-2">
       {
         true ?
-          <PredictionLoading size={2} full={true} /> :
+          <div className="p-3">
+            <PredictionLoading size={2} full={true} />
+          </div> :
           <>
             <div className="border-b border-secondary-900/50 p-3">
               <h2 className="font-bold text-white-300 mb-4">Featured Match</h2>
