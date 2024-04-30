@@ -78,11 +78,11 @@ const config: Config = {
     },
     animation: {
       loadgradient: 'loadinggradient 1s linear infinite',
-      loadopacity: 'loadingopacity 1s linear infinite alternate'
+      loadopacity: 'loadingopacity 500ms linear infinite alternate'
     },
     keyframes: {
       loadinggradient: {
-        '0': { backgroundPosition: '200% 0' },
+        '0%': { backgroundPosition: '200% 0' },
         '100%': { backgroundPosition: '0% 0' }
       },
       loadingopacity: {

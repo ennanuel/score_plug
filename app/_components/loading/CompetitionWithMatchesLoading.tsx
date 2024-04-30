@@ -16,8 +16,8 @@ const CompetitionWithMatchesLoading = ({ size }: { size: number }) => {
                         <div className='flex items-center gap-3 px-2'>
                             <span className="w-[40px] h-[40px] rounded-full bg-secondary-900/50" />
                             <div className="flex-1 flex flex-col gap-2">
-                                <span className="animate-loadgradient loading h-4 rounded-sm bg-secondary-900/50 w-[160px]"></span>
-                                <span className="animate-loadgradient loading h-3 rounded-sm bg-secondary-900/50 w-[100px]"></span>
+                                <span className="animate-loadopacity h-4 rounded-sm bg-secondary-900/50 w-[160px]"></span>
+                                <span className="animate-loadopacity h-3 rounded-sm bg-secondary-900/50 w-[100px]"></span>
                             </div>
                         </div>
                         <MatchLoading size={4} />

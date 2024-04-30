@@ -19,11 +19,11 @@ const MatchLoading = ({ size }: { size: number }) => {
                         <div className="flex flex-col gap-2 ml-[30px]">
                             <div className="h-4 flex gap-2">
                                 <span className='w-4 h-4 rounded-full bg-secondary-900/50'></span>
-                                <span className='animate-loadgradient loading w-[160px] h-4 rounded-sm bg-secondary-900/50'></span>
+                                <span className='animate-loadopacity w-[160px] h-4 rounded-sm bg-secondary-900/50'></span>
                             </div>
                             <div className="h-4 flex gap-2">
                                 <span className='w-4 h-4 rounded-full bg-secondary-900/50'></span>
-                                <span className='animate-loadgradient loading w-[160px] h-4 rounded-sm bg-secondary-900/50'></span>
+                                <span className='animate-loadopacity w-[160px] h-4 rounded-sm bg-secondary-900/50'></span>
                             </div>
                         </div>
                     </li>

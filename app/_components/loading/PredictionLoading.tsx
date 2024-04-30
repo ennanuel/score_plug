@@ -15,7 +15,7 @@ const PredictionLoading = ({ size, full }: { size: number, full?: boolean }) => 
                         <div className="grid grid-cols-3 border border-secondary-900/50 rounded-md shadow-lg">
                             <div className="flex flex-col justify-between items-center gap-2 p-2">
                                 <span className="bg-secondary-900/50 w-[60px] aspect-square rounded-full "></span>
-                                <span className="animate-loadgradient loading w-[80%] h-4 rounded-sm bg-secondary-900/50"></span>
+                                <span className="animate-loadopacity w-[80%] h-4 rounded-sm bg-secondary-900/50"></span>
                             </div>
                             <div className="flex flex-col border-x border-secondary-900/50">
                                 <div className="flex-[2] border-b border-secondary-900/50">
@@ -24,7 +24,7 @@ const PredictionLoading = ({ size, full }: { size: number, full?: boolean }) => 
                             </div>
                             <div className="flex flex-col justify-between items-center gap-2 p-2">
                                 <span className="bg-secondary-900/50 w-[60px] loading aspect-square rounded-full"></span>
-                                <span className="w-[80%] animate-loadgradient loading h-4 rounded-sm bg-secondary-900/50"></span>
+                                <span className="w-[80%] animate-loadopacity h-4 rounded-sm bg-secondary-900/50"></span>
                             </div>
                         </div>
                         <div className="flex border border-secondary-900/50 h-[40px]">
