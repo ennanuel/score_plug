@@ -49,7 +49,7 @@ const Competitions = () => {
             </div>
         
             {
-                true ?
+                loading ?
                     <div className="mt-6">
                         <CompetitionLoading size={6} />
                     </div> :

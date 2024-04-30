@@ -7,6 +7,7 @@ import { Competition } from '@/types/global.type';
 import { useQuery, gql } from '@apollo/client';
 import { ErrorMessage } from './_components';
 import { MatchLoading } from './_components/loading';
+import CompetitionWithMatchesLoading from './_components/loading/CompetitionWithMatchesLoading';
 
 const QUERY = gql`
   query GetActiveCompetitions($isLive: Boolean!) {
@@ -69,8 +70,8 @@ function Home() {
       </div>
 
       {
-        loading ?
-          <MatchLoading size={10} /> :
+        true ?
+          <CompetitionWithMatchesLoading size={4} /> :
           <ul className="flex flex-col">
             {
               data?.activeCompetitions.map((competition, index) => <li key={index}><CompetitionWithMatches {...competition} /></li>)
