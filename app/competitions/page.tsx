@@ -50,7 +50,9 @@ const Competitions = () => {
         
             {
                 true ?
-                    <CompetitionLoading size={6} /> :
+                    <div className="mt-6">
+                        <CompetitionLoading size={6} />
+                    </div> :
                     <ul className="flex flex-col mt-6 border border-secondary-900/50 rounded-md overflow-hidden">
                         {
                             competitions?.map((competition, index) => <CompetitionCard {...competition} key={index} />)
