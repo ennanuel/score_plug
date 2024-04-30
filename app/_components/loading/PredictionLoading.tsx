@@ -14,7 +14,7 @@ const PredictionLoading = ({ size, full }: { size: number, full?: boolean }) => 
                     <li key={key} style={{ '--delay': `${key * 100}ms` } as React.CSSProperties} className="flex flex-col gap-3">
                         <div className="grid grid-cols-3 border border-secondary-900/50 rounded-md shadow-lg">
                             <div className="flex flex-col justify-between items-center gap-2 p-2">
-                                <span className="loading w-[60px] aspect-square rounded-full bg-secondary-900/50"></span>
+                                <span className="bg-secondary-900/50 w-[60px] aspect-square rounded-full "></span>
                                 <span className="animate-loadgradient loading w-[80%] h-4 rounded-sm bg-secondary-900/50"></span>
                             </div>
                             <div className="flex flex-col border-x border-secondary-900/50">
@@ -23,7 +23,7 @@ const PredictionLoading = ({ size, full }: { size: number, full?: boolean }) => 
                                 <span className="flex-1"></span>
                             </div>
                             <div className="flex flex-col justify-between items-center gap-2 p-2">
-                                <span className="w-[60px]loading aspect-square rounded-full bg-secondary-900/50"></span>
+                                <span className="bg-secondary-900/50 w-[60px] loading aspect-square rounded-full"></span>
                                 <span className="w-[80%] animate-loadgradient loading h-4 rounded-sm bg-secondary-900/50"></span>
                             </div>
                         </div>
