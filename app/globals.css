@@ -38,6 +38,16 @@ body {
   @apply translate-x-[0] opacity-100;
 }
 
+.loading {
+  background: linear-gradient(10deg,
+      rgba(255, 255, 255, 0.05) 0,
+      rgba(255, 255, 255, 0.1) 30px,
+      rgba(255, 255, 255, 0.2) 50px,
+      rgba(255, 255, 255, 0.1) 70px,
+      rgba(255, 255, 255, 0.05) 90px);
+  background-size: 150% 0;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
