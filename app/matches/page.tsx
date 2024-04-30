@@ -49,15 +49,7 @@ function Matches() {
         <div className="p-4 flex flex-col gap-4">
             <h1 className='font-bold text-3xl px-4'>Matches</h1>
             <DateAndStatusFilter setDate={setDate} setMatchStatus={setStatus} />
-            {
-                loading ? 
-                    <LoadingMessage /> :
-                    error ?
-                        <ErrorMessage /> :
-                        !data ?
-                            <div>Nothing was found</div> :
-                            <MatchesContainer matches={data.matches.matches} />
-            }
+            <MatchesContainer matches={data?.matches?.matches} error={Boolean(error)} loading={true} />
         </div>
     )
 };

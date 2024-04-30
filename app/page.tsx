@@ -5,7 +5,8 @@ import { MdStar } from "react-icons/md";
 import CompetitionWithMatches from './_components/CompetitionWithMatches';
 import { Competition } from '@/types/global.type';
 import { useQuery, gql } from '@apollo/client';
-import { ErrorMessage, LoadingMessage } from './_components';
+import { ErrorMessage } from './_components';
+import { MatchLoading } from './_components/loading';
 
 const QUERY = gql`
   query GetActiveCompetitions($isLive: Boolean!) {
@@ -47,8 +48,7 @@ function Home() {
 
   const { loading, error, data } = useQuery<{ activeCompetitions: Competition[] }>(QUERY, { variables: { isLive: status === 'IN_PLAY' } });
 
-  if (loading) return <LoadingMessage />;
-  else if (error) return <ErrorMessage />;
+  if (error) return <ErrorMessage />;
   else if (!data) return <div>Nothing was found</div>;
 
   return (
@@ -58,20 +58,25 @@ function Home() {
         <MdStar />
       </div>
       <div className="mt-4 h-[50px] border-t border-secondary-900/50 flex items-stretch justify-stretch text-sm">
-        <button onClick={showAllMatches} className={`flex justify-center items-center gap-2 px-4 min-w-[120px] font-semibold ${status === "" ? 'text-orange-300 bg-orange-400/20': 'border-r border-secondary-900/50 text-orange-700'}`}>
+        <button onClick={showAllMatches} className={`flex justify-center items-center gap-2 px-4 min-w-[120px] font-semibold ${status === "" ? 'text-orange-300 bg-orange-400/20' : 'border-r border-secondary-900/50 text-orange-700'}`}>
           {status === "" && <span className="block w-1 h-4 rounded-md bg-orange-300"></span>}
           <span>All</span>
         </button>
-        <button onClick={showLiveMatches} className={`flex justify-center items-center gap-2 px-4 min-w-[120px] font-semibold ${status === "IN_PLAY" ? 'border-r border-secondary-900/50 text-green-300 bg-green-400/20': 'border-r border-secondary-900/50 text-green-700'}`}>            
+        <button onClick={showLiveMatches} className={`flex justify-center items-center gap-2 px-4 min-w-[120px] font-semibold ${status === "IN_PLAY" ? 'border-r border-secondary-900/50 text-green-300 bg-green-400/20' : 'border-r border-secondary-900/50 text-green-700'}`}>
           {status === "IN_PLAY" && <span className="block w-1 h-4 rounded-md bg-green-600"></span>}
           <span>Live</span>
         </button>
       </div>
-      <ul className="flex flex-col">
-          {
-            data?.activeCompetitions.map((competition, index) => <li key={index}><CompetitionWithMatches {...competition} /></li>)
-          }
-      </ul>
+
+      {
+        loading ?
+          <MatchLoading size={10} /> :
+          <ul className="flex flex-col">
+            {
+              data?.activeCompetitions.map((competition, index) => <li key={index}><CompetitionWithMatches {...competition} /></li>)
+            }
+          </ul>
+      }
     </main>
   )
 }
