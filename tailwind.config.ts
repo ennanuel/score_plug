@@ -82,7 +82,7 @@ const config: Config = {
     },
     keyframes: {
       loadinggradient: {
-        from: { backgroundPosition: '100% 0' },
+        from: { backgroundPosition: '200% 0' },
         to: { backgroundPosition: '-40% 0' }
       },
       loadingopacity: {
