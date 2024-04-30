@@ -4,9 +4,10 @@ import { MdStarOutline } from 'react-icons/md';
 import CompetitionCard from '../_components/CompetitionCard';
 import { Competition } from '@/types/global.type';
 import { useQuery, gql } from '@apollo/client';
-import { LoadingMessage, ErrorMessage } from '../_components';
+import { ErrorMessage } from '../_components';
 import { useContext, useMemo } from 'react';
 import { SocketContext } from '../SocketContext';
+import { CompetitionLoading } from '../_components/loading';
 
 const QUERY = gql`
   query {
@@ -38,8 +39,7 @@ const Competitions = () => {
         recentMatches: { ...competition.recentMatches, hasLiveMatch: socketData.competitions.includes(competition._id) }
     })), [socketData, data])
 
-    if (loading) return <LoadingMessage />;
-    else if (error) return <ErrorMessage />;
+    if (error) return <ErrorMessage />;
 
     return (
         <div className="p-4">
@@ -47,12 +47,16 @@ const Competitions = () => {
                 <h1 className="font-bold">Leagues and Competitions</h1>
                 <MdStarOutline size={20} />
             </div>
-            
-            <ul className="flex flex-col mt-6 border border-secondary-900/50 rounded-md overflow-hidden">
-                {
-                    competitions?.map((competition, index) => <CompetitionCard {...competition} key={index} />)
-                }
-            </ul>
+        
+            {
+                true ?
+                    <CompetitionLoading size={6} /> :
+                    <ul className="flex flex-col mt-6 border border-secondary-900/50 rounded-md overflow-hidden">
+                        {
+                            competitions?.map((competition, index) => <CompetitionCard {...competition} key={index} />)
+                        }
+                    </ul>
+            }
         </div>
     )
 }
