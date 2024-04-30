@@ -76,6 +76,20 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
     },
+    animation: {
+      loadgradient: 'loadinggradient 500ms linear var(--delay) infinite',
+      loadopacity: 'loadingopacity 500ms linear var(--delay) infinite alternate'
+    },
+    keyFrames: {
+      loadinggradient: {
+        from: { backgroundPosition: '-50% 0' },
+        to: { backgroundPosition: '100% 0' }
+      },
+      loadingopacity: {
+        from: { opacity: '0' },
+        to: { opacity: '1' }
+      }
+    }
   },
   plugins: [],
 };
