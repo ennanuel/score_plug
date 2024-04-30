@@ -40,7 +40,6 @@ const Leftbar = () => {
   const { loading, error, data } = useQuery<{ topCompetitions: Competition[], teams: { teams: Team[] } }>(QUERY);
 
   if (error) return <ErrorMessage />;
-  else if (!data) return <div>Nothing was found!</div>;
 
   return (
     <div className="col-span-1 sticky top-[50px] flex flex-col gap-2">
@@ -54,7 +53,7 @@ const Leftbar = () => {
             <CompetitionLoading size={5} small={true} /> :
             <ul className="flex mt-4 flex-col rounded-md overflow-hidden border border-secondary-900/50">
               {
-                data.topCompetitions.slice(0, 6).map((competition) => (
+                data?.topCompetitions?.slice(0, 6)?.map((competition) => (
                   <li key={competition._id} className="border-b border-secondary-900/50 last:border-none">
                     <Link href={`/competition/${competition._id}`} className="flex items-center justify-between py-2 px-3 gap-3">
                       <Image loader={loadImage} src={competition.emblem || String(process.env.NEXT_IMAGE_URL)} width={25} height={25} alt={competition.name} className="aspect-square object-contain" />
@@ -80,7 +79,7 @@ const Leftbar = () => {
             <CompetitionLoading size={8} small={true} /> :
             <ul className="flex mt-4 flex-col rounded-md overflow-hidden border border-secondary-900/50">
               {
-                data.teams.teams.map((team) => (
+                data?.teams?.teams?.map((team) => (
                   <li key={team._id} className="border-b border-secondary-900/50 last:border-nond">
                     <Link href={`/team/${team._id}`} className="flex items-center justify-between py-2 px-3 gap-3 hover:bg-secondary-900/50">
                       <Image src={team.crest || String(process.env.NEXT_IMAGE_URL)} width={25} height={25} alt={team.name} className="aspect-square object-contain" />
