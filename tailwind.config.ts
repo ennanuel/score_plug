@@ -78,7 +78,7 @@ const config: Config = {
     },
     animation: {
       loadgradient: 'loadinggradient 1s linear infinite',
-      loadopacity: 'loadingopacity 500ms linear infinite alternate'
+      loadopacity: 'loadingopacity 500ms linear var(--delay) infinite alternate'
     },
     keyframes: {
       loadinggradient: {
@@ -86,7 +86,7 @@ const config: Config = {
         '100%': { backgroundPosition: '0% 0' }
       },
       loadingopacity: {
-        from: { opacity: '0' },
+        from: { opacity: '0.4' },
         to: { opacity: '1' }
       }
     }
