@@ -24,7 +24,7 @@ const PredictionLoading = ({ size, full }: { size: number, full?: boolean }) => 
                             </div>
                             <div className="flex flex-col justify-between items-center gap-2 p-2">
                                 <span className="bg-secondary-900/50 w-[60px] loading aspect-square rounded-full"></span>
-                                <span className="w-[80%] animate-loadopacity h-4 rounded-sm bg-secondary-900/50"></span>
+                                <span className="animate-loadopacity w-[80%] h-4 rounded-sm bg-secondary-900/50"></span>
                             </div>
                         </div>
                         <div className="flex border border-secondary-900/50 h-[40px]">
