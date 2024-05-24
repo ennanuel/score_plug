@@ -5,6 +5,7 @@ import { gql, useQuery } from "@apollo/client";
 import { useParams } from "next/navigation";
 
 import { Competition } from "@/types/global.type";
+import TeamsContainer from "@/app/_components/TeamsContainer";
 
 const QUERY = gql`
   query GetCompetitionTeams($id: ID!) {
@@ -14,6 +15,7 @@ const QUERY = gql`
         _id
         name
         crest
+        hasOngoingMatch
       }
     }
   }
@@ -23,17 +25,9 @@ const CompetitionTeams = () => {
   const { id } = useParams();
   const { loading, error, data } = useQuery<{ competition: Competition }>(QUERY, { variables: { id } });
 
-  if (loading) return <LoadingMessage />;
-  else if (error) return <ErrorMessage />;
-  else if (!data) return <div>Nothing was found</div>;
-
   return (
     <ul className="grid grid-cols-5 gap-4 p-4">
-      {
-        data.competition.teams.map((team, index) => (
-          <li key={index}><TeamCard {...team} /></li>
-        ))
-      }
+      <TeamsContainer teams={data?.competition?.teams} loading={loading} error={Boolean(error)} />
     </ul>
   )
 }
