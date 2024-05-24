@@ -1,14 +1,14 @@
 "use client";
 
-import { DateAndStatusFilter, LoadingMessage, ErrorMessage, MatchesContainer } from '@/app/_components';
+import { useState } from "react";
+import { DateAndStatusFilter, MatchesContainer } from '@/app/_components';
 import { Match } from '@/types/global.type';
 import { gql, useQuery } from '@apollo/client';
 import { useParams } from 'next/navigation';
-import { Suspense } from 'react';
 
 const QUERY = gql`
     query CompetitionMatches($id: ID!, $from: String, $to: String) {
-        competition(id: $id) {
+        competition(id: $id, ) {
             matches(from: $from, to: $to) {
                 _id
                 utcDate
@@ -37,21 +37,18 @@ const QUERY = gql`
 
 const CompetitionMatches = () => {
     const { id } = useParams();
-    const { loading, error, data } = useQuery<{ competition: { matches: Match[] } }>(QUERY, { variables: { id } });
+    const [date, setDate] = useState('');
+    const [status, setStatus] = useState('');
 
-    if (loading) return <LoadingMessage />;
-    else if (error) return <ErrorMessage />;
-    else if (!data) return <div>Nothing was found</div>;
+    const { loading, error, data } = useQuery<{ competition: { matches: Match[] } }>(QUERY, { variables: { id, status, from: date } });
 
     return (
-        <Suspense>
-            <div className="p-2">
-                <div className="flex flex-col gap-3 mt-4 p-2 border border-secondary-900/50">
-                    <DateAndStatusFilter />
-                    <MatchesContainer matches={data.competition.matches} />
-                </div>
+        <div className="p-2">
+            <div className="flex flex-col gap-3 mt-4 p-2 border border-secondary-900/50">
+                <DateAndStatusFilter setDate={setDate} setMatchStatus={setStatus} />
+                <MatchesContainer matches={data?.competition?.matches} loading={loading} error={Boolean(error)} />
             </div>
-        </Suspense>
+        </div>
     )
 };
 
