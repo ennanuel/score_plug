@@ -73,7 +73,7 @@ const Matches = () => {
       <h2 className="col-span-2 font-bold text-2xl mb-2 mx-3 mt-4">Match Predictions</h2>
       <DateAndStatusFilter setDate={setDate} setMatchStatus={setStatus} />
       {
-        true ?
+        loading ?
           <div className="mt-4">
             <PredictionLoading size={6} />
           </div> :
