@@ -68,7 +68,7 @@ function Home() {
       </div>
 
       {
-        true ?
+        loading ?
           <CompetitionWithMatchesLoading size={4} /> :
           <ul className="flex flex-col">
             {
