@@ -67,9 +67,6 @@ const CompetitionInfo = () => {
 
     return (
         <div className="mt-2">
-            <h2 className="text-base font-bold m-4">Standings</h2>
-            <Standings competition={data.competition} />
-
             <h2 className="text-base font-bold m-4 mt-6">Details</h2>
             <div className="text-xs m-2 mt-4 border border-white-100/5 rounded-md">
                 <div className="flex justify-between items-end border-b border-white-100/5 p-2">
@@ -90,6 +87,8 @@ const CompetitionInfo = () => {
                 </div>
             </div>
 
+            <h2 className="text-base font-bold">Standings</h2>
+            <Standings competition={data.competition} />
         </div>
     )
 };
