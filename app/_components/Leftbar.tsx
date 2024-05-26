@@ -48,7 +48,7 @@ const Leftbar = () => {
           <Link href="/competitions" className="text-xs text-secondary-700 hover:text-secondary-500">More</Link>
         </div>
         {
-          true ?
+          loading ?
             <CompetitionLoading size={5} small={true} /> :
             <ul className="flex mt-4 flex-col rounded-md overflow-hidden border border-secondary-900/50">
               {
