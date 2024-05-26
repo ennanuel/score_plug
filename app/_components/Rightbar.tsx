@@ -138,7 +138,7 @@ const Rightbar = () => {
       <div className="p-3">
         <h2 className="font-bold text-white-300 mb-4">Featured Prediction</h2>
         {
-          true ?
+          loading ?
             <PredictionLoading size={1} full={true} /> :
             featuredPrediction ?
               <MatchPredictionCard {...featuredPrediction as Match} /> :
