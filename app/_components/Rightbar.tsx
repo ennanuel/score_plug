@@ -117,8 +117,10 @@ const Rightbar = () => {
 
   const { featuredMatch, featuredPrediction } = useMemo(() => data ?
     {
-      featuredPrediction: { ...(data.matches.matches[0]), ...(socketData.matches[data.matches.matches[0]?._id] || {}) },
-      featuredMatch: { ...(data.matchPredictions.matches[0]), ...(socketData.matches[data.matchPredictions.matches[0]?._id] || {}) },
+      featuredPrediction: data.matches.matches[0] &&
+        { ...(data.matches.matches[0]), ...(socketData.matches[data.matches.matches[0]?._id] || {}) },
+      featuredMatch: data.matchPredictions.matches[0] &&
+        { ...(data.matchPredictions.matches[0]), ...(socketData.matches[data.matchPredictions.matches[0]?._id] || {}) },
     } :
     {},
     [data, socketData]
