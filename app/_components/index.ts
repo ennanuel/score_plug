@@ -16,6 +16,7 @@ import CompetitionWithMatches from './CompetitionWithMatches';
 import MatchesContainer from './MatchesContainer';
 import LoadingMessage from './LoadingMessage';
 import ErrorMessage from './ErrorMessage';
+import NothingWasFound from './NothingWasFound';
 
 export {
     Header,
@@ -35,5 +36,6 @@ export {
     CompetitionWithMatches,
     MatchesContainer,
     LoadingMessage,
-    ErrorMessage
+    ErrorMessage,
+    NothingWasFound
 }
