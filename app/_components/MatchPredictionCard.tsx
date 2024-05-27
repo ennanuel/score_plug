@@ -28,8 +28,10 @@ function MatchPredictionCard({ _id, homeTeam, competition, awayTeam, utcDate, st
               </div>
               <span className={`${minute != 'FT' ? 'bg-highlight-700/20 text-highlight-500' : 'bg-secondary-900/30 text-secondary-800'} font-semibold flex-1 flex items-center justify-center`}>{/\w/i.test(minute) ? minute : `${minute}'`}</span>
             </div> :
-            <p className="text-2xl font-bold flex flex-col p-2 border-x border-secondary-900/50">
-              <span className="text-2xl font-bold flex-[2] flex items-center justify-center border-b border-secondary-900/50">V</span>
+            <p className="text-2xl font-bold flex flex-col border-x border-secondary-900/50">
+              <span className="text-2xl font-bold flex-[2] flex items-center justify-center border-b border-secondary-900/50">
+                {status === 'TIMED' ? 'VS' : status.substring(0, 4)}
+              </span>
               <span className="text-sm text-secondary-700 flex-1 flex items-center justify-center">{time}</span>
             </p>
         }
