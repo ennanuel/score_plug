@@ -46,7 +46,7 @@ const TeamDetailsHeader = () => {
         loading ?
           <DetailsHeaderLoading /> :
           data ?
-            <div className="relative mx-4 border border-secondary-900/50 rounded-md">
+            <div className="relative mx-4 border border-secondary-900/50 rounded-md m-4">
               <div style={{ background: `linear-gradient(45deg, ${teamColors[0]}, ${teamColors[1]})` }} className="opacity-30 rounded-lg absolute top-0 left-0 w-full h-full" />
               <div className="relative py-4 pr-3 flex items-center gap-2 m-2 p-2">
                 <button className="h-8 aspect-square rounded-full hover:bg-secondary-500/50">
