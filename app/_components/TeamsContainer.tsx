@@ -18,14 +18,13 @@ function TeamsContainer({ teams, loading, error }: { teams: Team[] | undefined, 
         }
     ) || [], [socketData, teams]);
     
-    if (error) return <ErrorMessage />;
+    if (loading) return <TeamLoading size={6} />;
+    else if (error) return <ErrorMessage />;
 
     return (
         <ul className='grid grid-cols-5 gap-4 overflow-hidden'>
             {
-                loading ?
-                    <TeamLoading size={6} /> :
-                    teamsToView.map((team) => <TeamCard {...team} />)
+                teamsToView.map((team) => <TeamCard {...team} />)
             }
         </ul>
     )
