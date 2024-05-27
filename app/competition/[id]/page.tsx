@@ -1,11 +1,12 @@
 "use client";
 
 import { gql, useQuery } from '@apollo/client';
-import { ErrorMessage, LoadingMessage, Standings } from '../../_components';
+import { ErrorMessage, NothingWasFound, Standings } from '../../_components';
 import { useParams } from 'next/navigation';
 import { useMemo } from 'react';
 import { getDateFormat } from '@/app/_utils/dateTime';
 import { Competition } from '@/types/global.type';
+import { DetailsLoading } from '@/app/_components/loading';
 
 const QUERY = gql`
     query GetCompetitions($id: ID!) {
@@ -61,13 +62,12 @@ const CompetitionInfo = () => {
     const startDate = useMemo(() => getDateFormat(data?.competition?.currentSeason?.startDate || ''), [data]);
     const endDate = useMemo(() => getDateFormat(data?.competition?.currentSeason?.endDate || ''), [data]);
 
-    if (loading) return <LoadingMessage />;
+    if (loading) return <DetailsLoading />;
     else if (error) return <ErrorMessage />;
-    else if (!data) return <div>Nothing was found</div>;
+    else if (!data) return <NothingWasFound />;
 
     return (
-        <div className="mt-2">
-            <h2 className="text-base font-bold m-4 mt-6">Details</h2>
+        <div className="mt-2 flex flex-col">
             <div className="text-xs m-2 mt-4 border border-white-100/5 rounded-md">
                 <div className="flex justify-between items-end border-b border-white-100/5 p-2">
                     <span className="text-gray-400">Region</span>
@@ -87,7 +87,7 @@ const CompetitionInfo = () => {
                 </div>
             </div>
 
-            <h2 className="text-base font-bold">Standings</h2>
+            <h2 className="text-base font-bold mt-6">Team Standings</h2>
             <Standings competition={data.competition} />
         </div>
     )
