@@ -51,15 +51,11 @@ const QUERY = gql`
 const TeamMatches = () => {
     const { id } = useParams();
     const { loading, error, data } = useQuery<{ team: Team }>(QUERY, { variables: { id } });
-
-    if (loading) return <LoadingMessage />;
-    else if (error) return <ErrorMessage />;
-    else if (!data) return <div>Nothing was found!</div>;
     
     return (
         <div className="p-2 flex flex-col gap-4">
             <DateAndStatusFilter />
-            <MatchesContainer matches={data.team.matches} />
+            <MatchesContainer loading={loading} error={Boolean(error)} matches={data?.team?.matches} />
         </div>
     )
 }
