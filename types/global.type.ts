@@ -95,5 +95,6 @@ export type Team = {
     coach: Referee;
     squad: Player[];
     hasOngoingMatch: boolean;
-    matches: Match[]
+    matches: Match[];
+    competitions: Competition[];
 };
