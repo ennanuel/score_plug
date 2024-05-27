@@ -3,7 +3,7 @@
 import { gql, useQuery } from '@apollo/client';
 
 import { TEAM_FORM } from '@/app/_assets/constants/team';
-import { ErrorMessage, FormBox, MatchesContainer, NothingWasFound } from '@/app/_components';
+import { ErrorMessage, FormBox, MatchesContainer, NothingWasFound, TeamForm } from '@/app/_components';
 
 import { Match, Team } from '@/types/global.type';
 import { useParams } from 'next/navigation';
@@ -80,26 +80,9 @@ const QUERY = gql`
     }
 `;
 
-function getTeamForm(matches: Match[] | undefined, teamId: string | string[]): { outcome: string; teamCrest: string; }[] {
-    if (!matches) return [];
-
-    const reorderedMatches: { main: { score: number }, other: { score: number, crest: string } }[] = matches.map(match => ({
-        main: String(match.homeTeam._id) == teamId ? { score: match.score.fullTime.home } : { score: match.score.fullTime.away },
-        other: String(match.homeTeam._id) == teamId ? { score: match.score.fullTime.away, crest: String(match.awayTeam.crest) } : { score: match.score.fullTime.home, crest: String(match.homeTeam.crest) }
-    }));
-
-    const teamFormArray = reorderedMatches.map(match => ({
-        outcome: match.main.score > match.other.score ? 'W' : match.main.score < match.other.score ? 'L' : 'D',
-        teamCrest: match.other.crest
-    }));
-
-    return teamFormArray;
-}
-
 const TeamInfo = () => {
     const { id } = useParams();
     const { loading, error, data } = useQuery<{ team: Team }>(QUERY, { variables: { id } });
-    const teamForm = useMemo(() => getTeamForm(data?.team?.matches, id), [data]);
 
     if (loading) return <DetailsLoading />;
     else if (error) return <ErrorMessage />;
@@ -161,9 +144,7 @@ const TeamInfo = () => {
                 
                 <li className="flex justify-between items-end gap-3 p-2 border-t border-secondary-900/50">
                     <p className="text-xs font-semibold">Team Form</p>
-                    <div className="flex gap-2 items-center flex-wrap">
-                        {teamForm.map((form, index) => <FormBox key={index} {...form} />)}
-                    </div>
+                    <TeamForm matches={data.team.matches} teamId={String(id)} />
                 </li>
         
                 <li className="flex justify-between items-center gap-3 p-2 px-4 border-t border-secondary-900/50">
