@@ -1,7 +1,6 @@
 "use client";
 
-import { DateAndStatusFilter, LoadingMessage, ErrorMessage, MatchesContainer } from "@/app/_components/";
-import { Suspense } from "react";
+import { DateAndStatusFilter, MatchesContainer } from "@/app/_components/";
 import { gql, useQuery } from "@apollo/client"
 import { useParams } from "next/navigation";
 import { Team } from "@/types/global.type";
