@@ -49,7 +49,7 @@ const QUERY = gql`
                 goalsConceded
             }
 
-            matches(status: "FINISHED") {
+            matches {
                 _id
                 utcDate
                 status
@@ -142,8 +142,8 @@ const TeamInfo = () => {
                     <span className="text-sm font-semibold">{data.team.matchesPlayed}</span>
                 </li>
                 
-                <li className="flex justify-between items-end gap-3 p-2 border-t border-secondary-900/50">
-                    <p className="text-xs font-semibold">Team Form</p>
+                <li className="flex justify-between items-end gap-3 p-2 px-4 border-t border-secondary-900/50">
+                    <p className="text-xs">Team Form</p>
                     <TeamForm matches={data.team.matches} teamId={String(id)} />
                 </li>
         
