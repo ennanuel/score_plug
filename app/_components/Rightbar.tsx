@@ -110,8 +110,6 @@ const QUERY = gql`
   }
 `;
 
-const getFeaturedMatchAndPrediction = (data: QueryResult) => ({})
-
 const Rightbar = () => {
   const { socketData } = useContext(SocketContext);
 
@@ -126,6 +124,8 @@ const Rightbar = () => {
     [data, socketData]
   );
 
+  console.log(data);
+
   if (error) return <div className="col-span-1"><ErrorMessage /></div>;
 
   return (
@@ -135,7 +135,7 @@ const Rightbar = () => {
         {
           loading ?
             <PredictionLoading size={1} full={true} /> :
-            Boolean(featuredMatch) ?
+            featuredMatch ?
               <FeaturedMatchCard {...(featuredMatch as Match)} /> :
               <p className="border border-secondary-900/50 p-6 h-[160px]">Nothing to show</p>
         }
@@ -146,7 +146,7 @@ const Rightbar = () => {
         {
           loading ?
             <PredictionLoading size={1} full={true} /> :
-            Boolean(featuredPrediction) ?
+            featuredPrediction ?
               <MatchPredictionCard {...(featuredPrediction as Match)} /> :
               <p className="border border-secondary-900/50 p-6 h-[160px]">Nothing to show</p>
         }
