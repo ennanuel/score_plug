@@ -87,7 +87,7 @@ const CompetitionInfo = () => {
                 </div>
             </div>
 
-            <h2 className="text-base font-bold mt-6">Team Standings</h2>
+            <h2 className="text-base font-bold mt-2 m-4">Team Standings</h2>
             <Standings competition={data.competition} />
         </div>
     )
