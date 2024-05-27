@@ -89,7 +89,7 @@ const TeamInfo = () => {
     else if (!data) return <NothingWasFound />;
 
     return (
-        <div className="mt-4">
+        <div className="p-4 flex flex-col gap-4">
             <ul className="border border-secondary-900/50 rounded-md">
                 <li className="flex items-center justify-between gap-4 p-2 border-t border-secondary-900/50">
                     <span className="text-xs font-semibold">Region</span>
