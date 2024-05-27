@@ -14,6 +14,7 @@ import Standings from './standings';
 import DateAndStatusFilter from './DateAndStatusFilter';
 import CompetitionWithMatches from './CompetitionWithMatches';
 import MatchesContainer from './MatchesContainer';
+import TeamForm from './TeamForm';
 import LoadingMessage from './LoadingMessage';
 import ErrorMessage from './ErrorMessage';
 import NothingWasFound from './NothingWasFound';
@@ -35,6 +36,7 @@ export {
     DateAndStatusFilter,
     CompetitionWithMatches,
     MatchesContainer,
+    TeamForm,
     LoadingMessage,
     ErrorMessage,
     NothingWasFound
