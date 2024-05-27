@@ -17,14 +17,15 @@ function TeamsContainer({ teams, loading, error }: { teams: Team[] | undefined, 
             return updatedTeam;
         }
     ) || [], [socketData, teams]);
-
-    if (loading) return <TeamLoading size={6} />;
-    else if (error) return <ErrorMessage />;
+    
+    if (error) return <ErrorMessage />;
 
     return (
-        <ul className='flex flex-col rounded-md border border-white-100/5 overflow-hidden'>
+        <ul className='grid grid-cols-5 gap-4 overflow-hidden'>
             {
-                teamsToView.map((team) => <TeamCard {...team} />)
+                loading ?
+                    <TeamLoading size={6} /> :
+                    teamsToView.map((team) => <TeamCard {...team} />)
             }
         </ul>
     )
