@@ -49,7 +49,7 @@ const QUERY = gql`
                 goalsConceded
             }
 
-            matches(status: "FINISHED", limit: 6) {
+            matches(status: "FINISHED") {
                 _id
                 utcDate
                 status
