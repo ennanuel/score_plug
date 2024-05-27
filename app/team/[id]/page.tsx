@@ -13,9 +13,6 @@ import { loadImage } from "@/app/_utils/competition";
 import Link from 'next/link';
 import Image from 'next/image';
 import { BsDot } from 'react-icons/bs';
-import { MdLink } from 'react-icons/md';
-import { useMemo } from 'react';
-import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import { FiExternalLink } from 'react-icons/fi';
 
 const QUERY = gql`
