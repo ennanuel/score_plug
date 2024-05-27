@@ -40,7 +40,7 @@ const Competitions = () => {
     })), [socketData, data])
 
     return (
-        <div className="p-4">
+        <div className="p-4 flex flex-col gap-6">
             <div className="flex items-center gap-4 justify-between">
                 <h1 className="font-bold">Leagues and Competitions</h1>
                 <MdStarOutline size={20} />
@@ -48,13 +48,9 @@ const Competitions = () => {
             {
                 loading ?
                     error ?
-                        <div className="mt-6">
-                            <ErrorMessage /> 
-                        </div>:
-                        <div className="mt-6">
-                            <CompetitionLoading size={6} />
-                        </div> :
-                    <ul className="flex flex-col mt-6 border border-secondary-900/50 rounded-md overflow-hidden">
+                        <ErrorMessage /> :
+                        <CompetitionLoading size={6} /> :
+                    <ul className="flex flex-col border border-secondary-900/50 rounded-md overflow-hidden">
                         {
                             competitions?.map((competition, index) => <CompetitionCard {...competition} key={index} />)
                         }
