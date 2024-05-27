@@ -31,7 +31,7 @@ function FeaturedMatchCard({ _id, competition, homeTeam, awayTeam, utcDate, stat
                             <span className={`${minute == 'FT' ? 'text-secondary-700 bg-secondary-900/30' : 'bg-highlight-700/20 text-highlight-500'} flex-1 font-semibold`}>{/\w/i.test(minute) ? minute : `${minute}'`}</span>
                         </div> :
                         <p className="text-2xl border-x border-secondary-900/50 font-bold flex items-center justify-center">
-                            <span>V</span>
+                            {status === 'TIMED' ? 'VS' : status.substring(0, 4)}
                         </p>
                 }
                 <div className="flex flex-col justify-between items-center gap-2 p-2">
