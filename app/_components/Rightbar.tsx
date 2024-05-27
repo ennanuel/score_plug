@@ -126,8 +126,6 @@ const Rightbar = () => {
     [data, socketData]
   );
 
-  console.log(featuredMatch, featuredPrediction);
-
   if (error) return <div className="col-span-1"><ErrorMessage /></div>;
 
   return (
@@ -137,7 +135,7 @@ const Rightbar = () => {
         {
           loading ?
             <PredictionLoading size={1} full={true} /> :
-            featuredMatch ?
+            Boolean(featuredMatch) ?
               <FeaturedMatchCard {...(featuredMatch as Match)} /> :
               <p className="border border-secondary-900/50 p-6 h-[160px]">Nothing to show</p>
         }
@@ -148,7 +146,7 @@ const Rightbar = () => {
         {
           loading ?
             <PredictionLoading size={1} full={true} /> :
-            featuredPrediction ?
+            Boolean(featuredPrediction) ?
               <MatchPredictionCard {...(featuredPrediction as Match)} /> :
               <p className="border border-secondary-900/50 p-6 h-[160px]">Nothing to show</p>
         }
