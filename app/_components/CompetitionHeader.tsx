@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { MdKeyboardArrowLeft, MdStar } from 'react-icons/md';
+import { MdArrowBack, MdKeyboardArrowLeft, MdStar } from 'react-icons/md';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import AltHeader from './AltHeader';
@@ -43,11 +43,24 @@ const CompetitionHeader = () => {
         loading ?
           <DetailsHeaderLoading /> :
           data ?
-            <div className="bg-gradient-to-r m-2 from-red-900/50 to-red-900/20 py-4 px-3 flex items-center gap-2 rounded-md">
-              <button className="h-8 aspect-square rounded-full hover:bg-secondary-400/10">
-                <MdKeyboardArrowLeft size={20} />
+            <div className="relative bg-gradient-to-r m-2 from-red-900/50 to-red-900/20 py-4 px-3 flex items-center gap-2 rounded-md overflow-clip border border-secondary-900/50">
+              <Image
+                src={data.competition.emblem || String(process.env.NEXT_IMAGE_URL)}
+                loader={loadImage}
+                alt=""
+                width={150}
+                className="aspect-square object-contain absolute top-0 left-0 translate-x-[-50%] translate-y-[-50%] blur-[40px]"
+              />
+              <button className="h-8 aspect-square rounded-full hover:bg-secondary-900/50">
+                <MdArrowBack size={20} />
               </button>
-              <Image src={data.competition.emblem || String(process.env.NEXT_IMAGE_URL)} loader={loadImage} alt="Competition Emblem" width={60} className="aspect-square object-contain" />
+              <Image
+                src={data.competition.emblem || String(process.env.NEXT_IMAGE_URL)}
+                loader={loadImage}
+                alt={`${data.competition.name} emblem`}
+                width={60}
+                className="aspect-square object-contain"
+              />
               <div className="flex-1 flex-col">
                 <p className="font-bold">{data.competition.name}</p>
                 <p className="text-sm text-secondary-600">{data.competition.area.name}</p>
