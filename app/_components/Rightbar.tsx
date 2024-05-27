@@ -124,7 +124,7 @@ const Rightbar = () => {
     [data, socketData]
   );
 
-  console.log(data);
+  console.log(Boolean(featuredMatch), Boolean(featuredPrediction), featuredMatch, featuredPrediction);
 
   if (error) return <div className="col-span-1"><ErrorMessage /></div>;
 
