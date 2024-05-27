@@ -4,9 +4,10 @@ import { useState, useMemo } from "react";
 import { describeArc } from "@/app/_utils/shape";
 import { useParams } from "next/navigation";
 import { gql, useQuery } from "@apollo/client";
-import { ErrorMessage, LoadingMessage } from "@/app/_components";
+import { ErrorMessage, LoadingMessage, NothingWasFound } from "@/app/_components";
 
 import { Match } from "@/types/global.type";
+import { DetailsLoading } from "@/app/_components/loading";
 
 const QUERY = gql`
   query GetMatchPrediction($id: ID!) {
@@ -99,7 +100,7 @@ const QUERY = gql`
   }
 `;
 
-const goalsOutcome = {
+const GOALS_OUTCOME = {
   "_1": 0.5,
   "_2": 1.5,
   "_3": 2.5,
@@ -119,9 +120,9 @@ const MatchPrediction = () => {
   const awayArc = useMemo(() => data ? describeArc({ x: 45, y: 45, radius: 40, startAngle: 0, endAngle: convertToPercentageOf360(data?.match.predictions[timePeriod].outcome?.awayWin)}) : '360', [data, timePeriod]);
   const drawArc = useMemo(() => data ? describeArc({ x: 45, y: 45, radius: 40, startAngle: 0, endAngle: convertToPercentageOf360(data?.match.predictions[timePeriod].outcome?.draw)}) : '360', [data, timePeriod]);
 
-  if (loading) return <LoadingMessage />;
+  if (loading) return <DetailsLoading />;
   else if (error) return <ErrorMessage />;
-  else if (!data) return <div>Nothing was found</div>;
+  else if (!data) return <NothingWasFound />;
 
   return (
     <div className="mt-2 p-2">
@@ -172,13 +173,13 @@ const MatchPrediction = () => {
                 .map(([key, value]) => (
                   <li className="flex flex-col gap-1 p-4 border-b last:border-b-0 border-white-100/10">
                     <div className="flex items-center gap-2">
-                      <p className="w-14 text-xs text-secondary-600">Ov. {goalsOutcome[key as keyof typeof goalsOutcome]}</p>
+                      <p className="w-14 text-xs text-secondary-600">Ov. {GOALS_OUTCOME[key as keyof typeof GOALS_OUTCOME]}</p>
                       <div style={{ width: `calc(${value.over}% - 60px)` }} className="w-full min-w-[60px] h-[25px] flex items-center justify-end border border-highlight-400 bg-highlight-400/10 px-2">
                         <p className="text-highlight-400 font-semibold text-xs">{value.over?.toFixed(2)} <span className="font-normal">%</span></p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
-                      <p className="w-14 text-xs text-secondary-600">Un. {goalsOutcome[key as keyof typeof goalsOutcome]}</p>
+                      <p className="w-14 text-xs text-secondary-600">Un. {GOALS_OUTCOME[key as keyof typeof GOALS_OUTCOME]}</p>
                       <div style={{ width: `calc(${value.under}% - 60px)` }} className="w-full min-w-[60px]  h-[25px] flex items-center justify-end border border-highlight-600 bg-highlight-600/10 px-2">
                         <p className="text-highlight-600 font-semibold text-xs">{value.under?.toFixed(2)} <span className="font-normal">%</span></p>
                       </div>
