@@ -2,10 +2,9 @@
 
 import { gql, useQuery } from '@apollo/client';
 
-import { TEAM_FORM } from '@/app/_assets/constants/team';
-import { ErrorMessage, FormBox, MatchesContainer, NothingWasFound, TeamForm } from '@/app/_components';
+import { ErrorMessage, MatchesContainer, NothingWasFound, TeamForm } from '@/app/_components';
 
-import { Match, Team } from '@/types/global.type';
+import { Team } from '@/types/global.type';
 import { useParams } from 'next/navigation';
 import { DetailsLoading } from '@/app/_components/loading';
 
@@ -17,6 +16,7 @@ import { BsDot } from 'react-icons/bs';
 import { MdLink } from 'react-icons/md';
 import { useMemo } from 'react';
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
+import { FiExternalLink } from 'react-icons/fi';
 
 const QUERY = gql`
     query GetTeamDetails($id: ID!) {
@@ -103,9 +103,9 @@ const TeamInfo = () => {
                     <span className="text-xs text-secondary-600">{data.team.venue || "Not available"}</span>
                 </li>
                 <li className="p-2 border-t border-secondary-900/50">
-                    <a href={data.team.website || "#"} className="flex items-center justify-between group gap-4">
+                    <a href={data.team.website || "#"} target={data.team.website && '_blank'} className="flex items-center justify-between group gap-4">
                         <span className="font-semibold text-xs">Website</span>
-                        {data.team.website ? <MdLink size={20} /> : <span className="text-xs text-secondary-600 group-hover:underline">Not Available</span>}
+                        {data.team.website ? <FiExternalLink size={20} /> : <span className="text-xs text-secondary-600 group-hover:underline">Not Available</span>}
                     </a>
                 </li>
                 <li className="flex items-center justify-between gap-4 p-2 border-t border-secondary-900/50">
