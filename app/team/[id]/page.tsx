@@ -127,7 +127,7 @@ const TeamInfo = () => {
                 <li className="flex items-center flex-wrap gap-2 p-2 border-t border-secondary-900/50">
                     {
                         data.team.competitions.map((competition) => (
-                            <Link href={`/competition/${competition._id}`} className="flex items-center gap-2 px-2 h-[40px] border border-secondary-900/50">
+                            <Link href={`/competition/${competition._id}`} className="flex items-center gap-2 px-2 h-[40px] border border-secondary-900/50 hover:bg-secondary-900/50">
                                 <Image src={competition.emblem} width={25} height={25} loader={loadImage} alt={`${data.team.name} emblem`} className="object-contain aspect-square" />
                                 <span className='text-xs text-secondary-600'>{competition.name}</span>
                             </Link>
