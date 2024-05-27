@@ -26,7 +26,7 @@ const CompetitionTeams = () => {
   const { loading, error, data } = useQuery<{ competition: Competition }>(QUERY, { variables: { id } });
 
   return (
-    <ul className="grid grid-cols-5 gap-4 p-4">
+    <ul className="p-4">
       <TeamsContainer teams={data?.competition?.teams} loading={loading} error={Boolean(error)} />
     </ul>
   )
