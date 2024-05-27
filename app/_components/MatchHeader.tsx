@@ -9,14 +9,13 @@ import { MATCH_LINKS } from '../_assets/constants/match';
 
 import { gql, useQuery } from '@apollo/client';
 import { Match } from "@/types/global.type";
-import LoadingMessage from './LoadingMessage';
 import ErrorMessage from './ErrorMessage';
 import { useContext, useMemo } from 'react';
 import { getDateFormat, getTimeFormat, getTimeRemaining } from '../_utils/dateTime';
 import { getMatchTeamColors } from "../_utils/colors";
-import { FaAngleLeft } from "react-icons/fa";
 import { SocketContext } from "../SocketContext";
 import { DetailsHeaderLoading } from "./loading";
+import { MdArrowBack } from "react-icons/md";
 
 const query = gql`
   query GetMatchByID($id: ID!) {
@@ -95,7 +94,7 @@ const MatchHeader = () => {
                 className="absolute top-0 left-0 w-full h-full opacity-30 rounded-md"
               ></div>
               <button className="absolute top-2 left-2 flex items-center justify-center w-6 h-6 rounded-full bg-black-900/50 hover:bg-secondary-900 text-secondary-400">
-                <FaAngleLeft size={20} />
+                <MdArrowBack size={20} />
               </button>
               {
                 /in_play|paused|finished/i.test(matchData.status) ?
