@@ -58,7 +58,7 @@ const Leftbar = () => {
                       <Image loader={loadImage} src={competition.emblem || String(process.env.NEXT_IMAGE_URL)} width={25} height={25} alt={competition.name} className="aspect-square object-contain" />
                       {competition.recentMatches.hasLiveMatch ? <span className="mr-[-5px] bg-highlight-500 text-xs w-[3px] h-[10px] rounded-md"></span> : null}
                       <span className={`text-sm font-semibold flex-1 ${competition.recentMatches.hasLiveMatch ? 'text-highlight-500' : 'text-secondary-600'}`}>{competition.name}</span>
-                      <span className="text-secondary-700 text-xs">{competition.area.name}</span>
+                      <span className="text-secondary-700 text-xs">{competition?.area?.name}</span>
                     </Link>
                   </li>
                 ))
