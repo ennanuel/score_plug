@@ -43,7 +43,7 @@ const CompetitionHeader = () => {
         loading ?
           <DetailsHeaderLoading /> :
           data ?
-            <div className="relative bg-gradient-to-r m-2 from-red-900/50 to-red-900/20 py-4 px-3 flex items-center gap-2 rounded-md overflow-clip border border-secondary-900/50">
+            <div className="relative py-4 px-3 flex items-center gap-2 rounded-md overflow-clip border border-secondary-900/50">
               <Image
                 src={data.competition.emblem || String(process.env.NEXT_IMAGE_URL)}
                 loader={loadImage}
