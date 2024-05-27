@@ -5,8 +5,9 @@ import Image from "next/image";
 import { Match } from '@/types/global.type';
 import { gql, useQuery } from '@apollo/client';
 import { useParams } from 'next/navigation';
-import { ErrorMessage, LoadingMessage } from '@/app/_components';
+import { ErrorMessage, NothingWasFound } from '@/app/_components';
 import { loadImage } from '@/app/_utils/competition';
+import { DetailsLoading } from '@/app/_components/loading';
 
 
 const QUERY = gql`
@@ -41,9 +42,9 @@ const MatchInfo = () => {
     variables: { id }
   });
 
-  if (loading) return <LoadingMessage />;
+  if (loading) return <DetailsLoading />;
   else if (error) return <ErrorMessage />;
-  else if (!data) return null;
+  else if (!data) return <NothingWasFound />;
 
   return (
     <div className='p-4'>
@@ -81,7 +82,7 @@ const MatchInfo = () => {
         <hr className="border-none m-auto mt-2 bg-white-100/10 outline-none h-[1px] w-full" />
         <div className="flex items-center justify-between">
           <h3 className='font-semibold text-sm text-secondary-500 mt-2'>Match Venue</h3>
-          <p className="text-sm text-secondary-800">{data.match.venue || 'Not available'}</p>
+          <p className="text-xs text-secondary-800">{data.match.venue || 'Venue not available'}</p>
         </div>
       </div>
 
@@ -101,7 +102,7 @@ const MatchInfo = () => {
                   </p>
               </li>
             )) :
-            <div className="flex items-center justify-center p-4 border text-sm font-semibold text-secondary-800 border-white-100/5 rounded-md">
+            <div className="flex items-center justify-center p-4 border text-sm font-semibold text-secondary-800 border-secondary-900/50 rounded-md">
               <span>Referees not available</span>
             </div>
         }
