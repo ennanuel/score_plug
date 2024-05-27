@@ -1,7 +1,7 @@
 "use client";
 
 import { FaAngleLeft } from 'react-icons/fa';
-import { MdStarOutline } from 'react-icons/md';
+import { MdArrowLeft, MdStarOutline } from 'react-icons/md';
 import Image from "next/image";
 
 import { useParams } from 'next/navigation';
@@ -10,7 +10,6 @@ import { getHeaderLinks } from '../_utils/link';
 import { TEAM_LINKS } from '../_assets/constants/team';
 import { gql, useQuery } from '@apollo/client';
 import { Team } from '@/types/global.type';
-import LoadingMessage from './LoadingMessage';
 import ErrorMessage from './ErrorMessage';
 import { useMemo } from 'react';
 import { getMatchTeamColors } from '../_utils/colors';
@@ -47,12 +46,11 @@ const TeamDetailsHeader = () => {
         loading ?
           <DetailsHeaderLoading /> :
           data ?
-            
-            <div className="relative mx-4">
+            <div className="relative mx-4 border border-secondary-900/50 rounded-md">
               <div style={{ background: `linear-gradient(45deg, ${teamColors[0]}, ${teamColors[1]})` }} className="opacity-30 rounded-lg absolute top-0 left-0 w-full h-full" />
               <div className="relative py-4 pr-3 flex items-center gap-2 m-2 p-2">
-                <button className="h-8 aspect-square rounded-full hover:bg-secondary-400/10">
-                  <FaAngleLeft size={20} />
+                <button className="h-8 aspect-square rounded-full hover:bg-secondary-500/50">
+                  <MdArrowLeft size={20} />
                 </button>
                 <Image src={data.team.crest || String(process.env.NEXT_IMAGE_URL)} alt="Clug Emblem" width={80} className="aspect-square object-contain" />
                 <div className="flex-1 flex-col">
