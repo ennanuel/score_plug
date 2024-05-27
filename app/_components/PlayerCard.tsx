@@ -1,14 +1,24 @@
-import { Player } from '@/types/player.type';
-import Image from "next/image";
+"use client";
 
-const PlayerCard = ({ name, nationality, shirtNumber }: Player) => {
+import { Player } from '@/types/player.type';
+import { useMemo } from 'react';
+
+const PlayerCard = ({ name, nationality, position, dateOfBirth }: Player) => {
+    const age = useMemo(() => (new Date()).getFullYear() - (new Date(dateOfBirth)).getFullYear(), []);
+
     return (
-        <div className="flex flex-col items-center justify-center p-3 gap-2 bg-primary-600 rounded-md hover:bg-primary-500">
-            <div className="w-full aspect-square rounded-full bg-white-900/50 relative font-bold text-white text-2xl">
-                {shirtNumber}
+        <div className="flex items-center p-2 gap-3 bg-primary-600 hover:bg-primary-500 border-b last:border-transparent border-secondary-900/50">
+            <div className="h-[30px] aspect-square rounded-full bg-white-900/50 relative font-bold text-white text-2xl" />
+            <div className="flex flex-col gap-1">
+                <div className="flex items-center justify-between gap-4">
+                    <p className="w-full font-semibold text-secondary-600 truncate text-sm">{name}</p>
+                    <p className="w-full text-secondary-600 truncate text-xs">{nationality}</p>
+                </div>
+                <div className="flex items-center justify-between gap-4">
+                    <p className="w-full text-secondary-600 truncate text-xs font-semibold">{position}</p>
+                    <p className="w-full text-secondary-600 truncate text-xs">{age + age === 1 ? '' : 's'}</p>
+                </div>
             </div>
-            <p className="text-[.65rem] text-secondary-700 mt-2">{nationality}</p>
-            <p className="w-full font-semibold text-secondary-600 truncate text-sm">{name}</p>
         </div>
     )
 };
