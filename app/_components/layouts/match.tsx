@@ -40,7 +40,7 @@ const MatchLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   const { loading, error, data } = useQuery<{ similarMatches: Match[] }>(QUERY, { variables: { id } });
 
   return (
-    <div className='border border-secondary-900/50'>
+    <div>
       <MatchHeader />
       {children}
       <section>
