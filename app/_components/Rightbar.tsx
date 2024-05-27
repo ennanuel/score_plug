@@ -2,7 +2,6 @@
 
 import { gql, useQuery } from "@apollo/client";
 import { Match } from "@/types/global.type";
-import LoadingMessage from "./LoadingMessage";
 import ErrorMessage from "./ErrorMessage";
 import MatchPredictionCard from "./MatchPredictionCard";
 import FeaturedMatchCard from "./FeaturedMatchCard";
@@ -10,6 +9,11 @@ import { useContext, useMemo } from "react";
 import { SocketContext } from "../SocketContext";
 import { PredictionLoading } from "./loading";
 
+
+type QueryResult = {
+  matches: { matches: Match[] };
+  matchPredictions: {matches: Match[]};
+}
 
 const QUERY = gql`
   query GetMatchAndPrediction {
@@ -104,12 +108,14 @@ const QUERY = gql`
       }
     }
   }
-`
+`;
+
+const getFeaturedMatchAndPrediction = (data: QueryResult) => ({})
 
 const Rightbar = () => {
   const { socketData } = useContext(SocketContext);
 
-  const { loading, error, data } = useQuery<{ matchPredictions: { matches: Match[] }, matches: { matches: Match[] } }>(QUERY);
+  const { loading, error, data } = useQuery<QueryResult>(QUERY);
 
   const { featuredMatch, featuredPrediction } = useMemo(() => data ?
     {
@@ -120,6 +126,8 @@ const Rightbar = () => {
     [data, socketData]
   );
 
+  console.log(featuredMatch, featuredPrediction);
+
   if (error) return <div className="col-span-1"><ErrorMessage /></div>;
 
   return (
@@ -127,7 +135,7 @@ const Rightbar = () => {
       <div className="border-b border-secondary-900/50 p-3">
         <h2 className="font-bold text-white-300 mb-4">Featured Match</h2>
         {
-          true ?
+          loading ?
             <PredictionLoading size={1} full={true} /> :
             featuredMatch ?
               <FeaturedMatchCard {...(featuredMatch as Match)} /> :
@@ -141,7 +149,7 @@ const Rightbar = () => {
           loading ?
             <PredictionLoading size={1} full={true} /> :
             featuredPrediction ?
-              <MatchPredictionCard {...featuredPrediction as Match} /> :
+              <MatchPredictionCard {...(featuredPrediction as Match)} /> :
               <p className="border border-secondary-900/50 p-6 h-[160px]">Nothing to show</p>
         }
       </div>
