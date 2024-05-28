@@ -36,11 +36,13 @@ const TeamPlayers = () => {
   else if (!data) return <NothingWasFound />;
   
   return (
-    <ul className="flex flex-col border border-secondary-900/50 rounded-md overflow-clip">
-      {
-        data.team.squad.map((player, index) => (<li key={index}><PlayerCard {...player} /></li>))
-      }
-    </ul>
+    <div className="p-4">
+      <ul className="flex flex-col border border-secondary-900/50 rounded-md overflow-clip">
+        {
+          data.team.squad.map((player, index) => (<li key={index}><PlayerCard {...player} /></li>))
+        }
+      </ul>
+    </div>
   )
 }
 
