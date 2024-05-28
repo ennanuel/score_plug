@@ -48,7 +48,7 @@ const TeamDetailsHeader = () => {
             <div className="relative mx-4 border border-secondary-900/50 rounded-md m-4">
               <div style={{ background: `linear-gradient(45deg, ${teamColors[0]}, ${teamColors[1]})` }} className="opacity-30 rounded-lg absolute top-0 left-0 w-full h-full" />
               <div className="relative py-4 pr-3 flex items-center gap-2 m-2 p-2">
-                <button className="h-8 aspect-square rounded-full hover:bg-secondary-500/50">
+                <button className="h-8 aspect-square rounded-full flex items-center justify-center hover:bg-secondary-500/50">
                   <MdArrowBack size={20} />
                 </button>
                 <Image src={data.team.crest || String(process.env.NEXT_IMAGE_URL)} alt="Clug Emblem" width={80} className="aspect-square object-contain" />
