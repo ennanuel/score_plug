@@ -9,7 +9,7 @@ import { loadImage } from '../_utils/competition';
 
 const CompetitionWithMatches = ({ _id, name, emblem, area, matches, isFavorite }: Competition) => {
     return (
-        <div className='flex flex-col gap-2 border-t border-white-100/10 p-4'>
+        <li className='flex flex-col gap-2 border-b border-secondary-900/50 last:border-transparent p-4'>
             <div className='flex items-center gap-3 px-2'>
                 <Image src={emblem || String(process.env.NEXT_IMAGE_URI)} loader={loadImage} width={30} height={30} alt={name} className="aspect-square object-contain" />
                 <Link href={`/competition/${_id}`} className="flex-1 flex flex-col">
@@ -23,8 +23,7 @@ const CompetitionWithMatches = ({ _id, name, emblem, area, matches, isFavorite }
                 }
             </div>
             <MatchesContainer matches={matches} />
-        </div>
-
+        </li>
     )
 };
 
