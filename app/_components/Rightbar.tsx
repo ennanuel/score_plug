@@ -8,6 +8,7 @@ import FeaturedMatchCard from "./FeaturedMatchCard";
 import { useContext, useMemo } from "react";
 import { SocketContext } from "../SocketContext";
 import { PredictionLoading } from "./loading";
+import NothingWasFound from "./NothingWasFound";
 
 
 type QueryResult = {
@@ -126,10 +127,6 @@ const Rightbar = () => {
     [data, socketData]
   );
 
-  console.log(Boolean(featuredMatch), Boolean(featuredPrediction), featuredMatch, featuredPrediction);
-
-  if (error) return <div className="col-span-1"><ErrorMessage /></div>;
-
   return (
     <div className="sticky top-[50px] flex flex-col gap-2">
       <div className="border-b border-secondary-900/50 p-3">
@@ -137,9 +134,11 @@ const Rightbar = () => {
         {
           loading ?
             <PredictionLoading size={1} full={true} /> :
-            featuredMatch ?
-              <FeaturedMatchCard {...(featuredMatch as Match)} /> :
-              <p className="border border-secondary-900/50 p-6 h-[160px]">Nothing to show</p>
+            error ?
+              <ErrorMessage /> :
+              featuredMatch ?
+                <FeaturedMatchCard {...(featuredMatch as Match)} /> :
+                <NothingWasFound text="Not available today" />
         }
       </div>
 
@@ -148,9 +147,11 @@ const Rightbar = () => {
         {
           loading ?
             <PredictionLoading size={1} full={true} /> :
-            featuredPrediction ?
-              <MatchPredictionCard {...(featuredPrediction as Match)} /> :
-              <p className="border border-secondary-900/50 p-6 h-[160px]">Nothing to show</p>
+            error ?
+              <ErrorMessage /> :
+              featuredPrediction ?
+                <MatchPredictionCard {...(featuredPrediction as Match)} /> :
+                <NothingWasFound text="Not available today" />
         }
       </div>
     </div>
