@@ -21,7 +21,7 @@ function getTeamForm(matches: Match[] | undefined, teamId: string | number): { o
 };
 
 const TeamForm = ({ matches, teamId }: { matches: Match[], teamId: string | number; }) => {
-    const teamForm = useMemo(() => getTeamForm(matches, teamId), []);
+    const teamForm = useMemo(() => getTeamForm(matches.slice(0, 6), teamId), []);
 
     return (
         <div className="flex gap-2 items-center flex-wrap">
