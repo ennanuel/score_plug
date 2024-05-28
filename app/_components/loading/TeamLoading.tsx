@@ -13,13 +13,10 @@ const TeamLoading = ({ size }: { size: number }) => {
                 teams.map((key) => (
                     <li
                         key={key} style={{ '--delay': `${key*100}ms` } as React.CSSProperties}
-                        className="border border-secondary-900/50 flex flex-col"
+                        className="border border-secondary-900/50 flex flex-col p-2 rounded-md"
                     >
-                        <span className='w-[calc(100%_-_20px)] m-auto mt-2 aspect-square rounded-full bg-secondary-900/50'></span>
-                        <div className="h-8 flex items-center gap-2 py-2 px-3">
-                            <span className="w-2 h-2 ml-4 rounded-full bg-secondary-900/50"></span>
-                            <span className='animate-loadopacity h-4 flex-1 rounded-sm bg-secondary-900/50'></span>
-                        </div>
+                        <span className='aspect-square rounded-full bg-secondary-900/50 animate-loadopacity'></span>
+                        <span className='animate-loadopacity h-4 flex-1 max-w-[120px] rounded-sm bg-secondary-900/50'></span>
                     </li>
                 ))
             }
