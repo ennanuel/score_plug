@@ -7,7 +7,7 @@ const PlayerCard = ({ name, nationality, position, dateOfBirth }: Player) => {
     const age = useMemo(() => (new Date()).getFullYear() - (new Date(dateOfBirth)).getFullYear(), []);
 
     return (
-        <div className="flex items-center p-2 gap-3 bg-primary-600 hover:bg-primary-500 border-b last:border-transparent border-secondary-900/50">
+        <div className="flex items-center p-2 gap-3 bg-secondary-900/50 hover:bg-secondary-900/50 border-b last:border-transparent border-secondary-900/50">
             <div className="h-[30px] aspect-square rounded-full bg-white-900/50 relative font-bold text-white text-2xl" />
             <div className="flex flex-col gap-1">
                 <div className="flex items-center justify-between gap-4">
