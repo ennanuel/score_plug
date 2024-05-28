@@ -140,11 +140,6 @@ const TeamInfo = () => {
                     <p className="text-sm font-semibold">Matches Played</p>
                     <span className="text-sm font-semibold">{data.team.matchesPlayed}</span>
                 </li>
-                
-                <li className="flex justify-between items-center gap-3 p-2 px-4 border-t border-secondary-900/50">
-                    <p className="text-xs">Team Form</p>
-                    <TeamForm matches={data.team.matches} teamId={String(id)} />
-                </li>
         
                 <li className="flex justify-between items-center gap-3 p-2 px-4 border-t border-secondary-900/50">
                     <p className="text-xs text-secondary-600">Goals Scored</p>
@@ -154,6 +149,11 @@ const TeamInfo = () => {
                 <li className="flex justify-between items-center gap-3 p-2 px-4 border-t border-secondary-900/50">
                     <p className="text-xs text-secondary-600">Goals Conceded</p>
                     <p className="text-xs font-bold">{data.team.fullTime.goalsConceded}</p>
+                </li>
+                
+                <li className="flex justify-between items-center gap-3 p-2 px-4 border-t border-secondary-900/50">
+                    <p className="text-xs">Team Form</p>
+                    <TeamForm matches={data.team.matches} teamId={String(id)} />
                 </li>
             </ul>
 
