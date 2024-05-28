@@ -9,7 +9,7 @@ const FormBox = ({ outcome, teamCrest }: { outcome: string, teamCrest: string })
     
     return (
         <div className={`${colors} px-2 h-[30px] rounded-md border flex items-center justify-center gap-2`}>
-            <Image src={teamCrest} height={24} alt="" className="object-contain aspect-square rounded-md" />
+            <Image src={teamCrest} height={24} width={24} alt="" className="object-contain" />
             <span className="text-sm font-bold">{outcome}</span>
         </div>
     )

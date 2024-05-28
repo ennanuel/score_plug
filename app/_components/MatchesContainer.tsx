@@ -25,9 +25,9 @@ function MatchesContainer({ matches, loading, error }: { matches: Match[] | unde
     else if (error) return <ErrorMessage />;
 
     return (
-        <ul className='flex flex-col rounded-md border border-white-100/5 overflow-hidden'>
+        <ul className='flex flex-col rounded-md border border-secondary-900/50 overflow-hidden'>
             {
-                matchesToView.map((match) => <MatchCard {...match} />)
+                matchesToView.map((match) => <MatchCard key={match._id} {...match} />)
             }
         </ul>
     )
