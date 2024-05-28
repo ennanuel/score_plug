@@ -11,7 +11,7 @@ const PlayerLoading = ({ size }: { size: number }) => {
         <ul className="flex flex-col border border-secondary-900/50 rounded-md overflow-clip">
             {
                 players.map((key, index) => (
-                    <li key={key} style={{ '--delay': `${index / 10}s` } as React.CSSProperties} className="flex items-center p-2 gap-3 bg-secondary-900/50 border-b last:border-transparent border-secondary-900/50">
+                    <li key={key} style={{ '--delay': `${index / 10}s` } as React.CSSProperties} className="flex items-center p-2 gap-3 border-b last:border-transparent border-secondary-900/50">
                         <div className="h-[30px] aspect-square rounded-full bg-white-900/50 relative font-bold text-white text-2xl" />
                         <div className="flex flex-col gap-1">
                             <div className="flex items-center justify-between gap-4">
