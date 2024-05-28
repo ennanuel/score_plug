@@ -1,13 +1,13 @@
 "use client";
 
-import { ErrorMessage, LoadingMessage, NothingWasFound } from '@/app/_components';
+import { ErrorMessage, NothingWasFound } from '@/app/_components';
 import PlayerCard from '@/app/_components/PlayerCard';
 import { gql, useQuery } from '@apollo/client';
 import { useParams } from 'next/navigation';
 import React from 'react';
 
 import { Team } from "@/types/global.type";
-import { CompetitionLoading } from '@/app/_components/loading';
+import { PlayerLoading } from '@/app/_components/loading';
 
 const QUERY = gql`
   query GetTeamPlayers($id: ID!) {
@@ -31,7 +31,7 @@ const TeamPlayers = () => {
   const { id } = useParams();
   const { loading, error, data } = useQuery<{ team: Team }>(QUERY, { variables: { id } });
 
-  if (loading) return <CompetitionLoading size={11} />
+  if (loading) return <PlayerLoading size={11} />
   else if (error) return <ErrorMessage />;
   else if (!data) return <NothingWasFound />;
   
