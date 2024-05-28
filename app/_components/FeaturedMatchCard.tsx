@@ -8,6 +8,8 @@ function FeaturedMatchCard({ _id, competition, homeTeam, awayTeam, utcDate, stat
     const time = useMemo(() => getTimeFormat(utcDate), []);
     const date = useMemo(() => getDateFormat(utcDate), []);
     const { timeRemainder, timeUnit } = useMemo(() => getTimeRemaining(timeRemaining), []);
+    
+    console.log(score.fullTime, 'featured match');
 
     return (
         <Link href={`match/${_id}`} className="flex flex-col gap-2">

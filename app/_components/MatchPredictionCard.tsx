@@ -7,6 +7,8 @@ import { useMemo } from "react";
 function MatchPredictionCard({ _id, homeTeam, competition, awayTeam, utcDate, status, predictions, score, minute }: Match) {
   const time = useMemo(() => getTimeFormat(utcDate), []);
 
+  console.log(score.fullTime, 'featured prediction');
+
   return (
     <Link href={`/match/${_id}/prediction`} className="flex flex-col gap-2">
       <div className="grid grid-cols-3 border border-secondary-900/50 rounded-md shadow-lg">
