@@ -50,6 +50,8 @@ const QUERY = gql`
                 _id
                 utcDate
                 status
+                minute
+                
                 homeTeam {
                     _id
                     name
