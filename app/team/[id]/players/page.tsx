@@ -31,19 +31,23 @@ const TeamPlayers = () => {
   const { id } = useParams();
   const { loading, error, data } = useQuery<{ team: Team }>(QUERY, { variables: { id } });
 
-  if (loading) return <PlayerLoading size={11} />
-  else if (error) return <ErrorMessage />;
-  else if (!data) return <NothingWasFound />;
-  
   return (
     <div className="p-4">
-      <ul className="flex flex-col border border-secondary-900/50 rounded-md overflow-clip">
-        {
-          data.team.squad.map((player, index) => (<li key={index}><PlayerCard {...player} /></li>))
-        }
-      </ul>
+      {
+        loading ?
+          <PlayerLoading size={11} /> :
+          error ?
+            <ErrorMessage /> :
+            !data ?
+              <NothingWasFound /> :
+              <ul className="flex flex-col border border-secondary-900/50 rounded-md overflow-clip">
+                {
+                  data.team.squad.map((player, index) => <PlayerCard key={index} {...player} />)
+                }
+              </ul>
+      }
     </div>
-  )
+  );
 }
 
 export default TeamPlayers
