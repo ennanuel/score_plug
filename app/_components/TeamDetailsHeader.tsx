@@ -1,7 +1,6 @@
 "use client";
 
-import { FaAngleLeft } from 'react-icons/fa';
-import { MdArrowLeft, MdStarOutline } from 'react-icons/md';
+import { MdArrowBack, MdStarOutline } from 'react-icons/md';
 import Image from "next/image";
 
 import { useParams } from 'next/navigation';
@@ -50,7 +49,7 @@ const TeamDetailsHeader = () => {
               <div style={{ background: `linear-gradient(45deg, ${teamColors[0]}, ${teamColors[1]})` }} className="opacity-30 rounded-lg absolute top-0 left-0 w-full h-full" />
               <div className="relative py-4 pr-3 flex items-center gap-2 m-2 p-2">
                 <button className="h-8 aspect-square rounded-full hover:bg-secondary-500/50">
-                  <MdArrowLeft size={20} />
+                  <MdArrowBack size={20} />
                 </button>
                 <Image src={data.team.crest || String(process.env.NEXT_IMAGE_URL)} alt="Clug Emblem" width={80} className="aspect-square object-contain" />
                 <div className="flex-1 flex-col">
