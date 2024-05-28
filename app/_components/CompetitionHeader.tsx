@@ -1,14 +1,13 @@
 "use client";
 
 import { useMemo } from "react";
-import { MdArrowBack, MdKeyboardArrowLeft, MdStar } from 'react-icons/md';
+import { MdArrowBack, MdStar } from 'react-icons/md';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import AltHeader from './AltHeader';
 import { getHeaderLinks } from '../_utils/link';
 import { COMPETITION_LINKS } from '../_assets/constants/competition';
 import { gql, useQuery } from '@apollo/client';
-import LoadingMessage from "./LoadingMessage";
 import ErrorMessage from "./ErrorMessage";
 
 import { Competition } from "@/types/global.type";
