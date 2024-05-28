@@ -1,13 +1,11 @@
 "use client";
 
 import { useState } from 'react';
-import { MdStar } from "react-icons/md";
-import CompetitionWithMatches from './_components/CompetitionWithMatches';
-import { Competition } from '@/types/global.type';
 import { useQuery, gql } from '@apollo/client';
-import { ErrorMessage } from './_components';
-import { MatchLoading } from './_components/loading';
-import CompetitionWithMatchesLoading from './_components/loading/CompetitionWithMatchesLoading';
+import { ErrorMessage, NothingWasFound, CompetitionWithMatches } from './_components';
+import { CompetitionWithMatchesLoading } from './_components/loading';
+
+import { Competition } from '@/types/global.type';
 
 const QUERY = gql`
   query GetActiveCompetitions($isLive: Boolean!) {
@@ -53,7 +51,7 @@ function Home() {
 
   return (
     <main className="pb-4 bg-primary-600">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between border-b border-secondary-900/50">
         <h2 className="font-bold px-4">Today's Matches</h2>
         <div className="h-[50px] flex items-stretch justify-stretch text-sm">
           <button onClick={showAllMatches} className={`flex justify-center items-center gap-4 px-4 min-w-[100px] font-semibold ${status === "" ? 'text-orange-300 bg-orange-400/20' : 'border-l border-secondary-900/50 text-orange-700'}`}>
@@ -70,11 +68,13 @@ function Home() {
       {
         loading ?
           <CompetitionWithMatchesLoading size={4} /> :
-          <ul className="flex flex-col">
-            {
-              data?.activeCompetitions.map((competition, index) => <li key={index}><CompetitionWithMatches {...competition} /></li>)
-            }
-          </ul>
+          data?.activeCompetitions?.length === 0 ?
+            <NothingWasFound /> :
+            <ul className="flex flex-col">
+              {
+                data?.activeCompetitions.map((competition, index) => <CompetitionWithMatches key={index} {...competition} />)
+              }
+            </ul>
       }
     </main>
   )
