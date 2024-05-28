@@ -7,8 +7,6 @@ import { useMemo } from "react";
 function MatchPredictionCard({ _id, homeTeam, competition, awayTeam, utcDate, status, predictions, score, minute }: Match) {
   const time = useMemo(() => getTimeFormat(utcDate), []);
 
-  console.log(predictions, 'featured prediction');
-
   return (
     <Link href={`/match/${_id}/prediction`} className="flex flex-col gap-2">
       <div className="grid grid-cols-3 border border-secondary-900/50 rounded-md shadow-lg">
@@ -45,17 +43,17 @@ function MatchPredictionCard({ _id, homeTeam, competition, awayTeam, utcDate, st
       <div>
         <div className="relative mt-1 mb-2 h-2 rounded-lg bg-secondary-900 overflow-clip">
           <div className="absolute top-0 left-0 w-[100%] h-full rounded-r-lg bg-highlight-700 shadow-lg" />
-          <div style={{ width: `${predictions.fullTime.outcome.draw + predictions.fullTime.outcome.homeWin}%` }} className="absolute top-0 left-0 w-[80%] h-full rounded-r-lg bg-highlight-500 shadow-lg" />
-          <div style={{ width: `${predictions.fullTime.outcome.homeWin}%` }} className="absolute top-0 left-0 w-[50%] h-full rounded-r-lg bg-highlight-300" />
+          <div style={{ width: `${predictions?.fullTime?.outcome?.draw + predictions?.fullTime?.outcome?.homeWin}%` }} className="absolute top-0 left-0 w-[80%] h-full rounded-r-lg bg-highlight-500 shadow-lg" />
+          <div style={{ width: `${predictions?.fullTime?.outcome?.homeWin}%` }} className="absolute top-0 left-0 w-[50%] h-full rounded-r-lg bg-highlight-300" />
         </div>
         <div className="flex items-center gap-2">
           <div className="flex-1 flex flex-col gap-[2px] text-center">
             <span className="text-[.7em] text-secondary-600">Home</span>
-            <p className="text-sm font-semibold text-secondary-500 border border-highlight-400/40 bg-highlight-400/20 p-1">{predictions.fullTime.outcome.homeWin}%</p>
+            <p className="text-sm font-semibold text-secondary-500 border border-highlight-400/40 bg-highlight-400/20 p-1">{predictions?.fullTime?.outcome?.homeWin}%</p>
           </div>
           <div className="flex-1 flex flex-col gap-[2px] text-center">
             <span className="text-[.7em] text-secondary-600">Draw</span>
-            <p className="text-sm font-semibold text-secondary-500 border border-highlight-500/40 bg-highlight-500/20 p-1">{predictions.fullTime.outcome.draw}%</p>
+            <p className="text-sm font-semibold text-secondary-500 border border-highlight-500/40 bg-highlight-500/20 p-1">{predictions?.fullTime?.outcome?.draw}%</p>
           </div>
           <div className="flex-1 flex flex-col gap-[2px] text-center">
             <span className="text-[.7em] text-secondary-600">Away</span>
