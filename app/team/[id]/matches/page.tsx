@@ -4,11 +4,12 @@ import { DateAndStatusFilter, MatchesContainer } from "@/app/_components/";
 import { gql, useQuery } from "@apollo/client"
 import { useParams } from "next/navigation";
 import { Team } from "@/types/global.type";
+import { useState } from "react";
 
 const QUERY = gql`
-    query GetTeamMatches($id: ID!) {
+    query GetTeamMatches($id: ID!, $status: String, $from: String) {
         team(id: $id) {
-            matches {
+            matches(status: $status, from: $from) {
                 _id
                 minute
                 utcDate
@@ -49,11 +50,13 @@ const QUERY = gql`
 
 const TeamMatches = () => {
     const { id } = useParams();
-    const { loading, error, data } = useQuery<{ team: Team }>(QUERY, { variables: { id } });
+    const [dateFilter, setDateFilter] = useState('');
+    const [statusFilter, setStatusFilter] = useState('');
+    const { loading, error, data } = useQuery<{ team: Team }>(QUERY, { variables: { id, status: statusFilter, from: dateFilter } });
     
     return (
         <div className="p-2 flex flex-col gap-4">
-            <DateAndStatusFilter />
+            <DateAndStatusFilter setDate={setDateFilter} setMatchStatus={setStatusFilter} />
             <MatchesContainer loading={loading} error={Boolean(error)} matches={data?.team?.matches} />
         </div>
     )
