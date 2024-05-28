@@ -20,7 +20,7 @@ function MatchCard ({ _id, status, minute, utcDate, homeTeam, awayTeam, score }:
     const { homeTextColor, awayTextColor } = useMemo(() => getTeamColors(status, score), []);
 
     return (
-        <Link href={`/match/${_id}`} className={`flex items-center border-b border-secondary-900/50 last:border-transparent justify-between ${cardBackground} hover:border-transparent hover:bg-secondary-900/5 p-2`}>
+        <Link href={`/match/${_id}`} className={`flex items-center border-b border-secondary-900/50 last:border-transparent justify-between ${cardBackground} hover:border-transparent hover:bg-secondary-900/50 p-2`}>
             <div className={`h-[40px] w-[3px] rounded-md ${highlightBackground}`} />
             <p className={`px-4 py-3 ${timeTextColor} text-sm font-semibold w-[80px] text-center`}>
                 {showMinutes ? `${minute}${/(paused|finished)/i.test(status) ? "" : "'"}` : showTime ? time : status.slice(0, 4)}
