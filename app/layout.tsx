@@ -12,6 +12,7 @@ import TeamLayout from "./_components/layouts/team";
 import { usePathname } from "next/navigation";
 
 import "./globals.css";
+import SocketContextProvider from "./SocketContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,19 +29,25 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 
   return (
     <ApolloProvider client={client}>
-      <html lang="en">
-        <body className={inter.className}>
-          <Header />
-          <div className="grid grid-cols-4">
-            <Leftbar />
-            <div className="col-span-2 p-4">
-              {pageBody}
+      <SocketContextProvider>
+        <html lang="en">
+          <body className={inter.className}>
+            <Header />
+            <div className="grid grid-cols-4">
+              <section>
+                <Leftbar />
+              </section>
+              <section className="col-span-2 border-x border-secondary-900/50">
+                {pageBody}
+              </section>
+              <section>
+                <Rightbar />
+              </section>
             </div>
-            <Rightbar />
-          </div>
-          <Footer />
-        </body>
-      </html>
+            <Footer />
+          </body>
+        </html>
+      </SocketContextProvider>
     </ApolloProvider>
   );
 };

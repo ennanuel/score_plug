@@ -1,15 +1,23 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext, useMemo } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import { MdOutlinePerson, MdOutlineSettings, MdSearch } from "react-icons/md";
 import { NAV_LINKS } from "../_assets/constants/links";
 import NavLink from "./NavLink";
 import { PiPlug } from "react-icons/pi";
+import { SocketContext } from "../SocketContext";
 
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
+  const { socketData } = useContext(SocketContext);
+
+  const navLinks = useMemo(() => NAV_LINKS.map((link) => (
+    link.title == 'Matches' && Object.values(socketData.matches).some(match => match.scoreWasUpdated) ?
+      { ...link, alert: true } :
+      link
+  )), [socketData]);
 
   useEffect(() => { 
     const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -21,38 +29,38 @@ const Header = () => {
 
   return (
     <>
-      <div className="fixed top-0 left-[15px] h-[50px] z-[2] flex-1 font-semibold text-white-100 text-2xl flex items-center justify-start gap-3 transition-transform">
-        <PiPlug size={30} /> 
+      <div className="fixed top-0 left-0 px-6 h-[50px] z-[2] flex-1 font-semibold border-r border-b border-secondary-900/50 bg-primary-900 text-white-100 flex items-center justify-start gap-3">
+        <PiPlug size={25} /> 
         <span>ScorePlug</span>
       </div>
-      <div className="flex items-center gap-4 px-4 h-[50px] bg-primary-500">
+      <div className="flex items-stretch gap-4 h-[50px] bg-primary-900 border-b border-secondary-900/50">
         <div className="flex-1 opacity-0"></div>
-        <div className='overflow-clip flex-1 h-[35px] flex items-stretch justify-start gap-2 bg-white-100/5 border border-secondary-100/10 hover:border-secondary-100/50 rounded-md'>
-          <label htmlFor="search" className="text-white-500 flex items-center justify-center pl-2">
-            <MdSearch />
+        <div className='overflow-clip flex-[2] flex items-stretch justify-start border-x border-secondary-900/50 hover:bg-secondary-900/50'>
+          <label htmlFor="search" className="text-white-500 flex items-center justify-center w-[50px]">
+            <MdSearch size={26} />
           </label>
           <input 
-            className="text-sm flex-1 bg-transparent border-none outline-none text-white-600 focus:text-white-200 h-[35px] pr-2" 
+            className="text-sm flex-1 bg-transparent border-none outline-none text-white-600 focus:text-white-200 pr-2" 
             type="text" 
             id="search" 
             placeholder="Barcelona v Chelsea" 
           />
         </div>
-        <ul className="flex-1 flex items-center justify-end gap-4">
-          <li className="aspect-square rounded-full border border-white-600 hover:bg-white-100/10 flex items-center justify-center p-1">
-            <MdOutlinePerson size={24} />
+        <ul className="flex-1 flex items-stretch justify-end">
+          <li className="w-[50px] border-x border-secondary-900/50 hover:bg-secondary-900/50 flex items-center justify-center">
+            <MdOutlinePerson size={25} />
           </li>
-          <li className="rounded-2xl hover:bg-white-100/10 flex items-center justify-center py-1 px-2">
+          <li className="hover:bg-white-100/10 flex items-center justify-center gap-2 px-4 pr-6 bover:bg-secondary-900/50">
             <MdOutlineSettings size={24} />
             <FaAngleDown />
           </li>
         </ul>
       </div>
-      <nav className="sticky z-[1] h-[50px] top-0 border-b px-6 flex border-secondary-900/50 bg-primary-500">
-        <ul className={`flex items-center justify-start gap-3 transition-transform w-fit ${scrolled && "lg:translate-x-[130px]"}`}>
+      <nav className="sticky z-[1] h-[50px] top-0 border-b border-secondary-900/50 bg-primary-900">
+        <ul className={`flex items-center justify-start transition-transform w-fit ${scrolled && "lg:translate-x-[160px]"}`}>
           {
-            NAV_LINKS.map((navLink, index) => (
-              <li><NavLink key={index} {...navLink} /></li>
+            navLinks.map((navLink, index) => (
+              <li className="border-r first:border-x border-secondary-900/50"><NavLink key={index} {...navLink} /></li>
             ))
           }
         </ul>

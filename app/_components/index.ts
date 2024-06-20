@@ -8,13 +8,16 @@ import TeamDetailsHeader from './TeamDetailsHeader';
 import TeamCard from "./TeamCard";
 import MatchCard from './MatchCard';
 import CompetitionCard from './CompetitionCard';
+import FeaturedMatchCard from './FeaturedMatchCard';
 import FormBox from './FormBox';
 import Standings from './standings';
 import DateAndStatusFilter from './DateAndStatusFilter';
 import CompetitionWithMatches from './CompetitionWithMatches';
 import MatchesContainer from './MatchesContainer';
+import TeamForm from './TeamForm';
 import LoadingMessage from './LoadingMessage';
 import ErrorMessage from './ErrorMessage';
+import NothingWasFound from './NothingWasFound';
 
 export {
     Header,
@@ -27,11 +30,14 @@ export {
     TeamCard,
     MatchCard,
     CompetitionCard,
+    FeaturedMatchCard,
     FormBox,
     Standings,
     DateAndStatusFilter,
     CompetitionWithMatches,
     MatchesContainer,
+    TeamForm,
     LoadingMessage,
-    ErrorMessage
+    ErrorMessage,
+    NothingWasFound
 }

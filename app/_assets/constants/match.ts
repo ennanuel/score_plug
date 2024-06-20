@@ -17,7 +17,7 @@ export const HIGHLIGHT_BACKGROUNDS = {
 }
 
 export const MATCH_CARD_BACKGROUNDS = {
-    'in_play': 'bg-white-100/10',
+    'in_play': 'bg-highlight-700/5',
     'finished': 'bg-transparent',
     'paused': 'bg-white-100/5',
 }

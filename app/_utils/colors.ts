@@ -19,6 +19,16 @@ export function getTeamColors(status: MatchStatus, score: MatchScore) {
     return result;
 };
 
+export function getTeamFormColors(outcome: string) {
+    return (
+        outcome === 'W' ?
+            'bg-green-600/10 border-green-900/50 text-green-500' :
+            outcome === 'D' ?
+                'bg-secondary-900/10 border-secondary-900/50 text-secondary-800' :
+                'bg-red-800/10 border-red-900/50 text-red-500'
+    );
+}
+
 export function getMatchTimeColor(status: MatchStatus) {
     return status !== 'IN_PLAY' ?
         (status === 'PAUSED' ? 'text-highlight-600' : 'FINISHED' ? 'text-secondary-800' : 'text-secondary-500') :

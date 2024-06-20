@@ -1,15 +1,16 @@
-import React from 'react'
+"use memo";
 
-const FormBox = ({ outcome }: { outcome: "W" | "D" | "L" }) => {
-    const colors = outcome === 'W' ?
-        'border-green-500 text-green-500' :
-        outcome === 'D' ?
-            'border-secondary-800 text-secondary-800' :
-            'border-red-500 text-red-500';
+import React, { useMemo } from 'react';
+import Image from "next/image";
+import { getTeamFormColors } from '../_utils/colors';
+
+function FormBox({ outcome, teamCrest }: { outcome: string, teamCrest: string }) {
+    const colors = useMemo(() => getTeamFormColors(outcome), []);
     
     return (
-        <div className={`${colors} h-6 aspect-square rounded-sm border flex items-center justify-center  font-semibold`}>
-            {outcome}
+        <div className={`${colors} px-2 h-[30px] border flex items-center justify-center gap-2`}>
+            <Image src={teamCrest} height={20} width={24} alt="" className="object-contain" />
+            <span className="text-sm font-bold">{outcome}</span>
         </div>
     )
 };

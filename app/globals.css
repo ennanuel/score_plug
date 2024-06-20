@@ -18,12 +18,34 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
+  background: linear-gradient(to bottom,
       transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+}
+
+.status-date-filter .status-btn:focus .open-icon,
+.status-date-filter .status-btn:not(:focus) .close-icon {
+  @apply hidden
+}
+
+.status-date-filter .status-btn:focus+.status-dates .dates,
+.status-date-filter:has(.status:hover) .dates {
+  @apply translate-x-[100%] opacity-0;
+}
+
+.status-date-filter .status-btn:focus+.status-dates .status,
+.status-date-filter .status:hover {
+  @apply translate-x-[0] opacity-100;
+}
+
+.loading {
+  background: linear-gradient(80deg,
+      rgba(255, 255, 255, 0.05) 0,
+      rgba(255, 255, 255, 0.1) 10%,
+      rgba(255, 255, 255, 0.15) 15%,
+      rgba(255, 255, 255, 0.1) 20%,
+      rgba(255, 255, 255, 0.05) 30%);
+  background-size: 200% 100%;
 }
 
 @layer utilities {

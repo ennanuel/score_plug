@@ -5,7 +5,9 @@ import Image from "next/image";
 import { Match } from '@/types/global.type';
 import { gql, useQuery } from '@apollo/client';
 import { useParams } from 'next/navigation';
-import { ErrorMessage, LoadingMessage } from '@/app/_components';
+import { ErrorMessage, NothingWasFound } from '@/app/_components';
+import { loadImage } from '@/app/_utils/competition';
+import { DetailsLoading } from '@/app/_components/loading';
 
 
 const QUERY = gql`
@@ -40,17 +42,25 @@ const MatchInfo = () => {
     variables: { id }
   });
 
-  if (loading) return <LoadingMessage />;
+  if (loading) return <DetailsLoading />;
   else if (error) return <ErrorMessage />;
-  else if (!data) return null;
+  else if (!data) return <NothingWasFound />;
 
   return (
     <div className='p-4'>
-
-      <div className="flex flex-col p-4 gap-2 rounded-md border border-white-100/10">
+      <div className="relative overflow-clip flex flex-col p-4 gap-2 rounded-md border border-white-100/10">
+        <Image
+          src={data.match.competition.emblem || String(process.env.NEXT_IMAGE_URL)}
+          loader={loadImage}
+          alt={data.match.competition.name}
+          height={150}
+          width={150}
+          className="object-contain opacity-50 blur-[50px] top-[50px] left-[-50px] absolute"
+        />
         <div className="flex items-center gap-4">
           <Image
             src={data.match.competition.emblem || String(process.env.NEXT_IMAGE_URL)}
+            loader={loadImage}
             alt={data.match.competition.name}
             height={40}
             width={40}
@@ -72,7 +82,7 @@ const MatchInfo = () => {
         <hr className="border-none m-auto mt-2 bg-white-100/10 outline-none h-[1px] w-full" />
         <div className="flex items-center justify-between">
           <h3 className='font-semibold text-sm text-secondary-500 mt-2'>Match Venue</h3>
-          <p className="text-sm">{data.match.venue || 'Not available'}</p>
+          <p className="text-xs text-secondary-800">{data.match.venue || 'Venue not available'}</p>
         </div>
       </div>
 
@@ -92,8 +102,8 @@ const MatchInfo = () => {
                   </p>
               </li>
             )) :
-            <div className="flex items-center justify-center p-4 border border-white-100/5 rounded-md">
-              <span>Not available</span>
+            <div className="flex items-center justify-center p-4 border text-sm font-semibold text-secondary-800 border-secondary-900/50 rounded-md">
+              <span>Referees not available</span>
             </div>
         }
       </ul>

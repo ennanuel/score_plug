@@ -32,11 +32,11 @@ export const NAV_LINKS = [
         ActiveIcon: BsBarChartFill,
         alert: false
     },
-    {
-        title: "Favorites",
-        href: "/favorites",
-        Icon: MdStarOutline,
-        ActiveIcon: MdStar,
-        alert: true
-    },
+    // {
+    //     title: "Favorites",
+    //     href: "/favorites",
+    //     Icon: MdStarOutline,
+    //     ActiveIcon: MdStar,
+    //     alert: true
+    // },
 ]

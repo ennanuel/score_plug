@@ -2,11 +2,12 @@
 
 import { useState } from "react";
 import { TEAM_FORM } from "@/app/_assets/constants/team";
-import { FormBox, LoadingMessage, ErrorMessage, Standings, MatchesContainer } from "@/app/_components";
+import { FormBox, LoadingMessage, ErrorMessage, Standings, MatchesContainer, NothingWasFound, TeamForm } from "@/app/_components";
 import { Match } from "@/types/global.type";
 import { useParams } from "next/navigation";
 import { gql, useQuery } from "@apollo/client";
 import Image from "next/image";
+import { DetailsLoading } from "@/app/_components/loading";
 
 const QUERY = gql`
     query GetCompetitionHead2Head($id: ID!) {
@@ -219,9 +220,9 @@ const H2H = () => {
 
     const { loading, error, data } = useQuery<{ match: Match }>(QUERY, { variables: { id } });
 
-    if (loading) return <LoadingMessage />;
+    if (loading) return <DetailsLoading />;
     if (error) return <ErrorMessage />
-    else if (!data) return <div>Nothing was found</div>;
+    else if (!data) return <NothingWasFound />;
 
     return (
         <div className='mt-2 p-4'>
@@ -302,11 +303,7 @@ const H2H = () => {
             <div className="mt-2 border border-secondary-900/50">
                 <div className="flex justify-between items-end gap-3 p-4">
                     <p className="text-sm font-semibold">Team Form</p>
-                    <div className="flex gap-2 items-center justify-center">
-                        {
-                            TEAM_FORM.map((outcome) => <FormBox outcome={outcome} />)
-                        }
-                    </div>
+                    <TeamForm matches={data.match[showHomeSide ? 'homeTeam' : 'awayTeam'].matches} teamId={data.match[showHomeSide ? 'homeTeam' : 'awayTeam']._id} />
                 </div>
                 
                 <div className="flex justify-between items-center gap-3 py-2 px-4">

@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from 'react';
-import { MdStar } from "react-icons/md";
-import CompetitionWithMatches from './_components/CompetitionWithMatches';
-import { Competition } from '@/types/global.type';
 import { useQuery, gql } from '@apollo/client';
-import { ErrorMessage, LoadingMessage } from './_components';
+import { ErrorMessage, NothingWasFound, CompetitionWithMatches } from './_components';
+import { CompetitionWithMatchesLoading } from './_components/loading';
+
+import { Competition } from '@/types/global.type';
 
 const QUERY = gql`
   query GetActiveCompetitions($isLive: Boolean!) {
@@ -47,33 +47,35 @@ function Home() {
 
   const { loading, error, data } = useQuery<{ activeCompetitions: Competition[] }>(QUERY, { variables: { isLive: status === 'IN_PLAY' } });
 
-  if (loading) return <LoadingMessage />;
-  else if (error) return <ErrorMessage />;
-  else if (!data) return <div>Nothing was found</div>;
+  if (error) return <ErrorMessage />;
 
   return (
-    <main className="border border-secondary-900/50 bg-primary-600 flex flex-col gap-4">
-      <div className="p-3">
-        <div className="flex items-center justify-between px-3">
-          <h2 className="font-bold">Today's Matches</h2>
-          <MdStar />
+    <main className="pb-4 bg-primary-600">
+      <div className="flex items-center justify-between border-b border-secondary-900/50">
+        <h2 className="font-bold px-4">Today's Matches</h2>
+        <div className="h-[50px] flex items-stretch justify-stretch text-sm">
+          <button onClick={showAllMatches} className={`flex justify-center items-center gap-4 px-4 min-w-[100px] font-semibold ${status === "" ? 'text-orange-300 bg-orange-400/20' : 'border-l border-secondary-900/50 text-orange-700'}`}>
+            {status === "" && <span className="block w-1 h-4 rounded-md bg-orange-300"></span>}
+            <span>All</span>
+          </button>
+          <button onClick={showLiveMatches} className={`flex justify-center items-center gap-4 px-4 min-w-[100px] font-semibold ${status === "IN_PLAY" ? 'border-l text-green-300 bg-green-400/20' : 'border-r border-secondary-900/50 text-green-700'}`}>
+            {status === "IN_PLAY" && <span className="block w-1 h-4 rounded-md bg-green-600"></span>}
+            <span>Live</span>
+          </button>
         </div>
-          <div className="mt-2 flex items-center justify-stretch h-[30px] gap-2 text-sm">
-            <button onClick={showAllMatches} className={`relative flex justify-center items-center gap-2 h-full px-3 rounded-sm font-semibold ${status === "" ? 'text-orange-300 bg-orange-400/20': 'bg-black-900/50 text-orange-700'}`}>
-              {status === "" && <span className="block w-1 h-4 rounded-md bg-orange-300"></span>}
-              <span>All</span>
-            </button>
-            <button onClick={showLiveMatches} className={`relative flex justify-center items-center gap-2 h-full px-3 rounded-sm font-semibold ${status === "IN_PLAY" ? ' text-green-300 bg-green-400/20': 'bg-black-900/50 text-green-700'}`}>            
-              {status === "IN_PLAY" && <span className="block w-2 h-4 rounded-md bg-green-600"></span>}
-              <span>Live</span>
-            </button>
-          </div>
       </div>
-      <ul className="flex flex-col">
-          {
-            data?.activeCompetitions.map((competition, index) => <li key={index}><CompetitionWithMatches {...competition} /></li>)
-          }
-      </ul>
+
+      {
+        loading ?
+          <CompetitionWithMatchesLoading size={4} /> :
+          data?.activeCompetitions?.length === 0 ?
+            <NothingWasFound /> :
+            <ul className="flex flex-col">
+              {
+                data?.activeCompetitions.map((competition, index) => <CompetitionWithMatches key={index} {...competition} />)
+              }
+            </ul>
+      }
     </main>
   )
 }

@@ -2,13 +2,15 @@
 
 import MatchPredictionCard from "../_components/MatchPredictionCard";
 import { DateAndStatusFilter, ErrorMessage, LoadingMessage } from "../_components";
-import { Suspense } from "react";
+import { useContext, useMemo, useState } from "react";
 import { gql, useQuery } from "@apollo/client";
 import { Match } from "@/types/global.type";
+import { SocketContext } from "../SocketContext";
+import { PredictionLoading } from "../_components/loading";
 
 const QUERY = gql`
-  query {
-    matchPredictions {
+  query GetMatchPredictions($date: String, $status: String) {
+    matchPredictions(from: $date, status: $status) {
         totalPages
         matches {
             _id
@@ -53,24 +55,39 @@ const QUERY = gql`
 
 
 const Matches = () => {
-  const { loading, error, data } = useQuery<{ matchPredictions: { matches: Match[], totalPages: number } }>(QUERY);
+  const [date, setDate] = useState("");
+  const [status, setStatus] = useState("");
 
-  if (loading) return <LoadingMessage />;
-  else if (error) return <ErrorMessage />;
+  const { loading, error, data } = useQuery<{ matchPredictions: { matches: Match[], totalPages: number } }>(QUERY, {
+    variables: { date, status }
+  });
 
+  const { socketData } = useContext(SocketContext);
+  const matchPredictions = useMemo(() => data?.matchPredictions?.matches?.map((match) => ({
+    ...match,
+    ...(socketData.matches[match._id] || {})
+  })), [socketData, data]);
 
   return (
-    <Suspense>
-      <div className="border border-secondary-900/50 bg-primary-500 p-3">
-        <h2 className="col-span-2 font-bold text-2xl mb-2 mx-3 mt-4">Match Predictions</h2>
-        <DateAndStatusFilter />
-        <ul className="grid grid-cols-2 gap-4 mt-4">
-          {
-            data?.matchPredictions?.matches.map((match, index) => <li key={index}><MatchPredictionCard {...match} /></li>)
-          }
-        </ul>
-      </div>
-    </Suspense>
+    <div className="p-4">
+      <h2 className="col-span-2 font-bold text-2xl mb-2 mx-3 mt-4">Match Predictions</h2>
+      <DateAndStatusFilter setDate={setDate} setMatchStatus={setStatus} />
+      {
+        loading ?
+          <div className="mt-4">
+            <PredictionLoading size={6} />
+          </div> :
+          <ul className="grid grid-cols-2 gap-4 mt-4">
+            {
+              error ?
+                <ErrorMessage /> :
+                !matchPredictions ?
+                  <div>Nothing to show</div> :
+                  matchPredictions?.map((match, index) => <li key={index}><MatchPredictionCard {...match} /></li>)
+            }
+          </ul>
+      }
+    </div>
   )
 };
 
