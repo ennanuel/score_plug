@@ -2,7 +2,7 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 
 const Search = () => {
     return (
-        <div className="border border-secondary-900/50 p-4 py-2">
+        <div className="p-4 py-2">
             <p className="text-secondary-600">
                 Results for <span className="text-secondary-400 font-bold">Barcelona</span>
             </p>
@@ -70,7 +70,7 @@ const Search = () => {
                 <p className="text-sm font-semibold text-center">Leagues</p>
                 
                 <div className="flex flex-col gap-4 mt-4">
-                    <div className="flex items-center gap-4 justify-between bg-primary-500 p-3 px-4 rounded-lg">
+                    <div className="flex items-center gap-4 justify-between p-3 px-4 rounded-lg">
                         <div className="h-12 aspect-square rounded-full border-2 border-secondary-800 shadow-lg" />
                         <div className="flex-1 flex flex-col">
                             <h3 className="text-secondary-400 font-semibold">Premier League</h3>
@@ -79,7 +79,7 @@ const Search = () => {
                         <MdKeyboardArrowRight size={20} />
                     </div>
 
-                    <div className="flex items-center gap-4 justify-between bg-primary-500 p-3 px-4 rounded-lg">
+                    <div className="flex items-center gap-4 justify-between p-3 px-4 rounded-lg">
                         <div className="h-12 aspect-square rounded-full border-2 border-secondary-800" />
                         <div className="flex-1 flex flex-col">
                             <h3 className="text-secondary-400 font-semibold">Ligue 1</h3>
@@ -88,7 +88,7 @@ const Search = () => {
                         <MdKeyboardArrowRight size={20} />
                     </div>
 
-                    <div className="flex items-center gap-4 justify-between bg-primary-500 p-3 px-4 rounded-lg shadow-lg">
+                    <div className="flex items-center gap-4 justify-between p-3 px-4 rounded-lg shadow-lg">
                         <div className="h-12 aspect-square rounded-full border-2 border-secondary-800" />
                         <div className="flex-1 flex flex-col">
                             <h3 className="text-secondary-400 font-semibold">La Liga</h3>
@@ -97,7 +97,7 @@ const Search = () => {
                         <MdKeyboardArrowRight size={20} />
                     </div>
 
-                    <div className="flex items-center gap-4 justify-between bg-primary-500 p-3 px-4 rounded-lg shadow-lg">
+                    <div className="flex items-center gap-4 justify-between p-3 px-4 rounded-lg shadow-lg">
                         <div className="h-12 aspect-square rounded-full border-2 border-secondary-800" />
                         <div className="flex-1 flex flex-col">
                             <h3 className="text-secondary-400 font-semibold">Bundesliga</h3>
@@ -112,17 +112,17 @@ const Search = () => {
             <div className="border border-secondary-900/50 mt-4 p-2">
                 <p className="text-sm font-semibold text-center">Teams</p>
                 <div className="grid grid-cols-5 gap-4 p-4">
-                <div className="flex flex-col items-center p-3 gap-3 bg-primary-600 rounded-md hover:bg-primary-500">
+                <div className="flex flex-col items-center p-3 gap-3 rounded-md">
                     <div className="w-full aspect-square rounded-full bg-white-900/50 relative">
                     </div>
                     <p className="font-semibold text-secondary-600 truncate text-sm">FC Barcelona</p>
                 </div>
-                <div className="flex flex-col items-center p-3 gap-3 bg-primary-600 rounded-md hover:bg-primary-500">
+                <div className="flex flex-col items-center p-3 gap-3 rounded-md">
                     <div className="w-full aspect-square rounded-full bg-white-900/50 relative">
                     </div>
                     <p className="font-semibold text-secondary-600 truncate text-sm">FC Barcelona</p>
                 </div>
-                <div className="flex flex-col items-center p-3 gap-3 bg-primary-600 rounded-md hover:bg-primary-500">
+                <div className="flex flex-col items-center p-3 gap-3">
                     <div className="w-full aspect-square rounded-full bg-white-900/50 relative">
                     </div>
                     <p className="font-semibold text-secondary-600 truncate text-sm">FC Barcelona</p>
