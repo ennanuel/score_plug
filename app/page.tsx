@@ -6,6 +6,11 @@ import { ErrorMessage, NothingWasFound, CompetitionWithMatches } from './_compon
 import { CompetitionWithMatchesLoading } from './_components/loading';
 
 import { Competition } from '@/types/global.type';
+import { FiChevronLeft } from 'react-icons/fi';
+import { FaAngleRight } from 'react-icons/fa6';
+import { BiCaretDown } from 'react-icons/bi';
+import { FaAngleLeft } from 'react-icons/fa';
+import { IoFilter } from 'react-icons/io5';
 
 const QUERY = gql`
   query GetActiveCompetitions($isLive: Boolean!) {
@@ -50,21 +55,35 @@ function Home() {
   if (error) return <ErrorMessage />;
 
   return (
-    <main className="pb-4 bg-primary-600">
-      <div className="flex items-center justify-between border-b border-secondary-900/50">
-        <h2 className="font-bold px-4">Today's Matches</h2>
-        <div className="h-[50px] flex items-stretch justify-stretch text-sm">
-          <button onClick={showAllMatches} className={`flex justify-center items-center gap-4 px-4 min-w-[100px] font-semibold ${status === "" ? 'text-orange-300 bg-orange-400/20' : 'border-l border-secondary-900/50 text-orange-700'}`}>
-            {status === "" && <span className="block w-1 h-4 rounded-md bg-orange-300"></span>}
-            <span>All</span>
-          </button>
-          <button onClick={showLiveMatches} className={`flex justify-center items-center gap-4 px-4 min-w-[100px] font-semibold ${status === "IN_PLAY" ? 'border-l text-green-300 bg-green-400/20' : 'border-r border-secondary-900/50 text-green-700'}`}>
-            {status === "IN_PLAY" && <span className="block w-1 h-4 rounded-md bg-green-600"></span>}
-            <span>Live</span>
+    <main className="flex flex-col gap-4">
+      <div className="flex flex-col rounded-lg overflow-hidden border border-white-100/10 bg-white-100/5">
+        <div className="flex items-center justify-between gap-4 p-3">
+            <button className="flex items-center justify-center bg-white-100/10 rounded-full w-6 aspect-square text-white-500">
+              <FaAngleLeft size={12} />
+            </button>
+            <button className="flex items-center justify-center w-fit gap-2 px-2 text-white-400 hover:text-white-600">
+              <span className="font-bold text-sm">Today's matches</span>
+              <BiCaretDown size={12} />
+            </button>
+          <button className="flex items-center justify-center bg-white-100/10 rounded-full w-6 aspect-square text-white-500">
+            <FaAngleRight size={12} />
           </button>
         </div>
+        <div className="border-t border-white-100/5 flex justify-between gap-2 p-3">
+          <div className="flex items-center gap-2">
+            <button className="flex items-center justify-center gap-2 text-white-500 h-8 rounded-full bg-white/10 border border-white-100/10 px-4">
+              <span className="text-xs font-semibold">Live</span>
+            </button>
+            <button className="flex items-center justify-center gap-2 text-white-500 h-8 rounded-full bg-white/10 border border-white-100/10 px-4">
+              <span className="text-xs font-semibold">By Time</span>
+            </button>
+          </div>
+          <span className="flex-1 flex items-center justify-center gap-3 text-white-500 h-8 rounded-full bg-white/10 border border-white-100/10 px-4">
+            <IoFilter size={14} />
+            <input type="text" placeholder="Filter" className='flex-1 text-xs font-semibold h-full bg-transparent focus:outline-none outline-none text-white-500 placeholder:text-white-600' />
+          </span>
+        </div>
       </div>
-
       {
         loading ?
           <CompetitionWithMatchesLoading size={4} /> :
