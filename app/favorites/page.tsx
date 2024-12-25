@@ -6,9 +6,9 @@ import TeamCard from '../_components/TeamCard';
 
 const index = () => {
   return (
-    <div className="p-4 py-2 bg-primary-500 border border-secondary-900/50">
+    <div className="p-4 py-2">
       
-      <div className="p-2 px-4 bg-primary-800 rounded-lg mt-4">
+      <div className="p-2 px-4 rounded-lg mt-4">
         <h2 className="font-bold">Competitions</h2>
 
         <ul className="flex flex-col gap-4 mt-4">
