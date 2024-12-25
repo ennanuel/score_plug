@@ -8,9 +8,15 @@ const config: Config = {
   ],
   theme: {
     fontSize: {
-      xs: '.7rem',
-      sm: '.75rem',
-      base: '.85rem',
+      'tiny': '.5rem',
+      '3xs': '.6rem',
+      '2xs': '.65rem',
+      'xs': '.7rem',
+      'sm': '.75rem',
+      'base': '.85rem',
+    },
+    fontFamily: {
+      'figtree': 'Figtree'
     },
     extend: {
       colors: {
