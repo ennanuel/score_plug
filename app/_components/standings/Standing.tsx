@@ -16,7 +16,7 @@ function Standing({ highlightedTeams, teamStanding, relegationPositions, topPosi
     const positionColors = useMemo(() => getTablePositionColor(teamPosition), []);
 
     return (
-        <tr className={`text-xs text-center h-10 border-l-4 hover:bg-primary-500 ${highlightColors}`}>
+        <tr className={`text-xs text-center h-10 border-l-4 ${highlightColors}`}>
             <td className="text-center text-xs">
                 <p className={`h-6 m-auto aspect-square rounded-full ${positionColors} font-bold flex items-center justify-center`}>
                     {teamStanding.position}
