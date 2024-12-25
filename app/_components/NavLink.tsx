@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { IconType } from 'react-icons';
 
-const NavLink = ({ href, title, Icon, alert }: { href: string; title: string; Icon: IconType; ActiveIcon: IconType; alert: boolean; }) => {
+const NavLink = ({ href, title, alert }: { href: string; title: string; alert: boolean; }) => {
     const pathname = usePathname();
     const active = pathname === href;
 
