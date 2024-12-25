@@ -4,15 +4,16 @@ import { ApolloProvider } from "@apollo/client";
 import client from "@/apolloClient";
 
 import { Inter } from "next/font/google";
+import { usePathname } from "next/navigation";
 
 import { Header, Leftbar, Rightbar, Footer } from './_components';
 import CompetitionLayout from "./_components/layouts/competition";
 import MatchLayout from "./_components/layouts/match";
 import TeamLayout from "./_components/layouts/team";
-import { usePathname } from "next/navigation";
+
+import SocketContextProvider from "./SocketContext";
 
 import "./globals.css";
-import SocketContextProvider from "./SocketContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,18 +32,15 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <ApolloProvider client={client}>
       <SocketContextProvider>
         <html lang="en">
-          <body className={inter.className}>
+          <head>
+            <title>Scoreplug - Your sure plug for football scores</title>
+          </head>
+          <body style={{ '--max-width': '1240px' } as React.CSSProperties} className={`${inter.className} min-h-screen bg-black-900`}>
             <Header />
-            <div className="grid grid-cols-4">
-              <section>
-                <Leftbar />
-              </section>
-              <section className="col-span-2 border-x border-secondary-900/50">
-                {pageBody}
-              </section>
-              <section>
-                <Rightbar />
-              </section>
+            <div className="grid grid-cols-[240px,_1fr,_240px] gap-4 mt-6 lg:mt-20 m-auto max-w-[var(--max-width)]">
+              <Leftbar />
+              {pageBody}
+              <Rightbar />
             </div>
             <Footer />
           </body>
