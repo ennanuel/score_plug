@@ -8,7 +8,6 @@ export function getDateFormat(dateString: string): string {
     const date = new Date(dateStringToNumber);
     const month = MONTHS_ARRAY[date.getMonth()]?.substring(0, 3);
     const dateFormat = `${date.getDate()} ${month}, ${date.getFullYear()}`;
-    console.log(dateString);
     return dateFormat;
 };
 
