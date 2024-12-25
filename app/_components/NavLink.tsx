@@ -2,15 +2,14 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { IconType } from 'react-icons';
 
-const NavLink = ({ href, title, Icon, ActiveIcon, alert }: { href: string; title: string; Icon: IconType; ActiveIcon: IconType; alert: boolean; }) => {
+const NavLink = ({ href, title, Icon, alert }: { href: string; title: string; Icon: IconType; ActiveIcon: IconType; alert: boolean; }) => {
     const pathname = usePathname();
     const active = pathname === href;
 
     return (
-        <Link href={href} className={`relative h-[50px] flex items-center justify-center gap-2 px-6 text-sm ${active ? 'bg-secondary-900/50 text-secondary-100 font-semibold' : 'bg-transparent text-secondary-700 hover:bg-primary-900/30 hover:text-secondary-500'}`}>
-            {active ? <ActiveIcon size={15} /> : <Icon size={15} />}
-            <span>{title}</span>
-            {alert && <div className="absolute top-0 right-0 h-2 w-2 bg-highlight-400" />}
+        <Link href={href} className={`h-6 rounded-full flex items-center justify-center gap-2 px-3 ${active ? 'bg-white-400 text-black-600 font-semibold' : 'text-white-700 hover:bg-white-100/10 hover:text-white-500'}`}>
+            <span className="text-xs font-semibold">{title}</span>
+            {alert && <div className="absolute top-0 right-0 h-1 w-1 bg-white-400" />}
         </Link>
     )
 };
