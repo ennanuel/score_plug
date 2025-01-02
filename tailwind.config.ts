@@ -18,6 +18,11 @@ const config: Config = {
     fontFamily: {
       'figtree': 'Figtree'
     },
+    borderWidth: {
+      '5': '5px',
+      '6': '6px',
+      '0': '0px',
+    },
     extend: {
       colors: {
         primary: {
@@ -84,7 +89,7 @@ const config: Config = {
     },
     animation: {
       loadgradient: 'loadinggradient 1s linear infinite',
-      loadopacity: 'loadingopacity 500ms linear var(--delay) infinite alternate'
+      loadopacity: 'loadingopacity 500ms linear infinite alternate'
     },
     keyframes: {
       loadinggradient: {
