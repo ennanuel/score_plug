@@ -2,16 +2,11 @@
 
 import { useState, useMemo } from 'react';
 import { useQuery, gql } from '@apollo/client';
-import { ErrorMessage, NothingWasFound, CompetitionWithMatches, LoadingMessage } from './_components';
+import { ErrorMessage, CompetitionWithMatches } from './_components';
 import { CompetitionWithMatchesLoading } from './_components/loading';
 
 import { Competition } from '@/types/global.type';
-import { FiChevronLeft } from 'react-icons/fi';
-import { FaAngleRight } from 'react-icons/fa6';
-import { BiCaretDown } from 'react-icons/bi';
-import { FaAngleLeft } from 'react-icons/fa';
 import { IoFilter } from 'react-icons/io5';
-import { COMPETITIONS } from './_assets/constants/competition';
 import { getDay } from './_utils/dateTime';
 import DateSelector from './_components/DateSelector';
 
