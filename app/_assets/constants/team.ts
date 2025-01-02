@@ -2,9 +2,10 @@ import barcelonaCrest from "../barcelona_crest.png";
 import liverpoolCrest from "../liverpool_crest.png";
 
 export const TEAM_LINKS = [
-    { title: "Details", href: "" },
-    { title: "Matches", href: "matches" },
-    { title: "Players", href: "players" }
+    { title: "Overview", href: "" },
+    { title: "Table", href: "table" },
+    { title: "Fixtures", href: "matches" },
+    { title: "Squad", href: "players" }
 ];
 
 export const TEAMS = [

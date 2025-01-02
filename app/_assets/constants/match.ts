@@ -4,24 +4,10 @@ import laLigaEmblem from "../la_liga_emblem.png";
 
 export const MATCH_LINKS = [
     { title: "Details", href: "" },
-    { title: "Head to Head", href: "h2h" },
+    { title: "Head-to-Head", href: "h2h" },
+    { title: "Table", href: "table" },
     { title: "Prediction", href: "prediction" }
 ];
-
-export const HIGHLIGHT_BACKGROUNDS = {
-    'in_play': 'bg-highlight-500',
-    'paused': 'bg-highlight-800',
-    'finished': 'bg-secondary-800',
-    'cancelled': 'bg-red-800',
-    'postponed': 'bg-highlight-800'
-}
-
-export const MATCH_CARD_BACKGROUNDS = {
-    'in_play': 'bg-highlight-700/5',
-    'finished': 'bg-transparent',
-    'paused': 'bg-white-100/5',
-}
-
 const MATCH_COMPETITION = {
     _id: 133902,
     name: "La Liga",
@@ -99,6 +85,10 @@ export const MATCHES = [
         },
         score: {
             winner: null,
+            firstHalf: {
+                home: 0,
+                away: 2
+            },
             fullTime: {
                 home: 1,
                 away: 4
@@ -127,6 +117,14 @@ export const MATCHES = [
         },
         score: {
             winner: "AWAY_TEAM",
+            firstHalf: {
+                home: 0,
+                away: 1
+            },
+            secondHalf: {
+                home: 0,
+                away: 2
+            },
             fullTime: {
                 home: 0,
                 away: 3
@@ -155,8 +153,12 @@ export const MATCHES = [
         },
         score: {
             winner: null,
+            firstHalf: {
+                home: 1,
+                away: 0
+            },
             fullTime: {
-                home: 2,
+                home: 1,
                 away: 0
             }
         },
