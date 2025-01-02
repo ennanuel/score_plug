@@ -8,24 +8,26 @@ const MatchLoading = ({ size }: { size: number }) => {
     }, []);
 
     return (
-        <ul className="flex flex-col border border-secondary-900/50 rounded-md overflow-hidden">
+        <ul className="">
             {
                 matches.map((key) => (
                     <li
                         key={key} style={{ '--delay': `${key*100}ms` } as React.CSSProperties}
-                        className="border-b last:border-none border-secondary-900/50 p-3 flex gap-4"
+                        className="border-b last:border-none border-white-100/10 px-3 py-4 grid grid-cols-[auto,_1fr,_auto] items-center gap-3"
                     >
-                        <div className="w-1 rounded-md bg-secondary-900/50"></div>
-                        <div className="flex flex-col gap-2 ml-[30px]">
-                            <div className="h-4 flex gap-2">
-                                <span className='w-4 h-4 rounded-full bg-secondary-900/50'></span>
-                                <span className='animate-loadopacity w-[160px] h-4 rounded-sm bg-secondary-900/50'></span>
+                        <div className="w-5 h-3 rounded-full bg-white-100/10"></div>
+                        <div className="flex items-center justify-center gap-4 ml-[30px]">
+                            <div className="flex justify-end items-center gap-2 flex-1">
+                                <span className='animate-loadopacity w-full max-w-[160px] h-3 rounded-sm bg-white-100/10'></span>
+                                <span className='w-4 aspect-square rounded-full bg-white-100/10'></span>
                             </div>
-                            <div className="h-4 flex gap-2">
-                                <span className='w-4 h-4 rounded-full bg-secondary-900/50'></span>
-                                <span className='animate-loadopacity w-[160px] h-4 rounded-sm bg-secondary-900/50'></span>
+                            <span className="animate-loadopacity w-10 h-3 rounded-sm bg-white-100/10"></span>
+                            <div className="flex justify-start items-center gap-2 flex-1">
+                                <span className='w-4 aspect-square rounded-full bg-white-100/10'></span>
+                                <span className='animate-loadopacity w-full max-w-[160px] h-3 rounded-sm bg-white-100/10'></span>
                             </div>
                         </div>
+                        <div className="w-5 h-3 rounded-full bg-white-100/10 hidden"></div>
                     </li>
                 ))
             }

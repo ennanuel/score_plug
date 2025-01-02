@@ -9,20 +9,17 @@ const CompetitionWithMatchesLoading = ({ size }: { size: number }) => {
     }, []);
 
     return (
-        <ul className="flex flex-col gap-2">
+        <ul className="flex flex-col gap-4">
             {
                 competitions.map((key) => (
                     <li
                         key={key}
                         style={{ '--delay': `${key * 100}ms` } as React.CSSProperties}
-                        className='flex flex-col gap-4 border-b border-white-100/10 last:border-transparent p-4'
+                        className='rounded-xl border border-white-100/10 bg-white-100/5'
                     >
-                        <div className='flex items-center gap-3 px-2'>
-                            <span className="w-[40px] h-[40px] rounded-full bg-secondary-900/50" />
-                            <div className="flex-1 flex flex-col gap-2">
-                                <span className="animate-loadopacity h-4 rounded-sm bg-secondary-900/50 w-[160px]"></span>
-                                <span className="animate-loadopacity h-3 rounded-sm bg-secondary-900/50 w-[100px]"></span>
-                            </div>
+                        <div className='flex items-center gap-2 p-3 border-b border-transparent bg-white-100/5'>
+                            <span className="w-5 block aspect-square rounded-full bg-white-100/10" />
+                            <span className="animate-loadopacity h-3 block rounded-sm bg-white-100/10 w-full max-w-[160px]"></span>
                         </div>
                         <MatchLoading size={4} />
                     </li>
