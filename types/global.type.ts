@@ -60,10 +60,6 @@ export type Competition = {
         headTitle: string;
         stats: CompetitionTeamStat[]
     }[];
-    highlightMatches?: {
-        matches: Match[];
-        totalPages: number;
-    };
     recentMatches: {
         matches: number;
         hasLiveMatch: boolean;
