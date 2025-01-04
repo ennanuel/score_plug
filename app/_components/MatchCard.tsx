@@ -45,7 +45,7 @@ function MatchCard ({ _id, status, competition, minute, utcDate, homeTeam, awayT
                     </div> :
                     null
             }
-            <div className={`text-2xs grid ${showDateAndCompetition ? 'grid-cols-1' : 'grid-cols-[80px,_1fr,_80px]'} items-center`}>
+            <div className={`text-2xs grid ${showDateAndCompetition ? 'grid-cols-1' : 'grid-cols-[24px,_1fr,_24px] sm:grid-cols-[40px,_1fr,_40px] md:grid-cols-[80px,_1fr,_80px]'} items-center`}>
                 <div className={showDateAndCompetition ? 'hidden' : ''}>
                     {
                         showMinutes ?
@@ -55,10 +55,12 @@ function MatchCard ({ _id, status, competition, minute, utcDate, homeTeam, awayT
                             null
                     }
                 </div>
-                <div className="grid grid-cols-[1fr,_auto,_1fr] items-center justify-center gap-4">
+                <div className="grid grid-cols-[1fr,_auto,_1fr] items-center justify-center gap-2 md:gap-4">
                     <div className={`flex justify-end items-center gap-2 ${homeTextColor}`}>
-                        <p className="font-semibold">{small ? homeTeam.shortName : homeTeam.name}</p>
-                        <Image src={homeTeam.crest || String(process.env.NEXT_IMAGE_URI)} alt={homeTeam.name} height={24} width={24} className="w-6 aspect-square object-contain" />
+                        <span className="flex-1 relative block w-full">
+                            <p className="font-semibold truncate absolute w-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-right">{small ? homeTeam.shortName : homeTeam.name}</p>
+                        </span>
+                        <Image src={homeTeam.crest || String(process.env.NEXT_IMAGE_URI)} alt={homeTeam.name} height={24} width={24} className="w-6 max-h-6 aspect-square object-contain" />
                     </div>
                     <div>
                         {
@@ -93,8 +95,10 @@ function MatchCard ({ _id, status, competition, minute, utcDate, homeTeam, awayT
                         }
                     </div>
                     <div className={`flex items-center gap-2 ${awayTextColor}`}>
-                        <Image src={awayTeam.crest} alt={awayTeam.name} height={24} width={24} className="w-6 aspect-square object-contain" />
-                        <p className="font-semibold">{small ? awayTeam.shortName : awayTeam.name}</p>
+                        <Image src={awayTeam.crest} alt={awayTeam.name} height={24} width={24} className="w-6 max-h-6 aspect-square object-contain" />
+                        <span className="flex-1 relative block w-full">
+                            <p className="font-semibold truncate absolute w-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-left">{small ? awayTeam.shortName : awayTeam.name}</p>
+                        </span>
                     </div>
                 </div>
                 <div className={`${showDateAndCompetition ? 'hidden' : 'flex'} items-center justify-end`}>
