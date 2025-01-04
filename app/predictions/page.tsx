@@ -8,10 +8,11 @@ import { Match } from "@/types/global.type";
 import { SocketContext } from "../SocketContext";
 import { PredictionLoading } from "../_components/loading";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import DateSelector from "../_components/DateSelector";
 
 const QUERY = gql`
-  query GetMatchPredictions($date: String, $status: String) {
-    matchPredictions(from: $date, status: $status) {
+  query GetMatchPredictions($fromDate: String, $toDate: String, $status: String) {
+    matchPredictions(from: $fromDate, to: $toDate, status: $status) {
         totalPages
         matches {
             _id
@@ -56,11 +57,10 @@ const QUERY = gql`
 
 
 const Matches = () => {
-  const [date, setDate] = useState("");
-  const [status, setStatus] = useState("");
+  const [date, setDate] = useState({ fromDate: "", toDate: "" });
 
   const { loading, error, data } = useQuery<{ matchPredictions: { matches: Match[], totalPages: number } }>(QUERY, {
-    variables: { status }
+    variables: { ...date }
   });
 
   const { socketData } = useContext(SocketContext);
@@ -71,16 +71,8 @@ const Matches = () => {
 
   return (
     <div className="rounded-xl pb-3 bg-white-100/10 border border-transparent h-fit flex flex-col gap-4">
-      <div className="grid grid-cols-[auto,_1fr,auto] gap-2 items-center p-3 ">
-        <button className="w-6 aspect-square rounded-full bg-white-100/10 text-white-500 hover:bg-white-100/60 hover:text-black-900 flex items-center justify-center">
-          <FiChevronLeft size={14} />
-        </button>
-        <button className="text-white-500 hover:text-white-600">
-          <span className="text-xs font-semibold">Today</span>
-        </button>
-        <button className="w-6 aspect-square rounded-full bg-white-100/10 text-white-500 hover:bg-white-100/60 hover:text-black-900 flex items-center justify-center">
-          <FiChevronRight size={14} />
-        </button>
+      <div className="gap-2 items-center p-3 ">
+        <DateSelector setDate={setDate} />
       </div>
       {
         loading ?
