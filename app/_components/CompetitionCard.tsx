@@ -3,34 +3,28 @@
 import { Competition } from '@/types/global.type';
 import Link from 'next/link';
 import Image from "next/image";
-import { MdKeyboardArrowRight } from "react-icons/md";
 import { loadImage } from '../_utils/competition';
 
 const CompetitionCard = ({ _id, name, emblem, area, recentMatches }: Competition) => {
     return (
-        <li className={`border-b last:border-none ${recentMatches.hasLiveMatch ? 'bg-secondary-900/50 border-transparent' : 'border-secondary-900/50'}`}>
-            <Link href={`/competition/${_id}`} className="flex items-center gap-4 justify-between hover:bg-secondary-900/50 p-3 px-4">
-                <Image src={emblem || String(process.env.NEXT_IMAGE_URI)} loader={loadImage} width={30} height={30} className="aspect-square object-contain" alt={name} />
+        <li className={`bg-white-100/5 rounded-lg hover:bg-white-100/10 p-3 min-h-14 flex`}>
+            <Link href={`/competition/${_id}`} className="flex items-center gap-4 justify-between w-full">
+                <Image src={emblem || String(process.env.NEXT_IMAGE_URI)} loader={loadImage} width={30} height={30} className="w-6 max-h-6 aspect-square object-contain" alt={name} />
                 <div className="flex-1 flex flex-col">
-                    <div className="flex items-center gap-2">
-                        <h3 className="text-secondary-400 font-semibold text-sm">{name}</h3>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <Image src={area.flag || String(process.env.NEXT_IMAGE_URI)} width={15} height={15} className="object-contain" alt="Competition area flag" />
-                        <span className="text-xs text-gray-500">{area.name}</span>
-                    </div>
+                    <div className="flex items-center justify-between gap-4">
+                        <h3 className={`${recentMatches.hasLiveMatch ? 'text-yellow-400' : 'text-white-400'} font-semibold text-2xs`}>{name}</h3>
+                        {
+                            Boolean(recentMatches.matches) ?
+                                <div className="flex items-center gap-2">
+                                    <p className={`text-3xs font-semibold ${recentMatches.hasLiveMatch ? 'text-yellow-400' : 'text-white-700'}`}>
+                                    {recentMatches.matches} {recentMatches.matches > 1 ? 'matches' : 'match'}
+                                    </p>
+                                </div>
+                                : null
+                        }
+                    </div>                    
+                    <span className="text-3xs text-white-700">{area.name}</span>
                 </div>
-                {
-                    Boolean(recentMatches.matches) ?
-                        <div className="flex items-center gap-2">
-                            {recentMatches.hasLiveMatch && <span className="block w-2 h-2 rounded-full bg-highlight-400"></span>}
-                            <p className={`text-xs font-bold ${recentMatches.hasLiveMatch ? 'text-highlight-400' : 'text-gray-400'}`}>
-                            {recentMatches.matches} {recentMatches.matches > 1 ? 'matches' : 'match'}
-                            </p>
-                        </div>
-                        : null
-                }
-                <MdKeyboardArrowRight size={20} />
             </Link>
         </li>
     )

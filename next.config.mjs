@@ -7,6 +7,11 @@ const nextConfig = {
                 hostname: '**.football-data.org',
                 port: '',
             },
+            {
+                protocol: "https",
+                hostname: 'score-plug-backend.onrender.com',
+                port: ''
+            }
         ],
     },
 };

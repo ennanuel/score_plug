@@ -1,3 +1,22 @@
+
+
+type H2HHalfAggregate = {
+    homeTeam: { 
+        id: number,
+        wins: number,
+        draws: number,
+        losses: number,
+        totalGoals: number
+    },
+    awayTeam: {
+        id: number,
+        wins: number,
+        draws: number,
+        losses: number,
+        totalGoals: number
+    }
+}
+
 export type MatchStatus = "TIMED" | "PAUSED" | "IN_PLAY" | "FINISHED" | "CANCELLED" | "POSTPONED";
 
 export type MatchScore = {
@@ -20,42 +39,32 @@ export type Score = {
 }
 
 export type MatchGoals = {
-    _1: GoalsOutcome;
-    _2: GoalsOutcome;
-    _3: GoalsOutcome;
-    _4: GoalsOutcome;
+    _1?: GoalsOutcome;
+    _2?: GoalsOutcome;
+    _3?: GoalsOutcome;
+    _4?: GoalsOutcome;
 };
 
-export type GoalsOutcome = {
-    over: number;
-    under: number;
+type GoalsOutcome = {
+    over?: number;
+    under?: number;
 };
 
-export type MatchOutcome = {
-    homeWin: number;
-    draw: number;
-    awayWin: number;
+type MatchOutcome = {
+    homeWin?: number;
+    draw?: number;
+    awayWin?: number;
 };
 
-export type Referee = {
-    name: string;
-    type: string;
-    nationality: string;
+export type MatchHalfPrediction = {
+    outcome?: MatchOutcome;
+    goals?: MatchGoals;
 };
 
-export type H2HAggregate = {
-    homeTeam: { 
-        id: number,
-        wins: number,
-        draws: number,
-        losses: number,
-        totalGoals: number
-    },
-    awayTeam: {
-        id: number,
-        wins: number,
-        draws: number,
-        losses: number,
-        totalGoals: number
-    }
-}
+export type HeadToHeadAggregate = {
+    numberOfMatches: number;
+    homeTeam: number,
+    awayTeam: number,
+    halfTime: H2HHalfAggregate,
+    fullTime: H2HHalfAggregate
+};

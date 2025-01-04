@@ -1,13 +1,14 @@
 "use client";
 
-import { useState } from "react";
-import { TEAM_FORM } from "@/app/_assets/constants/team";
-import { FormBox, LoadingMessage, ErrorMessage, Standings, MatchesContainer, NothingWasFound, TeamForm } from "@/app/_components";
+import { ErrorMessage, MatchesContainer, NothingWasFound } from "@/app/_components";
 import { Match } from "@/types/global.type";
 import { useParams } from "next/navigation";
 import { gql, useQuery } from "@apollo/client";
 import Image from "next/image";
 import { DetailsLoading } from "@/app/_components/loading";
+import { getMatchTeamColors } from "@/app/_utils/colors";
+import { useMemo, useState } from "react";
+import { IoIosHelpCircle } from "react-icons/io";
 
 const QUERY = gql`
     query GetCompetitionHead2Head($id: ID!) {
@@ -20,16 +21,23 @@ const QUERY = gql`
             homeTeam {
                 _id
                 name
+                shortName
+                tla
                 crest
+                clubColors
+                matchesPlayed
+
                 halfTime {
                     wins
                     draws
+                    losses
                     goalsConceded
                     goalsScored
                 }
                 fullTime {
                     wins
                     draws
+                    losses
                     goalsConceded
                     goalsScored
                 }
@@ -60,16 +68,23 @@ const QUERY = gql`
             awayTeam {
                 _id
                 name
+                shortName
+                tla
                 crest
+                clubColors
+                matchesPlayed
+
                 halfTime {
                     wins
                     draws
+                    losses
                     goalsConceded
                     goalsScored
                 }
                 fullTime {
                     wins
                     draws
+                    losses
                     goalsConceded
                     goalsScored
                 }
@@ -102,6 +117,8 @@ const QUERY = gql`
                 _id
                 aggregates {
                     numberOfMatches
+                    homeTeam
+                    awayTeam
                     halfTime {
                         homeTeam {
                             totalGoals
@@ -139,7 +156,16 @@ const QUERY = gql`
                     status
                     minute
 
+                    competition {
+                        name
+                        emblem
+                    }
+
                     score {
+                        firstHalf {
+                            home
+                            away
+                        }
                         fullTime {
                             home
                             away
@@ -168,162 +194,365 @@ const QUERY = gql`
                 }
             }
 
-            competition {
-                
-                _id
-                name
-                emblem
-                type
-                code
-
-                teams {
-                    _id
-                }
-                area {
-                    name
-                    flag
-                }
-                currentSeason {
-                    startDate
-                    endDate
-                }
-                standings {
-                    stage
-                    type
-                    group
-                    table {
-                        position
-                        team {
-                            _id
-                            name
-                            crest
-                        }
-                        playedGames
-                        form
-                        won
-                        draw
-                        lost
-                        points
-                        goalsFor
-                        goalsAgainst
-                        goalDifference
-                    }
-                }
-            }
         }
     }
 `
 
 const H2H = () => {
     const { id } = useParams();
-    const [showHomeSide, setShowHomeSide] = useState(true);
-
     const { loading, error, data } = useQuery<{ match: Match }>(QUERY, { variables: { id } });
+
+    const [showHalfTime, setShowHalfTime] = useState(false);
+    const { homeTeamPrevWins, homeTeamPrevLosses, homeTeamPrevDraws, homeTeamPrevGoalsScored, homeTeamPrevGoalsConceded, homeTeamExpectedGoals, awayTeamPrevWins, awayTeamPrevLosses, awayTeamPrevDraws, awayTeamPrevGoalsScored, awayTeamPrevGoalsConceded, awayTeamExpectedGoals } = useMemo(() => (
+        data?.match ? 
+            {
+                homeTeamPrevWins: data.match[data.match.homeTeam._id == data.match.head2head.aggregates.homeTeam ? 'homeTeam' : 'awayTeam'].fullTime.wins,
+                homeTeamPrevLosses: data.match[data.match.homeTeam._id == data.match.head2head.aggregates.homeTeam ? 'homeTeam' : 'awayTeam'].fullTime.losses,
+                homeTeamPrevDraws: data.match[data.match.homeTeam._id == data.match.head2head.aggregates.homeTeam ? 'homeTeam' : 'awayTeam'].fullTime.draws,
+                homeTeamPrevGoalsScored: data.match[data.match.homeTeam._id == data.match.head2head.aggregates.homeTeam ? 'homeTeam' : 'awayTeam'].fullTime.goalsScored,
+                homeTeamPrevGoalsConceded: data.match[data.match.homeTeam._id == data.match.head2head.aggregates.homeTeam ? 'homeTeam' : 'awayTeam'].fullTime.goalsConceded,
+                homeTeamExpectedGoals: (data.match[data.match.homeTeam._id == data.match.head2head.aggregates.homeTeam ? 'homeTeam' : 'awayTeam'].fullTime.goalsScored / data.match[data.match.homeTeam._id == data.match.head2head.aggregates.homeTeam ? 'homeTeam' : 'awayTeam'].matchesPlayed),
+                awayTeamPrevWins: data.match[data.match.awayTeam._id == data.match.head2head.aggregates.awayTeam ? 'awayTeam' : 'homeTeam'].fullTime.wins,
+                awayTeamPrevLosses: data.match[data.match.homeTeam._id == data.match.head2head.aggregates.homeTeam ? 'awayTeam' : 'homeTeam'].fullTime.losses,
+                awayTeamPrevDraws: data.match[data.match.homeTeam._id == data.match.head2head.aggregates.homeTeam ? 'awayTeam' : 'homeTeam'].fullTime.draws,
+                awayTeamPrevGoalsScored: data.match[data.match.homeTeam._id == data.match.head2head.aggregates.homeTeam ? 'awayTeam' : 'homeTeam'].fullTime.goalsScored,
+                awayTeamPrevGoalsConceded: data.match[data.match.homeTeam._id == data.match.head2head.aggregates.homeTeam ? 'awayTeam' : 'homeTeam'].fullTime.goalsConceded,
+                awayTeamExpectedGoals: (data.match[data.match.homeTeam._id == data.match.head2head.aggregates.homeTeam ? 'awayTeam' : 'homeTeam'].fullTime.goalsScored / data.match[data.match.homeTeam._id == data.match.head2head.aggregates.homeTeam ? 'awayTeam' : 'homeTeam'].matchesPlayed),
+            } :
+            { homeTeamPrevWins: 0, homeTeamPrevLosses: 0, homeTeamPrevDraws: 0, homeTeamPrevGoalsScored: 0, homeTeamPrevGoalsConceded: 0, homeTeamExpectedGoals: 0, awayTeamPrevWins: 0, awayTeamPrevLosses: 0, awayTeamPrevDraws: 0, awayTeamPrevGoalsScored: 0, awayTeamPrevGoalsConceded: 0, awayTeamExpectedGoals: 0 }
+    ), [data]);
+
+    const { homeTeamH2HWins, homeTeamH2HLosses, homeTeamH2HDraws, homeTeamH2HGoals, awayTeamH2HWins, awayTeamH2HLosses, awayTeamH2HDraws, awayTeamH2HGoals } = useMemo(() => (
+        data?.match ?
+        {
+            homeTeamH2HWins: data.match.head2head.aggregates.fullTime[data.match.homeTeam._id == data.match.head2head.aggregates.homeTeam ? 'homeTeam' : 'awayTeam'].wins,
+            homeTeamH2HLosses: data.match.head2head.aggregates.fullTime[data.match.homeTeam._id == data.match.head2head.aggregates.homeTeam ? 'homeTeam' : 'awayTeam'].losses,
+            homeTeamH2HDraws: data.match.head2head.aggregates.fullTime[data.match.homeTeam._id == data.match.head2head.aggregates.homeTeam ? 'homeTeam' : 'awayTeam'].draws,
+            homeTeamH2HGoals: data.match.head2head.aggregates.fullTime[data.match.homeTeam._id == data.match.head2head.aggregates.homeTeam ? 'homeTeam' : 'awayTeam'].totalGoals,
+            awayTeamH2HWins: data.match.head2head.aggregates.fullTime[data.match.awayTeam._id == data.match.head2head.aggregates.awayTeam ? 'awayTeam' : 'homeTeam'].wins,
+            awayTeamH2HLosses: data.match.head2head.aggregates.fullTime[data.match.awayTeam._id == data.match.head2head.aggregates.awayTeam ? 'awayTeam' : 'homeTeam'].losses,
+            awayTeamH2HDraws: data.match.head2head.aggregates.fullTime[data.match.awayTeam._id == data.match.head2head.aggregates.awayTeam ? 'awayTeam' : 'homeTeam'].draws,
+            awayTeamH2HGoals: data.match.head2head.aggregates.fullTime[data.match.awayTeam._id == data.match.head2head.aggregates.awayTeam ? 'awayTeam' : 'homeTeam'].totalGoals,
+        } :
+        { homeTeamH2HWins: 0, homeTeamH2HLosses: 0, homeTeamH2HDraws: 0, homeTeamH2HGoals: 0, awayTeamH2HWins: 0, awayTeamH2HLosses: 0, awayTeamH2HDraws: 0, awayTeamH2HGoals: 0 }
+    ), [data])
+    const { homeTeamColor, homeTeamWinPercentage, awayTeamColor, awayTeamWinPercentage } = useMemo(() => (data?.match ? 
+        { 
+            homeTeamColor: getMatchTeamColors(data.match[data.match.homeTeam._id == data.match.head2head.aggregates.homeTeam ? 'homeTeam' : 'awayTeam'].clubColors)[0],
+            awayTeamColor: getMatchTeamColors(data.match[data.match.awayTeam._id == data.match.head2head.aggregates.awayTeam ? 'awayTeam' : 'homeTeam'].clubColors)[0],
+            homeTeamWinPercentage: `${Math.round((homeTeamH2HWins / (homeTeamH2HWins + awayTeamH2HWins)) * 100)}%`,
+            awayTeamWinPercentage: `${Math.round((awayTeamH2HWins / (homeTeamH2HWins + awayTeamH2HWins)) * 100)}%`,
+        } : 
+        { homeTeamColor: "", homeTeamWinPercentage: "", awayTeamColor: "", awayTeamWinPercentage: "" }
+    ), [data])
 
     if (loading) return <DetailsLoading />;
     if (error) return <ErrorMessage />
     else if (!data) return <NothingWasFound />;
 
     return (
-        <div className='mt-2 p-4'>
-            <p className='font-semibold text-s mt-6'>Overall Stats</p>
-            <div className='flex flex-col items-center gap-2 p-2 px-5 pt-[40px] m-auto mt-2 border border-secondary-900/50'>
-                <div className="flex w-[80%]">
-                    <div style={{ width: `${data.match.predictions.fullTime.outcome.homeWin}%`}} className="relative top-0 left-0 w-[33.33%] h-2 rounded-l-[5px] bg-highlight-300">
-                        <p className="absolute bottom-[calc(100%_+_5px)] left-[50%] flex items-center justify-center gap-1 translate-x-[-50%] text-[.7em] text-secondary-600">
-                            <span>Home</span>
-                            <span>({data.match.predictions.fullTime.outcome.homeWin}%)</span>
-                        </p>
+        <div className="flex flex-col gap-4">
+            <div className="flex flex-col rounded-xl bg-[#191919] border border-transparent">
+                <div className="flex justify-evenly gap-6 p-6">
+                    <span className="flex gap-6">
+                        <Image src={data.match.homeTeam.crest} alt={`${data.match.homeTeam.name} crest`} height={48} width={48} className="w-10 max-h-10 aspect-square object-contain" />
+                        <div className="flex flex-col gap-3 justify-center items-center text-white-100">
+                            <span className="relative overflow-hidden h-10 flex items-center justify-center rounded-full bg-white-100/10 w-16">
+                                <span style={{ backgroundColor: homeTeamColor }} className="absolute top-0 left-0 opacity-50 block w-full h-full bg-white-100/10" />
+                                <span className="relative text-lg font-bold">
+                                    {
+                                        data
+                                            .match
+                                            .head2head
+                                            .aggregates
+                                            [showHalfTime ? 'halfTime' : 'fullTime']
+                                            [Number(data.match.homeTeam._id) == Number(data.match.head2head.aggregates.homeTeam) ? 'homeTeam' : 'awayTeam']
+                                            .wins
+                                    }
+                                </span>
+                            </span>
+                            <span className="text-sm font-semibold">Wins</span>
+                        </div>
+                    </span>
+                    <div className="flex flex-col gap-3 justify-center items-center text-white-100">
+                        <span className="h-10 flex items-center justify-center rounded-full bg-white-100/10 w-16">
+                            <span className="text-lg font-bold">
+                                {
+                                    data
+                                        .match
+                                        .head2head
+                                        .aggregates
+                                        [showHalfTime ? 'halfTime' : 'fullTime']
+                                        .homeTeam
+                                        .draws
+                                }
+                            </span>
+                        </span>
+                        <span className="text-sm font-semibold">Draws</span>
                     </div>
-                    <div style={{ width: `${data.match.predictions.fullTime.outcome.draw}%`}} className="relative top-0 left-0 w-[33.34%] h-2 border-x border-primary-800 bg-highlight-500">
-                        <p className="absolute bottom-[calc(100%_+_5px)] left-[50%] flex items-center justify-center gap-1 translate-x-[-50%] text-[.7em] text-secondary-600">
-                            <span>Draw</span>
-                            <span>({data.match.predictions.fullTime.outcome.draw}%)</span>
-                        </p>
-                    </div>
-                    <div style={{ width: `${data.match.predictions.fullTime.outcome.awayWin}%` }} className="relative top-0 left-0 w-[33.33%] h-2 rounded-r-[5px] bg-highlight-700">
-                        <p className="absolute bottom-[calc(100%_+_5px)] left-[50%] flex items-center justify-center gap-1 translate-x-[-50%] text-[.7em] text-secondary-600">
-                            <span>Away</span>
-                            <span>({data.match.predictions.fullTime.outcome.awayWin}%)</span>
-                        </p>
-                    </div>
+                    <span className="flex gap-6">
+                        <div className="flex flex-col gap-3 justify-center items-center text-white-100">
+                            <span className="relative overflow-hidden h-10 flex items-center justify-center rounded-full bg-white-100/10 w-16">
+                                <span style={{ backgroundColor: awayTeamColor }} className="absolute top-0 left-0 opacity-50 block w-full h-full bg-white-100/10" />
+                                <span className="relative text-lg font-bold">
+                                    {
+                                        data
+                                            .match
+                                            .head2head
+                                            .aggregates
+                                            .fullTime[Number(data.match.awayTeam._id) == Number(data.match.head2head.aggregates.awayTeam) ? 'awayTeam' : 'homeTeam']
+                                            .wins
+                                    }
+                                </span>
+                            </span>
+                            <span className="text-sm font-semibold">Wins</span>
+                        </div>
+                        <Image src={data.match.awayTeam.crest} alt={`${data.match.awayTeam.name} crest`} height={48} width={48} className="w-10 max-h-10 aspect-square object-contain" />
+                    </span>
                 </div>
-
-                <div className="flex w-full items-center justify-between gap-4 mt-2">
-                    <p className='text-sm font-semibold text-secondary-500'>Matches Played</p>
-                    <span className='font-bold'>{data.match.head2head?.aggregates?.numberOfMatches}</span>
-                </div>
-
-                <div className="flex w-full items-center justify-between gap-4">
-                    <p className='text-xs text-secondary-600'>{data.match.homeTeam.name} Wins</p>
-                    <span className='font-semibold text-sm'>{data.match.head2head?.aggregates?.fullTime?.homeTeam?.wins}</span>
-                </div>
-
-                <div className="flex w-full items-center justify-between gap-4">
-                    <p className='text-xs text-secondary-600'>Matches Drawn</p>
-                    <span className='font-semibold text-sm'>{data.match.head2head?.aggregates?.fullTime?.awayTeam?.draws}</span>
-                </div>
-
-                <div className="flex w-full items-center justify-between gap-4">
-                    <p className='text-xs text-secondary-600'>{data.match.awayTeam.name} Wins</p>
-                    <span className='font-semibold text-sm'>{data.match.head2head?.aggregates?.fullTime?.awayTeam?.wins}</span>
-                </div>
-
-                <div className="flex w-full items-center justify-between gap-4 mt-2">
-                    <p className='text-sm font-semibold text-secondary-500'>Goals Scored</p>
-                    <span className='font-bold'>{data.match.head2head?.aggregates?.fullTime?.awayTeam?.totalGoals + data.match?.head2head?.aggregates?.fullTime?.homeTeam?.totalGoals}</span>
-                </div>
-
-                <div className="flex w-full items-center justify-between gap-4">
-                    <p className='text-xs text-secondary-600'>{data.match.homeTeam.name} Goals</p>
-                    <span className='font-semibold text-sm'>{data.match.head2head?.aggregates?.fullTime?.homeTeam?.totalGoals}</span>
-                </div>
-
-                <div className="flex w-full items-center justify-between gap-4">
-                    <p className='text-xs text-secondary-600'>{data.match.homeTeam.name} United Goals</p>
-                    <span className='font-semibold text-sm'>{data.match.head2head?.aggregates?.fullTime?.awayTeam?.totalGoals}</span>
-                </div>
-            
-                <div className="flex flex-col gap-4 w-full mb-3">
-                    <p className='font-semibold text-sm mt-6'>Previous Encounters</p>
-                    <MatchesContainer matches={data.match.head2head.matches || []} />
-                </div>
+                {
+                    data.match.head2head.matches.length ?
+                        <div className="flex flex-col pb-2">
+                            <div className="flex items-center gap-2 px-6 py-3 border-y border-white-100/10">
+                                {
+                                    ["Full time", "Half time"]
+                                        .map((title) => (
+                                            <button 
+                                                onClick={() => setShowHalfTime(title === "Half time")} 
+                                                className={`${(title === "Half time" && showHalfTime) || (title === "Full time" && !showHalfTime) ? 'bg-white-100 text-black-900' : 'bg-white-100/10 text-white-600 hover:bg-white-100/20 hover:text-white-500'} h-7 rounded-full px-4 flex items-center justify-center`}
+                                                >
+                                                <span className="text-2xs">{title}</span>
+                                            </button>
+                                        ))
+                                }
+                            </div>
+                            <MatchesContainer matches={data.match.head2head.matches} showDateAndCompetition showHalfTimeScore={showHalfTime} />
+                        </div> :
+                        null
+                }
             </div>
-
-            <p className='font-semibold mt-[60px]'>Individual Stats</p>
-            <div className="flex items-center p-2 gap-3 mt-2">
-                <button onClick={() => setShowHomeSide(true)} className={`px-4 h-[35px] rounded-md text-sm font-bold ${showHomeSide ? 'bg-secondary-100/10 border-secondary-100/10' : 'border-transparent bg-secondary-100/5'} border`}>
-                    <Image src={data.match.homeTeam.crest || String(process.env.NEXT_IMAGE_URL)} alt={data.match.homeTeam.name} width={20} height={20} />
-                </button>
-                <button onClick={() => setShowHomeSide(false)} className={`px-4 h-[35px] rounded-md text-sm font-bold ${!showHomeSide ? 'bg-secondary-100/10 border-secondary-100/10' : 'border-transparent bg-secondary-100/5'} border`}>
-                    <Image src={data.match.awayTeam.crest || String(process.env.NEXT_IMAGE_URL)} alt={data.match.homeTeam.name} width={20} height={20} />
-                </button>
-            </div>
-
-            <div className="mt-2 border border-secondary-900/50">
-                <div className="flex justify-between items-end gap-3 p-4">
-                    <p className="text-sm font-semibold">Team Form</p>
-                    <TeamForm matches={data.match[showHomeSide ? 'homeTeam' : 'awayTeam'].matches} teamId={data.match[showHomeSide ? 'homeTeam' : 'awayTeam']._id} />
+            <div className="bg-[#191919] rounded-xl border border-transparent">
+                <div className="flex gap-2 p-4 border-b border-white-100/10">
+                    {
+                        ["All", "1st", "2nd"]
+                            .map((title) => (
+                                <button className={`${title === "All" ? "bg-white-100 text-black-900" : "bg-white-100/10 text-white-600"} flex items-center justify-center h-7 px-4 rounded-full`}>
+                                    <span className="text-2xs font-semibold">{title}</span>
+                                </button>
+                            ))
+                    }
                 </div>
-                
-                <div className="flex justify-between items-center gap-3 py-2 px-4">
-                    <p className="text-xs text-secondary-600">Average Goals Scored</p>
-                    <p className="text-sm font-semibold">{data.match[showHomeSide ? 'homeTeam' : 'awayTeam'].fullTime.goalsScored}</p>
-                </div>
-                
-                <div className="flex justify-between items-center gap-3 py-2 px-4">
-                    <p className="text-xs text-secondary-600">Average Goals Conceded</p>
-                    <p className="text-sm font-semibold">{data.match[showHomeSide ? 'homeTeam' : 'awayTeam'].fullTime.goalsConceded}</p>
-                </div>
-
-                <div className="flex flex-col gap-4 mt-6">
-                    <p className='font-semibold text-sm px-4'>Previous Matches</p>
-                    <MatchesContainer matches={data.match.head2head.matches || []} />
-                </div>
-
-                <div className="flex flex-col mt-6 gap-6">
-                    <p className='font-semibold text-smpx-4'>Team Standing</p>
-                    <Standings competition={data?.match.competition} teams={[data.match.homeTeam._id, data.match.awayTeam._id]} />
+                <div className="grid grid-cols-2">
+                    <div className="flex flex-col gap-4 p-6 border-r border-white-100/10">
+                        <h3 className="text-xs font-semibold text-white-100 text-center">Head-to-Head stats</h3>
+                        <span className="text-3xs text-white-400 text-center mt-2">Win percentage</span>
+                        <div className="flex gap-[2px] h-8 rounded-full overflow-hidden">
+                            <span 
+                                style={{ width: homeTeamWinPercentage }} 
+                                className="relative h-full flex justify-start items-center min-w-10 max-w-[calc(100%_-_40px)] px-3"
+                            >
+                            <span style={{ backgroundColor: homeTeamColor }} className="bg-white-100/10 absolute top-0 left-0 w-full h-full opacity-70"></span>
+                                <span className="relative text-sm font-semibold text-white drop-shadow-lg text-white-400">{homeTeamWinPercentage}</span>
+                            </span>
+                            <span 
+                                style={{ width: awayTeamWinPercentage }} 
+                                className="relative h-full flex justify-end items-center drop-shadow-lg drop-shadow-black-900/50 min-w-10 max-w-[calc(100%_-_40px)] px-3"
+                            >
+                                <span style={{ backgroundColor: awayTeamColor }} className="bg-white-100/10 absolute top-0 left-0 w-full h-full opacity-70"></span>
+                                <span className="relative text-sm font-semibold text-white drop-shadow-lg text-white-400">{awayTeamWinPercentage}</span>
+                            </span>
+                        </div>
+                        <div className="grid grid-cols-[1fr,_auto,_1fr] items-center gap-3 h-5">
+                            <div className="flex justify-start h-full">
+                                <span className="relative flex items-center justify-center px-1 min-w-5 text-3xs font-semibold text-white-100">
+                                    <span style={{ backgroundColor: homeTeamH2HWins > 0 ? homeTeamColor : "" }} className="absolute top-0 left-0 w-full h-full block rounded-full opacity-60"></span>
+                                    <span className="relative">{homeTeamH2HWins}</span>
+                                </span>
+                            </div>
+                            <span className="text-3xs font-semibold text-white-100">Games won</span>
+                            <div className="flex justify-end h-full">
+                                <span className="relative flex items-center justify-center px-1 min-w-5 text-3xs font-semibold text-white-100">
+                                    <span style={{ backgroundColor: awayTeamH2HWins > 0 ? awayTeamColor : "" }} className="absolute top-0 left-0 w-full h-full block rounded-full opacity-60"></span>
+                                    <span className="relative">{awayTeamH2HWins}</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="grid grid-cols-[1fr,_auto,_1fr] items-center gap-3 h-5">
+                            <div className="flex justify-start h-full">
+                                <span className="relative flex items-center justify-center px-1 min-w-5 text-3xs font-semibold text-white-100">
+                                    <span style={{ backgroundColor: homeTeamH2HLosses > 1 ? homeTeamColor : "" }} className="absolute top-0 left-0 w-full h-full block rounded-full opacity-60"></span>
+                                    <span className="relative">{homeTeamH2HLosses}</span>
+                                </span>
+                            </div>
+                            <span className="text-3xs font-semibold text-white-100">Games lost</span>
+                            <div className="flex justify-end h-full">
+                                <span className="relative flex items-center justify-center px-1 min-w-5 text-3xs font-semibold text-white-100">
+                                    <span style={{ backgroundColor: awayTeamH2HLosses > 1 ? awayTeamColor : "" }} className="absolute top-0 left-0 w-full h-full block rounded-full opacity-60"></span>
+                                    <span className="relative">{awayTeamH2HLosses}</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="grid grid-cols-[1fr,_auto,_1fr] items-center gap-3 h-5">
+                            <div className="flex justify-start h-full">
+                                <span className="relative flex items-center justify-center px-1 min-w-5 text-3xs font-semibold text-white-100">
+                                    <span style={{ backgroundColor: homeTeamH2HDraws > 0 ? homeTeamColor : "" }} className="absolute top-0 left-0 w-full h-full block rounded-full opacity-60"></span>
+                                    <span className="relative">{homeTeamH2HDraws}</span>
+                                </span>
+                            </div>
+                            <span className="text-3xs font-semibold text-white-100">Games drawn</span>
+                            <div className="flex justify-end h-full">
+                                <span className="relative flex items-center justify-center px-1 min-w-5 text-3xs font-semibold text-white-100">
+                                    <span style={{ backgroundColor: awayTeamH2HDraws > 0 ? awayTeamColor : "" }} className="absolute top-0 left-0 w-full h-full block rounded-full opacity-60"></span>
+                                    <span className="relative">{awayTeamH2HDraws}</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="grid grid-cols-[1fr,_auto,_1fr] items-center gap-3 h-5">
+                            <div className="flex justify-start h-full">
+                                <span className="relative flex items-center justify-center px-1 min-w-5 text-3xs font-semibold text-white-100">
+                                    <span style={{ backgroundColor: homeTeamH2HGoals > 4 ? homeTeamColor : "" }} className="absolute top-0 left-0 w-full h-full block rounded-full opacity-60"></span>
+                                    <span className="relative">{homeTeamH2HGoals}</span>
+                                </span>
+                            </div>
+                            <span className="text-3xs font-semibold text-white-100">Goals scored</span>
+                            <div className="flex justify-end h-full">
+                                <span className="relative flex items-center justify-center px-1 min-w-5 text-3xs font-semibold text-white-100">
+                                    <span style={{ backgroundColor: awayTeamH2HGoals > 4 ? awayTeamColor : "" }} className="absolute top-0 left-0 w-full h-full block rounded-full opacity-60"></span>
+                                    <span className="relative">{awayTeamH2HGoals}</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="grid grid-cols-[1fr,_auto,_1fr] items-center gap-3 h-5">
+                            <div className="flex justify-start h-full">
+                                <span className="relative flex items-center justify-center px-1 min-w-5 text-3xs font-semibold text-white-100">
+                                    <span style={{ backgroundColor: awayTeamH2HGoals > 1 ? homeTeamColor : "" }} className="absolute top-0 left-0 w-full h-full block rounded-full opacity-60"></span>
+                                    <span className="relative">{awayTeamH2HGoals}</span>
+                                </span>
+                            </div>
+                            <span className="text-3xs font-semibold text-white-100">Goals conceded</span>
+                            <div className="flex justify-end h-full">
+                                <span className="relative flex items-center justify-center px-1 min-w-5 text-3xs font-semibold text-white-100">
+                                    <span style={{ backgroundColor: homeTeamH2HGoals > 1 ? awayTeamColor : "" }} className="absolute top-0 left-0 w-full h-full block rounded-full opacity-60"></span>
+                                    <span className="relative">{homeTeamH2HGoals}</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="grid grid-cols-[1fr,_auto,_1fr] items-center gap-3 h-5">
+                            <div className="flex justify-start h-full">
+                                <span className="relative flex items-center justify-center px-1 min-w-5 text-3xs font-semibold text-white-100">
+                                    <span style={{ backgroundColor: Math.floor(homeTeamH2HWins / data.match.head2head.aggregates.numberOfMatches) > 0 ? homeTeamColor : "" }} className="absolute top-0 left-0 w-full h-full block rounded-full opacity-60"></span>
+                                    <span className="relative">{(homeTeamH2HGoals / data.match.head2head.aggregates.numberOfMatches).toFixed(2)}</span>
+                                </span>
+                            </div>
+                            <span className="text-3xs font-semibold text-white-100">Expected goals (xG)</span>
+                            <div className="flex justify-end h-full">
+                                <span className="relative flex items-center justify-center px-1 min-w-5 text-3xs font-semibold text-white-100">
+                                    <span style={{ backgroundColor: Math.floor(awayTeamH2HWins / data.match.head2head.aggregates.numberOfMatches) > 0 ? awayTeamColor : "" }} className="absolute top-0 left-0 w-full h-full block rounded-full opacity-60"></span>
+                                    <span className="relative">{(awayTeamH2HGoals / data.match.head2head.aggregates.numberOfMatches).toFixed(2)}</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="flex flex-col gap-4 p-6 border-r border-white-100/10">
+                        <h3 className="text-xs font-semibold text-white-100 text-center">Individual team stats</h3>
+                        <div className="grid mt-2 grid-cols-[1fr,_auto,_1fr] items-center gap-3 h-5">
+                            <div className="flex justify-start h-full">
+                                <span className="relative flex items-center justify-center px-1 min-w-5 text-3xs font-semibold text-white-100">
+                                    <span style={{ backgroundColor: homeTeamPrevWins > 0 ? homeTeamColor : "" }} className="absolute top-0 left-0 w-full h-full block rounded-full opacity-60"></span>
+                                    <span className="relative">{homeTeamPrevWins}</span>
+                                </span>
+                            </div>
+                            <span className="text-3xs font-semibold text-white-100">Games won</span>
+                            <div className="flex justify-end h-full">
+                                <span className="relative flex items-center justify-center px-1 min-w-5 text-3xs font-semibold text-white-100">
+                                    <span style={{ backgroundColor: awayTeamPrevWins > 0 ? awayTeamColor : "" }} className="absolute top-0 left-0 w-full h-full block rounded-full opacity-60"></span>
+                                    <span className="relative">{awayTeamPrevWins}</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="grid grid-cols-[1fr,_auto,_1fr] items-center gap-3 h-5">
+                            <div className="flex justify-start h-full">
+                                <span className="relative flex items-center justify-center px-1 min-w-5 text-3xs font-semibold text-white-100">
+                                    <span style={{ backgroundColor: homeTeamPrevLosses > 1 ? homeTeamColor : "" }} className="absolute top-0 left-0 w-full h-full block rounded-full opacity-60"></span>
+                                    <span className="relative">{homeTeamPrevLosses}</span>
+                                </span>
+                            </div>
+                            <span className="text-3xs font-semibold text-white-100">Games lost</span>
+                            <div className="flex justify-end h-full">
+                                <span className="relative flex items-center justify-center px-1 min-w-5 text-3xs font-semibold text-white-100">
+                                    <span style={{ backgroundColor: awayTeamPrevLosses > 1 ? awayTeamColor : "" }} className="absolute top-0 left-0 w-full h-full block rounded-full opacity-60"></span>
+                                    <span className="relative">{awayTeamPrevLosses}</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="grid grid-cols-[1fr,_auto,_1fr] items-center gap-3 h-5">
+                            <div className="flex justify-start h-full">
+                                <span className="relative flex items-center justify-center px-1 min-w-5 text-3xs font-semibold text-white-100">
+                                    <span style={{ backgroundColor: homeTeamPrevDraws > 0 ? homeTeamColor : "" }} className="absolute top-0 left-0 w-full h-full block rounded-full opacity-60"></span>
+                                    <span className="relative">{homeTeamPrevDraws}</span>
+                                </span>
+                            </div>
+                            <span className="text-3xs font-semibold text-white-100">Games drawn</span>
+                            <div className="flex justify-end h-full">
+                                <span className="relative flex items-center justify-center px-1 min-w-5 text-3xs font-semibold text-white-100">
+                                    <span style={{ backgroundColor: awayTeamPrevDraws > 0 ? awayTeamColor : "" }} className="absolute top-0 left-0 w-full h-full block rounded-full opacity-60"></span>
+                                    <span className="relative">{awayTeamPrevDraws}</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="grid grid-cols-[1fr,_auto,_1fr] items-center gap-3 h-5">
+                            <div className="flex justify-start h-full">
+                                <span className="relative flex items-center justify-center px-1 min-w-5 text-3xs font-semibold text-white-100">
+                                    <span style={{ backgroundColor: homeTeamPrevGoalsScored > 4 ? homeTeamColor : "" }} className="absolute top-0 left-0 w-full h-full block rounded-full opacity-60"></span>
+                                    <span className="relative">{homeTeamPrevGoalsScored}</span>
+                                </span>
+                            </div>
+                            <span className="text-3xs font-semibold text-white-100">Goals scored</span>
+                            <div className="flex justify-end h-full">
+                                <span className="relative flex items-center justify-center px-1 min-w-5 text-3xs font-semibold text-white-100">
+                                    <span style={{ backgroundColor: awayTeamPrevGoalsScored > 4 ? awayTeamColor : "" }} className="absolute top-0 left-0 w-full h-full block rounded-full opacity-60"></span>
+                                    <span className="relative">{awayTeamPrevGoalsScored}</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="grid grid-cols-[1fr,_auto,_1fr] items-center gap-3 h-5">
+                            <div className="flex justify-start h-full">
+                                <span className="relative flex items-center justify-center px-1 min-w-5 text-3xs font-semibold text-white-100">
+                                    <span style={{ backgroundColor: homeTeamPrevGoalsConceded > 1 ? homeTeamColor : "" }} className="absolute top-0 left-0 w-full h-full block rounded-full opacity-60"></span>
+                                    <span className="relative">{homeTeamPrevGoalsConceded}</span>
+                                </span>
+                            </div>
+                            <span className="text-3xs font-semibold text-white-100">Goals conceded</span>
+                            <div className="flex justify-end h-full">
+                                <span className="relative flex items-center justify-center px-1 min-w-5 text-3xs font-semibold text-white-100">
+                                    <span style={{ backgroundColor: awayTeamPrevGoalsConceded > 1 ? awayTeamColor : "" }} className="absolute top-0 left-0 w-full h-full block rounded-full opacity-60"></span>
+                                    <span className="relative">{awayTeamPrevGoalsConceded}</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div className="grid grid-cols-[1fr,_auto,_1fr] items-center gap-3 h-5">
+                            <div className="flex justify-start h-full">
+                                <span className="relative flex items-center justify-center px-1 min-w-5 text-3xs font-semibold text-white-100">
+                                    <span style={{ backgroundColor: Math.floor(homeTeamExpectedGoals) > 0 ? homeTeamColor : "" }} className="absolute top-0 left-0 w-full h-full block rounded-full opacity-60"></span>
+                                    <span className="relative">{(homeTeamExpectedGoals).toFixed(2)}</span>
+                                </span>
+                            </div>
+                            <span className="text-3xs font-semibold text-white-100">Expected goals (xG)</span>
+                            <div className="flex justify-end h-full">
+                                <span className="relative flex items-center justify-center px-1 min-w-5 text-3xs font-semibold text-white-100">
+                                    <span style={{ backgroundColor: Math.floor(awayTeamExpectedGoals) > 0 ? awayTeamColor : "" }} className="absolute top-0 left-0 w-full h-full block rounded-full opacity-60"></span>
+                                    <span className="relative">{(awayTeamExpectedGoals).toFixed(2)}</span>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div className="flex-1 flex items-end">
+                            <div className="w-full flex text-white-700 items-center justify-center gap-1 hover:underline">
+                                <span className="text-3xs">What does Expect Goals(xG) mean?</span>
+                                <IoIosHelpCircle size={16} />
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

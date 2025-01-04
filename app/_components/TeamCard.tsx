@@ -4,14 +4,14 @@ import Link from 'next/link';
 
 function TeamCard ({ _id, name, crest, hasOngoingMatch }: Team) {
     return (
-        <Link href={`/team/${_id}`} className={`relative flex flex-col items-center p-3 gap-4 bg-primary-600 rounded-sm hover:bg-primary-500/80 border border-transparent ${hasOngoingMatch && 'border-highlight-400/50 hover:border-transparent'}`}>
+        <Link href={`/team/${_id}`} className={`relative flex items-center gap-3 px-6 py-3 rounded-none border-b border-white-100/10 hover:rounded-lg hover:bg-white-100/10`}>
             {
                 hasOngoingMatch ?
-                    <div className="absolute top-[-4px] right-[-4px] w-2 aspect-square rounded-full bg-highlight-500 border-2 border-primary-900" /> :
+                    <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[2px] rounded-r-full bg-yellow-400" /> :
                     null
             }
-            <Image src={crest} alt={name} width={80} className="object-contain aspect-square" />
-            <p className="text-secondary-600 text-sm text-center truncate w-full">{name}</p>
+            <Image src={crest} alt={name} width={44} height={44} className="w-10 object-contain aspect-square" />
+            <span className={`${hasOngoingMatch ? 'text-yellow-500' : 'text-white-600'} text-2xs font-semibold text-center truncate w-full`}>{name}</span>
         </Link>
     )
 }

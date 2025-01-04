@@ -11,11 +11,13 @@ import { gql, useQuery } from '@apollo/client';
 import { Match } from "@/types/global.type";
 import ErrorMessage from './ErrorMessage';
 import { useContext, useMemo } from 'react';
-import { getDateFormat, getTimeFormat, getTimeRemaining } from '../_utils/dateTime';
-import { getMatchTeamColors } from "../_utils/colors";
+import { getDateFormat, getDay, getTimeFormat, getTimeRemaining } from '../_utils/dateTime';
 import { SocketContext } from "../SocketContext";
-import { DetailsHeaderLoading } from "./loading";
-import { MdArrowBack } from "react-icons/md";
+import { FaAngleLeft } from "react-icons/fa6";
+import { loadImage } from "../_utils/competition";
+import { AiOutlineSchedule } from "react-icons/ai";
+import { TbSoccerField } from "react-icons/tb";
+import { GiWhistle } from "react-icons/gi";
 
 const query = gql`
   query GetMatchByID($id: ID!) {
@@ -24,6 +26,16 @@ const query = gql`
       minute
       utcDate
       status
+      matchday
+
+      competition {
+        _id
+        emblem
+        name
+        area {
+          name
+        }
+      }
 
       timeRemaining {
         days
@@ -31,11 +43,17 @@ const query = gql`
         minutes
       }
 
+      referees {
+        _id
+        name
+      }
+
       homeTeam {
         _id
         name
         crest
         clubColors
+        venue
       }
       awayTeam {
         _id
@@ -75,82 +93,84 @@ const MatchHeader = () => {
   const date = useMemo(() => getDateFormat(data?.match?.utcDate || ''), [data]);
   const { timeUnit, timeRemainder } = useMemo(() => getTimeRemaining(data?.match?.timeRemaining), [data]);
 
-  const colors = useMemo(() => ({
-    homeTeam: data ? getMatchTeamColors(data.match.homeTeam.clubColors) : [],
-    awayTeam: data ? getMatchTeamColors(data.match.awayTeam.clubColors) : []
-  }), [data]);
+  if (error) return <ErrorMessage />;
 
-  if (error) return <ErrorMessage />
+  else if (!matchData) return null;
   
   return (
-    <>
-      {
-        loading ?
-          <DetailsHeaderLoading /> :
-          matchData ?
-            <div className="relative p-4 grid grid-cols-5 m-4 gap-2">
-              <div
-                style={{ background: `linear-gradient(90deg, ${colors.homeTeam[0] === colors.awayTeam[0] ? colors.homeTeam[1] : colors.homeTeam[0]}, ${colors.awayTeam[0]})` }}
-                className="absolute top-0 left-0 w-full h-full opacity-30 rounded-md"
-              ></div>
-              <button className="absolute top-2 left-2 flex items-center justify-center w-6 h-6 rounded-full bg-black-900/50 hover:bg-secondary-900 text-secondary-400">
-                <MdArrowBack size={20} />
-              </button>
-              {
-                /in_play|paused|finished/i.test(matchData.status) ?
-                  <p className={`absolute top-2 right-2 p-1 px-2 border-md bg-black-900/50 text-base font-semibold ${/in_play|paused/i.test(matchData.status) ? "text-highlight-400" : "text-secondary-500"} flex items-center gap-2`}>
-                    <span className={`w-1 h-[10px] ${/in_play|paused/i.test(matchData.status) ? "bg-highlight-400" : "bg-secondary-500"}`} />
-                    <span>{matchData.minute}</span>
-                  </p> :
-                  null
-              }
-              <div className="relative col-span-2 flex flex-col gap-2 items-center justify-center">
-                <Image width={90} src={matchData.homeTeam.crest} className="aspect-square object-contain" alt="Clug Crest" />
-                <h3 className="font-bold text-sm text-secondary-600">{matchData.homeTeam.name}</h3>
-              </div>
-              <div className="relative col-span-1 flex flex-col gap-2 items-center justify-center text-center">
-                <div className="flex flex-col justify-center">
+    <div className="flex flex-col bg-white-100/10 border border-transparent rounded-xl">
+      <div className="grid grid-cols-[120px,_1fr,_120px] p-4 pb-3 border-b border-white-100/10">
+        <button className="group flex items-center justify-start gap-2">
+          <span className="flex items-center justify-center w-6 aspect-square rounded-full bg-white-100/10 text-white-500 group-hover:bg-white-100 group-hover:text-black-900">
+            <FaAngleLeft size={12} />
+          </span>
+          <span className='text-xs font-semibold text-white-500 group-hover:underline'>Matches</span>
+        </button>
+        <span className="flex items-center justify-center gap-3">
+          <Image src={matchData.competition.emblem} alt={`${matchData.competition.name} emblem`} loader={loadImage} width={20} height={20} className="w-4 max-h-4 aspect-square object-contain" />
+          <span className="text-sm font-normal text-white-400">{`${matchData.competition.name} Round ${matchData.matchday}`}</span>
+        </span>
+      </div>
+
+      <div className="flex items-center gap-3 justify-center px-4 border-b border-white-100/10 h-10">
+        <span className="flex items-center justify-center gap-1 text-white-700">
+          <AiOutlineSchedule size={14} />
+          <span className="text-3xs">{`${getDateFormat(matchData.utcDate)}, ${getTimeFormat(matchData.utcDate)}`}</span>
+        </span>
+        <span className="flex items-center justify-center gap-1 text-white-700">
+          <TbSoccerField size={14} />
+          <span className="text-3xs">{matchData.homeTeam.venue}, {matchData.competition.area.name}</span>
+        </span>
+        <span className="flex items-center justify-center gap-1 text-white-700">
+          <GiWhistle size={14} />
+          <span className="text-3xs">
+            {
+              matchData.referees.length ?
+                matchData.referees.map(({ name }) => name).join(', ') :
+                "Referee unavailable"
+            }
+          </span>
+        </span>
+      </div>
+      <div className="relative px-4 pt-6 pb-12 grid grid-cols-[1fr,_auto,_1fr] items-center justify-center gap-8">
+        <div className="relative flex gap-2 items-center justify-end">
+          <h3 className="font-normal text-xl text-white-400">{matchData.homeTeam.name}</h3>
+          <Image width={40} height={40} src={matchData.homeTeam.crest} className="w-8 max-h-8 aspect-square object-contain" alt={`${matchData.homeTeam.crest} crest`} />
+        </div>
+        <div>
+          {
+            matchData.status !== 'TIMED' ?
+              <div className="flex flex-col gap-2">
+                <span className="flex items-center justify-center gap-1 text-[1.4rem]">
+                  <span className="font-semibold text-white-400">{matchData.score.fullTime.home}</span>
+                  <span className="font-semibold text-white-400">-</span>
+                  <span className="font-semibold text-white-400">{matchData.score.fullTime.away}</span>
+                </span>
+                <span className={`text-xs font-normal ${matchData.status === 'IN_PLAY' ? 'text-green-400' : 'text-white-700'}`}>
                   {
-                    matchData.status === "TIMED" ?
-                      <p className="text-3xl font-bold">{time}</p> :
-                      <p className="text-[2rem] font-bold">
-                        {
-                          /(in_play|paused|finished)/i.test(matchData.status) ?
-                            <span>
-                              <span className="font-bold">{matchData.score.fullTime.home}</span> - <span className="font-bold">{matchData.score.fullTime.away}</span>
-                            </span> :
-                            matchData.status.substring(0, 4)
-                        }
-                      </p>
+                    /in_play|finished|paused/i.test(matchData.status) ?
+                      matchData.minute === 'HT' || matchData.minute === 'FT' ? 
+                        matchData.minute === 'HT' ? 
+                          'Half time' : 
+                          'Full time' : 
+                        `${matchData.minute}'` :
+                      matchData.status
                   }
-                  {
-                    matchData.status !== "TIMED" && /(in_play|paused|finished)/i.test(matchData.status) ?
-                      <p className="text-sm mt-[-5px] text-secondary-600 font-semibold">
-                        {`(${matchData.score.firstHalf.home} - ${matchData.score.firstHalf.away})`}
-                      </p> :
-                      null
-                  }
-                </div>
-                {
-                  Number(matchData.timeRemaining.days) >= 1 || !/(timed|in_play|paused)/i.test(matchData.status) ?
-                    <p className="text-sm text-secondary-600">{date}</p> :
-                    /(in_play|paused)/i.test(matchData.status) ?
-                      null :
-                      <p className="text-sm text-secondary-600">
-                        <span>Starts in </span>
-                        <span className="capitalize">{`${timeRemainder} ${timeUnit}`}</span>
-                      </p>
-                }
+                </span>
+              </div>:
+              <div className="flex flex-col items-center justify-center">
+                <span className="font-semibold text-[1.4rem] text-white-400">{getTimeFormat(matchData.utcDate)}</span>
+                <span className="text-xs font-normal text-white-700">{getDay(matchData.utcDate)}</span>
               </div>
-              <div className="relative col-span-2 flex flex-col gap-2 items-center justify-center">
-                <Image width={90} src={matchData.awayTeam.crest} className="aspect-square object-contain" alt="Clug Crest" />
-                <h3 className="font-bold text-sm text-secondary-600">{matchData.awayTeam.name}</h3>
-              </div>
-            </div> :
-            null
-      }
+          }
+        </div>
+        <div className="relative flex gap-2 items-center justify-start">
+          <Image width={40} height={40} src={matchData.awayTeam.crest} className="w-8 max-h-8 aspect-square object-contain" alt={`${matchData.awayTeam.crest} crest`} />
+          <h3 className="font-normal text-xl text-white-400">{matchData.awayTeam.name}</h3>
+        </div>
+      </div>
       <AltHeader links={links} />
-    </>
+    </div>
   )
 }
 

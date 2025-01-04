@@ -8,9 +8,20 @@ const config: Config = {
   ],
   theme: {
     fontSize: {
-      xs: '.7rem',
-      sm: '.75rem',
-      base: '.85rem',
+      'tiny': '.5rem',
+      '3xs': '.6rem',
+      '2xs': '.65rem',
+      'xs': '.7rem',
+      'sm': '.75rem',
+      'base': '.85rem',
+    },
+    fontFamily: {
+      'figtree': 'Figtree'
+    },
+    borderWidth: {
+      '5': '5px',
+      '6': '6px',
+      '0': '0px',
     },
     extend: {
       colors: {
@@ -78,7 +89,7 @@ const config: Config = {
     },
     animation: {
       loadgradient: 'loadinggradient 1s linear infinite',
-      loadopacity: 'loadingopacity 500ms linear var(--delay) infinite alternate'
+      loadopacity: 'loadingopacity 500ms linear infinite alternate'
     },
     keyframes: {
       loadinggradient: {

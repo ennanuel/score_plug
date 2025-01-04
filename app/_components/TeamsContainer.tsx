@@ -22,7 +22,7 @@ function TeamsContainer({ teams, loading, error }: { teams: Team[] | undefined, 
     else if (error) return <ErrorMessage />;
 
     return (
-        <ul className='grid grid-cols-5 gap-4 overflow-hidden'>
+        <ul className='flex flex-col gap-4 overflow-hidden'>
             {
                 teamsToView.map((team) => <TeamCard {...team} />)
             }

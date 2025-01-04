@@ -6,8 +6,8 @@ const NavLink = ({ href, title }: { href: string; title: string }) => {
     const active = pathname === href;
 
     return (
-        <Link href={href} className={`relative flex items-center justify-center px-2 text-sm mb-[-1px] border ${active ? 'border-secondary-900/50 border-b-primary-900 bg-primary-900' : 'border-transparent hover:bg-white-100/5'}`}>
-            <span className={`${active ? 'text-secondary-500 font-semibold' : 'text-secondary-700'}`}>{title}</span>
+        <Link href={href} className={`relative group flex flex-col gap-4 items-center justify-center after:w-full after:h-[2px] after:rounded-t-full ${active ? 'after:bg-white-100' : 'hover:text-white-100'}`}>
+            <span className={`${active ? 'text-white-300' : 'text-white-700 group-hover:text-white-600'} font-semibold text-xs`}>{title}</span>
         </Link>
     )
 };

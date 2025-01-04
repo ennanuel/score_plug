@@ -1,31 +1,40 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+@layer components {
+  .border {
+    border: 1px solid white;
   }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+  .border-t {
+    border-top: 1px solid white;
+  }
+  .border-b {
+    border-bottom: 1px solid white;
+  }
+  .border-l {
+    border-left: 1px solid white;
+  }
+  .border-r {
+    border-right: 1px solid white;
+  }
+  .border-x {
+    border-right: 1px solid white;
+    border-left: 1px solid white;
+  }
+  .border-y {
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+  }
 }
 
 .status-date-filter .status-btn:focus .open-icon,
 .status-date-filter .status-btn:not(:focus) .close-icon {
-  @apply hidden
+  @apply hidden;
 }
 
 .status-date-filter .status-btn:focus+.status-dates .dates,
@@ -46,10 +55,4 @@ body {
       rgba(255, 255, 255, 0.1) 20%,
       rgba(255, 255, 255, 0.05) 30%);
   background-size: 200% 100%;
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
 }
