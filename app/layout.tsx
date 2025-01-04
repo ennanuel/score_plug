@@ -22,9 +22,11 @@ function getBody({ pathname, children }: { pathname: string; children: React.Rea
   else if (pathname.startsWith("/match/")) return (<MatchLayout>{children}</MatchLayout>);
   else if (pathname.startsWith("/team/")) return (<TeamLayout>{children}</TeamLayout>);
   return (
-    <div className="grid grid-cols-[240px,_1fr,_240px] gap-4">
+    <div className="mobile-layout md:tablet-layout lg:desktop-layout grid gap-4">
       <Leftbar />
-      {children}
+      <div className="content mb-8 md:mb-0">
+        {children}
+      </div>
       <Rightbar />
     </div>
   );
@@ -43,7 +45,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           </head>
           <body style={{ '--max-width': '1240px' } as React.CSSProperties} className={`${inter.className} min-h-screen bg-black-900`}>
             <Header />
-            <div className="mt-6 lg:mt-20 m-auto max-w-[var(--max-width)]">
+            <div className="mt-10 md:mt-20 m-auto max-w-[var(--max-width)] px-2 sm:px-4">
               {pageBody}
             </div>
             <Footer />
