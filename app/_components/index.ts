@@ -10,7 +10,6 @@ import MatchCard from './MatchCard';
 import CompetitionCard from './CompetitionCard';
 import FormBox from './FormBox';
 import Standings from './standings';
-import DateAndStatusFilter from './DateAndStatusFilter';
 import CompetitionWithMatches from './CompetitionWithMatches';
 import MatchesContainer from './MatchesContainer';
 import LoadingMessage from './LoadingMessage';
@@ -30,7 +29,6 @@ export {
     CompetitionCard,
     FormBox,
     Standings,
-    DateAndStatusFilter,
     CompetitionWithMatches,
     MatchesContainer,
     LoadingMessage,
