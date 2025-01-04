@@ -9,7 +9,7 @@ function MatchPredictionCard({ _id, homeTeam, competition, awayTeam, utcDate, st
 
   return (
     <li className="rounded-lg bg-white-100/5 hover:bg-white-100/10">
-      <Link href={`/match/${_id}/prediction`} className="grid grid-cols-2 grid-rows-[auto,_1fr] gap-3 p-3">
+      <Link href={`/match/${_id}/prediction`} className="grid grid-cols-2 grid-rows-[auto,_auto,_1fr] md:grid-rows-[auto,_1fr] gap-3 p-3">
         <div className="col-span-2 text-white-700 flex items-center justify-between gap-2">
           <div className="flex items-center gap-2">
             <span className="text-3xs font-semibold">{competition?.name}</span>
@@ -30,19 +30,19 @@ function MatchPredictionCard({ _id, homeTeam, competition, awayTeam, utcDate, st
             }
           </span>
         </div>
-        <div className="flex flex-col gap-2">
+        <div className="col-span-2 md:col-span-1 flex flex-col gap-2">
           <div className="grid grid-cols-[auto,_1fr,auto] items-center gap-2">
-            <Image src={homeTeam?.crest || String(process.env.NEXT_IMAGE_URL)} width={16} height={16} alt={homeTeam?.name} className="w-5 aspect-square object-contain" />
+            <Image src={homeTeam?.crest || String(process.env.NEXT_IMAGE_URL)} width={16} height={16} alt={homeTeam?.name} className="w-5 max-h-5 aspect-square object-contain" />
             <span className="truncate text-2xs font-semibold text-white-500">{homeTeam?.name}</span>
             <span className="font-semibold text-2xs text-white-300">{score?.fullTime?.home}</span>
           </div>
           <div className="grid grid-cols-[auto,_1fr,auto] items-center gap-2">
-            <Image src={awayTeam?.crest || String(process.env.NEXT_IMAGE_URL)} width={16} height={16} alt={awayTeam?.name} className="w-5 aspect-square object-contain" />
+            <Image src={awayTeam?.crest || String(process.env.NEXT_IMAGE_URL)} width={16} height={16} alt={awayTeam?.name} className="w-5 max-h-5 aspect-square object-contain" />
             <span className="truncate text-2xs font-semibold text-white-500">{awayTeam?.name}</span>
             <span className="font-semibold text-2xs text-white-300">{score?.fullTime?.away}</span>
           </div>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="col-span-2 md:col-span-1 flex items-center gap-2">
           {
             [
               { title: "Home", outcome: predictions?.fullTime?.outcome?.homeWin }, 
