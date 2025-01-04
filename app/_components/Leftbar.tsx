@@ -34,7 +34,7 @@ const Leftbar = () => {
   if (error) return <ErrorMessage />;
 
   return (
-    <div className="col-span-1 sticky top-[50px] flex flex-col gap-4">
+    <div className="leftbar flex flex-col col-span-1 gap-4">
       <div className="pb-2 pt-4 rounded-xl border border-transparent bg-white-100/10 flex flex-col gap-4">
         <h2 className="font-semibold text-white-300 text-xs px-4">Top Leagues</h2>
         {
@@ -59,11 +59,11 @@ const Leftbar = () => {
         }
       </div>
 
-      <div className="rounded-xl border border-transparent bg-white-100/10 flex flex-col">
-        <button className="text-white-500 hover:text-white-600 flex items-center gap-3 p-4">
+      <div className="hidden lg:flex rounded-xl border border-transparent bg-white-100/10 flex-col">
+        <Link href="/competitions" className="text-white-500 hover:text-white-600 flex items-center gap-3 p-4">
           <span className="font-semibold text-xs ">All Leagues</span>
           <BiCaretDown size={14} />
-        </button>
+        </Link>
       </div>
     </div>
   )
