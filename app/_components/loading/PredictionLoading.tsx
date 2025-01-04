@@ -11,7 +11,7 @@ const PredictionLoading = ({ size, full }: { size: number, full?: boolean }) => 
         <ul className="flex flex-col gap-3">
             {
                 matches.map((key) => (
-                    <li key={key} className={`1-full ${full ? 'grid-cols-1 p-2 gap-2' : 'grid-cols-2 items-center pt-4 p-3 bg-white-100/5 rounded-lg gap-4'} grid`}>
+                    <li key={key} className={`1-full ${full ? 'grid-cols-1 p-2 gap-2' : 'grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-4 items-center pt-4 p-3 bg-white-100/5 rounded-lg'} grid`}>
                         <div className={`${full ? 'grid grid-cols-3 bg-white/5 rounded-lg p-2 pb-4 bg-white-100/5' : 'flex flex-col gap-2'} `}>
                             <div className={`${full ? 'flex-col justify-between p-2' : 'flex-row'} flex items-center gap-2`}>
                                 <span className={`${full ? 'w-10' : 'w-4'} animate-loadopacity bg-white-100/10 aspect-square rounded-full`}></span>

@@ -83,12 +83,12 @@ function Home() {
               <span className="text-2xs font-semibold">Live</span>
             </button>
             <button className="flex items-center justify-center gap-2 text-white-600 hover:bg-white-100/20 hover:text-white-500 h-8 rounded-full bg-white-100/10 border border-transparent px-4">
-              <span className="text-2xs font-semibold">By time</span>
+              <span className="text-2xs font-semibold whitespace-nowrap">By time</span>
             </button>
           </div>
-          <span className="flex-1 flex items-center justify-center gap-3 text-white-500 h-8 rounded-full bg-transparent border border-white-100/10 px-4">
+          <span className="flex-1 flex items-center justify-center gap-2 sm:gap-3 text-white-500 h-8 rounded-full bg-transparent border border-white-100/10 px-3 md:px-4">
             <IoFilter size={12} />
-            <input type="text" placeholder="Filter" className='flex-1 text-2xs font-normal h-full bg-transparent focus:outline-none outline-none text-white-500 placeholder:text-white-600' />
+            <input type="text" placeholder="Filter" className='w-full text-2xs font-normal h-full bg-transparent focus:outline-none outline-none text-white-500 placeholder:text-white-600' />
           </span>
         </div>
       </div>

@@ -6,6 +6,7 @@ import Standing from "./Standing";
 import { Competition } from "@/types/global.type";
 import { COMPETITIONS_STANDINGS_STRUCTURE } from "@/app/_assets/constants/competition";
 import Image from "next/image";
+import { IoMdArrowDropdown } from "react-icons/io";
 
 const OPTIONS = [
     { 
@@ -51,14 +52,22 @@ function Standings({ competition, teams = [], showOptions, showCompetition }: St
                     <div key={index} className="rounded-xl overflow-hidden bg-white-100/10 border border-transparent flex flex-col">
                         {
                             index === 0 && showOptions ?
-                                <div className="flex items-center gap-2 px-5 py-3 border-b border-white-100/10">
-                                    {
-                                        OPTIONS.map(({ title, value }) => (
-                                            <button onClick={() => setActiveOption(value)} className={`${activeOption === value ? 'bg-white-100 text-black-900' : 'bg-white-100/5 text-white-400 hover:bg-white-100/10 hover:text-white-400'} flex items-center justify-center px-4 rounded-full h-7`}>
-                                                <span className="text-2xs font-semibold">{title}</span>
-                                            </button>
-                                        ))
-                                    }
+                                <div>
+                                    <div className="hidden md:flex items-center gap-2 px-5 py-3 border-b border-white-100/10">
+                                        {
+                                            OPTIONS.map(({ title, value }) => (
+                                                <button onClick={() => setActiveOption(value)} className={`${activeOption === value ? 'bg-white-100 text-black-900' : 'bg-white-100/5 text-white-400 hover:bg-white-100/10 hover:text-white-400'} flex items-center justify-center px-4 rounded-full h-7`}>
+                                                    <span className="text-2xs font-semibold">{title}</span>
+                                                </button>
+                                            ))
+                                        }
+                                    </div>
+                                    <div className="relative block md:hidden p-3">
+                                        <button className="h-6 rounded-full flex items-center justify-center gap-1 px-3 bg-white-100/10 text-white-600 focus:bg-white-100 focus:text-black-900">
+                                            <span className="text-2xs font-semibold">All</span>
+                                            <IoMdArrowDropdown size={12} />
+                                        </button>
+                                    </div>
                                 </div> :
                                 null
                         }
@@ -86,10 +95,10 @@ function Standings({ competition, teams = [], showOptions, showCompetition }: St
                                 </span>
                                 <span className="flex-1"></span>
                                 <span className="w-12 flex items-center justify-center">PL</span>
-                                <span className="w-12 flex items-center justify-center">+/-</span>
+                                <span className="w-12 hidden sm:flex items-center justify-center">+/-</span>
                                 <span className="w-12 flex items-center justify-center">GD</span>
                                 <span className="w-12 flex items-center justify-center">PTS</span>
-                                <span className="w-12 flex items-center justify-center">Next</span>
+                                <span className="w-12 hidden md:flex items-center justify-center">Next</span>
                             </div>
                         </div>
                         <div className="flex flex-col">

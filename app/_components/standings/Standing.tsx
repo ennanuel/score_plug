@@ -37,15 +37,17 @@ function Standing({ highlightedTeams, teamStanding, relegationPositions, topPosi
                     alt={teamStanding.team?.name}
                     className="w-4 aspect-square object-contain"
                 />
-                <p className="text-left">{teamStanding.team?.name}</p>
+                <p className="text-left flex-1 w-full relative">
+                    <span className="absolute w-full top-1/2 -translate-y-1/2 left-0 truncate">{teamStanding.team?.name}</span>
+                </p>
             </span>
             <span className="w-12">{teamStanding.playedGames}</span>
-            <span className="w-12">{teamStanding.goalsFor}-{teamStanding.goalsAgainst}</span>
+            <span className="hidden sm:block w-12">{teamStanding.goalsFor}-{teamStanding.goalsAgainst}</span>
             <span className="w-12">
                 {`${teamStanding.goalDifference > 0 ? '+' : ''}${teamStanding.goalDifference}`}
             </span>
             <span className="w-12">{teamStanding.points}</span>
-            <span className="w-12 flex items-center justify-center">
+            <span className="w-12 hidden md:flex items-center justify-center">
                 {
                     teamNextMatchEmblem ?
                         <Image

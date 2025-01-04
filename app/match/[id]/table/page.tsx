@@ -1,6 +1,7 @@
 "use client";
 
 import { Standings } from "@/app/_components";
+import { DetailsLoading } from "@/app/_components/loading";
 import { gql, useQuery } from "@apollo/client"
 import { useParams } from "next/navigation";
 
@@ -62,6 +63,8 @@ const QUERY = gql`
 export default function MatchCompetitionStandings() {
     const { id } = useParams();
     const { loading, error, data } = useQuery(QUERY, { variables: { id } });
+
+    if(loading) return <DetailsLoading />
 
     return (
         <div>

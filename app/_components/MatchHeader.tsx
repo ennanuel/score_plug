@@ -18,6 +18,8 @@ import { loadImage } from "../_utils/competition";
 import { AiOutlineSchedule } from "react-icons/ai";
 import { TbSoccerField } from "react-icons/tb";
 import { GiWhistle } from "react-icons/gi";
+import { DetailsHeaderLoading } from "./loading";
+import Link from "next/link";
 
 const query = gql`
   query GetMatchByID($id: ID!) {
@@ -27,6 +29,18 @@ const query = gql`
       utcDate
       status
       matchday
+      head2head {
+        aggregates {
+          fullTime {
+            homeTeam {
+              wins
+            }
+            awayTeam {
+              wins
+            }
+          }
+        }
+      }
 
       competition {
         _id
@@ -81,49 +95,54 @@ const MatchHeader = () => {
   const { id } = useParams<{ id: string }>();
   const { socketData } = useContext(SocketContext);
 
-  const links = getHeaderLinks({ path: 'match', id, links: MATCH_LINKS });
-
   const { loading, error, data } = useQuery<{ match: Match }>(query, {
     variables: { id }
   });
 
+  const links = useMemo(() => (
+    getHeaderLinks({ path: 'match', id, links: MATCH_LINKS })
+      .filter(({ href }) => (data?.match?.head2head?.aggregates?.fullTime?.homeTeam?.wins || data?.match?.head2head?.aggregates?.fullTime?.awayTeam?.wins) ? true : !/prediction|h2h/i.test(href))
+  ), [data]);
+
   const matchData = useMemo(() => data?.match && ({ ...(data.match), ...(socketData.matches[data.match._id] || {}) }), [data, socketData]);
 
-  const time = useMemo(() => getTimeFormat(data?.match?.utcDate || ''), [data]);
-  const date = useMemo(() => getDateFormat(data?.match?.utcDate || ''), [data]);
-  const { timeUnit, timeRemainder } = useMemo(() => getTimeRemaining(data?.match?.timeRemaining), [data]);
+  const time = useMemo(() => getTimeFormat(String(data?.match?.utcDate)), [data]);
+  const date = useMemo(() => getDateFormat(String(data?.match?.utcDate)), [data]);
+  const day = useMemo(() => getDay(String(data?.match?.utcDate)), [data]);
 
-  if (error) return <ErrorMessage />;
+  if(loading) return <DetailsHeaderLoading />
+  else if (error) return <ErrorMessage />;
 
+  // There should be a component to display for data that is not found
   else if (!matchData) return null;
   
   return (
     <div className="flex flex-col bg-white-100/10 border border-transparent rounded-xl">
-      <div className="grid grid-cols-[120px,_1fr,_120px] p-4 pb-3 border-b border-white-100/10">
-        <button className="group flex items-center justify-start gap-2">
+      <div className="grid grid-cols-[30px,_1fr,_30px] sm:grid-cols-[120px,_1fr,_120px] p-4 pb-3 border-b border-white-100/10">
+        <Link href="/matches" className="group flex items-center justify-start gap-2">
           <span className="flex items-center justify-center w-6 aspect-square rounded-full bg-white-100/10 text-white-500 group-hover:bg-white-100 group-hover:text-black-900">
             <FaAngleLeft size={12} />
           </span>
-          <span className='text-xs font-semibold text-white-500 group-hover:underline'>Matches</span>
-        </button>
+          <span className='text-xs font-semibold text-white-500 group-hover:underline hidden sm:inline-block'>Matches</span>
+        </Link>
         <span className="flex items-center justify-center gap-3">
-          <Image src={matchData.competition.emblem} alt={`${matchData.competition.name} emblem`} loader={loadImage} width={20} height={20} className="w-4 max-h-4 aspect-square object-contain" />
+          <Image src={matchData.competition.emblem} alt={`${matchData.competition.name} emblem`} width={20} height={20} className="w-4 max-h-4 aspect-square object-contain" />
           <span className="text-sm font-normal text-white-400">{`${matchData.competition.name} Round ${matchData.matchday}`}</span>
         </span>
       </div>
 
-      <div className="flex items-center gap-3 justify-center px-4 border-b border-white-100/10 h-10">
+      <div className="flex flex-wrap items-center gap-3 justify-center px-4 border-b border-white-100/10 py-3 sm:py-0 sm:h-10">
         <span className="flex items-center justify-center gap-1 text-white-700">
           <AiOutlineSchedule size={14} />
-          <span className="text-3xs">{`${getDateFormat(matchData.utcDate)}, ${getTimeFormat(matchData.utcDate)}`}</span>
+          <span className="text-3xs whitespace-nowrap">{`${date}, ${time}`}</span>
         </span>
         <span className="flex items-center justify-center gap-1 text-white-700">
           <TbSoccerField size={14} />
-          <span className="text-3xs">{matchData.homeTeam.venue}, {matchData.competition.area.name}</span>
+          <span className="text-3xs whitespace-nowrap">{matchData.homeTeam.venue}, {matchData.competition.area.name}</span>
         </span>
         <span className="flex items-center justify-center gap-1 text-white-700">
           <GiWhistle size={14} />
-          <span className="text-3xs">
+          <span className="text-3xs whitespace-nowrap">
             {
               matchData.referees.length ?
                 matchData.referees.map(({ name }) => name).join(', ') :
@@ -132,9 +151,9 @@ const MatchHeader = () => {
           </span>
         </span>
       </div>
-      <div className="relative px-4 pt-6 pb-12 grid grid-cols-[1fr,_auto,_1fr] items-center justify-center gap-8">
+      <div className="relative px-4 pt-6 pb-12 grid grid-cols-[1fr,_auto,_1fr] items-center justify-center gap-3 sm:gap-8">
         <div className="relative flex gap-2 items-center justify-end">
-          <h3 className="font-normal text-xl text-white-400">{matchData.homeTeam.name}</h3>
+          <h3 className="font-normal text-xl text-white-400 truncate">{matchData.homeTeam.name}</h3>
           <Image width={40} height={40} src={matchData.homeTeam.crest} className="w-8 max-h-8 aspect-square object-contain" alt={`${matchData.homeTeam.crest} crest`} />
         </div>
         <div>
@@ -159,14 +178,14 @@ const MatchHeader = () => {
                 </span>
               </div>:
               <div className="flex flex-col items-center justify-center">
-                <span className="font-semibold text-[1.4rem] text-white-400">{getTimeFormat(matchData.utcDate)}</span>
-                <span className="text-xs font-normal text-white-700">{getDay(matchData.utcDate)}</span>
+                <span className="font-semibold text-[1.4rem] text-white-400">{time}</span>
+                <span className="text-xs font-normal text-white-700">{day}</span>
               </div>
           }
         </div>
         <div className="relative flex gap-2 items-center justify-start">
           <Image width={40} height={40} src={matchData.awayTeam.crest} className="w-8 max-h-8 aspect-square object-contain" alt={`${matchData.awayTeam.crest} crest`} />
-          <h3 className="font-normal text-xl text-white-400">{matchData.awayTeam.name}</h3>
+          <h3 className="font-normal text-xl text-white-400 truncate">{matchData.awayTeam.name}</h3>
         </div>
       </div>
       <AltHeader links={links} />

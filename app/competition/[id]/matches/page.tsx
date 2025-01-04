@@ -44,20 +44,19 @@ const QUERY = gql`
 const CompetitionMatches = () => {
     const { id } = useParams();
 
-    const [status, setStatus] = useState("");
     const [date, setDate] = useState({ 
         fromDate: (new Date()).toDateString(), 
         toDate: (new Date()).toDateString() 
     });
 
     const { loading, error, data } = useQuery<{ competition: Competition }>(QUERY, {
-        variables: { id, status, ...date }
+        variables: { id, ...date }
     });
 
     const matchesSeparatedByDate = useMemo(() => seperateMatchesByDate(data?.competition?.matches), [data]);
 
     return (
-        <div className="mt-4 flex flex-col gap-2 rounded-xl border border-transparent bg-white-100/10 h-fit pb-3">
+        <div className="flex flex-col gap-2 rounded-xl border border-transparent bg-white-100/10 h-fit pb-3">
             <div className="flex flex-col">
                 <div className="p-3 pb-2">
                     <DateSelector setDate={setDate} showTwoDates />

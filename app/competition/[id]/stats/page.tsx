@@ -8,6 +8,7 @@ import { FaAngleRight } from "react-icons/fa6";
 import Image from "next/image";
 import { loadImage } from "@/app/_utils/competition";
 import Link from "next/link";
+import { DetailsHeaderLoading } from "@/app/_components/loading";
 
 const QUERY = gql`
   query GetCompetitionTeams($id: ID!) {
@@ -38,9 +39,19 @@ const CompetitionStats = () => {
   const { id } = useParams();
   const { loading, error, data } = useQuery<{ competition: Competition }>(QUERY, { variables: { id }, fetchPolicy: 'no-cache' });
 
+  if(loading) return (
+    <div className="grid grid-cols-3 gap-4">
+      <DetailsHeaderLoading />
+      <DetailsHeaderLoading />
+      <DetailsHeaderLoading />
+      <DetailsHeaderLoading />
+      <DetailsHeaderLoading />
+    </div>
+  )
+
   return (
-    <div className="mt-4 flex flex-col gap-4">
-      <div className="flex px-4 py-3 rounded-xl bg-white-100/10 gap-2">
+    <div className="flex flex-col gap-4">
+      <div className="flex px-4 py-3 rounded-xl bg-[#191919] gap-2">
         {
           ["All", "Top teams", "Worst teams"].map((item, index) => (
             <button key={item} className={`${index === 0 ? 'bg-white-100 text-black-900' : 'bg-white-100/10 text-white-600 hover:bg-white-100/20 hover:text-white-500'} flex items-center justify-center px-4 h-7 rounded-full`}>
@@ -53,21 +64,20 @@ const CompetitionStats = () => {
         data
           ?.competition
           ?.fullTeamStats
-          ?.map(({ headTitle, stats }) => (
-            <div key={headTitle} className="flex flex-col gap-4">
+          ?.map(({ headTitle, stats }, index) => (
+            <div key={headTitle} className={`flex flex-col gap-4 ${index === 0 ? 'mt-0' : 'mt-2'}`}>
               <h2 className="px-2 font-semibold text-sm text-white-400">{headTitle}</h2>
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {
                   stats.map(({ title, teams }) => (
-                          
-                    <div key={title} className="pb-0 flex flex-col rounded-xl overflow-hidden border border-transparent bg-white-100/10">
-                      <div className="group p-4 flex items-center justify-between hover:bg-black-900/20">
+                    <div key={title} className="pb-0 flex flex-col rounded-xl overflow-hidden border border-transparent bg-[#191919]">
+                      <Link href={`/match/${id}/standing`} className="group p-4 flex items-center justify-between hover:bg-black-900/20">
                         <h3 className='text-xs font-semibold text-white-500'>{title}</h3>
                         <span className="flex items-center justify-center gap-2 text-white-700 group-hover:text-white-500">
                           <span className="text-2xs font-semibold opacity-0 group-hover:opacity-100">See all</span>
                           <FaAngleRight size={12} />
                         </span>
-                      </div>
+                      </Link>
                       <ul className="flex flex-col px-4 pb-2">
                         {
                           teams.map(({ _id, stat, name, shortName, crest }, index) => (

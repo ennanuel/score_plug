@@ -2,7 +2,7 @@ import React from 'react'
 
 const DetailsHeaderLoading = () => {
   return (
-    <div className='animate-loadopacity border border-secondary-900/50 rounded-md h-[200px] m-4'>
+    <div className='animate-loadopacity border border-transparent bg-[#191919] rounded-xl h-[200px]'>
       
     </div>
   )

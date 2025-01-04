@@ -247,16 +247,18 @@ const H2H = () => {
     ), [data])
 
     if (loading) return <DetailsLoading />;
-    if (error) return <ErrorMessage />
+    else if (error) return <ErrorMessage />;
+
+    // This nothing was found should be dynamic
     else if (!data) return <NothingWasFound />;
 
     return (
         <div className="flex flex-col gap-4">
             <div className="flex flex-col rounded-xl bg-[#191919] border border-transparent">
-                <div className="flex justify-evenly gap-6 p-6">
-                    <span className="flex gap-6">
-                        <Image src={data.match.homeTeam.crest} alt={`${data.match.homeTeam.name} crest`} height={48} width={48} className="w-10 max-h-10 aspect-square object-contain" />
-                        <div className="flex flex-col gap-3 justify-center items-center text-white-100">
+                <div className="flex justify-evenly gap-3 sm:gap-6 px-3 sm:px-6 p-6">
+                    <span className="flex gap-2 sm:gap-6">
+                        <Image src={data.match.homeTeam.crest} alt={`${data.match.homeTeam.name} crest`} height={48} width={48} className="hidden sm:block w-10 max-h-10 aspect-square object-contain" />
+                        <div className="flex flex-col gap-2 sm:gap-3 justify-center items-center text-white-100">
                             <span className="relative overflow-hidden h-10 flex items-center justify-center rounded-full bg-white-100/10 w-16">
                                 <span style={{ backgroundColor: homeTeamColor }} className="absolute top-0 left-0 opacity-50 block w-full h-full bg-white-100/10" />
                                 <span className="relative text-lg font-bold">
@@ -274,8 +276,8 @@ const H2H = () => {
                             <span className="text-sm font-semibold">Wins</span>
                         </div>
                     </span>
-                    <div className="flex flex-col gap-3 justify-center items-center text-white-100">
-                        <span className="h-10 flex items-center justify-center rounded-full bg-white-100/10 w-16">
+                    <div className="flex flex-col gap-2 sm:gap-3 justify-center items-center text-white-100">
+                        <span className="h-10 flex items-center justify-center rounded-full bg-white-100/10 w-10 sm:w-16">
                             <span className="text-lg font-bold">
                                 {
                                     data
@@ -290,8 +292,8 @@ const H2H = () => {
                         </span>
                         <span className="text-sm font-semibold">Draws</span>
                     </div>
-                    <span className="flex gap-6">
-                        <div className="flex flex-col gap-3 justify-center items-center text-white-100">
+                    <span className="flex gap-2 sm:gap-6">
+                        <div className="flex flex-col gap-2 sm:gap-3 justify-center items-center text-white-100">
                             <span className="relative overflow-hidden h-10 flex items-center justify-center rounded-full bg-white-100/10 w-16">
                                 <span style={{ backgroundColor: awayTeamColor }} className="absolute top-0 left-0 opacity-50 block w-full h-full bg-white-100/10" />
                                 <span className="relative text-lg font-bold">
@@ -307,13 +309,13 @@ const H2H = () => {
                             </span>
                             <span className="text-sm font-semibold">Wins</span>
                         </div>
-                        <Image src={data.match.awayTeam.crest} alt={`${data.match.awayTeam.name} crest`} height={48} width={48} className="w-10 max-h-10 aspect-square object-contain" />
+                        <Image src={data.match.awayTeam.crest} alt={`${data.match.awayTeam.name} crest`} height={48} width={48} className="hidden sm:block w-10 max-h-10 aspect-square object-contain" />
                     </span>
                 </div>
                 {
                     data.match.head2head.matches.length ?
                         <div className="flex flex-col pb-2">
-                            <div className="flex items-center gap-2 px-6 py-3 border-y border-white-100/10">
+                            <div className="flex items-center gap-2 px-3 sm:px-4 md:px-6 py-3 border-y border-white-100/10">
                                 {
                                     ["Full time", "Half time"]
                                         .map((title) => (
@@ -342,8 +344,8 @@ const H2H = () => {
                             ))
                     }
                 </div>
-                <div className="grid grid-cols-2">
-                    <div className="flex flex-col gap-4 p-6 border-r border-white-100/10">
+                <div className="grid grid-cols-1 sm:grid-cols-2">
+                    <div className="flex flex-col gap-4 p-6 border-b sm:border-none sm:border-r border-white-100/10">
                         <h3 className="text-xs font-semibold text-white-100 text-center">Head-to-Head stats</h3>
                         <span className="text-3xs text-white-400 text-center mt-2">Win percentage</span>
                         <div className="flex gap-[2px] h-8 rounded-full overflow-hidden">
@@ -453,7 +455,7 @@ const H2H = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="flex flex-col gap-4 p-6 border-r border-white-100/10">
+                    <div className="flex flex-col gap-4 p-6">
                         <h3 className="text-xs font-semibold text-white-100 text-center">Individual team stats</h3>
                         <div className="grid mt-2 grid-cols-[1fr,_auto,_1fr] items-center gap-3 h-5">
                             <div className="flex justify-start h-full">
