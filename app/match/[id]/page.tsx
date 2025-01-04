@@ -217,12 +217,12 @@ const MatchInfo = () => {
     <div className="mt-4 flex flex-col gap-4">
       <div className="rounded-xl overflow-hidden bg-[#202020] border border-transparent">
         <div className="flex flex-col gap-[1px]">
-          <div className="flex justify-between items-center p-4 bg-[#303030]">
+          <div className="hidden lg:flex justify-between items-center p-4 bg-[#303030]">
             <span className="flex items-center justify-start gap-4">
               <span className='text-2xs text-white-300'>{data.match.homeTeam.averageSquadAge}</span>
               <span className='flex items-center gap-2'>
                 <Image src={data.match.homeTeam.crest} alt={`${data.match.homeTeam.name} crest`} height={20} width={20} className="h-6 aspect-square object-contain" />
-                <span className="text-2xs text-white-300">{data.match.homeTeam.name}</span>
+                <span title="Average squad age" className="text-2xs text-white-300">{data.match.homeTeam.name}</span>
               </span>
               <span className='text-2xs text-white-300'>4-3-3</span>
             </span>
@@ -231,7 +231,7 @@ const MatchInfo = () => {
               <span className='text-2xs text-white-300'>{data.match.awayTeam.averageSquadAge}</span>
               <span className='flex flex-row-reverse items-center gap-2'>
                 <Image src={data.match.awayTeam.crest} alt={`${data.match.awayTeam.name} crest`} height={20} width={20} className="h-6 aspect-square object-contain" />
-                <span className="text-2xs text-white-300">{data.match.awayTeam.name}</span>
+                <span title="Average squad age" className="text-2xs text-white-300">{data.match.awayTeam.name}</span>
               </span>
               <span className='text-2xs text-white-300'>4-3-3</span>
             </span>
@@ -247,31 +247,48 @@ const MatchInfo = () => {
                 ))
             }
           </div>
+        
+          <div className="p-3 bg-[#303030] flex justify-between items-center gap-3">
+            <span className="flex lg:hidden items-center justify-end gap-4">
+              <span className='flex items-center gap-2'>
+                <Image src={data.match.homeTeam.crest} alt={`${data.match.homeTeam.name} crest`} height={20} width={20} className="h-6 aspect-square object-contain" />
+                <span title="Average squad age" className="text-2xs text-white-300">{data.match.homeTeam.name}</span>
+              </span>
+              <span className='text-2xs text-white-300'>4-3-3</span>
+            </span>
+
+            <span className="flex items-center justify-center gap-2">
+              <span className="w-6 aspect-square rounded-full overflow-hidden bg-white-100/10 text-white-600 flex justify-center items-end">
+                <IoPerson size={20} className='mb-[-2px]' />
+              </span>
+              <span className="text-2xs text-white-200">{data.match.homeTeam.coach.name || 'Coach unavailable'}</span>
+            </span>
+          </div>
         </div>
 
-        <div className="grid grid-cols-2 relative bg-[#282828]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 relative bg-[#282828]">
           <div className="absolute w-full h-full">
-            <div className="absolute top-1/2 -translate-y-1/2 left-0 flex items-center w-full h-full max-h-[280px]">
-              <span className="border-5 border-l-0 border-[#303030] rounded-r-lg w-1/2 max-w-[120px] h-full flex items-center justify-start">
-                <span className="w-[40%] h-1/2 border-5 border-l-0 rounded-r-lg border-inherit"></span>
+            <div className="absolute top-0 lg:top-1/2 lg:-translate-y-1/2 left-1/2 lg:left-0 -translate-x-1/2 lg:translate-x-0 flex flex-col lg:flex-row justify-start items-center w-full h-full max-h-[280px]">
+              <span className="border-5 border-t-0 lg:border-5 lg:border-l-0 border-[#303030] rounded-b-lg lg:rounded-none lg:rounded-r-lg w-full lg:w-1/2 max-w-[240px] lg:max-w-[120px] h-1/2 max-h-[120px] lg:max-h-none lg:h-full flex items-start lg:items-center justify-center lg:justify-start">
+                <span className="w-1/2 lg:w-2/5 h-2/5 lg:h-1/2 border-5 border-t-0 lg:border-5 lg:border-l-0 rounded-b-lg lg:rounded-none lg:rounded-r-lg border-inherit"></span>
               </span>
-              <span className='h-full max-h-[120px] aspect-square overflow-hidden block'>
-                <span className="block w-full h-full rounded-full border-5 border-[#303030] translate-x-[-70%]"></span>
+              <span className='h-full max-h-[160px] lg:max-h-[120px] aspect-square overflow-hidden block'>
+                <span className="block w-full h-full rounded-full border-5 border-[#303030] translate-y-[-70%] lg:translate-y-0 lg:translate-x-[-70%]"></span>
               </span>
             </div>
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 h-full w-[5px] bg-[#303030] flex items-center justify-center">
-              <span className="block h-full max-h-[160px] aspect-square rounded-full border-5 border-[#303030]"></span>
+            <div className="absolute top-1/2 lg:top-0 -translate-y-1/2 lg:translate-y-0 left-0 lg:left-1/2 lg:-translate-x-1/2 h-[5px] lg:h-full w-full lg:w-[5px] bg-[#303030] flex items-center justify-center">
+              <span className="block w-full lg:w-auto lg:h-full max-w-[160px] max-h-[160px] aspect-square rounded-full border-5 border-[#303030]"></span>
             </div>
-            <div className="absolute top-1/2 -translate-y-1/2 right-0 flex items-center justify-end w-full h-full max-h-[280px]">
-              <span className='h-full max-h-[120px] aspect-square overflow-hidden block'>
-                <span className="block w-full h-full rounded-full border-5 border-[#303030] translate-x-[70%]"></span>
+            <div className="absolute bottom-0 lg:bottom-1/2 lg:-translate-y-1/2 left-1/2 lg:left-0 -translate-x-1/2 lg:translate-x-0 flex flex-col lg:flex-row justify-end items-center w-full h-full max-h-[280px]">
+              <span className='h-full max-h-[160px] lg:max-h-[120px] aspect-square overflow-hidden block'>
+                <span className="block w-full h-full rounded-full border-5 border-[#303030] translate-y-[70%] lg:translate-y-0 lg:translate-x-[70%]"></span>
               </span>
-              <span className="border-5 border-r-0 border-[#303030] rounded-r-lg w-1/2 max-w-[120px] h-full flex items-center justify-end">
-                <span className="w-[40%] h-1/2 border-5 border-r-0 rounded-l-lg border-inherit"></span>
+              <span className="border-5 border-b-0 lg:border-5 lg:border-r-0 border-[#303030] rounded-t-lg lg:rounded-none lg:rounded-l-lg w-full lg:w-1/2 max-w-[240px] lg:max-w-[120px] h-1/2 max-h-[120px] lg:max-h-none lg:h-full flex items-end lg:items-center justify-center lg:justify-end">
+                <span className="w-1/2 lg:w-2/5 h-2/5 lg:h-1/2 border-5 border-b-0 lg:border-5 lg:border-r-0 rounded-t-lg lg:rounded-none lg:rounded-l-lg border-inherit"></span>
               </span>
             </div>
           </div>
-          <div className="relative flex justify-between items-stretch px-4 py-8 gap-3">
+          <div className="relative flex flex-col lg:flex-row justify-between items-stretch px-4 py-8 gap-3">
             {
               Object
                 .entries(data.match.homeTeam.squad.startingEleven)
@@ -279,7 +296,7 @@ const MatchInfo = () => {
                 .reverse()
                 .map(([key, players]) => (
                   ['goalkeeper', 'defence', 'midfield', 'offence'].includes(key) ?
-                    <div key={key} className="flex flex-col flex-1 justify-between items-center gap-10">
+                    <div key={key} className="flex flex-row lg:flex-col flex-1 justify-between items-center gap-4 md:gap-10">
                       {
                         players.map((player, index) => (
                           <span key={player._id} title={`${player.name} - ${player.position.specialty}`} className={`flex-1 flex flex-col gap-2 items-center ${index === 0 && players.length > 1 ? 'justify-end' : index === players.length - 1 && players.length > 1 ? 'justify-start' : 'justify-center'}`}>
@@ -317,14 +334,14 @@ const MatchInfo = () => {
                 ))
             }
           </div>
-          <div className="relative flex justify-between items-stretch p-4 gap-3">
+          <div className="relative flex flex-col lg:flex-row justify-between items-stretch p-4 gap-3">
             {
               Object
                 .entries(data.match.awayTeam.squad.startingEleven)
                 .sort(([key]) => key === 'goalkeeper' ? -4 : key === 'defence' ? -3 : key === 'midfield' ? -2 : -1)
                 .map(([key, players]) => (
                   ['goalkeeper', 'defence', 'midfield', 'offence'].includes(key) ?
-                    <div key={key} className="flex flex-col flex-1 justify-between items-center gap-10">
+                    <div key={key} className="flex flex-row lg:flex-col flex-1 justify-between items-center gap-4 md:gap-10">
                       {
                         [...players].reverse().map((player, index) => (
                           <span key={player._id} title={`${player.name} - ${player.position.specialty}`} className={`flex-1 flex flex-col gap-2 items-center ${index === 0 && players.length > 1 ? 'justify-end' : index === players.length - 1 && players.length > 1 ? 'justify-start' : 'justify-center'}`}>
@@ -362,8 +379,25 @@ const MatchInfo = () => {
             }
           </div>
         </div>
+        
+        <div className="p-3 bg-[#303030] flex justify-between items-center gap-3">
+          <span className="flex lg:hidden items-center justify-end gap-4">
+            <span className='flex items-center gap-2'>
+              <Image src={data.match.awayTeam.crest} alt={`${data.match.awayTeam.name} crest`} height={20} width={20} className="h-6 aspect-square object-contain" />
+              <span title="Average squad age" className="text-2xs text-white-300">{data.match.awayTeam.name}</span>
+            </span>
+            <span className='text-2xs text-white-300'>4-3-3</span>
+          </span>
 
-        <div className="grid gap-4 grid-cols-[1fr,_auto,_1fr] items-center px-4 py-3">
+          <span className="flex items-center justify-center gap-2">
+            <span className="w-6 aspect-square rounded-full overflow-hidden bg-white-100/10 text-white-600 flex justify-center items-end">
+              <IoPerson size={20} className='mb-[-2px]' />
+            </span>
+            <span className="text-2xs text-white-200">{data.match.awayTeam.coach.name || 'Coach unavailable'}</span>
+          </span>
+        </div>
+
+        <div className="hidden lg:grid gap-4 grid-cols-[1fr,_auto,_1fr] items-center px-4 py-3">
           <span className="flex justify-start items-center gap-3">
             <span className="w-6 aspect-square rounded-full overflow-hidden bg-white-100/10 text-white-600 flex justify-center items-end">
               <IoPerson size={20} className='mb-[-2px]' />
@@ -429,7 +463,10 @@ const MatchInfo = () => {
 
       <div className="rounded-xl p-4 pb-6 gap-8 bg-[#202020] flex flex-col">
         <h3 className="text-center text-sm font-semibold text-white-100">Team form</h3>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="flex mb-3 md:hidden items-center justify-center">
+            <Image src={data.match.homeTeam.crest} alt={`${data.match.homeTeam.name} crest`} height={40} width={40} className="w-8 max-h-8 aspect-square object-contain" />
+          </div>
           <ul className="flex flex-col gap-6">
             {
               data.match.homeTeam.matches.map((match) => (
@@ -443,6 +480,9 @@ const MatchInfo = () => {
               ))
             }
           </ul>
+          <div className="mt-3 py-3 border-t border-white-100/10 flex md:hidden items-center justify-center">
+            <Image src={data.match.awayTeam.crest} alt={`${data.match.awayTeam.name} crest`} height={40} width={40} className="w-8 max-h-8 aspect-square object-contain" />
+          </div>
           <ul className="flex flex-col gap-6">
             {
               data.match.awayTeam.matches.map((match) => (
