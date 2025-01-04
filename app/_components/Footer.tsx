@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { FaGooglePlay } from "react-icons/fa6";
+import { PiPlug } from "react-icons/pi";
 import { RiFacebookFill, RiInstagramFill, RiLinkedinBoxFill, RiTiktokFill, RiTwitterXFill } from "react-icons/ri";
 import { SiMusescore, SiTiktok, SiVimeo } from "react-icons/si";
 
@@ -38,9 +39,11 @@ const LINKS = [
 const Footer = () => {
   return (
     <footer className="bg-[#191919] mt-10 flex flex-col items-center justify-center">
-      <div className="w-full pt-10 pb-8 max-w-[var(--max-width)] grid grid-cols-3">
-        <div className="flex flex-col gap-6">
-          <SiMusescore size={36} className="text-green-400" />
+      <div className="w-full px-3 sm:px-4 pt-10 pb-8 max-w-[var(--max-width)] grid grid-cols-2 lg:grid-cols-3 gap-6 md:gap-3">
+        <div className="lg:col-span-1 flex flex-col gap-6 min-h-[160px]">
+          <span className="flex items-end justify-start bg-green-400 text-black-900 w-10 aspect-square rounded-full">
+            <PiPlug size={36} className="" />
+          </span>
           <p className="max-w-[24ch] font-semibold text-[1.2rem] leading-[1.8rem] text-white-100">ScorePlug is the essential football app.</p>
         </div>
         <ul className="flex flex-col gap-3">
@@ -52,7 +55,7 @@ const Footer = () => {
             ))
           }
         </ul>
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-3 md:gap-6">
           <p className="text-base text-white-500">Other web apps</p>
           <div className="flex gap-6">
             <span className="w-10 aspect-square rounded-full bg-white-100/10 flex items-center justify-center text-white-100">
@@ -64,8 +67,8 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="flex bg-white-100/5 w-full">
-        <div className="pt-8 pb-10 m-auto w-full max-w-[var(--max-width)] grid grid-cols-3 gap-4">
+      <div className="flex bg-white-100/5 w-full px-3 sm:px-4">
+        <div className="pt-8 pb-10 m-auto w-full max-w-[var(--max-width)] grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4">
           <div className="gap-4 h-fit">
               <span className="text-2xs text-white-700 font-semibold">© Copyright {(new Date()).getFullYear()} ScorePlug.</span>
           </div>
