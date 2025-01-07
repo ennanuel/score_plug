@@ -20,6 +20,7 @@ import { TbSoccerField } from "react-icons/tb";
 import { GiWhistle } from "react-icons/gi";
 import { DetailsHeaderLoading } from "./loading";
 import Link from "next/link";
+import NothingWasFound from "./NothingWasFound";
 
 const query = gql`
   query GetMatchByID($id: ID!) {
@@ -112,8 +113,6 @@ const MatchHeader = () => {
 
   if(loading) return <DetailsHeaderLoading />
   else if (error) return <ErrorMessage />;
-
-  // There should be a component to display for data that is not found
   else if (!matchData) return null;
   
   return (
@@ -127,7 +126,7 @@ const MatchHeader = () => {
         </Link>
         <span className="flex items-center justify-center gap-3">
           <Image src={matchData.competition.emblem} alt={`${matchData.competition.name} emblem`} width={20} height={20} className="w-4 max-h-4 aspect-square object-contain" />
-          <span className="text-sm font-normal text-white-400">{`${matchData.competition.name} Round ${matchData.matchday}`}</span>
+          <span className="text-2xs md:text-sm font-normal text-white-400">{`${matchData.competition.name} Round ${matchData.matchday}`}</span>
         </span>
       </div>
 
@@ -153,19 +152,21 @@ const MatchHeader = () => {
       </div>
       <div className="relative px-4 pt-6 pb-12 grid grid-cols-[1fr,_auto,_1fr] items-center justify-center gap-3 sm:gap-8">
         <div className="relative flex gap-2 items-center justify-end">
-          <h3 className="font-normal text-xl text-white-400 truncate">{matchData.homeTeam.name}</h3>
+          <div className="flex-1 relative">
+            <h3 className="absolute w-full top-1/2 -translate-y-1/2 right-0 font-normal text-base md:text-xl text-white-400 truncate text-right">{matchData.homeTeam.name}</h3>
+          </div>
           <Image width={40} height={40} src={matchData.homeTeam.crest} className="w-8 max-h-8 aspect-square object-contain" alt={`${matchData.homeTeam.crest} crest`} />
         </div>
         <div>
           {
             matchData.status !== 'TIMED' ?
               <div className="flex flex-col gap-2">
-                <span className="flex items-center justify-center gap-1 text-[1.4rem]">
+                <span className="flex items-center justify-center gap-1 text-lg md:text-[1.4rem]">
                   <span className="font-semibold text-white-400">{matchData.score.fullTime.home}</span>
                   <span className="font-semibold text-white-400">-</span>
                   <span className="font-semibold text-white-400">{matchData.score.fullTime.away}</span>
                 </span>
-                <span className={`text-xs font-normal ${matchData.status === 'IN_PLAY' ? 'text-green-400' : 'text-white-700'}`}>
+                <span className={`text-2xs md:text-xs font-normal ${matchData.status === 'IN_PLAY' ? 'text-green-400' : 'text-white-700'}`}>
                   {
                     /in_play|finished|paused/i.test(matchData.status) ?
                       matchData.minute === 'HT' || matchData.minute === 'FT' ? 
@@ -178,14 +179,16 @@ const MatchHeader = () => {
                 </span>
               </div>:
               <div className="flex flex-col items-center justify-center">
-                <span className="font-semibold text-[1.4rem] text-white-400">{time}</span>
-                <span className="text-xs font-normal text-white-700">{day}</span>
+                <span className="font-semibold text-lg md:text-[1.4rem] text-white-400">{time}</span>
+                <span className="text-2xs md:text-xs font-normal text-white-700">{day}</span>
               </div>
           }
         </div>
         <div className="relative flex gap-2 items-center justify-start">
           <Image width={40} height={40} src={matchData.awayTeam.crest} className="w-8 max-h-8 aspect-square object-contain" alt={`${matchData.awayTeam.crest} crest`} />
-          <h3 className="font-normal text-xl text-white-400 truncate">{matchData.awayTeam.name}</h3>
+          <div className="flex-1 relative">
+            <h3 className="absolute w-full top-1/2 -translate-y-1/2 left-0 font-normal text-base md:text-xl text-white-400 truncate">{matchData.awayTeam.name}</h3>
+          </div>
         </div>
       </div>
       <AltHeader links={links} />
