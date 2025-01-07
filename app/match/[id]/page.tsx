@@ -248,7 +248,7 @@ const MatchInfo = () => {
             }
           </div>
         
-          <div className="p-3 bg-[#303030] flex justify-between items-center gap-3">
+          <div className="p-3 bg-[#303030] flex lg:hidden justify-between items-center gap-3">
             <span className="flex lg:hidden items-center justify-end gap-4">
               <span className='flex items-center gap-2'>
                 <Image src={data.match.homeTeam.crest} alt={`${data.match.homeTeam.name} crest`} height={20} width={20} className="h-6 aspect-square object-contain" />
@@ -257,7 +257,7 @@ const MatchInfo = () => {
               <span className='text-2xs text-white-300'>4-3-3</span>
             </span>
 
-            <span className="flex items-center justify-center gap-2">
+            <span className="flex  items-center justify-center gap-2">
               <span className="w-6 aspect-square rounded-full overflow-hidden bg-white-100/10 text-white-600 flex justify-center items-end">
                 <IoPerson size={20} className='mb-[-2px]' />
               </span>
@@ -279,7 +279,7 @@ const MatchInfo = () => {
             <div className="absolute top-1/2 lg:top-0 -translate-y-1/2 lg:translate-y-0 left-0 lg:left-1/2 lg:-translate-x-1/2 h-[5px] lg:h-full w-full lg:w-[5px] bg-[#303030] flex items-center justify-center">
               <span className="block w-full lg:w-auto lg:h-full max-w-[160px] max-h-[160px] aspect-square rounded-full border-5 border-[#303030]"></span>
             </div>
-            <div className="absolute bottom-0 lg:bottom-1/2 lg:-translate-y-1/2 left-1/2 lg:left-0 -translate-x-1/2 lg:translate-x-0 flex flex-col lg:flex-row justify-end items-center w-full h-full max-h-[280px]">
+            <div className="absolute bottom-0 lg:bottom-1/2 lg:translate-y-1/2 left-1/2 lg:left-0 -translate-x-1/2 lg:translate-x-0 flex flex-col lg:flex-row justify-end items-center w-full h-full max-h-[280px]">
               <span className='h-full max-h-[160px] lg:max-h-[120px] aspect-square overflow-hidden block'>
                 <span className="block w-full h-full rounded-full border-5 border-[#303030] translate-y-[70%] lg:translate-y-0 lg:translate-x-[70%]"></span>
               </span>
@@ -380,8 +380,8 @@ const MatchInfo = () => {
           </div>
         </div>
         
-        <div className="p-3 bg-[#303030] flex justify-between items-center gap-3">
-          <span className="flex lg:hidden items-center justify-end gap-4">
+        <div className="p-3 bg-[#303030] flex lg:hidden justify-between items-center gap-3">
+          <span className="flex items-center justify-end gap-4">
             <span className='flex items-center gap-2'>
               <Image src={data.match.awayTeam.crest} alt={`${data.match.awayTeam.name} crest`} height={20} width={20} className="h-6 aspect-square object-contain" />
               <span title="Average squad age" className="text-2xs text-white-300">{data.match.awayTeam.name}</span>
