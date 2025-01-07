@@ -1,6 +1,6 @@
 "use client";
 
-import { MatchesContainer } from "@/app/_components/";
+import { MatchesContainer, NothingWasFound } from "@/app/_components/";
 import { gql, useQuery } from "@apollo/client"
 import { useParams } from "next/navigation";
 import { Team } from "@/types/global.type";
@@ -85,7 +85,6 @@ const TeamMatches = () => {
             <DetailsLoading key="component_2" />
         </div>
     )
-    else if(!data) return;
     
     return (
         <div className="grid md:grid-cols-[1fr,_240px] lg:grid-cols-[1fr,_360px] gap-4">
@@ -99,7 +98,11 @@ const TeamMatches = () => {
                         <FaAngleRight size={16} />
                     </button>
                 </div>
-                <MatchesContainer teamId={String(id)} loading={loading} error={Boolean(error)} matches={data?.team?.matches} showDateAndCompetition />
+                {
+                    !loading && !data?.team?.matches?.length ?
+                        <NothingWasFound noBackground /> :
+                        <MatchesContainer teamId={String(id)} loading={loading} error={Boolean(error)} matches={data?.team?.matches} showDateAndCompetition />
+                }
             </div>
             <div className="flex flex-col gap-4">
                 {
