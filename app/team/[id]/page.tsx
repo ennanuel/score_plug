@@ -202,7 +202,7 @@ const TeamInfo = () => {
 
     if (loading) return <DetailsLoading />;
     else if (error) return <ErrorMessage />;
-    else if (!data) return <NothingWasFound />;
+    else if (!data) return <NothingWasFound noBackground />;
 
     return (
         <div className="grid grid-cols-1 lg:grid-cols-[1fr,_360px] gap-4">
@@ -286,26 +286,26 @@ const TeamInfo = () => {
                         </div>
                     </TeamOfTheWeek>
                 </div>
-                {
-                    data.team.matches.length > 0 || data.teamNextFixtures.length > 0 ?
-                        <div className="flex flex-col rounded-xl border border-transparent bg-[#191919] pb-2">
-                            <div className="flex justify-between gap-4 items-center p-4">
-                                <button className="w-6 rounded-full aspect-square flex items-center justify-center bg-white-100/10 text-white-100 hover:bg-white-100 hover:text-black-900">
-                                    <FaAngleLeft size={16} />
-                                </button>
-                                <span className="text-xs font-semibold text-white-100">Fixtures</span>
-                                <button className="w-6 rounded-full aspect-square flex items-center justify-center bg-white-100/10 text-white-100 hover:bg-white-100 hover:text-black-900">
-                                    <FaAngleLeft size={16} />
-                                </button>
-                            </div>
+                <div className="flex flex-col rounded-xl border border-transparent bg-[#191919] pb-2">
+                    <div className="flex justify-between gap-4 items-center p-4">
+                        <button className="w-6 rounded-full aspect-square flex items-center justify-center bg-white-100/10 text-white-100 hover:bg-white-100 hover:text-black-900">
+                            <FaAngleLeft size={16} />
+                        </button>
+                        <span className="text-xs font-semibold text-white-100">Fixtures</span>
+                        <button className="w-6 rounded-full aspect-square flex items-center justify-center bg-white-100/10 text-white-100 hover:bg-white-100 hover:text-black-900">
+                            <FaAngleLeft size={16} />
+                        </button>
+                    </div>
+                    {
+                        data.team.matches.length > 0 || data.teamNextFixtures.length > 0 ?
                             <MatchesContainer 
                                 matches={[...data.teamNextFixtures, ...data.team.matches.slice(0, 5 - data.teamNextFixtures.length)]} 
                                 showDateAndCompetition 
                                 small
-                            />
-                        </div> :
-                        null
-                }
+                            /> :
+                            <NothingWasFound text="Fixtures not available" />
+                    }
+                </div>
                 <div className="flex flex-col rounded-xl border border-transparent bg-[#191919] p-4 gap-6">
                     <h3 className="text-xs font-semibold text-white-100">Stadium</h3>
                     <div className="flex items-center justify-start gap-3">
