@@ -11,7 +11,7 @@ import { IoMdArrowDropdown } from "react-icons/io";
 const OPTIONS = [
     { 
         title: "All",
-        value: ""
+        value: "position"
     },
     { 
         title: "Goals scored",
@@ -19,7 +19,7 @@ const OPTIONS = [
     },
     { 
         title: "Goals conceded",
-        value: "goalsAgains"
+        value: "goalsAgainst"
     },
     { 
         title: "xG",
@@ -35,13 +35,20 @@ type StandingProps = {
 }
 
 function Standings({ competition, teams = [], showOptions, showCompetition }: StandingProps) {
+    const [sortType, setSortType] = useState(OPTIONS[0]);
+    const [showMobileOptions, setShowMobileOptions] = useState(false);
+
+    const chooseOption = ({ title, value }: { title: string; value: string }) => {
+        setSortType({ title, value });
+        setShowMobileOptions(false);
+    }
+
     const { relegationPositions, topPositions, midPositions, positions } = useMemo(() => {
         const structureKeys = Object.keys(COMPETITIONS_STANDINGS_STRUCTURE);
         const key = structureKeys.find(key => (new RegExp(key)).test(String(competition?.code)));
         return COMPETITIONS_STANDINGS_STRUCTURE[(key as keyof typeof COMPETITIONS_STANDINGS_STRUCTURE) || "CL"];
     }, []);
 
-    const [activeOption, setActiveOption] = useState("");
     
     if (!competition) return null;
 
@@ -56,17 +63,28 @@ function Standings({ competition, teams = [], showOptions, showCompetition }: St
                                     <div className="hidden md:flex items-center gap-2 px-5 py-3 border-b border-white-100/10">
                                         {
                                             OPTIONS.map(({ title, value }) => (
-                                                <button onClick={() => setActiveOption(value)} className={`${activeOption === value ? 'bg-white-100 text-black-900' : 'bg-white-100/5 text-white-400 hover:bg-white-100/10 hover:text-white-400'} flex items-center justify-center px-4 rounded-full h-7`}>
+                                                <button onClick={() => chooseOption({ title, value })} className={`${sortType.value === value ? 'bg-white-100 text-black-900' : 'bg-white-100/5 text-white-400 hover:bg-white-100/10 hover:text-white-400'} flex items-center justify-center px-4 rounded-full h-7`}>
                                                     <span className="text-2xs font-semibold">{title}</span>
                                                 </button>
                                             ))
                                         }
                                     </div>
-                                    <div className="relative block md:hidden p-3">
-                                        <button className="h-6 rounded-full flex items-center justify-center gap-1 px-3 bg-white-100/10 text-white-600 focus:bg-white-100 focus:text-black-900">
-                                            <span className="text-2xs font-semibold">All</span>
+                                    <div className="relative md:hidden flex flex-col p-3">
+                                        <button onClick={() => setShowMobileOptions(!showMobileOptions)} className={`${showMobileOptions ? ' bg-white-100/10 text-white-600' : 'bg-white-100 text-black-900'} h-6 rounded-full flex items-center justify-center gap-1 px-3 w-fit`}>
+                                            <span className="text-2xs font-semibold">{sortType.title}</span>
                                             <IoMdArrowDropdown size={12} />
                                         </button>
+                                        <div className="absolute z-[1] top-[calc(100%_+_4px)] left-0 flex flex-col gap-1 w-fit rounded-lg bg-[#202020] shadow-lg shadow-black-900/60">
+                                            {
+                                                OPTIONS
+                                                    .filter((option) => option.value !== sortType.value)
+                                                    .map(({ title, value }) => (
+                                                        <button key={value} onClick={() => chooseOption({ title, value })} className="flex px-3 py-2 text-white-400 border-b border-white-100/10 last:border-transparent">
+                                                            <span className="text-2xs font-semibold">{title}</span>
+                                                        </button>
+                                                    ))
+                                            }
+                                        </div>
                                     </div>
                                 </div> :
                                 null
@@ -103,7 +121,19 @@ function Standings({ competition, teams = [], showOptions, showCompetition }: St
                         </div>
                         <div className="flex flex-col">
                             {
-                                standing.table.map((teamStanding) => (
+                                standing
+                                    .table
+                                    .slice()
+                                    .sort((teamA, teamB) => (
+                                        sortType.value === 'position' ?
+                                            teamA.position :
+                                            sortType.value === 'goalsFor' ?
+                                                teamB.goalsFor - teamA.goalsFor :
+                                                sortType.value === 'goalsAgainst' ?
+                                                teamA.goalsAgainst - teamB.goalsAgainst :
+                                            teamB.goalDifference - teamA.goalDifference
+                                    ))
+                                    .map((teamStanding) => (
                                     <Standing
                                         key={teamStanding.team._id}
                                         highlightedTeams={teams}
@@ -117,7 +147,9 @@ function Standings({ competition, teams = [], showOptions, showCompetition }: St
                         </div>
                         <div className="flex gap-3 items-center pt-4 pb-3 px-6">
                             {
-                                positions.map((position, index) => (
+                                positions
+                                    .slice()
+                                    .map((position, index) => (
                                     <span key={position} className="flex items-center gap-2">
                                         <span className={`w-[6px] aspect-square rounded-full ${index === 0 ? 'bg-green-400' : index < positions.length - 1 ? 'bg-yellow-400' : 'bg-red-500' }`}></span>
                                         <span className="text-3xs text-white-700">{position}</span>
