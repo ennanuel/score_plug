@@ -64,18 +64,37 @@ export function getTimeRemaining (timeRemaining?: MatchTimeRemaining) {
     return { timeUnit, timeRemainder }
 }
 
-export function seperateMatchesByDate(matches: Match[] | undefined) {
+function separateMatch(separatedMatches: { [key: string]: Match[] }, match: Match) {
+    const matchDay = (new Date(/\D/.test(match.utcDate) ? match.utcDate : Number(match.utcDate))).toDateString();
+    const result = { ...separatedMatches };
+
+    if(separatedMatches[matchDay]) result[matchDay] = [match, ...result[matchDay]];
+    else result[matchDay] = [match];
+
+    return result;
+};
+
+const sortMatches = (matchA: Match, matchB: Match, sortType: string) => (
+    sortType === 'team' ? 
+        matchA.homeTeam.name.toLowerCase().localeCompare(matchB.homeTeam.name.toLowerCase()) : 
+        sortType === 'round' ? 
+            Number(matchA.matchday) - Number(matchB.matchday) : 
+            0
+);
+
+export function seperateMatchesByDate(matches: Match[] | undefined, sortType: string) {
     if(!matches) return [];
-    function separateMatch(separatedMatches: { [key: string]: Match[] }, match: Match) {
-        const matchDay = (new Date(/\D/.test(match.utcDate) ? match.utcDate : Number(match.utcDate))).toDateString();
-        const result = { ...separatedMatches };
-
-        if(separatedMatches[matchDay]) result[matchDay] = [match, ...result[matchDay]];
-        else result[matchDay] = [match];
-
-        return result;
-    }
 
     const separatedMatches = matches.reduce(separateMatch, ({} as { [key: string]: Match[] }));
-    return Object.entries(separatedMatches).reverse();
+    const result = (Object
+        .entries(separatedMatches)
+        .map(([key, values]) => [
+            key,
+            values
+                .slice()
+                .sort((matchA, matchB) => sortMatches(matchA, matchB, sortType))
+        ]) as [string, Match[]][])
+        .reverse();
+    
+    return result
 }
