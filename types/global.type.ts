@@ -49,6 +49,7 @@ export type Competition = {
     code: string;
     area: Area
     name: string;
+    ranking: number;
     type: string;
     emblem: string | StaticImport;
     currentSeason: CompetitionSeason;
