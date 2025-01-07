@@ -137,7 +137,7 @@ const MatchPrediction = () => {
 
   if (loading) return <DetailsLoading />;
   else if (error) return <ErrorMessage />;
-  else if (!data) return <NothingWasFound />;
+  else if (!data) return <NothingWasFound noBackground />;
 
   return (
     <div className="rounded-xl border border-transparent bg-[#191919]">
