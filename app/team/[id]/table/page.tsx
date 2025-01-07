@@ -1,6 +1,6 @@
 "use client";
 
-import { Standings } from "@/app/_components";
+import { ErrorMessage, Standings } from "@/app/_components";
 import { DetailsLoading } from "@/app/_components/loading";
 import { gql, useQuery } from "@apollo/client";
 import { useParams } from "next/navigation";
@@ -60,6 +60,7 @@ export default function TeamTable() {
     const { loading, error, data } = useQuery(QUERY, { variables: { id } });
 
     if(loading) return <DetailsLoading />;
+    else if(error) return <ErrorMessage />;
 
     return (
         <div>

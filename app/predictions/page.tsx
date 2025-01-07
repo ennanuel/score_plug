@@ -1,7 +1,7 @@
 "use client";
 
 import MatchPredictionCard from "../_components/MatchPredictionCard";
-import { ErrorMessage } from "../_components";
+import { ErrorMessage, NothingWasFound } from "../_components";
 import { useContext, useMemo, useState } from "react";
 import { gql, useQuery } from "@apollo/client";
 import { Match } from "@/types/global.type";
@@ -69,6 +69,8 @@ const Matches = () => {
     ...(socketData.matches[match._id] || {})
   })), [socketData, data]);
 
+  if(error) return <ErrorMessage />
+
   return (
     <div className="rounded-xl pb-3 bg-white-100/10 border border-transparent h-fit flex flex-col gap-4">
       <div className="gap-2 items-center p-3 ">
@@ -79,14 +81,10 @@ const Matches = () => {
           <div className="mt-4 px-3">
             <PredictionLoading size={6} />
           </div> :
+          !loading && !matchPredictions?.length ?
+            <NothingWasFound /> :
           <ul className="flex flex-col gap-3 px-3">
-            {
-              error ?
-                <ErrorMessage /> :
-                !matchPredictions ?
-                  <div>Nothing to show</div> :
-                  matchPredictions.map((match, index) => <MatchPredictionCard {...match} key={index} />)
-            }
+            {matchPredictions?.map((match, index) => <MatchPredictionCard {...match} key={index} />)}
           </ul>
       }
     </div>

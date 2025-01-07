@@ -2,7 +2,7 @@ import Link from "next/link";
 import { FaGooglePlay } from "react-icons/fa6";
 import { PiPlug } from "react-icons/pi";
 import { RiFacebookFill, RiInstagramFill, RiLinkedinBoxFill, RiTiktokFill, RiTwitterXFill } from "react-icons/ri";
-import { SiMusescore, SiTiktok, SiVimeo } from "react-icons/si";
+import { SiVimeo } from "react-icons/si";
 
 const LINKS = [
   {
@@ -18,20 +18,23 @@ const LINKS = [
     href: "/predictions"
   },
   {
-    title: "About developer",
-    href: "/about"
+    title: "Home",
+    href: "/"
   },
   {
-    title: "FAQ",
-    href: "/faq"
+    title: "About developer",
+    isOtherLink: true,
+    href: "https://ezema.netlify.app"
   },
   {
     title: "Source code",
-    href: "/"
+    isOtherLink: true,
+    href: "https://github.com/ennanuel/score_plug.git/"
   },
   {
-    title: "Home",
-    href: "/"
+    title: "Donate",
+    isOtherLink: true,
+    href: "/faq"
   },
 ]
 
@@ -48,9 +51,13 @@ const Footer = () => {
         </div>
         <ul className="flex flex-col gap-3">
           {
-            LINKS.map(({ title, href }) => (
-              <li key={title} className="text-base font-semibold text-white-100 hover:underline">
-                <Link href={href}>{title}</Link>
+            LINKS.map(({ title, href, isOtherLink }) => (
+              <li key={title} >
+                {
+                  isOtherLink ?
+                    <a href={href} target="_blank" className="text-base font-semibold text-white-100 hover:underline">{title}</a> :
+                    <Link href={href} className="text-base font-semibold text-white-100 hover:underline">{title}</Link>
+                }
               </li>
             ))
           }
@@ -86,9 +93,15 @@ const Footer = () => {
             <span className="text-xs font-semibold text-white-400">Follow us</span>
             <div className="flex items-center gap-4">
               {
-                [RiTiktokFill, RiInstagramFill, RiFacebookFill, RiLinkedinBoxFill, RiTwitterXFill]
-                  .map((Icon, index) => (
-                    <a href="#" key={index} target="_blank" className="flex items-center justify-center text-white-500 hover:text-white-600">
+                [
+                  { Icon: RiTiktokFill, href: "https://tiktok.com", title: "TikTok" }, 
+                  { Icon: RiInstagramFill, href: "https://instagram.com/by.ezema", title: "Instagram" }, 
+                  { Icon: RiFacebookFill, href: "https://facebooke.com", title: "Facebook" },
+                  { Icon: RiLinkedinBoxFill, href: "https://linkedin.com/in/ezema-emmanuel", title: "Linked in" }, 
+                  { Icon: RiTwitterXFill, href: "https://x.com/nnanna-ezema", title: "Twitter" }
+                ]
+                  .map(({ Icon, href, title }) => (
+                    <a href={href} title={title} key={title} target="_blank" className="flex items-center justify-center text-white-500 hover:text-white-600">
                       <Icon size={16} />
                     </a>
                   ))

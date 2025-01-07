@@ -50,7 +50,7 @@ function MatchPredictionCard({ _id, homeTeam, competition, awayTeam, utcDate, st
               { title: "Away", outcome: predictions?.fullTime?.outcome?.awayWin }
             ]
               .map((prediction, index) => (
-                <div className="flex-1 flex items-center justify-center flex-col px-3 py-1 gap-1 rounded-md bg-white/5 border bg-white-100/5 border-white-100/5">
+                <div key={index} className="flex-1 flex items-center justify-center flex-col px-3 py-1 gap-1 rounded-md border bg-white-100/5 border-white-100/5">
                   <span className="text-3xs text-white-700">{prediction.title}</span>
                   <span className="text-2xs text-white-300">{prediction.outcome?.toFixed(2)}%</span>
                 </div>

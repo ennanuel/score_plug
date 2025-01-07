@@ -7,11 +7,11 @@ import { useContext, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import { FiChevronRight } from "react-icons/fi";
 import { CompetitionLoading, PredictionLoading } from "./loading";
 
 import { SocketContext } from "../SocketContext";
 import { getDay, getTimeFormat, getTimeRemaining } from "../_utils/dateTime";
+import ErrorSidebar from "./ErrorSidebar";
 
 type QueryResult = {
   matchPredictions: { matches: Match[] };
@@ -102,12 +102,7 @@ const Rightbar = () => {
     [data, socketData]
   );
 
-  if(error) return (
-    <div className="rightbar flex flex-col items-center justify-center gap-1 py-20 px-6 rounded-xl border border-transparent bg-white-100/10 h-fit">
-      <span className="text-white-600 text-sm font-semibold">Oh no!</span>
-      <p className="text-xs text-white-800 text-center">Failed to load sidebar</p>
-    </div>
-  )
+  if(error) return <ErrorSidebar />
 
   return (
     <div className="flex flex-col gap-4">
@@ -180,10 +175,9 @@ const Rightbar = () => {
           null
       }
       <div className="flex flex-col gap-4 bg-white-100/10 border border-transparent rounded-xl pb-2">
-        <Link href="/teams" className="p-4 pb-0 flex items-center justify-between font-semibold text-sm text-white-300 hover:text-white-600">
+        <div className="p-4 pb-0 flex items-center justify-between font-semibold text-sm text-white-300 hover:text-white-600">
           <span className="text-xs">Top Teams</span>
-          <FiChevronRight size={13} />
-        </Link>
+        </div>
         <ul className="flex flex-col">
           {
             loading ?

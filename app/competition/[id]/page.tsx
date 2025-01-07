@@ -149,8 +149,9 @@ const CompetitionInfo = () => {
             </div>
         </div>
     );
+
     else if (error) return <ErrorMessage />;
-    else if (!data) return <NothingWasFound />;
+    else if (!data) return <NothingWasFound iconType='competition' noBackground />;
 
     return (
         <div className="flex flex-col gap-4">
@@ -160,7 +161,7 @@ const CompetitionInfo = () => {
                     <span className="text-xs font-semibold text-green-400">All matches</span>
                 </div>
                 <div className="relative flex items-center gap-2">
-                    <button className="hidden md:flex items-center justify-center w-8 aspect-square rounded-full border border-white-100/20 text-white-600">
+                    <button className="hidden cursor-not-allowed md:flex items-center justify-center w-8 aspect-square rounded-full border border-white-100/20 text-white-600">
                         <FaAngleLeft size={16} />
                     </button>
                     <div className="flex-1 flex gap-3 lg:gap-4 overflow-x-auto">
@@ -217,7 +218,7 @@ const CompetitionInfo = () => {
                             ))
                         }
                     </div>
-                    <button className="hidden md:flex items-center justify-center w-8 aspect-square rounded-full border border-white-100/20 text-white-600">
+                    <button className="hidden cursor-not-allowed md:flex items-center justify-center w-8 aspect-square rounded-full border border-white-100/20 text-white-600">
                         <FaAngleRight size={16} />
                     </button>
                 </div>
