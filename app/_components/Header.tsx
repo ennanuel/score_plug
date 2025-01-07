@@ -6,6 +6,9 @@ import { MdOutlinePerson, MdOutlineSettings, MdSearch } from "react-icons/md";
 import { NAV_LINKS } from "../_assets/constants/links";
 import NavLink from "./NavLink";
 import { SocketContext } from "../SocketContext";
+import { PiPlug } from "react-icons/pi";
+import Search from "./Search";
+import Link from "next/link";
 
 
 const Header = () => {
@@ -28,32 +31,24 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="sticky top-0 z-10 w-full">
-      <div className="relative bg-[#191919] px-2 sm:px-4 z-10 w-full h-14 flex items-center justify-center">
-        <div className="w-full max-w-[var(--max-width)] m-auto flex justify-between items-center">
-          <div className="flex items-center gap-12">
-            <span className="font-inter font-bold text-xl text-white-100">ScorePlug.</span>
-
-            <div className="flex items-center h-8 rounded-full bg-white-100/10">
-              <label htmlFor="search" className="text-white-500 flex items-center justify-center w-8 aspect-square">
-                <MdSearch size={16} />
-              </label>
-              <input 
-                className="text-xs flex-1 bg-transparent border-none outline-none focus:outline-none text-white-500 placeholder:text-white-600 pr-2" 
-                type="text" 
-                id="search" 
-                placeholder="Barcelona v Chelsea" 
-              />
-            </div>
+    <div className="md:sticky md:top-0 z-10 w-full">
+      <div className="relative z-[11] md:bg-[#191919] px-3 sm:px-4 w-full h-14 flex items-center justify-center">
+        <div className="w-full max-w-[var(--max-width)] m-auto flex justify-between items-center gap-3">
+          <div className="flex items-center gap-2 md:gap-12">
+            <span className="hidden md:block font-inter font-bold text-xl text-white-100">ScorePlug.</span>
+            <Link href="/" className="flex md:hidden overflow-hidden items-end justify-start w-6 max-h-6 aspect-square rounded-full border border-white-600 text-white-600 pl-[1px]">
+              <PiPlug size={20} />
+            </Link>
+            <Search />
           </div>
-          <ul className="flex-1 hidden sm:flex items-stretch justify-end gap-2">
-            <li title="Coming soon..." className="w-8 aspect-square rounded-full bg-white-100/10 hover:bg-white-100/20 text-white-600 flex items-center justify-center">
+          <ul className="flex items-stretch justify-end gap-2">
+            <li title="Coming soon..." className="hidden sm:flex w-8 aspect-square rounded-full bg-white-100/10 hover:bg-white-100/20 text-white-600 items-center justify-center">
               <MdOutlinePerson size={16} />
             </li>
             <li title="Coming soon..." className="relative">
               <button 
                 onClick={() => setShowOptions(!showOptions)}
-                className={`${showOptions ? 'bg-white-100/20 text-white-100' : 'bg-white-100/10 hover:bg-white-100/20 text-white-600'} h-8 rounded-full flex items-center justify-center gap-2 px-2`}
+                className={`${showOptions ? 'bg-[#212121] md:bg-white-100/20 text-white-100' : 'bg-[#191919] md:bg-white-100/10 hover:bg-white-100/20 text-white-600'} h-8 rounded-full flex items-center justify-center gap-2 px-2`}
               >
                 <MdOutlineSettings size={16} />
                 <FaAngleDown size={12} className={`${showOptions ? 'rotate-180' : ''} duration-300 transition-transform`} />
@@ -78,12 +73,14 @@ const Header = () => {
           </ul>
         </div>
       </div>
-      <div className={`relative ${scrolled && 'lg:-translate-y-full'} px-2 sm:px-4 transition-transform duration-300 border-t border-black-900 bg-[#191919] flex items-center justify-center`}>
+      <div className={`z-10 fixed bottom-0 left-0 w-full md:relative ${scrolled && 'lg:-translate-y-full'} px-2 sm:px-4 transition-transform duration-300 border-t border-black-900 bg-[#191919] flex items-center justify-center`}>
         <nav className="py-2 w-full m-auto max-w-[var(--max-width)]">
-          <ul className={`flex items-center w-fit gap-1`}>
+          <ul className="flex items-center w-full md:w-fit gap-3 md:gap-1">
             {
               navLinks.map((navLink, index) => (
-                <li key={index} className=""><NavLink {...navLink} /></li>
+                <li key={index} className="w-full md:w-fit">
+                  <NavLink {...navLink} />
+                </li>
               ))
             }
           </ul>
