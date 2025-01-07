@@ -3,13 +3,13 @@
 import { gql, useQuery } from "@apollo/client";
 import Image from "next/image";
 import Link from "next/link";
-import ErrorMessage from "./ErrorMessage";
 
 import { Competition, Team } from "@/types/global.type";
 import { loadImage } from "../_utils/competition";
 import { CompetitionLoading } from "./loading";
 
 import { BiCaretDown } from "react-icons/bi";
+import ErrorSidebar from "./ErrorSidebar";
 
 const QUERY = gql`
   query GetTopCompetitionsAndTeams {
@@ -31,7 +31,7 @@ const QUERY = gql`
 const Leftbar = () => {
   const { loading, error, data } = useQuery<{ topCompetitions: Competition[], teams: { teams: Team[] } }>(QUERY);
 
-  if (error) return <ErrorMessage />;
+  if (error) return <ErrorSidebar />;
 
   return (
     <div className="leftbar flex flex-col col-span-1 gap-4">
