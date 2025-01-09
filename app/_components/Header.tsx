@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useContext, useMemo } from "react";
 import { FaAngleDown } from "react-icons/fa";
-import { MdOutlinePerson, MdOutlineSettings, MdSearch } from "react-icons/md";
+import { MdOutlinePerson, MdOutlineSettings } from "react-icons/md";
 import { NAV_LINKS } from "../_assets/constants/links";
 import NavLink from "./NavLink";
 import { SocketContext } from "../SocketContext";
