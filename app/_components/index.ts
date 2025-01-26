@@ -5,10 +5,8 @@ import MatchHeader from './MatchHeader';
 import CompetitionHeader from './CompetitionHeader';
 import Footer from './Footer';
 import TeamDetailsHeader from './TeamDetailsHeader';
-import TeamCard from "./TeamCard";
 import MatchCard from './MatchCard';
 import CompetitionCard from './CompetitionCard';
-import FormBox from './FormBox';
 import Standings from './standings';
 import CompetitionWithMatches from './CompetitionWithMatches';
 import MatchesContainer from './MatchesContainer';
@@ -24,10 +22,8 @@ export {
     CompetitionHeader,
     TeamDetailsHeader,
     Footer,
-    TeamCard,
     MatchCard,
     CompetitionCard,
-    FormBox,
     Standings,
     CompetitionWithMatches,
     MatchesContainer,
