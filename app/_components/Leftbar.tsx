@@ -31,10 +31,10 @@ const QUERY = gql`
 const Leftbar = () => {
   const { loading, error, data } = useQuery<{ topCompetitions: Competition[], teams: { teams: Team[] } }>(QUERY);
 
-  if (error) return <ErrorSidebar />;
+  if (error) return <ErrorSidebar />
 
   return (
-    <div className="leftbar flex flex-col col-span-1 gap-4">
+    <div className="flex flex-col col-span-1 gap-4">
       <div className="pb-2 pt-4 rounded-xl border border-transparent bg-white-100/10 flex flex-col gap-4">
         <h2 className="font-semibold text-white-300 text-xs px-4">Top Leagues</h2>
         {
@@ -49,8 +49,8 @@ const Leftbar = () => {
                     <li key={competition._id} className="">
                       <Link href={`/competition/${competition._id}`} className="flex items-center h-9 px-4 gap-4 hover:bg-white-100/10">
                         <Image loader={loadImage} src={competition.emblem || String(process.env.NEXT_IMAGE_URL)} width={20} height={20} alt={competition.name} className="w-4 aspect-square object-contain" />
-                        <span className={`text-2xs ${competition.recentMatches.hasLiveMatch ? 'text-yellow-500' : 'text-white-600'}`}>{competition.name}</span>
-                        {competition.recentMatches.hasLiveMatch ? <span className="-ml-2 bg-yellow-500 text-xs w-1 aspect-square rounded-md"></span> : null}
+                        <span className={`text-2xs ${competition.recentMatches.hasLiveMatch ? 'text-green-500' : 'text-white-600'}`}>{competition.name}</span>
+                        {competition.recentMatches.hasLiveMatch ? <span className="-ml-2 bg-green-500 text-xs w-1 aspect-square rounded-md"></span> : null}
                       </Link>
                     </li>
                   ))
