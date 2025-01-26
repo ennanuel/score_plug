@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { FaGooglePlay } from "react-icons/fa6";
 import { PiPlug } from "react-icons/pi";
@@ -44,9 +45,7 @@ const Footer = () => {
     <footer className="bg-[#191919] mt-10 flex flex-col items-center justify-center">
       <div className="w-full px-3 sm:px-4 pt-10 pb-8 max-w-[var(--max-width)] grid grid-cols-2 lg:grid-cols-3 gap-6 md:gap-3">
         <div className="lg:col-span-1 flex flex-col gap-6 min-h-[160px]">
-          <span className="flex items-end justify-start bg-green-400 text-black-900 w-10 aspect-square rounded-full">
-            <PiPlug size={36} className="" />
-          </span>
+          <Image src="/android-chrome-192x192.png" alt="Site Icon" width={48} height={48} className="w-10 aspect-square  object-contain" />
           <p className="max-w-[24ch] font-semibold text-[1.2rem] leading-[1.8rem] text-white-100">ScorePlug is the essential football app.</p>
         </div>
         <ul className="flex flex-col gap-3">
