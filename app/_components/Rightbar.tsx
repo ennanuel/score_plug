@@ -11,7 +11,9 @@ import { CompetitionLoading, PredictionLoading } from "./loading";
 
 import { SocketContext } from "../SocketContext";
 import { getDay, getTimeFormat, getTimeRemaining } from "../_utils/dateTime";
+
 import ErrorSidebar from "./ErrorSidebar";
+import NothingWasFound from "./NothingWasFound";
 
 type QueryResult = {
   matchPredictions: { matches: Match[] };
@@ -114,62 +116,62 @@ const Rightbar = () => {
             </Link>
             {
               loading ?
-              <PredictionLoading size={1} full /> :
-              featuredPrediction ?
-                <Link href={`match/${featuredPrediction._id}`} className="flex flex-col gap-2 p-2 pt-0">
-                  <div className="grid grid-cols-[1fr,_auto,_1fr] gap-2 shadow-lg p-2 min-h-20 rounded-lg bg-white-100/5">
-                    <div className="flex flex-col justify-center items-center gap-1">
-                        <Image src={featuredPrediction.homeTeam.crest || String(process.env.NEXT_IMAGE_URL)} width={40} height={40} alt={featuredPrediction.homeTeam.name} className="aspect-square w-10 max-h-10 object-contain" />
-                        <span className="truncate text-3xs max-w-[10ch] text-center w-full font-semibold text-white-300">{featuredPrediction.homeTeam.name}</span>
-                    </div>
-                    {
-                        /in_play|paused|finished/i.test(featuredPrediction.status) ?
-                            <div className="flex flex-col items-center justify-center">
-                                <div className={`text-base flex items-center justify-center gap-1 text-white-400`}>
-                                    <span className="font-bold">{featuredPrediction.score.fullTime.home}</span>
-                                    <span>-</span>
-                                    <span className="font-bold">{featuredPrediction.score.fullTime.away}</span>
-                                </div>
-                                <span className={`text-2xs ${featuredPrediction.minute == 'FT' ? 'text-white-700' : 'text-yellow-500'} font-semibold`}>{/\w/i.test(featuredPrediction.minute) ? featuredPrediction.minute : `${featuredPrediction.minute}'`}</span>
-                            </div> :
-                            featuredPrediction.status === 'TIMED' ?
-                              <p className="flex flex-col items-center justify-start">
-                                <span className="text-sm font-semibold text-white-500">{getTimeFormat(featuredPrediction.utcDate)}</span>
-                                <span className="text-3xs text-white-700">{getDay(featuredPrediction.utcDate)}</span>
-                                <span className="font-semibold text-3xs text-white-700">{Object.values(getTimeRemaining(featuredPrediction.timeRemaining)).reverse().join(' ')}</span>
-                              </p> :
-                              <p className="text-white-400 font-bold flex items-center justify-center">
-                                  {featuredPrediction.status.substring(0, 4)}
-                              </p>
-                    }
-                    <div className="flex flex-col justify-center items-center gap-1">
-                        <Image src={featuredPrediction.awayTeam.crest || String(process.env.NEXT_IMAGE_URL)} width={40} height={40} alt={featuredPrediction.awayTeam.name} className="aspect-square w-10 max-h-10 object-contain" />
-                        <span className="truncate text-3xs max-w-[10ch] text-center w-full font-semibold text-white-300">{featuredPrediction.awayTeam.name}</span>
-                    </div>
-                  </div>
-                  <div className="w-full flex flex-col gap-1 p-2 rounded-lg bg-gradient-to-r from-white-100/10 to-white-400/20">
-                    <span className="text-tiny text-white-300">Predictions</span>
-                    <div className="flex gap-1">
-                      <div className="flex-1 flex flex-col justify-center items-center bg-white-100/5 rounded-md px-2 h-8 border border-white-100/5">
-                        <span className="text-tiny text-white-600">Home</span>
-                        <span className="text-3xs text-white-500">10.04%</span>
+                <PredictionLoading size={1} full /> :
+                featuredPrediction ?
+                  <Link href={`match/${featuredPrediction._id}`} className="flex flex-col gap-2 p-2 pt-0">
+                    <div className="grid grid-cols-[1fr,_auto,_1fr] gap-2 shadow-lg p-2 min-h-20 rounded-lg bg-white-100/5">
+                      <div className="flex flex-col justify-center items-center gap-1">
+                          <Image src={featuredPrediction.homeTeam.crest || String(process.env.NEXT_IMAGE_URL)} width={40} height={40} alt={featuredPrediction.homeTeam.name} className="aspect-square w-10 max-h-10 object-contain" />
+                          <span className="truncate text-3xs max-w-[10ch] text-center w-full font-semibold text-white-300">{featuredPrediction.homeTeam.name}</span>
                       </div>
-                      <div className="flex-1 flex flex-col justify-center items-center bg-white-100/5 rounded-md px-2 h-8 border border-white-100/5">
-                        <span className="text-tiny text-white-600">Draw</span>
-                        <span className="text-3xs text-white-500">30.22%</span>
-                      </div>
-                      <div className="flex-1 flex flex-col justify-center items-center bg-white-100/5 rounded-md px-2 h-8 border border-white-100/5">
-                        <span className="text-tiny text-white-600">Away</span>
-                        <span className="text-3xs text-white-500">59.74%</span>
+                      {
+                          /in_play|paused|finished/i.test(featuredPrediction.status) ?
+                              <div className="flex flex-col items-center justify-center">
+                                  <div className={`text-base flex items-center justify-center gap-1 text-white-400`}>
+                                      <span className="font-bold">{featuredPrediction.score.fullTime.home}</span>
+                                      <span>-</span>
+                                      <span className="font-bold">{featuredPrediction.score.fullTime.away}</span>
+                                  </div>
+                                  <span className={`text-2xs ${featuredPrediction.minute == 'FT' ? 'text-white-700' : 'text-yellow-500'} font-semibold`}>{/\w/i.test(featuredPrediction.minute) ? featuredPrediction.minute : `${featuredPrediction.minute}'`}</span>
+                              </div> :
+                              featuredPrediction.status === 'TIMED' ?
+                                <p className="flex flex-col items-center justify-start">
+                                  <span className="text-sm font-semibold text-white-500">{getTimeFormat(featuredPrediction.utcDate)}</span>
+                                  <span className="text-3xs text-white-700">{getDay(featuredPrediction.utcDate)}</span>
+                                  <span className="font-semibold text-3xs text-white-700">{Object.values(getTimeRemaining(featuredPrediction.timeRemaining)).reverse().join(' ')}</span>
+                                </p> :
+                                <p className="text-white-400 font-bold flex items-center justify-center">
+                                    {featuredPrediction.status.substring(0, 4)}
+                                </p>
+                      }
+                      <div className="flex flex-col justify-center items-center gap-1">
+                          <Image src={featuredPrediction.awayTeam.crest || String(process.env.NEXT_IMAGE_URL)} width={40} height={40} alt={featuredPrediction.awayTeam.name} className="aspect-square w-10 max-h-10 object-contain" />
+                          <span className="truncate text-3xs max-w-[10ch] text-center w-full font-semibold text-white-300">{featuredPrediction.awayTeam.name}</span>
                       </div>
                     </div>
-                    <div className="flex justify-between items-center mt-1">
-                      <span className="text-tiny text-white-700">Predictions can be wrong</span>
-                      <button className="text-tiny text-white-500 hover:text-white-600">More matches</button>
+                    <div className="w-full flex flex-col gap-1 p-2 rounded-lg bg-gradient-to-r from-white-100/10 to-white-400/20">
+                      <span className="text-tiny text-white-300">Predictions</span>
+                      <div className="flex gap-1">
+                        <div className="flex-1 flex flex-col justify-center items-center bg-white-100/5 rounded-md px-2 h-8 border border-white-100/5">
+                          <span className="text-tiny text-white-600">Home</span>
+                          <span className="text-3xs text-white-500">10.04%</span>
+                        </div>
+                        <div className="flex-1 flex flex-col justify-center items-center bg-white-100/5 rounded-md px-2 h-8 border border-white-100/5">
+                          <span className="text-tiny text-white-600">Draw</span>
+                          <span className="text-3xs text-white-500">30.22%</span>
+                        </div>
+                        <div className="flex-1 flex flex-col justify-center items-center bg-white-100/5 rounded-md px-2 h-8 border border-white-100/5">
+                          <span className="text-tiny text-white-600">Away</span>
+                          <span className="text-3xs text-white-500">59.74%</span>
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center mt-1">
+                        <span className="text-tiny text-white-700">Predictions can be wrong</span>
+                        <button className="text-tiny text-white-500 hover:text-white-600">More matches</button>
+                      </div>
                     </div>
-                  </div>
-                </Link> :
-                null
+                  </Link> :
+                  <NothingWasFound small />
             }
           </div> :
           null
