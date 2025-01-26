@@ -7,12 +7,12 @@ import { gql, useQuery } from "@apollo/client";
 import { Match } from "@/types/global.type";
 import { SocketContext } from "../SocketContext";
 import { PredictionLoading } from "../_components/loading";
-import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import DateSelector from "../_components/DateSelector";
+import { BsCaretDownFill } from "react-icons/bs";
 
 const QUERY = gql`
-  query GetMatchPredictions($fromDate: String, $toDate: String, $status: String) {
-    matchPredictions(from: $fromDate, to: $toDate, status: $status) {
+  query GetMatchPredictions($fromDate: String, $toDate: String, $status: String, $limit: Float) {
+    matchPredictions(from: $fromDate, to: $toDate, status: $status, limit: $limit) {
         totalPages
         matches {
             _id
@@ -58,9 +58,10 @@ const QUERY = gql`
 
 const Matches = () => {
   const [date, setDate] = useState({ fromDate: "", toDate: "" });
+  const [limit, setLimit] = useState(10);
 
   const { loading, error, data } = useQuery<{ matchPredictions: { matches: Match[], totalPages: number } }>(QUERY, {
-    variables: { ...date }
+    variables: { ...date, limit }
   });
 
   const { socketData } = useContext(SocketContext);
@@ -72,20 +73,30 @@ const Matches = () => {
   if(error) return <ErrorMessage />
 
   return (
-    <div className="rounded-xl pb-3 bg-white-100/10 border border-transparent h-fit flex flex-col gap-4">
-      <div className="gap-2 items-center p-3 ">
-        <DateSelector setDate={setDate} />
+    <div className="flex flex-col gap-4">
+      <div className="rounded-xl pb-3 bg-white-100/10 border border-transparent h-fit flex flex-col gap-4">
+        <div className="gap-2 items-center p-3 ">
+          <DateSelector setDate={setDate} useCurrentDate />
+        </div>
+        {
+          loading ?
+            <div className="mt-4 px-3">
+              <PredictionLoading size={6} />
+            </div> :
+            !loading && !matchPredictions?.length ?
+              <NothingWasFound /> :
+            <ul className="flex flex-col gap-3 px-3">
+              {matchPredictions?.map((match, index) => <MatchPredictionCard {...match} key={index} />)}
+            </ul>
+        }
       </div>
       {
-        loading ?
-          <div className="mt-4 px-3">
-            <PredictionLoading size={6} />
-          </div> :
-          !loading && !matchPredictions?.length ?
-            <NothingWasFound /> :
-          <ul className="flex flex-col gap-3 px-3">
-            {matchPredictions?.map((match, index) => <MatchPredictionCard {...match} key={index} />)}
-          </ul>
+          Number(data?.matchPredictions?.totalPages) > 1 ?
+              <button onClick={() => setLimit(limit + 10)} className="m-auto w-fit flex items-center justify-center gap-2 px-4 h-10 rounded-full bg-white-100/20 text-white-300 hover:bg-white-100/30">
+                  <span className="font-semibold text-white-300 text-2xs">Show more</span>
+                  <BsCaretDownFill size={10} />
+              </button> :
+              null
       }
     </div>
   )
