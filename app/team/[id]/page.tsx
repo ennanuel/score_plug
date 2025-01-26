@@ -12,7 +12,7 @@ import { useMemo } from 'react';
 import { getDay, getTimeFormat } from '@/app/_utils/dateTime';
 import Link from 'next/link';
 import TeamOfTheWeek from '@/app/_components/TeamOfTheWeek';
-import { FaAngleLeft } from 'react-icons/fa6';
+import { FaAngleLeft, FaAngleRight } from 'react-icons/fa6';
 import { TbSoccerField } from 'react-icons/tb';
 
 const QUERY = gql`
@@ -293,7 +293,7 @@ const TeamInfo = () => {
                         </button>
                         <span className="text-xs font-semibold text-white-100">Fixtures</span>
                         <button className="w-6 rounded-full aspect-square flex items-center justify-center bg-white-100/10 text-white-100 hover:bg-white-100 hover:text-black-900">
-                            <FaAngleLeft size={16} />
+                            <FaAngleRight size={16} />
                         </button>
                     </div>
                     {
