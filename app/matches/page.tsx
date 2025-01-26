@@ -22,11 +22,13 @@ const QUERY = gql`
 
                 homeTeam {
                     name
+                    shortName
                     crest
                 }
 
                 awayTeam {
-                    name 
+                    name
+                    shortName 
                     crest
                 }
                 score {
