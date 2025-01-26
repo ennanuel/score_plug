@@ -58,9 +58,10 @@ function MatchCard ({ _id, status, competition, minute, utcDate, homeTeam, awayT
                 <div className="grid grid-cols-[1fr,_auto,_1fr] items-center justify-center gap-2 md:gap-4">
                     <div className={`flex justify-end items-center gap-2 ${homeTextColor}`}>
                         <span className="flex-1 relative block w-full">
-                            <p className="font-semibold truncate absolute w-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-right">{small ? homeTeam.shortName : homeTeam.name}</p>
+                            <p className="pl-2 block md:hidden font-semibold truncate absolute w-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-right">{homeTeam.shortName}</p>
+                            <p className="pl-2 hidden md:block font-semibold truncate absolute w-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-right">{small ? homeTeam.shortName : homeTeam.name}</p>
                         </span>
-                        <Image src={homeTeam.crest || String(process.env.NEXT_IMAGE_URI)} alt={homeTeam.name} height={24} width={24} className="w-6 max-h-6 aspect-square object-contain" />
+                        <Image src={homeTeam.crest || String(process.env.NEXT_IMAGE_URI)} alt={`${homeTeam.shortName} crest`} height={24} width={24} className="w-6 max-h-6 aspect-square object-contain" />
                     </div>
                     <div>
                         {
@@ -68,36 +69,39 @@ function MatchCard ({ _id, status, competition, minute, utcDate, homeTeam, awayT
                             <span className="font-semibold text-white-600 uppercase">
                                 {time}
                             </span> :
-                            <div className="flex flex-col items-center justify-center">
-                                {
-                                    teamId ?
-                                        <span className={`${((teamId === String(homeTeam._id) && score?.[showHalfTimeScore ? 'firstHalf' : 'fullTime']?.home > score?.[showHalfTimeScore ? 'firstHalf' : 'fullTime']?.away) || (teamId === String(awayTeam._id) && score?.[showHalfTimeScore ? 'firstHalf' : 'fullTime']?.away > score?.[showHalfTimeScore ? 'firstHalf' : 'fullTime']?.home) ? 'bg-green-600' : score?.[showHalfTimeScore ? 'firstHalf' : 'fullTime']?.home > score?.[showHalfTimeScore ? 'firstHalf' : 'fullTime']?.away ? 'bg-white-600' : 'bg-red-500')} font-semibold text-white-100 flex items-center justify-center gap-1 h-6 rounded-md px-3`}>
-                                            {showHalfTimeScore ? <span>{score?.firstHalf?.home}</span> : <span>{score?.fullTime?.home}</span>}
-                                            <span>-</span>
-                                            {showHalfTimeScore ? <span>{score?.firstHalf?.away}</span> : <span>{score?.fullTime?.away}</span>}
-                                        </span> :
-                                        <span className="flex items-center gap-1 text-white-500 font-semibold">
-                                            {showHalfTimeScore ? <span>{score?.firstHalf?.home}</span> : <span>{score?.fullTime?.home}</span>}
-                                            <span>-</span>
-                                            {showHalfTimeScore ? <span>{score?.firstHalf?.away}</span> : <span>{score?.fullTime?.away}</span>}
-                                        </span>
-                                }
-                                {
-                                    score.secondHalf && !showHalfTimeScore ?
-                                        <span className="text-3xs flex items-center justify-center gap-1 text-white-700">
-                                            <span>({score?.firstHalf?.home}</span>
-                                            <span>-</span>
-                                            <span>{score?.firstHalf?.away})</span>
-                                        </span> :
-                                        null
-                                }
-                            </div>
+                            /timed|in_play|finished|paused/i.test(status) ?
+                                <div className="flex flex-col items-center justify-center">
+                                    {
+                                        teamId ?
+                                            <span className={`${((teamId === String(homeTeam._id) && score?.[showHalfTimeScore ? 'firstHalf' : 'fullTime']?.home > score?.[showHalfTimeScore ? 'firstHalf' : 'fullTime']?.away) || (teamId === String(awayTeam._id) && score?.[showHalfTimeScore ? 'firstHalf' : 'fullTime']?.away > score?.[showHalfTimeScore ? 'firstHalf' : 'fullTime']?.home) ? 'bg-green-600' : score?.[showHalfTimeScore ? 'firstHalf' : 'fullTime']?.home === score?.[showHalfTimeScore ? 'firstHalf' : 'fullTime']?.away ? 'bg-white-600/80' : 'bg-red-500')} font-semibold text-white-100 flex items-center justify-center gap-1 h-6 rounded-md px-3`}>
+                                                {showHalfTimeScore ? <span>{score?.firstHalf?.home}</span> : <span>{score?.fullTime?.home}</span>}
+                                                <span>-</span>
+                                                {showHalfTimeScore ? <span>{score?.firstHalf?.away}</span> : <span>{score?.fullTime?.away}</span>}
+                                            </span> :
+                                            <span className="flex items-center gap-1 text-white-500 font-semibold">
+                                                {showHalfTimeScore ? <span>{score?.firstHalf?.home}</span> : <span>{score?.fullTime?.home}</span>}
+                                                <span>-</span>
+                                                {showHalfTimeScore ? <span>{score?.firstHalf?.away}</span> : <span>{score?.fullTime?.away}</span>}
+                                            </span>
+                                    }
+                                    {
+                                        score.secondHalf && !showHalfTimeScore ?
+                                            <span className="text-3xs flex items-center justify-center gap-1 text-white-700">
+                                                <span>({score?.firstHalf?.home}</span>
+                                                <span>-</span>
+                                                <span>{score?.firstHalf?.away})</span>
+                                            </span> :
+                                            null
+                                    }
+                                </div> :
+                                <span className="flex items-center justify-center text-xs text-gray-400 px-2">{status.substring(0, 4)}</span>
                         }
                     </div>
                     <div className={`flex items-center gap-2 ${awayTextColor}`}>
-                        <Image src={awayTeam.crest} alt={awayTeam.name} height={24} width={24} className="w-6 max-h-6 aspect-square object-contain" />
+                        <Image src={awayTeam.crest} alt={`${awayTeam.shortName} crest`} height={24} width={24} className="w-6 max-h-6 aspect-square object-contain" />
                         <span className="flex-1 relative block w-full">
-                            <p className="font-semibold truncate absolute w-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-left">{small ? awayTeam.shortName : awayTeam.name}</p>
+                            <p className="pr-2 block md:hidden font-semibold truncate absolute w-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-left">{awayTeam.shortName}</p>
+                            <p className="pr-2 hidden md:block font-semibold truncate absolute w-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-left">{small ? awayTeam.shortName : awayTeam.name}</p>
                         </span>
                     </div>
                 </div>
