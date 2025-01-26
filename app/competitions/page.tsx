@@ -7,7 +7,6 @@ import { ErrorMessage, NothingWasFound } from '../_components';
 import { useContext, useMemo, useState } from 'react';
 import { SocketContext } from '../SocketContext';
 import { CompetitionLoading } from '../_components/loading';
-import { FiArrowDown, FiArrowUp, FiChevronDown } from 'react-icons/fi';
 import { BsCaretDownFill } from 'react-icons/bs';
 
 const QUERY = gql`
@@ -90,7 +89,7 @@ const Competitions = () => {
 
             {
                 Number(data?.competitions?.totalPages) > 1 ?
-                    <button onClick={() => setLimit(20)} className="w-fit flex items-center justify-center gap-2 px-4 h-10 rounded-full bg-white-100/20 text-white-300 hover:bg-white-100/30">
+                    <button onClick={() => setLimit(limit + 10)} className="w-fit flex items-center justify-center gap-2 px-4 h-10 rounded-full bg-white-100/20 text-white-300 hover:bg-white-100/30">
                         <span className="font-semibold text-white-300 text-2xs">Show more</span>
                         <BsCaretDownFill size={10} />
                     </button> :
