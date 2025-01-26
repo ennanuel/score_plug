@@ -1,14 +1,18 @@
 "use client";
 
 import { useEffect, useState, useContext, useMemo } from "react";
-import { FaAngleDown } from "react-icons/fa";
-import { MdOutlinePerson, MdOutlineSettings, MdSearch } from "react-icons/md";
-import { NAV_LINKS } from "../_assets/constants/links";
-import NavLink from "./NavLink";
-import { SocketContext } from "../SocketContext";
-import { PiPlug } from "react-icons/pi";
-import Search from "./Search";
 import Link from "next/link";
+import Image from "next/image";
+
+import { FaAngleDown } from "react-icons/fa";
+import { MdOutlinePerson, MdOutlineSettings } from "react-icons/md";
+
+import NavLink from "./NavLink";
+import Search from "./Search";
+
+import { SocketContext } from "../SocketContext";
+
+import { NAV_LINKS } from "../_assets/constants/links";
 
 
 const Header = () => {
@@ -23,7 +27,7 @@ const Header = () => {
   )), [socketData]);
 
   useEffect(() => { 
-    const handleScroll = () => setScrolled(window.scrollY > 10);
+    const handleScroll = () => setScrolled(window.scrollY > 50);
 
     window.addEventListener('scroll', handleScroll);
 
@@ -36,8 +40,8 @@ const Header = () => {
         <div className="w-full max-w-[var(--max-width)] m-auto flex justify-between items-center gap-3">
           <div className="flex items-center gap-2 md:gap-12">
             <span className="hidden md:block font-inter font-bold text-xl text-white-100">ScorePlug.</span>
-            <Link href="/" className="flex md:hidden overflow-hidden items-end justify-start w-6 max-h-6 aspect-square rounded-full border border-white-600 text-white-600 pl-[1px]">
-              <PiPlug size={20} />
+            <Link href="/" className="flex items-center justify-start md:hidden w-fit">
+              <Image src="/android-chrome-192x192.png" alt="Site icon" width={40} height={40} className="w-8 max-w-8 min-w-8 h-8 max-h-8 aspect-square object-contain" />"
             </Link>
             <Search />
           </div>
