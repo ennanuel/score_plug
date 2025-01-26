@@ -33,25 +33,25 @@
   .desktop-layout {
     grid-template-columns: 240px 1fr 240px;
     grid-template-rows: auto;
-    grid-template-areas: "leftbar main righbar";
+    grid-template-areas: "leftbar main-content rightbar";
   }
   .tablet-layout {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto;
     grid-template-areas: 
-      "main main"
+      "main-content main-content"
       "leftbar rightbar";
   }
   .mobile-layout {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
     grid-template-areas:
-      "main"
+      "main-content"
       "rightbar"
       "leftbar";
   }
-  .content {
-    grid-area: main;
+  .page-content {
+    grid-area: main-content;
   }
   .leftbar {
     grid-area: leftbar;
