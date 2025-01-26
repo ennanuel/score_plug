@@ -27,10 +27,12 @@ const QUERY = gql`
         predictionAvailable
         homeTeam {
           name
+          shortName
           crest
         }
         awayTeam {
           name 
+          shortName
           crest
         }
          score {
