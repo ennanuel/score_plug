@@ -52,7 +52,7 @@ const TeamDetailsHeader = () => {
                 </div>
               </div>
               <a href={data.team.website} target="_blank" className="h-7 flex items-center justify-center gap-1 border border-white-100/20 px-3 rounded-full text-white-400 hover:bg-white-100/10 hover:border-transparent">
-                <span className="text-2xs font-semibold">Go to website</span>
+                <span className="text-2xs font-semibold whitespace-nowrap">Go to website</span>
                 <HiExternalLink size={14} />
               </a>
             </div>
