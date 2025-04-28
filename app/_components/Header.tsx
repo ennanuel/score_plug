@@ -58,20 +58,20 @@ const Header = () => {
                 <FaAngleDown size={12} className={`${showOptions ? 'rotate-180' : ''} duration-300 transition-transform`} />
               </button>
               <div className={`${showOptions ? '' : 'opacity-0 pointer-events-none'} transtion-opacity duration-300 absolute top-[calc(100%_+_8px)] min-w-[200px] w-fit right-0 rounded-xl bg-[#252525] border border-transparent flex flex-col gap-3 p-3 shadow-lg shadow-black-900/50`}>
-                <span className="group flex justify-between items-center gap-4">
+                <button className="group flex justify-between items-center gap-4 cursor-not-allowed">
                   <span className="font-bold text-sm text-white-600 group-hover:text-white-400">Dark mode</span>
-                  <button className="h-5 bg-white-100/10 rounded-full p-1 flex items-center justify-center">
+                  <span className="h-5 bg-white-100/10 rounded-full p-1 flex items-center justify-center">
                     <span className="w-3 aspect-square h-3 rounded-full bg-black-900/50"></span>
                     <span className="w-3 aspect-square h-3"></span>
-                  </button>
-                </span>
-                <span className="group flex justify-between items-center gap-4">
+                  </span>
+                </button>
+                <button className="group flex justify-between items-center gap-4 cursor-not-allowed">
                   <span className="font-bold text-sm text-white-600 group-hover:text-white-400">Use mock data</span>
-                  <button className="h-5 bg-white-100/10 rounded-full p-1 flex items-center justify-center">
+                  <span className="h-5 bg-white-100/10 rounded-full p-1 flex items-center justify-center">
                     <span className="w-3 aspect-square h-3 rounded-full bg-black-900/50"></span>
                     <span className="w-3 aspect-square h-3"></span>
-                  </button>
-                </span>
+                  </span>
+                </button>
               </div>
             </li>
           </ul>

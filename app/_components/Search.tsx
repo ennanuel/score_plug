@@ -128,7 +128,7 @@ export default function Search() {
                     <BiSearch size={16} />
                 </label>
                 <input 
-                    className="h-8 text-2xs px-2 md:text-xs flex-1 bg-transparent border-none outline-none focus:outline-none text-white-500 placeholder:text-white-600 pr-2" 
+                    className="h-8 text-2xs px-2 md:text-xs flex-1 bg-transparent border-none outline-none focus:outline-none text-white-500 placeholder:text-white-600 autofill:bg-transparent autofill:text-green-500 pr-2" 
                     type="text"
                     name="q" 
                     id="search" 
