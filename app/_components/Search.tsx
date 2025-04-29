@@ -145,7 +145,7 @@ export default function Search() {
                     <MdClose size={16} />
                 </button>
             </form>
-            <div className={`${showSearch ? 'block' : 'hidden'} flex-1 md:w-[400px] relative md:absolute md:top-[calc(100%_+_8px)] left-0 rounded-xl md:bg-[#191919] md:shadow-lg shadow-black-900/50`}>
+            <div className={`${showSearch ? 'block' : 'hidden'} flex-1 md:w-[400px] relative md:absolute md:top-[calc(100%_+_8px)] left-0 rounded-xl md:bg-[#191919] md:shadow-lg shadow-black-900/50 border border-black-900/5`}>
                 <div className="flex p-3 items-center justify-start gap-2 overflow-x-auto overflow-y-hidden border-b border-white-100/10">
                     {
                         OPTIONS.map(({ title, value }) => (
