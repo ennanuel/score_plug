@@ -475,7 +475,7 @@ const MatchInfo = () => {
                   <span className={`relative flex items-center justify-center h-[22px] w-10 rounded-md text-xs font-semibold text-white-100 before:absolute before:-bottom-1 before:left-1/2 before:-translate-x-1/2 before:h-[2px] before:w-6 before:rounded-full ${((match.homeTeam._id === data.match.homeTeam._id && match.score.fullTime.home > match.score.fullTime.away) || (match.awayTeam._id === data.match.homeTeam._id && match.score.fullTime.away > match.score.fullTime.home)) ? 'bg-green-600 before:bg-green-600' : match.score.fullTime.home === match.score.fullTime.away ? 'bg-white-700' : 'bg-red-600'}`}>
                     {`${match.score.fullTime.home} - ${match.score.fullTime.away}`}
                   </span>
-                  <span className='text-left text-2xs text-white-400'>{match.awayTeam.name}</span>
+                  <span className='text-left text-2xs text-white-400'>{match.awayTeam.shortName}</span>
                 </li>
               ))
             }
@@ -491,7 +491,7 @@ const MatchInfo = () => {
                   <span className={`relative flex items-center justify-center h-[22px] w-10 rounded-md text-xs font-semibold text-white-100 before:absolute before:-bottom-1 before:left-1/2 before:-translate-x-1/2 before:h-[2px] before:w-6 before:rounded-full ${((match.homeTeam._id === data.match.awayTeam._id && match.score.fullTime.home > match.score.fullTime.away) || (match.awayTeam._id === data.match.awayTeam._id && match.score.fullTime.away > match.score.fullTime.home)) ? 'bg-green-600 before:bg-green-600' : match.score.fullTime.home === match.score.fullTime.away ? 'bg-white-700' : 'bg-red-600'}`}>
                     {`${match.score.fullTime.home} - ${match.score.fullTime.away}`}
                   </span>
-                  <span className='text-left text-2xs text-white-400'>{match.awayTeam.name}</span>
+                  <span className='text-left text-2xs text-white-400'>{match.awayTeam.shortName}</span>
                 </li>
               ))
             }
