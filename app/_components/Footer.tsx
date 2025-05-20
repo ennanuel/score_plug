@@ -1,9 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FaGooglePlay } from "react-icons/fa6";
-import { PiPlug } from "react-icons/pi";
 import { RiFacebookFill, RiInstagramFill, RiLinkedinBoxFill, RiTiktokFill, RiTwitterXFill } from "react-icons/ri";
-import { SiVimeo } from "react-icons/si";
 
 const LINKS = [
   {
@@ -28,15 +25,23 @@ const LINKS = [
     href: "https://ezema.netlify.app"
   },
   {
-    title: "Source code",
+    title: "GitHub",
     isOtherLink: true,
     href: "https://github.com/ennanuel/score_plug.git/"
   },
+];
+
+const OTHER_WEB_APPS = [
   {
-    title: "Donate",
-    isOtherLink: true,
-    href: "/faq"
+    title: "Ridm",
+    icon: "/ridm_logo.svg",
+    href: "https://ridm.netlify.app"
   },
+  {
+    title: "Tekst",
+    icon: "/tekst_logo.png",
+    href: "https://tekst-live.netlify.app"
+  }
 ]
 
 
@@ -61,16 +66,22 @@ const Footer = () => {
             ))
           }
         </ul>
-        <div className="flex flex-col gap-3 md:gap-6">
-          <p className="text-base text-white-500">Other web apps</p>
-          <div className="flex gap-6">
-            <span className="w-10 aspect-square rounded-full bg-white-100/10 flex items-center justify-center text-white-100">
-              <SiVimeo size={20} />
-            </span>
-            <span className="w-10 aspect-square rounded-full bg-white-100/10 flex items-center justify-center text-white-100">
-              <FaGooglePlay size={20} />
-            </span>
+        <div className="flex flex-col justify-between gap-6">
+          <div className="flex flex-col gap-3 md:gap-4">
+            <p className="text-base text-white-500">Other web apps</p>
+            <div className="flex gap-4">
+              {
+                OTHER_WEB_APPS.map(({ icon, href, title }) => (
+                  <a href={href} target="_blank" className="group flex items-center justify-center gap-2 h-10 aspect-square rounded-lg bg-white-100/5 hover:bg-white-100/10">
+                    <Image src={icon} height={40} width={40} alt={title} className="w-6 h-auto" />
+                  </a>
+                ))
+              }
+            </div>
           </div>
+          <p className="text-xs text-white-600">
+            Developed by <a href="https://github.com/ennanuel" className="hover:underline text-white-100">Emmanuel Ezema</a>
+          </p>
         </div>
       </div>
       <div className="flex bg-white-100/5 w-full px-3 sm:px-4">
@@ -95,7 +106,7 @@ const Footer = () => {
                 [
                   { Icon: RiTiktokFill, href: "https://tiktok.com", title: "TikTok" }, 
                   { Icon: RiInstagramFill, href: "https://instagram.com/by.ezema", title: "Instagram" }, 
-                  { Icon: RiFacebookFill, href: "https://facebooke.com", title: "Facebook" },
+                  { Icon: RiFacebookFill, href: "https://facebook.com", title: "Facebook" },
                   { Icon: RiLinkedinBoxFill, href: "https://linkedin.com/in/ezema-emmanuel", title: "Linked in" }, 
                   { Icon: RiTwitterXFill, href: "https://x.com/nnanna-ezema", title: "Twitter" }
                 ]
