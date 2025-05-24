@@ -97,6 +97,7 @@ const CompetitionStats = () => {
                               <span className="w-[2ch] text-2xs font-semibold text-white-500">{index + 1}</span>
                               <span className="flex-1 flex items-center gap-2">
                                 <Image 
+                                  unoptimized
                                   src={crest}
                                   height={40}
                                   width={40}
