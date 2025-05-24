@@ -9,8 +9,6 @@ function createArrayOfWidthLengths(size: number) {
 const CompetitionLoading = ({ size, small }: { size: number, small?: boolean }) => {
     const competitions = createArrayOfWidthLengths(size);
 
-    console.log('re-rendered')
-
     return (
         <ul className={`h-fit flex flex-col ${small ? '' : 'gap-3'}`}>
             {
