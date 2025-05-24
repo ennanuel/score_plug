@@ -122,13 +122,13 @@ export default function Search() {
     }
 
     return (
-        <div className={`${showSearch ? 'fixed h-screen md:h-auto md:relative bg-[#191919] md:bg-transparent w-full md:w-auto' : 'relative'} top-0 left-0 z-[999] flex flex-col`}>
+        <div className={`${showSearch ? 'fixed h-screen md:h-auto md:relative bg-[#191919] md:border-none border-black-900/5 md:bg-transparent w-full md:w-auto' : 'relative'} top-0 left-0 z-[999] flex flex-col`}>
             <form onSubmit={handleSubmit} action="/search" method="GET" className="m-3 md:m-0 pl-2 flex items-center rounded-full bg-white-100/10 md:bg-[#191919] md:bg-white-100/10">
                 <label htmlFor="search" className="text-white-500 flex items-center justify-center">
                     <BiSearch size={16} />
                 </label>
                 <input 
-                    className="h-8 text-2xs px-2 md:text-xs flex-1 bg-transparent border-none outline-none focus:outline-none text-white-500 placeholder:text-white-600 autofill:bg-transparent autofill:text-green-500 pr-2" 
+                    className="h-8 text-2xs px-2 md:text-xs flex-1 bg-transparent border-none outline-none focus:outline-none text-white-500 placeholder:text-white-600 pr-2 " 
                     type="text"
                     name="q" 
                     id="search" 
