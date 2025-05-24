@@ -10,6 +10,4 @@ export function getTeamStandingStatus({ teamStanding, topPositions, midPositions
             (teamStanding.position >= relegationPositions) ?
                 'LOW_TEAM' :
                 '';
-}
-
-export const loadImage = ({ src }: { src: string }) => src;
+};
