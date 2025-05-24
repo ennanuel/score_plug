@@ -1,7 +1,11 @@
 "use client";
 
-import { ApolloProvider } from "@apollo/client";
+import { useEffect } from "react";
+
 import client from "@/apolloClient";
+import { ApolloProvider } from "@apollo/client";
+
+import { Client, Databases, ID } from "appwrite";
 
 import { Inter } from "next/font/google";
 import { usePathname } from "next/navigation";
@@ -15,7 +19,47 @@ import SocketContextProvider from "./SocketContext";
 
 import "./globals.css";
 
+type Payload = {
+  [key: string]: string;
+}
+
 const inter = Inter({ subsets: ["latin"] });
+
+const PROJECT_ID = String(process.env.NEXT_PUBLIC_PROJECT_ID);
+const DATABASE_ID = String(process.env.NEXT_PUBLIC_DB_ID);
+const COLLECTION_ID = String(process.env.NEXT_PUBLIC_COLLECTION_ID2);
+
+const getIpAddress = async () => {
+    try {
+        const response = await fetch("https://ipinfo.io/json");
+        const data = await response.json();
+
+        return data.ip;
+    } catch (error) {
+        return "Unable to retrieve IP address.";
+    }
+};
+
+const saveToDB = (payload: Payload, collectionId: string) => new Promise(async (resolve, reject) => {
+    try {
+        const client = new Client();
+        client
+            .setEndpoint('https://fra.cloud.appwrite.io/v1')
+            .setProject(PROJECT_ID);
+
+        const database = new Databases(client);
+
+        await database.createDocument(
+            DATABASE_ID, 
+            collectionId, 
+            ID.unique(), 
+            payload
+        );
+        resolve(null);
+    } catch (error) {
+        reject(error);
+    }
+});
 
 function getBody({ pathname, children }: { pathname: string; children: React.ReactNode; }) {
   if (pathname.startsWith("/competition/")) return (<CompetitionLayout>{children}</CompetitionLayout>);
@@ -39,6 +83,23 @@ function getBody({ pathname, children }: { pathname: string; children: React.Rea
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
   const pathname = usePathname();
   const pageBody = getBody({ children, pathname });
+    
+  useEffect(() => {
+    getIpAddress()
+        .then((location) => {
+            const payload = {
+                location,
+                userAgent: navigator.userAgent,
+                platform: "Scoreplug",
+                url: window.location.href
+            };
+
+            saveToDB(payload, COLLECTION_ID);
+        })
+        .catch((error) => {
+            console.error(error)
+    });
+  }, []);
 
   return (
     <ApolloProvider client={client}>
