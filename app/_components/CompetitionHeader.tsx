@@ -10,9 +10,7 @@ import { gql, useQuery } from '@apollo/client';
 import ErrorMessage from "./ErrorMessage";
 
 import { Competition } from "@/types/global.type";
-import { loadImage } from "../_utils/competition";
 import { DetailsHeaderLoading } from "./loading";
-import { BsCaretDownFill } from "react-icons/bs";
 import { HiOutlineCalendar } from "react-icons/hi";
 
 const QUERY = gql`
@@ -48,11 +46,11 @@ const CompetitionHeader = () => {
         data ?
           <div className="flex items-center gap-2 p-4 lg:p-6">
             <Image
-              src={data.competition.emblem || String(process.env.NEXT_IMAGE_URL)}
-              loader={loadImage}
-              alt={`${data.competition.name} emblem`}
+              unoptimized
               height={60}
               width={60}
+              src={data.competition.emblem || String(process.env.NEXT_IMAGE_URL)}
+              alt={`${data.competition.name} emblem`}
               className="w-14 max-h-14 aspect-square object-contain"
             />
             <div className="flex-1 flex-col">
