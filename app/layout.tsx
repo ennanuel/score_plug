@@ -7,7 +7,7 @@ import { ApolloProvider } from "@apollo/client";
 
 import { Client, Databases, ID } from "appwrite";
 
-import { Inter } from "next/font/google";
+import { Inter, Figtree } from "next/font/google";
 import { usePathname } from "next/navigation";
 
 import { Header, Leftbar, Rightbar, Footer } from './_components';
@@ -24,6 +24,7 @@ type Payload = {
 }
 
 const inter = Inter({ subsets: ["latin"] });
+const figtree = Figtree({ subsets: ["latin"] });
 
 const PROJECT_ID = String(process.env.NEXT_PUBLIC_PROJECT_ID);
 const DATABASE_ID = String(process.env.NEXT_PUBLIC_DB_ID);
@@ -104,11 +105,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <ApolloProvider client={client}>
       <SocketContextProvider>
-        <html lang="en" className="font-figtree">
+        <html lang="en">
           <head>
             <title>Scoreplug - Your sure plug for football scores</title>
           </head>
-          <body style={{ '--max-width': '1240px' } as React.CSSProperties} className={`${inter.className} min-h-screen bg-black-900`}>
+          <body style={{ '--max-width': '1240px' } as React.CSSProperties} className={`${inter.className} ${figtree.className} font-figtree min-h-screen bg-black-900`}>
             <Header />
             <main className="px-2 sm:px-4">
               <div className="mt-10 md:mt-20 mx-auto max-w-[var(--max-width)]">
