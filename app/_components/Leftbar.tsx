@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Competition, Team } from "@/types/global.type";
-import { loadImage } from "../_utils/competition";
 import { CompetitionLoading } from "./loading";
 
 import { BiCaretDown } from "react-icons/bi";
@@ -48,7 +47,14 @@ const Leftbar = () => {
                   ?.map((competition) => (
                     <li key={competition._id} className="">
                       <Link href={`/competition/${competition._id}`} className="flex items-center h-9 px-4 gap-4 hover:bg-white-100/10">
-                        <Image loader={loadImage} src={competition.emblem || String(process.env.NEXT_IMAGE_URL)} width={20} height={20} alt={competition.name} className="w-4 aspect-square object-contain" />
+                        <Image 
+                          unoptimized 
+                          width={20} 
+                          height={20} 
+                          alt={competition.name} 
+                          src={competition.emblem || String(process.env.NEXT_IMAGE_URL)} 
+                          className="w-4 aspect-square object-contain" 
+                        />
                         <span className={`text-2xs ${competition.recentMatches.hasLiveMatch ? 'text-green-500' : 'text-white-600'}`}>{competition.name}</span>
                         {competition.recentMatches.hasLiveMatch ? <span className="-ml-2 bg-green-500 text-xs w-1 aspect-square rounded-md"></span> : null}
                       </Link>
