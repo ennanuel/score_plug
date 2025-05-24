@@ -1,8 +1,8 @@
 import { TeamOfTheWeek as TeamOfTheWeekProps } from "@/types/competition.type";
+
 import Image from "next/image";
 import { FaAngleRight } from "react-icons/fa";
 import { FaAngleLeft } from "react-icons/fa6";
-import { loadImage } from "../_utils/competition";
 import { IoPerson } from "react-icons/io5";
 
 
@@ -45,12 +45,16 @@ export default function TeamOfTheWeek({ players, children, hideTeamCrest }: { pl
                     </span>
                 </div>
                 {
-                    teamOfTheWeek.map(([title, players]) => (
-                        <div key={title} className="relative flex flex-col lg:flex-row items-center justify-evenly gap-4">
+                    teamOfTheWeek.map(([title, players], index) => (
+                        <div key={index} className="relative flex flex-col lg:flex-row items-center justify-evenly gap-4">
                             {
                                 players
                                     .map((player, subIndex) => (
-                                        <div key={player._id} title={player.name} className={`${(title === 'offence' && subIndex === 1) ? 'mr-4 lg:mb-4' : (title ===  'midfield' && subIndex === 1) ? 'lr-4 lg:mt-4' : (title === 'defence' && (subIndex === 1 || subIndex === 2)) ? 'mr-4 lg:mt-4' : ''} relative flex flex-col justify-center items-center w-12 gap-2`}>
+                                        <div 
+                                            key={player._id} 
+                                            title={player.name} 
+                                            className={`${(title === 'offence' && subIndex === 1) ? 'mr-4 lg:mb-4' : (title ===  'midfield' && subIndex === 1) ? 'lr-4 lg:mt-4' : (title === 'defence' && (subIndex === 1 || subIndex === 2)) ? 'mr-4 lg:mt-4' : ''} relative flex flex-col justify-center items-center w-12 gap-2`}
+                                        >
                                             <span className="relative w-8 flex items-center justify-center aspect-square">
                                                 <span className="w-full h-full rounded-full flex items-end justify-center overflow-hidden bg-[#404040] text-white-600">
                                                     <IoPerson size={25} className="mb-[-2px]" />
@@ -59,7 +63,14 @@ export default function TeamOfTheWeek({ players, children, hideTeamCrest }: { pl
                                                     hideTeamCrest ?
                                                     null :
                                                     <span className="-bottom-1 right-0 absolute block w-4 aspect-square">
-                                                        <Image src={player.teamCrest} alt={`${player.name} team crest`} width={20} height={20} loader={loadImage} className="e-full h-full object-contain" />
+                                                        <Image 
+                                                            width={20} 
+                                                            height={20} 
+                                                            unoptimized
+                                                            src={player.teamCrest} 
+                                                            alt={`${player.name} team crest`} 
+                                                            className="e-full h-full object-contain" 
+                                                        />
                                                     </span>
                                                 }
                                             </span>
