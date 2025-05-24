@@ -1,13 +1,13 @@
 "use client";
 
-import { gql, useQuery } from "@apollo/client";
+import Image from "next/image";
+import Link from "next/link";
 import { useParams } from "next/navigation";
+
+import { gql, useQuery } from "@apollo/client";
 
 import { Competition } from "@/types/global.type";
 import { FaAngleRight } from "react-icons/fa6";
-import Image from "next/image";
-import { loadImage } from "@/app/_utils/competition";
-import Link from "next/link";
 import { DetailsHeaderLoading } from "@/app/_components/loading";
 import { useState } from "react";
 import { ErrorMessage, NothingWasFound } from "@/app/_components";
@@ -96,7 +96,13 @@ const CompetitionStats = () => {
                             <li key={_id} className="flex items-center gap-4 py-3 border-b border-white-100/10 last:border-transparent">
                               <span className="w-[2ch] text-2xs font-semibold text-white-500">{index + 1}</span>
                               <span className="flex-1 flex items-center gap-2">
-                                <Image loader={loadImage} src={crest} height={40} width={40} alt={`${name} crest`} className="w-6 max-h-6 aspect-square object-contain" />
+                                <Image 
+                                  src={crest}
+                                  height={40}
+                                  width={40}
+                                  alt={`${name} crest`}
+                                  className="w-6 max-h-6 aspect-square object-contain" 
+                                />
                                 <Link href={`/team/${_id}`} className="text-2xs text-white-500 font-semibold hover:underline">{shortName}</Link>
                               </span>
                               <span className={`${index === 0 && (stat <= 10 ? 'bg-blue-300' : (stat > 10 && stat <= 20) ? 'bg-blue-400' : (stat > 20 && stat <= 30) ? 'bg-blue-500' : stat > 30 && stat <= 50 ? 'bg-blue-600' : 'bg-blue-700')} h-5 rounded-full flex items-center justify-center px-2 text-2xs font-semibold text-white-300`}>{stat}</span>
