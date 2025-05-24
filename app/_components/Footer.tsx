@@ -72,7 +72,7 @@ const Footer = () => {
             <div className="flex gap-4">
               {
                 OTHER_WEB_APPS.map(({ icon, href, title }) => (
-                  <a href={href} target="_blank" className="group flex items-center justify-center gap-2 h-10 aspect-square rounded-lg bg-white-100/5 hover:bg-white-100/10">
+                  <a href={href} key={title} target="_blank" className="group flex items-center justify-center gap-2 h-10 aspect-square rounded-lg bg-white-100/5 hover:bg-white-100/10">
                     <Image src={icon} height={40} width={40} alt={title} className="w-6 h-auto" />
                   </a>
                 ))
