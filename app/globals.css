@@ -1,6 +1,4 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -58,14 +56,6 @@
   .rightbar {
     grid-area: rightbar;
   }
-}
-
-input:autofill {
-  @apply bg-transprent text-green-500;
-}
-
-div:has(input:autofill) {
-  @apply bg-white/5;
 }
 
 .status-date-filter .status-btn:focus .open-icon,
