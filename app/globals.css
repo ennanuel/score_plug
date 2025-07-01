@@ -58,6 +58,10 @@
   }
 }
 
+:root {
+  --max-width: 1240px;
+}
+
 .status-date-filter .status-btn:focus .open-icon,
 .status-date-filter .status-btn:not(:focus) .close-icon {
   @apply hidden;
